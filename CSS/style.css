@@ -1,0 +1,7 @@
+#nav li {
+    display: inline;
+    margin: 2%;
+}
+#nav li a {
+    text-decoration: none;
+}
