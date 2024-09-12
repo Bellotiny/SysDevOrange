@@ -5,3 +5,14 @@
 #nav li a {
     text-decoration: none;
 }
+
+/* Homepage */
+
+#homeImage {
+    background-image: url("../Images/homepage.jpg");
+    width: 100%;
+    height: 95vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
