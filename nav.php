@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="nav-container">
+            <!-- First div with navigation links -->
+            <div id="nav-main">
+                <a class="nav-item" href="index.html">Home</a>
+                <a class="nav-item" href="about.html">About</a>
+                <a class="nav-item" href="services.html">Services</a>
+                <a class="nav-item" href="gallery.html">Gallery</a>
+                <a class="nav-item" href="contact.html">Contact</a>
+            </div>
+
+            <!-- Second div with the Book link and the account image -->
+            <div id="nav-extra">
+                <a class="Nav-Split" href="book.html">Book</a>
+                <img id="account_img" src="Images/account.png" onclick="window.open('https://www.google.com')">
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+            
+                var currentPage = window.location.pathname.split("/").pop();
+
+                // Highlight the link that matches the current page URL
+                $('#nav-main > a[href="' + currentPage + '"]').css('background-color', '#1b613e').css('color', 'white')
+
+                $('#nav-main > a').click(function (e) {
+                    // Clear the background color of all links
+                    $('#nav-main > a').css('background-color', 'transparent').css('color', '#1b613e');
+
+                    // Apply background color to the clicked link
+                    $(this).css('background-color', '#1b613e').css('color', 'white').css('vertical-align', 'center');
+
+                    var selectedHref = $(this).attr('href');
+                    localStorage.setItem('activeLink', selectedHref);
+                });
+                localStorage.removeItem('activeLink');
+            });
+        </script>
+    </body>
+</html>
