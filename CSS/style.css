@@ -1,24 +1,19 @@
-<<<<<<< HEAD
-@font-face{
-=======
 @font-face {
     font-family: "Canvas Sans";
     src: url("../Fonts/CanvasSans.woff2");
   }
   @font-face{
->>>>>>> origin/TrevBranch
     font-family: 'AmsterdamThree';
     src:url('../amsterdam-3/Amsterdam.ttf');
     font-weight: normal;
     font-style: normal;
-<<<<<<< HEAD
 }
 h1{
     font-family: 'AmsterdamThree';
     font-size: 80px;
     color: #57453d;
     position: absolute;
-    top: -5%;
+    top: 10%;
     left: 5%;
 }
 h2{
@@ -30,8 +25,6 @@ h2{
 #nav li {
     display: inline;
     margin: 2%;
-=======
->>>>>>> origin/TrevBranch
 }
 * {
     padding: 0%;
@@ -118,43 +111,18 @@ h2{
     background-size: cover;
     background-position: center;
 }
-<<<<<<< HEAD
-=======
-
-h1{
-    font-family: 'AmsterdamThree';
-    font-size: 80px;
-    color: #57453d;
-    position: absolute;
-    
-    left: 5%;
-}
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;
-    color: #57453d;
-    position: absolute;
-}
-
-#nav li {
-    display: inline;
-    margin: 2%;
-}
-#nav li a {
-    text-decoration: none;
-}
-.background_color{
-    background-color: #efede9;
-}
-
-/* About Us*/
->>>>>>> origin/TrevBranch
+/*About Us*/
 .divGreen{
     background-color: #d2d8ce;
     height: 30vh;
     width: 80%;
     margin: 8% 10% 0 10%;
 }
+.divGreen-p{
+   height: 100%;
+   width: 100%;
+}
+
 
 #image-container{
     display: flex;
@@ -190,19 +158,56 @@ h2{
     margin: 10% 10% 0 10%;
 }
 #instagram-pic{
-    background-color:#f5e1c6;
+    background-color:#fc9a90;
     height: 40vh;
-    margin: 2% 10% 0 10%;
+    margin: 1% 10% 0 10%;
 }
-#reviews-container{
-    background-color: #e0ddd3;
-    height: 40vh;
+
+/*reviews*/
+#reviews-container{/* CSS for the main container in Reviews section*/
+    background-color:#e0ddd3;
+    height: 60vh;
+    padding-top: 10%;
+    font-family:"Canvas Sans" ;
 }
 .h2-reviews{
-    top: 80%;
+    top: 85%;
     left: 5%;
-<<<<<<< HEAD
 }
-=======
+.review-div{/* CSS for the div inside #reviews-container*/
+    display: flex;
+    margin: 0 10%;
+    padding: 2%;
+
 }
->>>>>>> origin/TrevBranch
+.review-div-icon{/* CSS for the div inside .review-div*/
+    margin-top: 30px;
+    flex: 1;
+    padding-right: 20px;
+    background-color:#e0ddd3;
+}
+.review-div-content{/* CSS for the div inside .review-div*/
+    background-color: #f5e1c6;
+    padding: 30px;
+    border-radius: 40px;
+    display: flex;
+}
+.review-div-content-text{
+    flex: 5;
+}
+.review-div-content-account-name{
+    padding-bottom: 10px;
+}
+
+.review-div-content-pic {
+    flex: 1;
+    text-align: center;
+}
+.review-div-content-pic img{
+    height: 100px;
+    object-fit: cover;
+}
+.review-div-content-account-review{/* CSS for the div inside .review-div-content*/
+    flex: 2;
+    padding-top: 10px;
+}
