@@ -1,9 +1,75 @@
-#nav li {
-    display: inline;
-    margin: 2%;
+@font-face {
+    font-family: "Canvas Sans";
+    src: url("../Fonts/CanvasSans.woff2");
+  }
+* {
+    padding: 0%;
+    margin: 0%;
 }
-#nav li a {
+ #account_img {
+    background: none;
+    
+    width: 15%;
+} 
+#nav {
+
+    align-items: center; /* Centers items vertically */
+    justify-content: space-between; /* Spreads items evenly */
+    padding: 10px;
+    margin: 2% auto;
+    width: 70%; 
+} 
+#nav-container {
+    display: flex; /* Align child divs horizontally */
+}
+
+#nav-main {
+    background-color: #efede9;
+    justify-content: center;
+    align-items: center; /* Vertically center both divs */ 
+    padding: 10px;
+    border-radius: 15px;
+    width: 100%; /* Make sure it spans full width */
+    margin-right: 22%;
+    max-width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100%;
+}
+
+#nav-home {
+    display: flex; /* Align all items on the same line */
+}
+
+#nav-main a {
+    width: auto;
     text-decoration: none;
+    text-align: center;
+    font-family: "Canvas Sans", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #1b613e;
+    padding: 5px 20px; /* Add padding for clickable area */
+    border-radius: 5px;
+}
+
+#nav-extra {
+    display: flex; /* Align the book link and image horizontally */
+    align-items: end;
+}
+
+/* Special styling for the Book link */
+.Nav-Split {
+    background-color: darkgrey; /* Different background color for the Book link */
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px; 
+    font-size: 18px; 
+    margin-right: 10%; /* Add space between the link and the image */
+    font-family: "Canvas Sans", sans-serif;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 /* Homepage */
