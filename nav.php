@@ -4,17 +4,20 @@
         <div id="nav-container">
             <!-- First div with navigation links -->
             <div id="nav-main">
-                <a class="nav-item" href="index.html">Home</a>
-                <a class="nav-item" href="about.html">About</a>
-                <a class="nav-item" href="services.html">Services</a>
-                <a class="nav-item" href="gallery.html">Gallery</a>
-                <a class="nav-item" href="contact.html">Contact</a>
+                <a class="nav-item" href="index.php">Home</a>
+                <a class="nav-item" href="about.php">About</a>
+                <a class="nav-item" href="services.php">Services</a>
+                <a class="nav-item" href="gallery.php">Gallery</a>
+                <a class="nav-item" href="contact.php">Contact</a>
             </div>
 
             <!-- Second div with the Book link and the account image -->
             <div id="nav-extra">
-                <a class="Nav-Split" href="book.html">Book</a>
-                <img id="account_img" src="Images/account.png" onclick="window.open('https://www.google.com')">
+                <a class="Nav-Split" href="book.php">Book</a>
+                <a href="account.php">
+                    <img id="account_img" src="Images/account.png" >
+                </a>
+                
             </div>
         </div>
 
