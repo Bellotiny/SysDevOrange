@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 @font-face{
+=======
+@font-face {
+    font-family: "Canvas Sans";
+    src: url("../Fonts/CanvasSans.woff2");
+  }
+  @font-face{
+>>>>>>> origin/TrevBranch
     font-family: 'AmsterdamThree';
     src:url('../amsterdam-3/Amsterdam.ttf');
     font-weight: normal;
     font-style: normal;
+<<<<<<< HEAD
 }
 h1{
     font-family: 'AmsterdamThree';
@@ -21,9 +30,79 @@ h2{
 #nav li {
     display: inline;
     margin: 2%;
+=======
+>>>>>>> origin/TrevBranch
 }
-#nav li a {
+* {
+    padding: 0%;
+    margin: 0%;
+}
+ #account_img {
+    background: none;
+    
+    width: 15%;
+} 
+#nav {
+
+    align-items: center; /* Centers items vertically */
+    justify-content: space-between; /* Spreads items evenly */
+    padding: 10px;
+    margin: 2% auto;
+    width: 70%; 
+} 
+#nav-container {
+    display: flex; /* Align child divs horizontally */
+}
+
+#nav-container >#nav-main {
+    background-color: rgb(192, 191, 191);
+    justify-content: center;
+    align-items: center; /* Vertically center both divs */ 
+    padding: 10px;
+    border-radius: 15px;
+    width: 100%; /* Make sure it spans full width */
+    margin-right: 22%;
+    max-width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100%;
+}
+
+#nav-home {
+    display: flex; /* Align all items on the same line */
+}
+
+#nav-main a {
+    width: auto;
     text-decoration: none;
+    text-align: center;
+    font-family: "Canvas Sans", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #1b613e;
+    padding: 5px 20px; /* Add padding for clickable area */
+    border-radius: 5px;
+}
+#nav-main a:hover {
+    color: white;
+}
+#nav-extra {
+    display: flex; /* Align the book link and image horizontally */
+    align-items: end;
+}
+
+/* Special styling for the Book link */
+.Nav-Split {
+    background-color: darkgrey; /* Different background color for the Book link */
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px; 
+    font-size: 18px; 
+    margin-right: 10%; /* Add space between the link and the image */
+    font-family: "Canvas Sans", sans-serif;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .background_color{
     background-color: #efede9;
@@ -39,6 +118,37 @@ h2{
     background-size: cover;
     background-position: center;
 }
+<<<<<<< HEAD
+=======
+
+h1{
+    font-family: 'AmsterdamThree';
+    font-size: 80px;
+    color: #57453d;
+    position: absolute;
+    
+    left: 5%;
+}
+h2{
+    font-family: 'AmsterdamThree';
+    font-size: 50px;
+    color: #57453d;
+    position: absolute;
+}
+
+#nav li {
+    display: inline;
+    margin: 2%;
+}
+#nav li a {
+    text-decoration: none;
+}
+.background_color{
+    background-color: #efede9;
+}
+
+/* About Us*/
+>>>>>>> origin/TrevBranch
 .divGreen{
     background-color: #d2d8ce;
     height: 30vh;
@@ -91,4 +201,8 @@ h2{
 .h2-reviews{
     top: 80%;
     left: 5%;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/TrevBranch

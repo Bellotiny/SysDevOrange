@@ -1,4 +1,7 @@
 
 $(document).ready(function() {
-    $("#nav").load("nav.html");
+    $("#nav").load("nav.html", function() {
+        
+    });
 });
+
