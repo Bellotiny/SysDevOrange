@@ -2,6 +2,12 @@
     font-family: "Canvas Sans";
     src: url("../Fonts/CanvasSans.woff2");
   }
+  @font-face{
+    font-family: 'AmsterdamThree';
+    src:url('../amsterdam-3/Amsterdam.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     padding: 0%;
     margin: 0%;
@@ -23,8 +29,8 @@
     display: flex; /* Align child divs horizontally */
 }
 
-#nav-main {
-    background-color: #efede9;
+#nav-container >#nav-main {
+    background-color: rgb(192, 191, 191);
     justify-content: center;
     align-items: center; /* Vertically center both divs */ 
     padding: 10px;
@@ -52,7 +58,9 @@
     padding: 5px 20px; /* Add padding for clickable area */
     border-radius: 5px;
 }
-
+#nav-main a:hover {
+    color: white;
+}
 #nav-extra {
     display: flex; /* Align the book link and image horizontally */
     align-items: end;
@@ -81,4 +89,85 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+h1{
+    font-family: 'AmsterdamThree';
+    font-size: 80px;
+    color: #57453d;
+    position: absolute;
+    
+    left: 5%;
+}
+h2{
+    font-family: 'AmsterdamThree';
+    font-size: 50px;
+    color: #57453d;
+    position: absolute;
+}
+
+#nav li {
+    display: inline;
+    margin: 2%;
+}
+#nav li a {
+    text-decoration: none;
+}
+.background_color{
+    background-color: #efede9;
+}
+
+/* About Us*/
+.divGreen{
+    background-color: #d2d8ce;
+    height: 30vh;
+    width: 80%;
+    margin: 8% 10% 0 10%;
+}
+
+#image-container{
+    display: flex;
+    justify-content: space-between ;
+    width: 80%;
+    margin: 0 10%;
+}
+#image-container img{
+    width: 50%;
+    object-fit: cover;
+}
+.sched-container{
+    background-color: #d5babc;
+    height: 60vh;
+    display: flex;
+    justify-content: space-between;
+}
+.sched-container div{
+    background-color:#7a7168 ;
+    height: 40vh;
+    width: 30%;
+    margin: 8% 10% 0 10%;
+    border-radius: 5%;
+}
+
+/*Gallery*/
+#gallery-h1{
+    text-align: center;
+}
+#accent-div{
+    background-color: #f5e1c6;
+    height:15vh ;
+    margin: 10% 10% 0 10%;
+}
+#instagram-pic{
+    background-color:#f5e1c6;
+    height: 40vh;
+    margin: 2% 10% 0 10%;
+}
+#reviews-container{
+    background-color: #e0ddd3;
+    height: 40vh;
+}
+.h2-reviews{
+    top: 80%;
+    left: 5%;
 }
