@@ -13,7 +13,7 @@ h1{
     font-size: 80px;
     color: #57453d;
     position: absolute;
-    top: 10%;
+    top: 15%;
     left: 5%;
 }
 h2{
@@ -22,17 +22,12 @@ h2{
     color: #57453d;
     position: absolute;
 }
-#nav li {
-    display: inline;
-    margin: 2%;
-}
 * {
     padding: 0%;
     margin: 0%;
 }
  #account_img {
     background: none;
-    
     width: 15%;
 } 
 #nav {
@@ -97,9 +92,6 @@ h2{
     margin-top: auto;
     margin-bottom: auto;
 }
-.background_color{
-    background-color: #efede9;
-}
 
 /* Homepage */
 
@@ -114,21 +106,18 @@ h2{
 /*About Us*/
 .divGreen{
     background-color: #d2d8ce;
-    height: 30vh;
+    height: auto;/* Let the height adapt to the content */
     width: 80%;
-    margin: 8% 10% 0 10%;
+    margin: 10% 10% 2% 10%; /* Center horizontally */
+    padding: 80px 80px 40px 140px; /* Add padding inside the div */
+    box-sizing: border-box; /* Ensure padding is included in the height and width */
 }
-.divGreen-p{
-   height: 100%;
-   width: 100%;
-}
-
 
 #image-container{
     display: flex;
     justify-content: space-between ;
     width: 80%;
-    margin: 0 10%;
+    margin: 2% 10%;
 }
 #image-container img{
     width: 50%;
@@ -149,13 +138,21 @@ h2{
 }
 
 /*Gallery*/
-#gallery-h1{
-    text-align: center;
-}
 #accent-div{
     background-color: #f5e1c6;
-    height:15vh ;
+    height:12vh ;
     margin: 10% 10% 0 10%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    position: relative;
+}
+#accent-div h1{
+    position: absolute;
+    top: -25%;  /* Move the h1 50% from the top */
+    left: 50%; /* Move the h1 50% from the left */
+    transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
+    text-align: center;
 }
 #instagram-pic{
     background-color:#fc9a90;
@@ -166,7 +163,7 @@ h2{
 /*reviews*/
 #reviews-container{/* CSS for the main container in Reviews section*/
     background-color:#e0ddd3;
-    height: 60vh;
+    height: auto;
     padding-top: 10%;
     font-family:"Canvas Sans" ;
 }
@@ -197,6 +194,9 @@ h2{
 }
 .review-div-content-account-name{
     padding-bottom: 10px;
+}
+.review-div-content-account-name h4{
+    font-weight: bolder;
 }
 
 .review-div-content-pic {
