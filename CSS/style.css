@@ -356,7 +356,7 @@ form {
     padding: 10px;
     border-radius: 15px;
 }
-.service_left_description, .left_price, .service_right_description, .top_right_price {
+.service_left_description, .left_price, .service_right_description, .right_price {
     font-size: 28px;
     font-family: "Canvas Sans", sans-serif;
 }
@@ -367,28 +367,25 @@ form {
     font-weight: bold;
     margin-left: auto !important;
 }
-
-#bottom_left_service .left_price {
-    margin-left: auto; /* Pushes the price to the right */
+.right_price {
     font-weight: bold;
-}
-.top_right_price {
     margin-right: auto;
 }
 /* Third row in main grid */
 #bottom_left_service, #bottom_right_service  {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     background-color: #efede9;
-    border-radius: 15px;
     padding: 10px;
+    border-radius: 15px;
     
 }
-#bottom_right_service {
-    align-items: flex-end;
+.bottom_info {
+    display: flex;
+    flex-direction: column;
 }
+
 /*Font edit for third row in main grid*/
 #bottom_left_service p, #bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3 {
     font-size: 28px;
@@ -415,4 +412,10 @@ form {
     grid-column: 3;
     grid-row: 2 / 4;
     border-radius: 15px;
+}
+#contact_footer_service {
+    grid-row: 4;
+    text-align: center;
+    font-family: "Canvas Sans", sans-serif;
+    background-color: #e0ddd3;
 }
