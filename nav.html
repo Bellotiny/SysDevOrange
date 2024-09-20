@@ -24,14 +24,14 @@
                 var currentPage = window.location.pathname.split("/").pop();
 
                 // Highlight the link that matches the current page URL
-                $('#nav-main > a[href="' + currentPage + '"]').css('background-color', '#1b613e').css('color', 'white')
+                $('#nav-main > a[href="' + currentPage + '"]').css('background-color', '#1b613e').css('color', '#fadadd')
 
                 $('#nav-main > a').click(function (e) {
                     // Clear the background color of all links
                     $('#nav-main > a').css('background-color', 'transparent').css('color', '#1b613e');
 
                     // Apply background color to the clicked link
-                    $(this).css('background-color', '#1b613e').css('color', 'white').css('vertical-align', 'center');
+                    $(this).css('background-color', '#1b613e').css('color', '#fadadd').css('vertical-align', 'center');
 
                     var selectedHref = $(this).attr('href');
                     localStorage.setItem('activeLink', selectedHref);
