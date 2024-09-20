@@ -2,6 +2,10 @@
     font-family: "Canvas Sans";
     src: url("../Fonts/CanvasSans.woff2");
   }
+  @font-face {
+    font-family: "DM Sans";
+    src: url("../Fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
+  }
   @font-face{
     font-family: 'AmsterdamThree';
     src:url('../amsterdam-3/Amsterdam.ttf');
@@ -12,13 +16,12 @@
     padding: 0%;
     margin: 0%;
 }
+/*nav*/
  #account_img {
     background: none;
-    
     width: 15%;
 } 
 #nav {
-
     align-items: center; /* Centers items vertically */
     justify-content: space-between; /* Spreads items evenly */
     padding: 10px;
@@ -29,7 +32,7 @@
     display: flex; /* Align child divs horizontally */
 }
 
-#nav-container >#nav-main {
+#nav-container > #nav-main {
     background-color: rgb(192, 191, 191);
     justify-content: center;
     align-items: center; /* Vertically center both divs */ 
@@ -55,7 +58,7 @@
     font-size: 15px;
     font-weight: bold;
     color: #1b613e;
-    padding: 5px 20px; /* Add padding for clickable area */
+    padding: 2% 20px; /* Add padding for clickable area */
     border-radius: 5px;
 }
 #nav-main a:hover {
@@ -64,12 +67,14 @@
 #nav-extra {
     display: flex; /* Align the book link and image horizontally */
     align-items: end;
+    justify-content: right;
 }
 
 /* Special styling for the Book link */
 .Nav-Split {
     background-color: darkgrey; /* Different background color for the Book link */
     color: white;
+    float: inline-end;
     padding: 10px 25px;
     border-radius: 20px; 
     font-size: 18px; 
@@ -96,7 +101,7 @@ h1{
     font-size: 80px;
     color: #57453d;
     position: absolute;
-    
+    top: 10%;
     left: 5%;
 }
 h2{
@@ -170,4 +175,85 @@ h2{
 .h2-reviews{
     top: 80%;
     left: 5%;
+}
+/*Contact us*/
+#contact_h1 {
+    text-align: center;
+    position: unset;
+}
+#contact_main {
+    background-color: #e0ddd3;
+}
+/*header of contact page */
+#contact_h1_div {
+   margin-left: auto;
+   margin-right: auto;
+    width: 70%;
+    background-color: #efede9;
+    border-radius: 15px;
+}
+/*div that holds the form */
+#contact_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #efede9;
+    width: 70%;
+    margin-top: 5%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style each form group to have label and input on the same line */
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-right: 10px;
+    width: 100px; /* Adjust width as necessary to align labels */
+    text-align: right;
+    font-family: "DM Sans", 'Regular';
+    font-weight: bold;
+}
+
+input[type="text"], textarea {
+    width: 300px; /* Adjust the width of the input fields */
+    padding: 5px;
+    border-radius: 15px;
+    border-style: none;
+    background-color: #e0ddd3;
+}
+textarea {
+    resize: none;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    font-family: "Canvas Sans", sans-serif;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border-style: none;
+    align-self: center;
+    background-color: #d2d8ce;
+    width: 25%;
+}
+form {
+    display: contents;
+}
+#contact_footer {
+    margin-top: 4%;
+    text-align: center;
+    background-color: #e0ddd3;
+    font-family: "Canvas Sans", sans-serif;
+    height: 10vh;
+
 }
