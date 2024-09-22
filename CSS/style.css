@@ -26,11 +26,23 @@ h2{
     color: #57453d;
     position: absolute;
 }
+main {
+    margin-top: 16vh; /*Offets navbar height so page starts right after navbar */
+}
 * {
     padding: 0%;
     margin: 0%;
 }
 /*nav*/
+header {
+    overflow: hidden;
+    background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; 
+    width: 100%;
+    height: 16vh;
+    
+}
  #account_img {
     background: none;
     width: 15%;
