@@ -12,6 +12,20 @@
     font-weight: normal;
     font-style: normal;
 }
+h1{
+    font-family: 'AmsterdamThree';
+    font-size: 80px;
+    color: #57453d;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
+h2{
+    font-family: 'AmsterdamThree';
+    font-size: 50px;
+    color: #57453d;
+    position: absolute;
+}
 * {
     padding: 0%;
     margin: 0%;
@@ -125,21 +139,18 @@ h2{
 /* About Us*/
 .divGreen{
     background-color: #d2d8ce;
-    height: 30vh;
+    height: auto;/* Let the height adapt to the content */
     width: 80%;
-    margin: 8% 10% 0 10%;
+    margin: 10% 10% 2% 10%; /* Center horizontally */
+    padding: 80px 80px 40px 140px; /* Add padding inside the div */
+    box-sizing: border-box; /* Ensure padding is included in the height and width */
 }
-.divGreen-p{
-   height: 100%;
-   width: 100%;
-}
-
 
 #image-container{
     display: flex;
     justify-content: space-between ;
     width: 80%;
-    margin: 0 10%;
+    margin: 2% 10%;
 }
 #image-container img{
     width: 50%;
@@ -160,13 +171,21 @@ h2{
 }
 
 /*Gallery*/
-#gallery-h1{
-    text-align: center;
-}
 #accent-div{
     background-color: #f5e1c6;
-    height:15vh ;
+    height:12vh ;
     margin: 10% 10% 0 10%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    position: relative;
+}
+#accent-div h1{
+    position: absolute;
+    top: -25%;  /* Move the h1 50% from the top */
+    left: 50%; /* Move the h1 50% from the left */
+    transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
+    text-align: center;
 }
 #instagram-pic{
     background-color:#fc9a90;
@@ -177,7 +196,7 @@ h2{
 /*reviews*/
 #reviews-container{/* CSS for the main container in Reviews section*/
     background-color:#e0ddd3;
-    height: 60vh;
+    height: auto;
     padding-top: 10%;
     font-family:"Canvas Sans" ;
 }
@@ -234,7 +253,7 @@ label {
 
 input[type="text"], textarea {
     width: 300px; /* Adjust the width of the input fields */
-    padding: 5px;
+    padding: 10px;
     border-radius: 15px;
     border-style: none;
     background-color: #e0ddd3;
@@ -263,8 +282,6 @@ form {
     text-align: center;
     background-color: #e0ddd3;
     font-family: "Canvas Sans", sans-serif;
-    height: 10vh;
-
 }
 /*Review*/
 .review-div{/* CSS for the div inside #reviews-container*/
@@ -291,6 +308,9 @@ form {
 .review-div-content-account-name{
     padding-bottom: 10px;
 }
+.review-div-content-account-name h4{
+    font-weight: bolder;
+}
 
 .review-div-content-pic {
     flex: 1;
@@ -304,38 +324,45 @@ form {
     flex: 2;
     padding-top: 10px;
 }
-/*Services*/ 
-#service_h1_div {
-    display: contents;
+/*Services*/
+
+#service_h1_div, #add_service_h1_div {
+    display: contents; /*Makes sure that changes are seen does not work well without not sure why -___- */
     margin-left: auto;
     margin-right: auto;
-     width: 70%;
-     background-color: #efede9;
-     border-radius: 15px;
+    width: 70%;
+    background-color: #efede9;
+    border-radius: 15px;
     
 }
-#service_h1 {
+#service_h1, #add_service_h1 {
     text-align: center;
     position: unset;
 }
-#service_main {
+#service_main, #add_service_main {
     grid-row: 1;
-    grid-column: 2 ;
+    grid-column: 1 / 4 ;
     background-color: #e0ddd3;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#service-grid {
+#service-grid, #add-service-grid {
     background-color: #e0ddd3;
     display: grid;
     grid-template-columns: 40% 20% 40%;
-    grid-template-rows: 20% 30% 30% 20%;
+    grid-template-rows: 1fr 2fr 2fr; 
     row-gap: 10px;
-    height: 100vh;
+    height: 100vh; 
 }
-#left-column, #right-column {
+
+#add-service-grid {
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+#left-column, #right-column, #add-left-column, #add-right-column {
     grid-column: 1;
     grid-row: 2 / 4; /* Span the middle two rows */
     display: grid;
@@ -347,8 +374,8 @@ form {
     border-radius: 15px;
     gap: 10%;
 }
-
-#top_left_service, #top_right_service {
+/*Ensures that service is centered and price is at other end*/
+#top_left_service, #top_right_service, #add_left_service, #add_right_service, #add_bottom_info  {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -356,6 +383,7 @@ form {
     padding: 10px;
     border-radius: 15px;
 }
+
 .service_left_description, .left_price, .service_right_description, .right_price {
     font-size: 28px;
     font-family: "Canvas Sans", sans-serif;
@@ -364,15 +392,13 @@ form {
     margin-left: auto;
 }
 .left_price {
-    font-weight: bold;
-    margin-left: auto !important;
+    margin-left: auto !important; /*Pushes to the left*/
 }
 .right_price {
-    font-weight: bold;
     margin-right: auto;
 }
 /* Third row in main grid */
-#bottom_left_service, #bottom_right_service  {
+#bottom_left_service, #bottom_right_service, #add_bottom_left_service  {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -387,12 +413,12 @@ form {
 }
 
 /*Font edit for third row in main grid*/
-#bottom_left_service p, #bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3 {
+#bottom_left_service p, #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
     font-size: 28px;
     font-family: "Canvas Sans", sans-serif;
 }
 
-#service_main {
+#service_main, #add_serivce_main {
     grid-column: 2; /* Center content in the second column */
     display: flex;
     justify-content: center;
@@ -401,18 +427,19 @@ form {
     background-color: #e0ddd3;
 }
 
-#service_h1_div {
+#service_h1_div, #add_service_h1_div {
     background-color: #efede9;
     padding: 10px;
     border-radius: 15px;
     width: 100%;
 }
 
-#right-column {
+#right-column, #add-right-column {
     grid-column: 3;
     grid-row: 2 / 4;
     border-radius: 15px;
 }
+
 #contact_footer_service {
     grid-row: 4;
     text-align: center;
