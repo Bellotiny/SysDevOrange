@@ -290,8 +290,8 @@ input[type="submit"] {
 form {
     display: contents;
 }
-#contact_footer {
-    margin-top: 4%;
+.contact_footer {
+    margin-top: 4% !important;
     text-align: center;
     background-color: #e0ddd3;
     font-family: "Canvas Sans", sans-serif;
@@ -453,7 +453,7 @@ form {
     border-radius: 15px;
 }
 
-#contact_footer_service {
+footer {
     grid-row: 4;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;

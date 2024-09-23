@@ -4,4 +4,9 @@ $(document).ready(function() {
         
     });
 });
+$(document).ready(function() {
+    $("#footer").load("footer.html", function() {
+        
+    });
+});
 
