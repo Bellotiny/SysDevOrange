@@ -12,7 +12,9 @@
       <main>
         <div id="homeImage"></div>
       </main>
-      <div id="footer"></div>
+      <?php 
+        include_once "script.js";
+      ?>
       <script src="script.js"></script>
     </body>
 </html>
