@@ -10,9 +10,9 @@
 
 </head>
 <body class="background_color">
-  <header>
-  <nav id="nav"></nav>
-</header>
+  <?php
+      include_once "nav.php"
+  ?>
   <main>
   <div class="divGreen">
     <h1>About us</h1>

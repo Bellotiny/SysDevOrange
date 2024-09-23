@@ -91,6 +91,9 @@ header {
 #nav-main a:hover {
     color: white;
 }
+#nav-extra a:hover {
+    color: #1b613e;
+}
 #nav-extra {
     display: flex; /* Align the book link and image horizontally */
     align-items: end;
