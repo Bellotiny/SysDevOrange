@@ -6,16 +6,15 @@
         <link rel="stylesheet" href="CSS/style.css">
     </head>
     <body>
-    <?php 
-        include_once "nav.php";
-      ?>
+    <header>
       <nav id="nav"></nav>
-      <div id="homeImage"></div>
+      </header>
       <main>
-       
+      <div id="homeImage"></div>
       </main>
       <?php 
         include_once "footer.php";
       ?>
+      <script src="script.js"></script>
     </body>
 </html>

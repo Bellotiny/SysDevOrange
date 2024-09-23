@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-<?php
-      include_once "nav.php"
-  ?>
+<header>
+      <nav id="nav"></nav>
+      </header>
   <main>
   <div id="service-grid">
     <div id="left-column">
@@ -79,5 +79,6 @@
   <?php
       include_once "footer.php"
   ?>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -55,23 +55,29 @@ header {
     margin: 2% auto;
     width: 70%; 
 } 
+
 #nav-container {
-    display: flex; /* Align child divs horizontally */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Adjust as necessary */
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px 5%;
 }
 
-#nav-container > #nav-main {
-    background-color: rgb(192, 191, 191);
+
+#nav-main {
+    display: flex;
     justify-content: center;
-    align-items: center; /* Vertically center both divs */ 
+    align-items: center;
+    background-color: rgb(192, 191, 191);
     padding: 10px;
     border-radius: 15px;
-    width: 100%; /* Make sure it spans full width */
-    margin-right: 22%;
-    max-width: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 100%;
+    width: auto; /* Adjust to fit content */
+    margin-right: auto; /* Ensures it's properly spaced */
 }
+
 
 #nav-home {
     display: flex; /* Align all items on the same line */
@@ -95,10 +101,9 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    display: flex; /* Align the book link and image horizontally */
-    align-items: end;
-    justify-content: right;
+    display: flex;             /* Keep elements inside #nav-extra in a row */
 }
+
 
 /* Special styling for the Book link */
 .Nav-Split {
