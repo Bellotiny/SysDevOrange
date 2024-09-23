@@ -13,7 +13,7 @@
         <div id="bottom_left_service">
             <div class="bottom_info"> <!--This will separate the description from the price-->
                 <h3 class="service_left_description">Nail Art</h3>
-                <p>Per Finger</p> 
+                <p class="extra_service_detail">Per Finger</p> 
             </div>
             <p class="left_price">5 CAD</p>
         </div>
@@ -34,7 +34,7 @@
             <p class="right_price">5 CAD</p>
             <div class="bottom_info">
                 <h3 class="service_right_description">French Tips</h3>
-                <p>Plus Base</p>
+                <p class="extra_service_detail">Plus Base</p>
             </div>
 
         </div>

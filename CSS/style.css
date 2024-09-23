@@ -12,6 +12,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family: 'Alice';
+    src:url('../Fonts/Alice-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Forum';
+    src:url('../Fonts/Forum-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 h1{
     font-family: 'AmsterdamThree';
     font-size: 80px;
@@ -408,8 +420,9 @@ form {
 
 .service_left_description, .left_price, .service_right_description, .right_price {
     font-size: 28px;
-    font-family: "Canvas Sans", sans-serif;
+    font-family: "Alice";
 }
+
 .service_right_description {
     margin-left: auto;
 }
@@ -435,9 +448,14 @@ form {
 }
 
 /*Font edit for third row in main grid*/
-#bottom_left_service p, #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
+ #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
     font-size: 28px;
-    font-family: "Canvas Sans", sans-serif;
+    font-family: "Alice";
+}
+/*Font for sub details like 'per finger' */
+.extra_service_detail {
+    font-size: 21px;
+    font-family: "Forum";
 }
 
 #service_main, #add_serivce_main {
