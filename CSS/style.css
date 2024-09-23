@@ -72,10 +72,11 @@ header {
     justify-content: center;
     align-items: center;
     background-color: rgb(192, 191, 191);
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 15px;
     width: auto; /* Adjust to fit content */
     margin-right: auto; /* Ensures it's properly spaced */
+
 }
 
 
@@ -92,7 +93,7 @@ header {
     font-weight: bold;
     color: #1b613e;
     padding: 2% 20px; /* Add padding for clickable area */
-    border-radius: 5px;
+    border-radius: 15px;
 }
 #nav-main a:hover {
     color: white;
@@ -372,8 +373,8 @@ form {
 #service-grid, #add-service-grid {
     background-color: #e0ddd3;
     display: grid;
-    grid-template-columns: 40% 20% 40%;
-    grid-template-rows: 1fr 2fr 2fr; 
+    grid-template-columns: 40% 20% 40%; /*Sizing of columns */
+    grid-template-rows: 1fr 0.5Fr 0.5fr; /*Sizing the rows*/
     row-gap: 10px;
     height: 100vh; 
 }

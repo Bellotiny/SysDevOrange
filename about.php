@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="jquery-3.7.1.min.js"></script>
-  <title>About</title>
-  <script src="jquery-3.7.1.min.js"></script>
-  <link rel="stylesheet" href="CSS/style.css">
-
-</head>
+<?php include_once "head.php" ?>
 <body class="background_color">
 <header>
       <nav id="nav"></nav>
@@ -41,8 +31,10 @@
     <div></div>
 
   </div>
+  <?php 
+        include_once "footer.php";
+      ?>
   </main>
-  <div id="footer"></div>
   <script src="script.js"></script>
 </body>
 </html>

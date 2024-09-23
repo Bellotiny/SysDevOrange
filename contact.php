@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="jquery-3.7.1.min.js"></script>
-        <link rel="stylesheet" href="CSS/style.css">
-    </head>
+<?php include_once "head.php" ?>
     <body id="contact">
     <header>
   <nav id="nav"></nav>
@@ -19,7 +13,7 @@
         <form autocomplete="on">
             <div class="form-group">
                 <label for="contact_fname">First Name:</label>
-                <input type="text" id="contact_fname" name="contact_fname">
+                <input type="text" id="contact_fname" name="contact_fname" required>
             </div>
             <div class="form-group">
                 <label for="contact_lname">Last Name:</label>
