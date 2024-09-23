@@ -17,6 +17,15 @@
     margin: 0%;
 }
 /*nav*/
+header {
+    overflow: hidden;
+    background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; 
+    width: 100%;
+    height: 16vh;
+    
+}
  #account_img {
     background: none;
     width: 15%;
@@ -239,7 +248,7 @@ label {
 
 input[type="text"], textarea {
     width: 300px; /* Adjust the width of the input fields */
-    padding: 5px;
+    padding: 10px;
     border-radius: 15px;
     border-style: none;
     background-color: #e0ddd3;
@@ -268,8 +277,6 @@ form {
     text-align: center;
     background-color: #e0ddd3;
     font-family: "Canvas Sans", sans-serif;
-    height: 10vh;
-
 }
 /*Review*/
 .review-div{/* CSS for the div inside #reviews-container*/
@@ -312,38 +319,45 @@ form {
     flex: 2;
     padding-top: 10px;
 }
-/*Services*/ 
-#service_h1_div {
-    display: contents;
+/*Services*/
+
+#service_h1_div, #add_service_h1_div {
+    display: contents; /*Makes sure that changes are seen does not work well without not sure why -___- */
     margin-left: auto;
     margin-right: auto;
-     width: 70%;
-     background-color: #efede9;
-     border-radius: 15px;
+    width: 70%;
+    background-color: #efede9;
+    border-radius: 15px;
     
 }
-#service_h1 {
+#service_h1, #add_service_h1 {
     text-align: center;
     position: unset;
 }
-#service_main {
+#service_main, #add_service_main {
     grid-row: 1;
-    grid-column: 2 ;
+    grid-column: 1 / 4 ;
     background-color: #e0ddd3;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#service-grid {
+#service-grid, #add-service-grid {
     background-color: #e0ddd3;
     display: grid;
     grid-template-columns: 40% 20% 40%;
-    grid-template-rows: 20% 30% 30% 20%;
+    grid-template-rows: 1fr 2fr 2fr; 
     row-gap: 10px;
-    height: 100vh;
+    height: 100vh; 
 }
-#left-column, #right-column {
+
+#add-service-grid {
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+#left-column, #right-column, #add-left-column, #add-right-column {
     grid-column: 1;
     grid-row: 2 / 4; /* Span the middle two rows */
     display: grid;
@@ -355,8 +369,8 @@ form {
     border-radius: 15px;
     gap: 10%;
 }
-
-#top_left_service, #top_right_service {
+/*Ensures that service is centered and price is at other end*/
+#top_left_service, #top_right_service, #add_left_service, #add_right_service, #add_bottom_info  {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -364,7 +378,8 @@ form {
     padding: 10px;
     border-radius: 15px;
 }
-.service_left_description, .left_price, .service_right_description, .top_right_price {
+
+.service_left_description, .left_price, .service_right_description, .right_price {
     font-size: 28px;
     font-family: "Canvas Sans", sans-serif;
 }
@@ -372,38 +387,33 @@ form {
     margin-left: auto;
 }
 .left_price {
-    font-weight: bold;
-    margin-left: auto !important;
+    margin-left: auto !important; /*Pushes to the left*/
 }
-
-#bottom_left_service .left_price {
-    margin-left: auto; /* Pushes the price to the right */
-    font-weight: bold;
-}
-.top_right_price {
+.right_price {
     margin-right: auto;
 }
 /* Third row in main grid */
-#bottom_left_service, #bottom_right_service  {
+#bottom_left_service, #bottom_right_service, #add_bottom_left_service  {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     background-color: #efede9;
-    border-radius: 15px;
     padding: 10px;
+    border-radius: 15px;
     
 }
-#bottom_right_service {
-    align-items: flex-end;
+.bottom_info {
+    display: flex;
+    flex-direction: column;
 }
+
 /*Font edit for third row in main grid*/
-#bottom_left_service p, #bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3 {
+#bottom_left_service p, #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
     font-size: 28px;
     font-family: "Canvas Sans", sans-serif;
 }
 
-#service_main {
+#service_main, #add_serivce_main {
     grid-column: 2; /* Center content in the second column */
     display: flex;
     justify-content: center;
@@ -412,15 +422,22 @@ form {
     background-color: #e0ddd3;
 }
 
-#service_h1_div {
+#service_h1_div, #add_service_h1_div {
     background-color: #efede9;
     padding: 10px;
     border-radius: 15px;
     width: 100%;
 }
 
-#right-column {
+#right-column, #add-right-column {
     grid-column: 3;
     grid-row: 2 / 4;
     border-radius: 15px;
+}
+
+#contact_footer_service {
+    grid-row: 4;
+    text-align: center;
+    font-family: "Canvas Sans", sans-serif;
+    background-color: #e0ddd3;
 }
