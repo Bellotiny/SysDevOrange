@@ -12,6 +12,35 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family: 'Alice';
+    src:url('../Fonts/Alice-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Forum';
+    src:url('../Fonts/Forum-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+h1{
+    font-family: 'AmsterdamThree';
+    font-size: 80px;
+    color: #57453d;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
+h2{
+    font-family: 'AmsterdamThree';
+    font-size: 50px;
+    color: #57453d;
+    position: absolute;
+}
+main {
+    margin-top: 16vh; /*Offets navbar height so page starts right after navbar */
+}
 * {
     padding: 0%;
     margin: 0%;
@@ -22,38 +51,40 @@ header {
     background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
-    width: 100%;
+    width: 100vw;
     height: 16vh;
+    z-index: 3;
     
 }
  #account_img {
-    background: none;
     width: 15%;
 } 
 #nav {
-    align-items: center; /* Centers items vertically */
-    justify-content: space-between; /* Spreads items evenly */
-    padding: 10px;
     margin: 2% auto;
     width: 70%; 
 } 
+
 #nav-container {
-    display: flex; /* Align child divs horizontally */
+    display: flex;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0 auto;
+    width: 100vw;
+    padding: 10px 5%;
+    height: -webkit-fill-available; /*Centers nav vetically */
 }
 
-#nav-container > #nav-main {
-    background-color: rgb(192, 191, 191);
+
+#nav-main {
+    display: flex;
     justify-content: center;
-    align-items: center; /* Vertically center both divs */ 
-    padding: 10px;
+    align-items: center;
+    background-color: rgb(192, 191, 191);
     border-radius: 15px;
-    width: 100%; /* Make sure it spans full width */
-    margin-right: 22%;
-    max-width: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 100%;
+    margin-right: auto; /* Ensures it's properly spaced */
+
 }
+
 
 #nav-home {
     display: flex; /* Align all items on the same line */
@@ -68,16 +99,18 @@ header {
     font-weight: bold;
     color: #1b613e;
     padding: 2% 20px; /* Add padding for clickable area */
-    border-radius: 5px;
+    border-radius: 15px;
 }
 #nav-main a:hover {
     color: white;
 }
-#nav-extra {
-    display: flex; /* Align the book link and image horizontally */
-    align-items: end;
-    justify-content: right;
+#nav-extra a:hover {
+    color: #1b613e;
 }
+#nav-extra {
+    display: flex;             /* Keep elements inside #nav-extra in a row */
+}
+
 
 /* Special styling for the Book link */
 .Nav-Split {
@@ -243,6 +276,7 @@ h2{
 }
 /*Contact us*/
 #contact_h1 {
+    font-size: clamp(2rem, 1.296rem + 3.756vw, 4rem);
     text-align: center;
     position: unset;
 }
@@ -260,7 +294,6 @@ h2{
 /*div that holds the form */
 #contact_form {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #efede9;
@@ -272,6 +305,13 @@ h2{
     margin-right: auto;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 2px 3px  #1b613e;
+}
+
 /* Style each form group to have label and input on the same line */
 .form-group {
     display: flex;
@@ -281,15 +321,16 @@ h2{
 }
 
 label {
+    font-size:clamp(0.923rem, 0.842rem + 0.282vw, 1.154rem);
     margin-right: 10px;
-    width: 100px; /* Adjust width as necessary to align labels */
+    width: 100px; /* Align labels */
     text-align: right;
     font-family: "DM Sans", 'Regular';
     font-weight: bold;
 }
 
 input[type="text"], textarea {
-    width: 300px; /* Adjust the width of the input fields */
+    width: clamp(10vw, 50vw, 35vw); /* Adjusting the width of the input fields */
     padding: 10px;
     border-radius: 15px;
     border-style: none;
@@ -302,20 +343,29 @@ textarea {
 /* Style the submit button */
 input[type="submit"] {
     font-family: "Canvas Sans", sans-serif;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 15px;
-    border-style: none;
-    align-self: center;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    text-align: center;
+    border: 0;
+    padding: 7px 16px;
+    min-height: 36px;
+    min-width: 36px;
+    max-width: 30%;
+    color: #ffffff;
+    background: #008060;
     background-color: #d2d8ce;
-    width: 25%;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    width: 70%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
 }
 form {
-    display: contents;
+    display: contents; /*keeps submit in middle otherwise display: block would push it to the left */
 }
-#contact_footer {
-    margin-top: 4%;
+.contact_footer {
+    margin-top: 4% !important;
     text-align: center;
     background-color: #e0ddd3;
     font-family: "Canvas Sans", sans-serif;
@@ -388,10 +438,10 @@ form {
 #service-grid, #add-service-grid {
     background-color: #e0ddd3;
     display: grid;
-    grid-template-columns: 40% 20% 40%;
-    grid-template-rows: 1fr 2fr 2fr; 
+    grid-template-columns: 1fr 20% 1fr; /*Sizing of columns */
+    grid-template-rows: 1fr 0.5Fr 0.5fr; /*Sizing the rows*/
     row-gap: 10px;
-    height: 100vh; 
+    height: 75vh; 
 }
 
 #add-service-grid {
@@ -405,7 +455,6 @@ form {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 50% 50%;
-    flex-direction: column;
     justify-content: space-between; /* Ensures hgroup goes to the bottom */
     padding: 10px;
     border-radius: 15px;
@@ -421,10 +470,12 @@ form {
     border-radius: 15px;
 }
 
-.service_left_description, .left_price, .service_right_description, .right_price {
-    font-size: 28px;
-    font-family: "Canvas Sans", sans-serif;
+.service_left_description, .left_price, .service_right_description, .right_price,  #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
+    
+    font-size: clamp(1rem, 10vw, 2rem);
+    font-family: "Alice";
 }
+
 .service_right_description {
     margin-left: auto;
 }
@@ -450,9 +501,12 @@ form {
 }
 
 /*Font edit for third row in main grid*/
-#bottom_left_service p, #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service p, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
-    font-size: 28px;
-    font-family: "Canvas Sans", sans-serif;
+
+/*Font for sub details like 'per finger' */
+.extra_service_detail {
+    font-size: clamp(1rem, 5vw, 2rem);
+    font-family: "Forum";
+    color: gray;
 }
 
 #service_main, #add_serivce_main {
@@ -477,7 +531,7 @@ form {
     border-radius: 15px;
 }
 
-#contact_footer_service {
+footer {
     grid-row: 4;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;

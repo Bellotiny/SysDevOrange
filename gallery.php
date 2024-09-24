@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery</title>
-  <script src="jquery-3.7.1.min.js"></script>
-  <link rel="stylesheet" href="CSS/style.css">
-  <script src="jquery-3.7.1.min.js"></script>
-</head>
+<?php include_once "head.php" ?>
 <body class="background_color">
   <header>
-    <nav id="nav"></nav>
+  <nav id="nav"></nav>
   </header>
-
+  <main>
   <div id="accent-div">
     <h1>Gallery</h1>
   </div>
@@ -57,6 +48,7 @@
 
   
   </main>
+  <?php include_once "footer.php"; ?>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="CSS/style.css">
-</head>
+<?php include_once "head.php" ?>
 <body>
-  <header>
-    <nav id="nav"></nav>
-  </header>
+<header>
+      <nav id="nav"></nav>
+      </header>
   <main>
   <div id="service-grid">
     <div id="left-column">
@@ -19,7 +13,7 @@
         <div id="bottom_left_service">
             <div class="bottom_info"> <!--This will separate the description from the price-->
                 <h3 class="service_left_description">Nail Art</h3>
-                <p>Per Finger</p> 
+                <p class="extra_service_detail">Per Finger</p> 
             </div>
             <p class="left_price">5 CAD</p>
         </div>
@@ -33,14 +27,14 @@
     
     <div id="right-column">
         <div id="top_right_service">
-            <p class="right_price">45 CAD</p>
-            <h3 class="service_right_description">Base Price Extension</h3>
+            <p class="right_price">35 CAD</p>
+            <h3 class="service_right_description">Base Price</h3>
         </div>
         <div id="bottom_right_service">
             <p class="right_price">5 CAD</p>
             <div class="bottom_info">
                 <h3 class="service_right_description">French Tips</h3>
-                <p>Plus Base</p>
+                <p class="extra_service_detail">Plus Base</p>
             </div>
 
         </div>
@@ -76,8 +70,9 @@
 
     </div> <!-- Empty right column for the 40% width -->
   </div>
-  <div id="footer"></div>
-  </main>
+  <?php
+      include_once "footer.php"
+  ?>
   <script src="script.js"></script>
 </body>
 </html>

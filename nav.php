@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <body>
+
+        <header>
         <div id="nav-container">
             <!-- First div with navigation links -->
             <div id="nav-main">
@@ -42,5 +41,4 @@
                 localStorage.removeItem('activeLink');
             });
         </script>
-    </body>
-</html>
+        </header>
