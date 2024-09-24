@@ -27,8 +27,8 @@
     
     <div id="right-column">
         <div id="top_right_service">
-            <p class="right_price">45 CAD</p>
-            <h3 class="service_right_description">Base Price Extension</h3>
+            <p class="right_price">35 CAD</p>
+            <h3 class="service_right_description">Base Price</h3>
         </div>
         <div id="bottom_right_service">
             <p class="right_price">5 CAD</p>
