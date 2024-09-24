@@ -145,6 +145,7 @@ h2{
     display: flex;
     justify-content: space-between ;
     width: 80%;
+    height: 40%;
     margin: 2% 10%;
 }
 #image-container img{
