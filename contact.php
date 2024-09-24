@@ -28,8 +28,9 @@
        </div>
        <div class="contact_footer">
        <?php include_once "footer.php"; ?>
-       <script src="script.js"></script>
+       
 </div>
     </main>
+    <script src="script.js"></script>
     </body>
 </html>

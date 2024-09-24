@@ -76,6 +76,7 @@ header {
     margin: 0 auto;
     width: 100%;
     padding: 10px 5%;
+    height: -webkit-fill-available; /*Centers nav vetically */
 }
 
 
