@@ -1,7 +1,9 @@
 
         <header>
+     
         <div id="nav-container">
             <!-- First div with navigation links -->
+            
             <div id="nav-main">
                 <a class="nav-item" href="index.php">Home</a>
                 <a class="nav-item" href="about.php">About</a>

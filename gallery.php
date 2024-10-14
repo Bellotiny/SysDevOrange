@@ -1,54 +1,182 @@
 <?php include_once "head.php" ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="CSS/style.css"> 
 <body class="background_color">
   <header>
   <nav id="nav"></nav>
   </header>
-  <main>
-  <div id="accent-div">
-    <h1>Gallery</h1>
+  <main class="container">
+  <div class="accent-div">
+    <h1 class="accent-heading">Gallery</h1>
   </div>
   <div id="instagram-pic">
-    pictures pictures pictures
-
+    <img src="Images/about1.png" alt="Image 1">
+    <img src="Images/about2.png" alt="Image 2">
+    <img src="Images/about3.png" alt="Image 3">
+    <img src="Images/about4.png" alt="Image 4">
+    <img src="Images/cat2.jpg" alt="Image 5">
+    <img src="Images/cat3.jpg" alt="Image 6">
+      
   </div>
+  <hr>
 
-  <div id="reviews-container">
-    <h2 class="h2-reviews">-Reviews-</h2>
-
-    <div class="review-div">
-      <div class="review-div-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#fc9a90" class="bi bi-person-circle" viewBox="0 0 16 16">
-          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-        </svg>
-   
+  <div>
+    <div class="accent-div">
+    <h1 class="accent-heading">Reviews</h1>
+    </div>
+    <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" id="toggleReviewFormButton">Post Review</button>
       </div>
-      <div class="review-div-content">
-        <div class="review-div-content-text">
-          <div class="review-div-content-account-name">
-            <h4>From: Janna Lomibao</h4>
+    </div>
+
+   <!-- Initially hidden review form -->
+    <div id="review-form-input" style="display: none; background-color: white; padding: 20px; border-radius: 5px;">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Review</label>
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">Post</button>
+      </div>
+    </div>
+
+    <div class="w-100">
+      <!------first reviewws--->
+      <div class="d-flex align-items-center py-2"> 
+        <div class="me-3">
+            <img src="Images/about1.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+        </div>  
+
+        <div class="w-100 ">
+            <div>
+              <!--date -->
+              <strong class="d-inline-block mb-2 text-primary-emphasis">Mar 16</strong>
+            </div>
+            <div>
+              <!-- Title comment-->
+              <h3 class="mb-0">Loveee!!</h3>
+              <!---comment-->
+              <p class="card-text mb-auto"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
+              vitae tristique tincidunt. Nam a condimentum urna,</p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bullseye  me-2" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
+                <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+              </svg>
+              <div class="mb-1 text-body-secondary">Bretman Rock</div>
+            </div>       
           </div>
-          <div class="review-div-content-account-review">
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices 
-            posuere cubilia curae. Vestibulum ante ipsum primis in faucibus orci luctus 
-            et ultrices posuere cubilia curae.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices 
-            posuere cubilia curae. Vestibulum ante ipsum primis in faucibus orci luctus 
-            et ultrices posuere cubilia curae.
-  
+      </div>
+
+      <!------second reviewws--->
+      <div class="d-flex align-items-center py-2"> 
+        <div class="me-3">
+            <img src="Images/about2.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+        </div>  
+
+        <div class="w-100 ">
+            <div>
+              <!--date -->
+              <strong class="d-inline-block mb-2 text-primary-emphasis">Mar 16</strong>
+            </div>
+            <div>
+              <!-- Title comment-->
+              <h3 class="mb-0">Nailssss!!</h3>
+              <!---comment-->
+              <p class="card-text mb-auto"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
+              vitae tristique tincidunt. Nam a condimentum urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
+              vitae tristique tincidunt. Nam a condimentum urna,</p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bullseye  me-2" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
+                <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+              </svg>
+              <div class="mb-1 text-body-secondary">Janna Lomibao</div>
+            </div>       
           </div>
-        </div>
-        <div class="review-div-content-pic">
-          <img src="Images/about2.png">
-        </div>
-      </div> 
-      </div> 
-  </div> 
+      </div>
+
+      <!------third reviewws--->
+      <div class="d-flex align-items-center py-2"> 
+        <div class="me-3">
+            <img src="Images/about4.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+        </div>  
+
+        <div class="w-100 ">
+            <div>
+              <!--date -->
+              <strong class="d-inline-block mb-2 text-primary-emphasis">Oct 16</strong>
+            </div>
+            <div>
+              <!-- Title comment-->
+              <h3 class="mb-0">Great</h3>
+              <!---comment-->
+              <p class="card-text mb-auto"> Lorem entum urna,</p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bullseye  me-2" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
+                <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+              </svg>
+              <div class="mb-1 text-body-secondary">Jennie Kim</div>
+            </div>       
+          </div>
+      </div>
+
+      <!---pagination--->
+     <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+     </div>
+
+    </div>
 
   </div>
 
   
   </main>
+
   <?php include_once "footer.php"; ?>
+ 
   <script src="script.js"></script>
+  <script>
+    // Toggle review form visibility
+    document.getElementById('toggleReviewFormButton').addEventListener('click', function() {
+      const reviewForm = document.getElementById('review-form-input');
+      if (reviewForm.style.display === 'none' || reviewForm.style.display === '') {
+        reviewForm.style.display = 'block';
+      } else {
+        reviewForm.style.display = 'none';
+      }
+    });
+  </script>
+   
 </body>
 </html>
