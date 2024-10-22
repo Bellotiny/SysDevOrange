@@ -1,10 +1,13 @@
-<?php include_once "head.php" ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/style.css"> 
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once ROOT . '/Views/head.php';
+?>
+
+
 <body id="services-body">
-<header>
-      <nav id="nav"></nav>
-</header>
+<?php include_once ROOT . '/Views/nav.php'; ?>  
 
 <main class="container ">
 
@@ -25,7 +28,7 @@
                 <p class="card-text mb-auto scrollable-paragraph">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care, <strong>extension</strong>  and polish application.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -38,7 +41,7 @@
           <p class="card-text mb-auto">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care and polish application.</p>
         </div>
         <div class="col-auto d-none d-lg-block">
-            <img src="Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+            <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
         </div>
       </div>
     </div>
@@ -61,7 +64,7 @@
                 <p class="card-text mb-auto scrollable-paragraph">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care, <strong>extension</strong>  and polish application.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -74,7 +77,7 @@
             <p class="card-text mb-auto">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care and polish application.</p>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <img src="Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
             </div>
         </div>
         </div>
@@ -146,6 +149,19 @@
 
     </div>
 
+    <!---pagination--->
+    <div class="d-flex justify-content-center my-3">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+     </div>
+
 
 
 </div>
@@ -153,10 +169,6 @@
 
 
 </main>
- 
-    <?php
-        include_once "footer.php"
-    ?>
-  <script src="script.js"></script>
+<?php include_once ROOT . '/Views/footer.php'; ?>
 </body>
 </html>

@@ -1,11 +1,13 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/style.css"> 
-</head>
-<?php include_once "head.php" ?>
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once ROOT . '/Views/head.php';
+?>
+
 <body class="background_color">
-<header>
-      <nav id="nav"></nav>
-</header>
+  <?php include_once ROOT . '/Views/nav.php'; ?>  
+
 <main>
   <div class="divGreen">
     <h1 class="about-heading">About us</h1>
@@ -24,8 +26,9 @@
   </div>
 
   <div id="image-container">
-    <img src="Images/about1.png" alt="Image 1" id="image1">
-    <img src="Images/about2.png" alt="Image 2" id="image2">
+    
+    <img src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1" id="image1">
+    <img src="<?= BASE_URL ?>/Views/Images/about2.png" alt="Image 2" id="image2">
   </div>
 
   <div id="cat-warning-container">
@@ -58,22 +61,21 @@
       </div>
     </div>
   </div>
-  
-  <?php include_once "footer.php"; ?>
+
 </main>
-<script src="script.js"></script>
+
 <script>
 
     // Array of images
 
      // for the first 2 pic
      const images = [
-            ["Images/about1.png", "Images/about2.png"], // Pair 1
-            ["Images/about3.png", "Images/about4.png"]  // Pair 2
+            ["<?php echo BASE_URL; ?>/Views/Images/about1.png", "<?php echo BASE_URL; ?>/Views/Images/about2.png"], // Pair 1
+            ["<?php echo BASE_URL; ?>/Views/Images/about3.png", "<?php echo BASE_URL; ?>/Views/Images/about4.png"]  // Pair 2
         ];
       let currentFirstImageIndex = 0;
      //cat   
-    const catImages = ['Images/cat1.jpg', 'Images/cat2.jpg', 'Images/cat3.jpg'];
+    const catImages = ['<?php echo BASE_URL; ?>/Views/Images/cat1.jpg', '<?php echo BASE_URL; ?>/Views/Images/cat2.jpg', '<?php echo BASE_URL; ?>/Views/Images/cat3.jpg'];
     let currentCatImageIndex = 0;
    
 
@@ -110,5 +112,7 @@
     changeImages();
     changeCatImage();
 </script>
+
+<?php include_once ROOT . '/Views/footer.php'; ?>
 </body>
 </html>

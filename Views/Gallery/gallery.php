@@ -1,21 +1,24 @@
-<?php include_once "head.php" ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/style.css"> 
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once ROOT . '/Views/head.php';
+?>
+
 <body class="background_color">
-  <header>
-  <nav id="nav"></nav>
-  </header>
+<?php include_once ROOT . '/Views/nav.php'; ?>
+
   <main class="container">
   <div class="accent-div">
     <h1 class="accent-heading">Gallery</h1>
   </div>
   <div id="instagram-pic">
-    <img src="Images/about1.png" alt="Image 1">
-    <img src="Images/about2.png" alt="Image 2">
-    <img src="Images/about3.png" alt="Image 3">
-    <img src="Images/about4.png" alt="Image 4">
-    <img src="Images/cat2.jpg" alt="Image 5">
-    <img src="Images/cat3.jpg" alt="Image 6">
+    <img src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1">
+    <img src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 2">
+    <img src="<?=  BASE_URL ?>/Views/Images/about3.png" alt="Image 3">
+    <img src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 4">
+    <img src="<?=  BASE_URL ?>/Views/Images/cat2.jpg" alt="Image 5">
+    <img src="<?=  BASE_URL ?>/Views/Images/cat3.jpg" alt="Image 6">
       
   </div>
   <hr>
@@ -53,7 +56,7 @@
       <!------first reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="Images/about1.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -84,7 +87,7 @@
       <!------second reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="Images/about2.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -116,7 +119,7 @@
       <!------third reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="Images/about4.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -163,9 +166,8 @@
   
   </main>
 
-  <?php include_once "footer.php"; ?>
+  <?php include_once ROOT . '/Views/footer.php'; ?>
  
-  <script src="script.js"></script>
   <script>
     // Toggle review form visibility
     document.getElementById('toggleReviewFormButton').addEventListener('click', function() {

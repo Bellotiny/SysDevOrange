@@ -1,29 +1,34 @@
 @font-face {
     font-family: "Canvas Sans";
     src: url("../Fonts/CanvasSans.woff2");
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "DM Sans";
-    src: url("../Fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
-  }
-  @font-face{
+    src: url("../Fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf") ;
+}
+
+@font-face {
     font-family: 'AmsterdamThree';
-    src:url('../amsterdam-3/Amsterdam.ttf');
+    src: url('../Fonts/amsterdam-3/Amsterdam.ttf');
     font-weight: normal;
     font-style: normal;
 }
-@font-face{
+
+@font-face {
     font-family: 'Alice';
-    src:url('../Fonts/Alice-Regular.ttf');
+    src: url('../Fonts/Alice-Regular.ttf') ;
     font-weight: normal;
     font-style: normal;
 }
-@font-face{
+
+@font-face {
     font-family: 'Forum';
-    src:url('../Fonts/Forum-Regular.ttf');
+    src: url('../Fonts/Forum-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
+
 h1{
     font-family: 'AmsterdamThree';
     font-size: 80px;
@@ -31,8 +36,7 @@ h1{
 }
 h2{
     font-family: 'AmsterdamThree';
-    font-size: 50px;
-   
+    font-size: 50px;  
 }
 p{
     font-family: "Canvas Sans", sans-serif;
@@ -50,7 +54,7 @@ header {
     background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
-    width: 100vw;
+    width: 100%;
     height: 11vh;
     z-index: 3;
     
@@ -58,36 +62,27 @@ header {
  #account_img {
     width: 15%;
 } 
-#nav {
-    margin: 2% auto;
-    width: 70%; 
-} 
+
 
 #nav-container {
-    display: flex;
-    align-items: center;
-    max-width: 1200px; 
-    margin: 0 auto;
-    width: 100vw;
-    margin: 10px 2%;
-    height: -webkit-fill-available; /*Centers nav vetically */
+ 
+    height: 100%;
+    padding: 0 20px;
 }
 
 
 #nav-main {
     display: flex;
-    justify-content: center;
     align-items: center;
     background-color: rgb(192, 191, 191);
-    border-radius: 10px;
-    margin-right: auto; /* Ensures it's properly spaced */
-    padding: 0 50px;
+    border-radius: 10px; 
+    padding: 0 50px
 
 }
 
 
 #nav-home {
-    display: flex; /* Align all items on the same line */
+  
 }
 
 #nav-main a {
@@ -100,6 +95,7 @@ header {
     color: #1b613e;
     padding: 2% 20px; /* Add padding for clickable area */
     border-radius: 15px;
+  
 }
 #nav-main a:hover {
     color: white;
@@ -108,7 +104,9 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    display: flex;             /* Keep elements inside #nav-extra in a row */
+
+    justify-content: flex-end; 
+   
 }
 
 
@@ -126,6 +124,8 @@ header {
     text-decoration: none;
     margin-top: auto;
     margin-bottom: auto;
+  
+    
 }
 
 /* Homepage */
@@ -168,6 +168,9 @@ h2{
 }
 .background_color{
     background-color: #efede9;
+}
+.div-background{
+    background-color: #008060;
 }
 
 /* About Us*/
@@ -300,7 +303,7 @@ h2{
 }
 .accent-div .accent-heading{
     position: absolute;
-    top: -25%;  /* Move the h1 50% from the top */
+    top: -35%;  /* Move the h1 50% from the top */
     left: 50%; /* Move the h1 50% from the left */
     transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
     text-align: center;
@@ -575,4 +578,8 @@ footer {
 footer p{
     margin: 0;
     padding: 10px;
+}
+
+#account-Main{
+    height: 80vh;
 }
