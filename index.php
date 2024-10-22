@@ -1,14 +1,17 @@
-<?php include_once "head.php" ?>
-    <body>
-    <header>
-      <nav id="nav"></nav>
-      </header>
-      <main>
-      <div id="homeImage"></div>
-      </main>
-      <?php 
-        include_once "footer.php";
-      ?>
-      <script src="script.js"></script>
-    </body>
-</html>
+<?php
+include_once 'Views/config.php';
+
+$controller = (isset($_GET['controller'])) ? $_GET['controller'] : "home";
+#echo $controller;
+
+
+
+$controllerClassName = ucfirst($controller) . "Controller";
+#echo $controllerClassName;
+//var_dump($controllerClassName);
+include_once "Controllers/$controllerClassName.php";
+
+//*
+$ct = new $controllerClassName();
+$ct->route();
+//*/

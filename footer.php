@@ -1,3 +1,0 @@
-<footer>
-    Maddie Snook Corp &copy
-</footer>

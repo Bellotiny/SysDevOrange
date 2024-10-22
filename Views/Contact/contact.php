@@ -1,8 +1,12 @@
-<?php include_once "head.php" ?>
-    <body id="contact">
-    <header>
-  <nav id="nav"></nav>
-  </header>
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once ROOT . '/Views/head.php';
+?>
+
+<body id="contact">
+    <?php include_once ROOT . '/Views/nav.php'; ?> 
 
     <main id="contact_main">
         <br>
@@ -27,7 +31,8 @@
         </form>
        </div>
        <div class="contact_footer">
-       <?php include_once "footer.php"; ?>
+       
+<?php include_once ROOT . '/Views/footer.php'; ?>
        
 </div>
     </main>

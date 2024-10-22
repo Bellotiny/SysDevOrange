@@ -1,45 +1,48 @@
 @font-face {
     font-family: "Canvas Sans";
     src: url("../Fonts/CanvasSans.woff2");
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "DM Sans";
-    src: url("../Fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
-  }
-  @font-face{
+    src: url("../Fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf") ;
+}
+
+@font-face {
     font-family: 'AmsterdamThree';
-    src:url('../amsterdam-3/Amsterdam.ttf');
+    src: url('../Fonts/amsterdam-3/Amsterdam.ttf');
     font-weight: normal;
     font-style: normal;
 }
-@font-face{
+
+@font-face {
     font-family: 'Alice';
-    src:url('../Fonts/Alice-Regular.ttf');
+    src: url('../Fonts/Alice-Regular.ttf') ;
     font-weight: normal;
     font-style: normal;
 }
-@font-face{
+
+@font-face {
     font-family: 'Forum';
-    src:url('../Fonts/Forum-Regular.ttf');
+    src: url('../Fonts/Forum-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
+
 h1{
     font-family: 'AmsterdamThree';
     font-size: 80px;
-    color: #57453d;
-    position: absolute;
-    top: 15%;
-    left: 5%;
+    width: 100%;
 }
 h2{
     font-family: 'AmsterdamThree';
-    font-size: 50px;
-    color: #57453d;
-    position: absolute;
+    font-size: 50px;  
+}
+p{
+    font-family: "Canvas Sans", sans-serif;
 }
 main {
-    margin-top: 16vh; /*Offets navbar height so page starts right after navbar */
+    margin-top: 10vh; /*Offets navbar height so page starts right after navbar */
 }
 * {
     padding: 0%;
@@ -51,43 +54,35 @@ header {
     background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
-    width: 100vw;
-    height: 16vh;
+    width: 100%;
+    height: 11vh;
     z-index: 3;
     
 }
  #account_img {
     width: 15%;
 } 
-#nav {
-    margin: 2% auto;
-    width: 70%; 
-} 
+
 
 #nav-container {
-    display: flex;
-    align-items: center;
-    max-width: 1200px; 
-    margin: 0 auto;
-    width: 100vw;
-    padding: 10px 5%;
-    height: -webkit-fill-available; /*Centers nav vetically */
+ 
+    height: 100%;
+    padding: 0 20px;
 }
 
 
 #nav-main {
     display: flex;
-    justify-content: center;
     align-items: center;
     background-color: rgb(192, 191, 191);
-    border-radius: 15px;
-    margin-right: auto; /* Ensures it's properly spaced */
+    border-radius: 10px; 
+    padding: 0 50px
 
 }
 
 
 #nav-home {
-    display: flex; /* Align all items on the same line */
+  
 }
 
 #nav-main a {
@@ -100,6 +95,7 @@ header {
     color: #1b613e;
     padding: 2% 20px; /* Add padding for clickable area */
     border-radius: 15px;
+  
 }
 #nav-main a:hover {
     color: white;
@@ -108,8 +104,11 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    display: flex;             /* Keep elements inside #nav-extra in a row */
+
+    justify-content: flex-end; 
+   
 }
+
 
 
 /* Special styling for the Book link */
@@ -125,6 +124,8 @@ header {
     text-decoration: none;
     margin-top: auto;
     margin-bottom: auto;
+  
+    
 }
 
 /* Homepage */
@@ -157,11 +158,19 @@ h2{
     display: inline;
     margin: 2%;
 }
+#logo_img {
+    width: 60px; /* Adjust this value based on your logo size */
+    height: auto; /* Maintains aspect ratio */
+    margin-right: 20px; /* Adds space between logo and navigation items */
+}
 #nav li a {
     text-decoration: none;
 }
 .background_color{
     background-color: #efede9;
+}
+.div-background{
+    background-color: #008060;
 }
 
 /* About Us*/
@@ -169,20 +178,46 @@ h2{
     background-color: #d2d8ce;
     height: auto;/* Let the height adapt to the content */
     width: 80%;
-    margin: 20% 10% 2% 10%; /* Center horizontally */
+    margin: 15% 10% 2% 10%; /* Center horizontally */
     padding: 80px 80px 40px 140px; /* Add padding inside the div */
     box-sizing: border-box; /* Ensure padding is included in the height and width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "DM Sans", sans-serif;
+    position: relative;
+}
+
+.about-heading{
+    position: relative; 
+    margin-top: -14%; 
+    margin-left:-20%;
+    margin-bottom: 3%;
+    color: #1b613e;
+}
+.about-heading::before {
+    content: ''; 
+    position: absolute;
+    top: 50%; /* Half of the height will be inside */
+    left: 0;
+    right: 0;
+    height: 50%; /* Adjust this value if necessary */
+    z-index: -1; /* Make sure the background is behind the text */
 }
 
 #image-container{
     display: flex;
-    justify-content: space-between ;
+    justify-content: center; /* Centers the images */
+    align-items: center; /* Vertically centers the images */
     width: 80%;
     margin: 2% 10%;
 }
 #image-container img{
-    width: 50%;
-    object-fit: cover;
+    width: 48%; /* Set both images to take up 48% of the container width */
+    height: 500px; /* Ensure the height scales proportionally */
+    object-fit: cover; /* Ensures the image covers its container without distortion */
+    margin-right: 2%; /* Adds space between the images */
+}
+#image-container img:last-child {
+    margin-right: 0; /* Removes the margin for the last image to avoid overflow */
 }
 #cat-warning-container{
     height: 45vh;
@@ -238,29 +273,53 @@ h2{
     font-family: "DM Sans", 'Regular' ;
     line-height: 2;
 }
+#parking-div {
+    position: relative;
+    width: 50%; /* Set width and height to create a square */
+    height: 50%;
+    overflow: hidden; /* Ensure the content stays inside the circle */
+    margin: 0 auto; /* Center it horizontally if necessary */
+}
+
+#parking-div iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 
 /*Gallery*/
-#accent-div{
+.accent-div{
     background-color: #f5e1c6;
     height:12vh ;
-    margin: 20% 10% 0 10%;
+    margin: 18% 0 0 0;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
+    justify-content: center; 
+    align-items: center;    
     position: relative;
 }
-#accent-div h1{
+.accent-div .accent-heading{
     position: absolute;
-    top: -25%;  /* Move the h1 50% from the top */
+    top: -35%;  /* Move the h1 50% from the top */
     left: 50%; /* Move the h1 50% from the left */
     transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
     text-align: center;
 }
-#instagram-pic{
-    background-color:#fc9a90;
-    height: 40vh;
-    margin: 1% 10% 0 10%;
-}
+#instagram-pic {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+  }
+  
+#instagram-pic img {
+    flex-basis: calc(33.33% - 10px); 
+    height: 300px; 
+    object-fit: cover;
+  }
 
 /*reviews*/
 #reviews-container{/* CSS for the main container in Reviews section*/
@@ -269,10 +328,8 @@ h2{
     padding-top: 10%;
     font-family:"Canvas Sans" ;
 }
-.h2-reviews{
-    top: 90%;
-    left: 5%;
-}
+/*Review*/
+
 /*Contact us*/
 #contact_h1 {
     font-size: clamp(2rem, 1.296rem + 3.756vw, 4rem);
@@ -374,48 +431,30 @@ form {
     background-color: #e0ddd3;
     font-family: "Canvas Sans", sans-serif;
 }
-/*Review*/
-.review-div{/* CSS for the div inside #reviews-container*/
-    display: flex;
-    margin: 0 10%;
-    padding: 2%;
 
-}
-.review-div-icon{/* CSS for the div inside .review-div*/
-    margin-top: 30px;
-    flex: 1;
-    padding-right: 20px;
+/*Services*/
+#services-body{
     background-color:#e0ddd3;
 }
-.review-div-content{/* CSS for the div inside .review-div*/
-    background-color: #f5e1c6;
-    padding: 30px;
-    border-radius: 40px;
-    display: flex;
-}
-.review-div-content-text{
-    flex: 5;
-}
-.review-div-content-account-name{
-    padding-bottom: 10px;
-}
-.review-div-content-account-name h4{
-    font-weight: bolder;
+
+#services-heading{
+    position: relative;
+    left: -5%;
+    padding-bottom:8% ;
 }
 
-.review-div-content-pic {
-    flex: 1;
-    text-align: center;
+.card {
+    position: relative; /* Ensure cards have their own stacking context */
+    z-index: 0; /* Cards will be behind the heading */
+   
 }
-.review-div-content-pic img{
-    height: 100px;
-    object-fit: cover;
+.services-card{
+    background-color: #f4f2ed;
 }
-.review-div-content-account-review{/* CSS for the div inside .review-div-content*/
-    flex: 2;
-    padding-top: 10px;
+.scrollable-paragraph {
+
+    overflow-y: auto;
 }
-/*Services*/
 
 #service_h1_div, #add_service_h1_div {
     display: contents; /*Makes sure that changes are seen does not work well without not sure why -___- */
@@ -539,5 +578,13 @@ footer {
     grid-row: 4;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
-    background-color: #e0ddd3;
+    background-color:rgb(255, 255, 255, 0.5);
+}
+footer p{
+    margin: 0;
+    padding: 10px;
+}
+
+#account-Main{
+    height: 80vh;
 }
