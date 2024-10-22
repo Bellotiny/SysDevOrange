@@ -17,7 +17,7 @@ include_once ROOT . '/Views/head.php';
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante, id congue sapien imperdiet sit amet. Praesent ac neque rutrum velit lobortis iaculis iaculis sed lacus. Praesent dictum sagittis ultrices. Nullam vitae dui mattis, mollis tortor id, euismod ligula. Integer a ligula magna. In hac habitasse platea dictumst. Aliquam erat volutpat. Donec scelerisque metus est.</p>
           </div>
           <div class="col-md-5">
-          <img src="<?php echo ROOT; ?>/Images/about1.png" alt="Welcome image" class="img-fluid mx-auto" width="500" height="500">
+          <img src="<?php echo BASE_URL; ?>/Views/Images/about1.png" alt="Welcome image" class="img-fluid mx-auto" width="500" height="500">
 
 
             
