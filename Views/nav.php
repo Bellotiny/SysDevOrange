@@ -1,4 +1,4 @@
-<header>
+<header class="d-flex">
     <div class="container">
         <div id="nav-container" class="d-flex justify-content-between align-items-center">
             <!-- First div with navigation links -->
