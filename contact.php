@@ -23,7 +23,7 @@
                 <label for="contact_message">Message:</label>
                 <textarea id="contact_message" name="contact_message" rows="5" required></textarea>
             </div>
-            <?= "<input type=\"submit\" value=\"Send\">" ?> 
+            <?= "<input id=\"submit\" type=\"submit\" value=\"Send\">" ?> 
         </form>
        </div>
        <div class="contact_footer">

@@ -360,6 +360,11 @@ input[type="submit"] {
     width: 70%;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
 }
+#submit:active {
+    vertical-align: top;
+    padding: 8px 13px 6px;
+    background-color: #b3b9b0;
+}
 form {
     display: contents; /*keeps submit in middle otherwise display: block would push it to the left */
 }
