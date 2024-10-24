@@ -1,4 +1,5 @@
 <?php
+    include_once dirname(__DIR__) . "/Models/Model.php";
 
     class Service extends Model{
 

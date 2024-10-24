@@ -1,4 +1,5 @@
 <?php
+    include_once dirname(__DIR__) . "/Models/Model.php";
 
     class RegisteredUser extends User{
 
@@ -10,24 +11,52 @@
         private $password;
         private $admin;
 
-        function __construct($id = -1){
-            
+        private function __construct($id = -1){
+            parent::__construct();
+
+            $this->userID = $id;
+            if($id<0){
+                $this->firstName = "";
+                $this->lastName = "";
+                $this->email = "";
+                $this->phoneNumber = "";
+                $this->password = "";
+                $this->admin = "";
+            }
+            else{
+                // Select Statement for listing
+                $sql = "SELECT * FROM `users` WHERE `userID`=" . $id;
+
+                $result = $this->conn->query($sql);
+
+                $data = $result->fetch_assoc();
+
+                // Assign values
+                $this->userID = $id;
+                $this->firstName = $data['firstName'];
+                $this->lastName = $data['lastName'];
+                $this->email = $data['email'];
+                $this->phoneNumber = $data['phoneNumber'];
+                $this->password = $data['password'];
+                $this->admin = $data['admin'];
+                
+            }
         }
 
-        static function list(){
-
+        private static function listRegisteredUser(){
+            $this->list('registeredUser','RegisteredUser');
         }
 
-        function update(){
-
+        private function updateRegisteredUser($data, $id){
+            $this->update('registeredUser', $data, $id);
         }
 
-        function insert(){
-
+        private function insertRegisteredUser($table, $data){
+            $this->insert($table, $data);
         }
 
-        function delete(){
-
+        private function deleteRegisteredUser($table, $fieldID, $id){
+            $this->delete($table, $fieldID, $id);
         }
 
     }

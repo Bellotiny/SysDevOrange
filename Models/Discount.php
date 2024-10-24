@@ -1,4 +1,5 @@
 <?php
+    include_once dirname(__DIR__) . "/Models/Model.php";
 
     class Discount extends Model{
 
@@ -10,24 +11,52 @@
         private $amount;
         private $discounts;
 
-        function __construct($id = -1){
-            
+        private function __construct($id = -1){
+            parent::__construct();
+
+            $this->discountID = $id;
+            if($id<0){
+                $this->name = "";
+                $this->start = "";
+                $this->end = "";
+                $this->percent = "";
+                $this->amount = "";
+                $this->discounts = "";
+            }
+            else{
+                // Select Statement for listing
+                $sql = "SELECT * FROM `discount` WHERE `discountID`=" . $id;
+
+                $result = $this->conn->query($sql);
+
+                $data = $result->fetch_assoc();
+
+                // Assign values
+                $this->discountID = $id;
+                $this->name = $data['name'];
+                $this->start = $data['start'];
+                $this->end = $data['end'];
+                $this->percent = $data['percent'];
+                $this->amount = $data['amount'];
+                $this->discounts = $data['discounts'];
+                
+            }
         }
 
-        static function list(){
-
+        private static function listDiscount(){
+            $this->list('discount','Discount');
         }
 
-        function update(){
-
+        private function updateDiscount($data, $id){
+            $this->update('discount', $data, $id);
         }
 
-        function insert(){
-
+        private function insertDiscount($table, $data){
+            $this->insert($table, $data);
         }
 
-        function delete(){
-
+        private function deleteDiscount($table, $fieldID, $id){
+            $this->delete($table, $fieldID, $id);
         }
 
     }

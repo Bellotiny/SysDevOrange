@@ -1,29 +1,50 @@
 <?php
+    include_once dirname(__DIR__) . "/Models/Model.php";
 
-    class Discount extends Model{
+    class ContactUs extends Model{
 
         private $contactUsID;
         private $message;
         private $user;
 
-        function __construct($id = -1){
-            
+        private function __construct($id = -1){
+            parent::__construct();
+
+            $this->contactUsID = $id;
+            if($id<0){
+                $this->message = "";
+                $this->user = "";
+            }
+            else{
+                // Select Statement for listing
+                $sql = "SELECT * FROM `contactUs` WHERE `contactUsID`=" . $id;
+
+                $result = $this->conn->query($sql);
+
+                $data = $result->fetch_assoc();
+
+                // Assign values
+                $this->contactUsID = $id;
+                $this->message = $data['message'];
+                $this->user = $data['user'];
+                
+            }
         }
 
-        static function list(){
-
+        private static function listContactUs(){
+            $this->list('contactUs','ContactUs');
         }
 
-        function update(){
-
+        private function updateContactUs($data, $id){
+            $this->update('contactUs', $data, $id);
         }
 
-        function insert(){
-
+        private function insertContactUs($table, $data){
+            $this->insert($table, $data);
         }
 
-        function delete(){
-
+        private function deleteContactUs($table, $fieldID, $id){
+            $this->delete($table, $fieldID, $id);
         }
 
     }

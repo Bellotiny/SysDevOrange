@@ -1,4 +1,5 @@
 <?php
+    include_once dirname(__DIR__) . "/Models/Model.php";
 
     class Payment extends Model{
 
@@ -8,23 +9,45 @@
         private $dateTime;
 
         function __construct($id = -1){
-            
+            parent::__construct();
+
+            $this->paymentID = $id;
+            if($id<0){
+                $this->status = "";
+                $this->amount = "";
+                $this->dateTime = "";
+            }
+            else{
+                // Select Statement for listing
+                $sql = "SELECT * FROM `payment` WHERE `paymentID`=" . $id;
+
+                $result = $this->conn->query($sql);
+
+                $data = $result->fetch_assoc();
+
+                // Assign values
+                $this->paymentID = $id;
+                $this->status = $data['status'];
+                $this->amount = $data['amount'];
+                $this->dateTime = $data['dateTime'];
+                
+            }
         }
 
-        static function list(){
-
+        private static function listPayment(){
+            $this->list('payment','Payment');
         }
 
-        function update(){
-
+        function updatePayment($data, $id){
+            $this->update('payment', $data, $id);
         }
 
-        function insert(){
-
+        function insertPayment($table, $data){
+            $this->insert($table, $data);
         }
 
-        function delete(){
-
+        function deletePayment($table, $fieldID, $id){
+            $this->delete($table, $fieldID, $id);
         }
 
     }
