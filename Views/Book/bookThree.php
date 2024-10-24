@@ -39,4 +39,14 @@ include_once ROOT . '/Views/head.php';
           </ul>
         </div>
       </main>
+      <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookFour" role="button">Next</a>
+
+<!--progress-->
+<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar" style="width: 25%">50%</div>
+</div>
+
+<!----FOOTER--->
+<?php include_once ROOT . '/Views/footer.php'; ?>
+
     </body>

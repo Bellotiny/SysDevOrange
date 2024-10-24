@@ -52,6 +52,7 @@ include_once ROOT . '/Views/head.php';
               
 
       </main>
+      <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookThree" role="button">Next</a>
 
       <!--progress-->
       <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
