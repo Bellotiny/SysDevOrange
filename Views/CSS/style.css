@@ -588,3 +588,12 @@ footer p{
 #account-Main{
     height: 80vh;
 }
+
+/* Change the active link color */
+a.nav-link.active {
+    color: #fadadd !important; /* Change to your desired color */
+    background-color: #1b613e !important; /* Optional: Change background color */
+}
+
+
+

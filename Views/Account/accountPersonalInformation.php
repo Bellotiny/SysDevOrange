@@ -8,9 +8,9 @@ include_once ROOT . '/Views/head.php';
     <body>
     <?php include_once ROOT . '/Views/nav.php'; ?>
     
-      <main class="d-flex" id="account-Main">
+      <main class="d-flex flex-grow-1  max-vh-100" id="account-Main">
          <!--Sidebar--->
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light " style="width: 280px; height:100%;">
+          <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
@@ -18,32 +18,32 @@ include_once ROOT . '/Views/head.php';
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPeronsalInformation" class="nav-link active" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Personal Information
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark" id="loadBookingHistory">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountBookingHistory" class="nav-link link-dark" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 Booking History
               </a>
             </li>
 
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountSchedule" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                 Schedule
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountInventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 Inventory
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountBookingList" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                 Booking list
               </a>
@@ -75,7 +75,7 @@ include_once ROOT . '/Views/head.php';
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center text-center">
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -90,7 +90,7 @@ include_once ROOT . '/Views/head.php';
               </div>
             </div>
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -105,7 +105,7 @@ include_once ROOT . '/Views/head.php';
               </div>
             </div>
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -121,7 +121,7 @@ include_once ROOT . '/Views/head.php';
             </div>
 
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -136,7 +136,7 @@ include_once ROOT . '/Views/head.php';
               </div>
             </div>
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -152,7 +152,7 @@ include_once ROOT . '/Views/head.php';
             </div>
    
             <div class="col">
-              <div class="card shadow-sm">
+              <div class="card shadow-sm h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -183,18 +183,11 @@ include_once ROOT . '/Views/head.php';
       </div>
           
 
-        </div>
-        
+       
       </main>
-
-      <script>
-
-  
-
-
-      </script>
-
-
       <?php include_once ROOT . '/Views/footer.php'; ?>
+
+      </div>
+      
     </body>
 </html>
