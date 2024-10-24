@@ -3,7 +3,7 @@
         <div id="nav-container" class="d-flex justify-content-between align-items-center">
             <!-- First div with navigation links -->
             <div id="nav-main" class="d-flex ">
-                <a class="nav-item" href="<?php echo BASE_URL; ?>/index.php?controller=home">Home</a>
+                <a class="nav-item" href="<?php echo BASE_URL; ?>/index.php?controller=home&">Home</a>
                 <a class="nav-item" href="<?php echo BASE_URL; ?>/index.php?controller=about">About</a>
                 <a class="nav-item" href="<?php echo BASE_URL; ?>/index.php?controller=services">Services</a>
                 <a class="nav-item" href="<?php echo BASE_URL; ?>/index.php?controller=gallery">Gallery</a>
@@ -12,7 +12,7 @@
 
             <!-- Second div with the Book link and the account image -->
             <div id="nav-extra" class="d-flex align-items-center">
-                <a class="Nav-Split" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=index">Book</a>
+                <a class="Nav-Split" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne">Book</a>
                 <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=index">
 
                     Account

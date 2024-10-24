@@ -5,102 +5,13 @@ ini_set('display_errors', 1);
 include_once ROOT . '/Views/head.php';
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/style.css"> 
     <body>
     <?php include_once ROOT . '/Views/nav.php'; ?>
  
 
-      <main class="container service-booking-div">
-       <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Checked checkbox
-          </label>
-        </div>
-      </main>
-
-      <main class="container color-booking-div">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                Color 1
-              </button>
-            </h3>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-              <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-               Color 2
-              </button>
-            </h3>
-            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-              <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                Color 3
-              </button>
-            </h3>
-            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-              <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
-          </div>
-        </div>
-
-              
-
-      </main>
-
-      <main class="container  date-booking-div">
-        <!--Day-->
-        <div class="dropdown">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-           Day
-          </a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </div>
-
-        <!--time-->
-
-        <div class="dropdown">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            Date
-          </a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </div>
-      </main>
 
 <!--input clinet's details--->
-      <div class="container">
+<div class="container">
         <main>
       
           <div class="row g-5">
@@ -258,37 +169,7 @@ include_once ROOT . '/Views/head.php';
           </ul>
         </footer>
       </div>
+   <!----FOOTER--->
+   <?php include_once ROOT . '/Views/footer.php'; ?>
 
-
-<!--Confirmation --->
-    <div class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
- <!--progress-->
-      <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" style="width: 25%">25%</div>
-      </div>
-
-      <!----FOOTER--->
-      <?php include_once ROOT . '/Views/footer.php'; ?>
-
-    </body>
-</html>
+</body>
