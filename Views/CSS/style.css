@@ -65,7 +65,7 @@ header {
 
 
 #nav-container {
-    width: auto;
+ 
     height: 100%;
     padding: 0 20px;
 }
@@ -74,9 +74,15 @@ header {
 #nav-main {
     display: flex;
     align-items: center;
- 
-    
+    background-color: rgb(192, 191, 191);
+    border-radius: 10px; 
+    padding: 0 50px
 
+}
+
+
+#nav-home {
+  
 }
 
 #nav-main a {
@@ -87,9 +93,8 @@ header {
     font-size: 15px;
     font-weight: bold;
     color: #1b613e;
-    padding: 2% 15%; /* Add padding for clickable area */
+    padding: 2% 20px; /* Add padding for clickable area */
     border-radius: 15px;
-
   
 }
 #nav-main a:hover {
@@ -99,10 +104,9 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    justify-content: flex-end;   
-}
-#nav-extra a{
-    padding: 2% 20%;
+
+    justify-content: flex-end; 
+   
 }
 
 
@@ -188,6 +192,7 @@ h2{
     margin-left:-20%;
     margin-bottom: 3%;
     color: #1b613e;
+    font-size: calc(45px + 1.5vw);
 }
 .about-heading::before {
     content: ''; 
@@ -328,7 +333,7 @@ h2{
 
 /*Contact us*/
 #contact_h1 {
-    font-size: clamp(2rem, 1.296rem + 3.756vw, 4rem);
+    font-size: calc(1.375rem + 1.5vw);
     text-align: center;
     position: unset;
 }
@@ -591,5 +596,7 @@ a.nav-link.active {
     background-color: #1b613e !important; /* Optional: Change background color */
 }
 
-
+.sideScreen {
+    width: -webkit-fill-available;
+}
 

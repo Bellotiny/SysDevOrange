@@ -69,12 +69,14 @@ include_once ROOT . '/Views/head.php';
           <!---default content will be the Personal info-->
           <!--content is load here-->
           
-          <div>
+          <div >
         <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Time</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Service</th>
         
             </tr>
           </thead>
@@ -82,7 +84,40 @@ include_once ROOT . '/Views/head.php';
                       <tr>
                           <td>Aug 26</td>
                           <td>10:10 am</td>
-                        
+                          <td>Sen Bellotiny</td>
+                          <td>Extenion</td>
+                          <td>
+                          
+                            <a href="#">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
+                              </svg>
+
+                            </a>
+                            
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Aug 28</td>
+                          <td>12:20 pm</td>
+                          <td>Jessica Curry</td>
+                          <td>Extenion</td>
+                          <td>
+                          
+                            <a href="#">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
+                              </svg>
+
+                            </a>
+                            
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Sept 2</td>
+                          <td>1:40 pm</td>
+                          <td>Melanie Nature</td>
+                          <td>Nail Removal</td>
                           <td>
                           
                             <a href="#">
