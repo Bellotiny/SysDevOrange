@@ -25,7 +25,7 @@
             }
             else{
                 // Select Statement for listing
-                $sql = "SELECT * FROM `users` WHERE `userID`=" . $id;
+                $sql = "SELECT * FROM `registeredusers` WHERE `userID`=" . $id;
 
                 $result = $this->conn->query($sql);
 
@@ -44,11 +44,11 @@
         }
 
         private static function listRegisteredUser(){
-            $this->list('registeredUser','RegisteredUser');
+            $this->list('registeredusers','RegisteredUser');
         }
 
         private function updateRegisteredUser($data, $id){
-            $this->update('registeredUser', $data, $id);
+            $this->update('registeredusers', $data, $id);
         }
 
         private function insertRegisteredUser($table, $data){

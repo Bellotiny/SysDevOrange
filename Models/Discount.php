@@ -25,7 +25,7 @@
             }
             else{
                 // Select Statement for listing
-                $sql = "SELECT * FROM `discount` WHERE `discountID`=" . $id;
+                $sql = "SELECT * FROM `discounts` WHERE `discountID`=" . $id;
 
                 $result = $this->conn->query($sql);
 
@@ -44,11 +44,11 @@
         }
 
         private static function listDiscount(){
-            $this->list('discount','Discount');
+            $this->list('discounts','Discount');
         }
 
         private function updateDiscount($data, $id){
-            $this->update('discount', $data, $id);
+            $this->update('discounts', $data, $id);
         }
 
         private function insertDiscount($table, $data){
