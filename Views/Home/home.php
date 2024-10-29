@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
   <?php include_once ROOT . '/Views/nav.php'; ?>
 
  
-<!-- Modal -->
+<!-- Modals -->
 <!--modal for welcome-->
 <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -32,8 +32,40 @@ ini_set('display_errors', 1);
   </div>
 </div>
 
+ <!-- Modal for Booking -->
+       <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalBookingWarningTitle">Booking Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <h4>Booking Rules:</h4>
+                        <ul>
+                            <li><strong>The client must pay <span style="color: #d9534f;">$10</span> upon booking</strong>, which will be deducted from the total payment.</li>
+                            <li><strong>They must choose at least <span style="color: #d9534f;">one color</span>.</strong></li>
+                            <li><strong>Home service is an option but available only <span style="color: #d9534f;">within a certain range</span>.</strong></li>
+                            <li><strong>There are <span style="color: #d9534f;">cats</span> in the owner's place.</strong></li>
 
-      <div id="homeImage"></div>
+                        </ul>
+                        <hr>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <strong>I read all the reminder</strong>
+                        </label>
+                    </div>
+                    <div class="container d-flex justify-content-center gap-4 my-5">
+                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
+                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+<!---home-->
+
+    <div id="homeImage"></div>
 
       <main class="container">
         <div class="row featurette">
@@ -52,22 +84,54 @@ ini_set('display_errors', 1);
 
      
       <div class="row my-5 justify-content-center text-center bg-light p-5">
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>Nail Care Tips & Dos and Don'ts </p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>The Importance of Professional</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>The Benefits of Regular Manicures</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+        </svg>
+        <p>Nail Care Tips & Dos and Don'ts</p>
+        <p>
+          <a class="btn btn-secondary" data-toggle="collapse" href="#collapseTips" role="button" aria-expanded="false" aria-controls="collapseTips">View details »</a>
+        </p>
+        <div class="collapse" id="collapseTips">
+          <div class="card card-body">
+            Tips on how to take care of your nails, what to avoid, and recommended practices.
+          </div>
         </div>
+      </div>
+
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+        </svg>
+        <p>The Importance of Professional Care</p>
+        <p>
+          <a class="btn btn-secondary" data-toggle="collapse" href="#collapseProfessional" role="button" aria-expanded="false" aria-controls="collapseProfessional">View details »</a>
+        </p>
+        <div class="collapse" id="collapseProfessional">
+          <div class="card card-body">
+            Why professional nail care matters and the benefits of seeing a trained technician.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+        </svg>
+        <p>The Benefits of Regular Manicures</p>
+        <p>
+          <a class="btn btn-secondary" data-toggle="collapse" href="#collapseBenefits" role="button" aria-expanded="false" aria-controls="collapseBenefits">View details »</a>
+        </p>
+        <div class="collapse" id="collapseBenefits">
+          <div class="card card-body">
+            Advantages of maintaining regular manicures for nail health and appearance.
+          </div>
+        </div>
+      </div>
+    </div>
 
         <div class="container my-5">
           <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 div-background">

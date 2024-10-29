@@ -11,7 +11,11 @@ include_once ROOT . '/Views/head.php';
  
   <main>
     <div class="container">
-    <form class="row g-3">
+    <div class="py-4">
+     <h3>Home address</h3>
+    </div>
+    <form class="row g-3 py-4">
+      
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Email</label>
         <input type="email" class="form-control" id="inputEmail4">
@@ -43,17 +47,8 @@ include_once ROOT . '/Views/head.php';
         <label for="inputZip" class="form-label">Zip</label>
         <input type="text" class="form-control" id="inputZip">
       </div>
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">
-            Check me out
-          </label>
-        </div>
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </div>
+      
+    
     </form>
 
     <!-----button--->
@@ -68,7 +63,7 @@ include_once ROOT . '/Views/head.php';
  
   <!--progress-->
 
-    <div class="progress " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="">
+    <div class="progress mt-4 " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="">
       <div class="progress-bar" style="width: 20%">20%</div>
     </div>
 

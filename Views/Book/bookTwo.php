@@ -11,7 +11,9 @@ include_once ROOT . '/Views/head.php';
   <main>
     <div class="container">
 <!---color---->
-    <h3 class="mt-4">Pick your color:</h3>
+    <div class="py-4">
+      <h3 class="mt-4">Pick your color:</h3>
+    </div>
 
     <div class="accordion" id="accordionExample" >
       <div class="accordion-item" id="colorGroup1">
@@ -192,9 +194,9 @@ include_once ROOT . '/Views/head.php';
                   <h5 class="fw-normal">Deep Purple</h5>
               </div><!-- /.col-lg-2 -->
               <div class="col-lg-2 mb-3 color-item">
-                  <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'bold Orange', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect></svg>
+                  <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color3', 'Bold Orange', 'colorGroup3')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect></svg>
                   <h5 class="fw-normal">Bold Orange</h5>
-              </div><!-- /.col-lg-2 -->
+              </div>
               <div class="col-lg-2 mb-3 color-item">
                   <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Sunny Yellow', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 223, 0)"></rect></svg>
                   <h5 class="fw-normal">Sunny Yellow</h5>
@@ -218,7 +220,10 @@ include_once ROOT . '/Views/head.php';
  
 <!--Date and time-->
   <div class=" my-5">
-      <h3>Pick your time and date:</h3>
+      
+      <div class="py-4">
+        <h3>Pick your time and date:</h3>
+      </div>
 
       <div class="d-flex justify-content-around my-4">
           <!-- Date Selection -->
@@ -264,7 +269,7 @@ include_once ROOT . '/Views/head.php';
 
  
   <!--progress-->
-  <div class="progress " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress my-4 " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div class="progress-bar" style="width: 25%">25%</div>
   </div>
 
