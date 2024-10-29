@@ -28,6 +28,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Jimmy Script';
+    src: url('../Fonts/JimmyScript-Rg.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Silver Fake';
+    src: url('../Fonts/Silverfake.otf');
+    font-weight: normal;
+    font-style: normal;
+}
 .canvaSans{
     font-family: "Canvas Sans", sans-serif;
 }
@@ -68,7 +80,7 @@ header {
 
 
 #nav-container {
-    width: auto;
+ 
     height: 100%;
     padding: 0 20px;
 }
@@ -77,9 +89,15 @@ header {
 #nav-main {
     display: flex;
     align-items: center;
- 
-    
+    background-color: rgb(192, 191, 191);
+    border-radius: 10px; 
+    padding: 0 50px
 
+}
+
+
+#nav-home {
+  
 }
 
 #nav-main a {
@@ -90,9 +108,8 @@ header {
     font-size: 15px;
     font-weight: bold;
     color: #1b613e;
-    padding: 2% 15%; /* Add padding for clickable area */
+    padding: 2% 20px; /* Add padding for clickable area */
     border-radius: 15px;
-
   
 }
 #nav-main a:hover {
@@ -102,10 +119,9 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    justify-content: flex-end;   
-}
-#nav-extra a{
-    padding: 2% 20%;
+
+    justify-content: flex-end; 
+   
 }
 
 
@@ -129,6 +145,34 @@ header {
 
 /* Homepage */
 
+#overlay-text {
+    font-family: 'Jimmy Script';
+}
+#overlay-text2 {
+    font-family: 'Silver Fake';
+}
+
+#overlay-text {
+    position: absolute;
+    top: 50%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: black; 
+    padding: 10px 20px; 
+    font-size: 160px; 
+    width: 700px;
+    text-align: center;
+}
+#overlay-text2 {
+    position: absolute;
+    top: 60%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: #fadaf6; 
+    font-size: 30px;
+    width: 700px; 
+    text-align: center;
+}
 #homeImage {
     background-image: url("../Images/homepage.jpg");
     width: 100%;
@@ -191,6 +235,7 @@ h2{
     margin-left:-20%;
     margin-bottom: 3%;
     color: #1b613e;
+    font-size: calc(45px + 1.5vw);
 }
 .about-heading::before {
     content: ''; 
@@ -330,8 +375,21 @@ h2{
 /*Review*/
 
 /*Contact us*/
+.custom-header {
+    font-family: 'AmsterdamThree';
+    font-size: 50px; /* Adjust if necessary */
+    color: #57453d;
+    position: relative; /* Change to relative for proper positioning */
+    margin: 0; /* Remove default margins */
+    text-align: center; /* Center the text */
+}
+
+/* Add a custom class to control the card position */
+.card-container {
+    margin-top: 100px !important; /* Adjust this value to position the card lower */
+}
 #contact_h1 {
-    font-size: clamp(2rem, 1.296rem + 3.756vw, 4rem);
+    font-size: calc(1.375rem + 1.5vw);
     text-align: center;
     position: unset;
 }
@@ -374,8 +432,6 @@ textarea:focus {
     align-items: center;
     margin-bottom: 15px;
 }
-
-
 
 
 textarea {
@@ -580,7 +636,9 @@ a.nav-link.active {
     background-color: #1b613e !important; /* Optional: Change background color */
 }
 
-
+.sideScreen {
+    width: -webkit-fill-available;
+}
 
 /**booking**/
 
