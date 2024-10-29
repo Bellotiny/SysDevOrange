@@ -29,7 +29,7 @@ include_once ROOT . '/Views/head.php';
     </div>
     <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button" id="toggleReviewFormButton">Post Review</button>
+        <button class="btn btn-primary" type="button" id="toggleReviewFormButton">Write Review</button>
       </div>
     </div>
 

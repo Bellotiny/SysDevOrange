@@ -2,12 +2,36 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once ROOT . '/Views/head.php';
 ?>
 
 
 <body>
   <?php include_once ROOT . '/Views/nav.php'; ?>
+
+ 
+<!-- Modal -->
+<!--modal for welcome-->
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Welcome to our nook!</h5>
+       
+      </div>
+      <div class="modal-body">
+      Hello and welcome! I am excited to have you here. Whether you’re a new or returning guest, we invite you to explore our services and enjoy a relaxing experience.
+      <span class="fw-bold">Register now to experience exclusive features!</span>
+      </div>
+      <div class="container d-flex justify-content-center gap-4 my-5">
+        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=account" role="button">Login</a>
+        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=gallery" role="button">Register</a>
+        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Home</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
       <div id="homeImage"></div>
 
@@ -25,6 +49,8 @@ include_once ROOT . '/Views/head.php';
         </div>
 
       </main>
+
+     
       <div class="row my-5 justify-content-center text-center bg-light p-5">
           <div class="col-lg-4">
             <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
@@ -58,6 +84,17 @@ include_once ROOT . '/Views/head.php';
         </div>
   <!----FOOTER--->
         <?php include_once ROOT . '/Views/footer.php'; ?>
+        <script>
+         const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+
+          // if modal is not alread displayed
+          if (!sessionStorage.getItem('modalShown')) {
+            modal.show();
+            ///we set the itam to true so that modal is not going to pop again this time
+            sessionStorage.setItem('modalShown', 'true');
+          }
+         
+        </script>
 
     </body>
 
