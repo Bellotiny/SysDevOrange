@@ -21,7 +21,13 @@ class BookController extends Controller{
 		}else if($action == "bookFour"){
 			$this->render("Book","bookFour", array());
 
-		}
+		}else if($action == "homeServiceBooking"){
+			$this->render("Book","homeServiceBooking", array());
+
+		}else if($action == "confirmation"){
+		$this->render("Book","confirmation", array());
+
+	}
 
 
 

@@ -10,16 +10,13 @@ include_once ROOT . '/Views/head.php';
 
   <main>
     <div class="container">
-      <h3>
-        Payment
-      </h3>
+      
 
  
   
 <!-----button--->
     <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookThree" role="button">Back</a>
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=confirmation" role="button">Next</a>  
+      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Home</a>
     </div>
 
     </div>

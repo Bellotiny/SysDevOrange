@@ -28,6 +28,9 @@
     font-weight: normal;
     font-style: normal;
 }
+.canvaSans{
+    font-family: "Canvas Sans", sans-serif;
+}
 
 h1{
     font-family: 'AmsterdamThree';
@@ -370,14 +373,14 @@ textarea:focus {
 }
 
 /* Style each form group to have label and input on the same line */
-.form-group {
+.form-group1 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
 }
 
-label {
+label1 {
     font-size:clamp(0.923rem, 0.842rem + 0.282vw, 1.154rem);
     margin-right: 10px;
     width: 100px; /* Align labels */
@@ -389,7 +392,7 @@ label {
 input[type="text"], textarea {
     width: clamp(10vw, 50vw, 35vw); /* Adjusting the width of the input fields */
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     border-style: none;
     background-color: #e0ddd3;
 }
@@ -580,6 +583,8 @@ footer {
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
+    position: relative; /* Keep the footer static */
+    z-index: 900;
 }
 footer p{
     margin: 0;
@@ -599,4 +604,28 @@ a.nav-link.active {
 .sideScreen {
     width: -webkit-fill-available;
 }
+
+/**booking**/
+
+.booking-border-style{
+    border:  1px solid #e0e0e0; 
+    border-radius: 5px;
+}
+
+
+.progress-bar {
+    
+    height: 100%;       /* Full height of the container */
+   /* Color of the progress bar */
+    transition: width 0.3s; /* Smooth transition for width changes */
+}
+.selected {
+    border: 3px solid #333; /* Adjust color as needed */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 3px; /* Adjust padding if needed */
+    border-radius: 50%;
+}
+
+/**modal**/
+
 
