@@ -389,7 +389,7 @@ label1 {
     font-weight: bold;
 }
 
-input[type="text"], textarea {
+#contact_lname, #contact_fname, textarea {
     width: clamp(10vw, 50vw, 35vw); /* Adjusting the width of the input fields */
     padding: 10px;
     border-radius: 10px;
