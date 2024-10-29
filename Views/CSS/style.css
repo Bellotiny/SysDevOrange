@@ -28,6 +28,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Jimmy Script';
+    src: url('../Fonts/JimmyScript-Rg.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Silver Fake';
+    src: url('../Fonts/Silverfake.otf');
+    font-weight: normal;
+    font-style: normal;
+}
 .canvaSans{
     font-family: "Canvas Sans", sans-serif;
 }
@@ -133,6 +145,34 @@ header {
 
 /* Homepage */
 
+#overlay-text {
+    font-family: 'Jimmy Script';
+}
+#overlay-text2 {
+    font-family: 'Silver Fake';
+}
+
+#overlay-text {
+    position: absolute;
+    top: 50%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: black; 
+    padding: 10px 20px; 
+    font-size: 160px; 
+    width: 700px;
+    text-align: center;
+}
+#overlay-text2 {
+    position: absolute;
+    top: 60%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: #fadaf6; 
+    font-size: 30px;
+    width: 700px; 
+    text-align: center;
+}
 #homeImage {
     background-image: url("../Images/homepage.jpg");
     width: 100%;

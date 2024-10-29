@@ -79,7 +79,10 @@ ini_set('display_errors', 1);
     </div>
   </div>
 
-  <div id="homeImage"></div>
+  <div id="homeImage">
+    <div id="overlay-text">Snook's</div>
+    <div id="overlay-text2">Nail Nook</div>
+  </div>
 
   <main class="container">
 
