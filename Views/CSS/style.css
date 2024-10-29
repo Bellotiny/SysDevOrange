@@ -335,6 +335,19 @@ h2{
 /*Review*/
 
 /*Contact us*/
+.custom-header {
+    font-family: 'AmsterdamThree';
+    font-size: 50px; /* Adjust if necessary */
+    color: #57453d;
+    position: relative; /* Change to relative for proper positioning */
+    margin: 0; /* Remove default margins */
+    text-align: center; /* Center the text */
+}
+
+/* Add a custom class to control the card position */
+.card-container {
+    margin-top: 100px !important; /* Adjust this value to position the card lower */
+}
 #contact_h1 {
     font-size: calc(1.375rem + 1.5vw);
     text-align: center;
@@ -389,13 +402,6 @@ label1 {
     font-weight: bold;
 }
 
-#contact_lname, #contact_fname, textarea {
-    width: clamp(10vw, 50vw, 35vw); /* Adjusting the width of the input fields */
-    padding: 10px;
-    border-radius: 10px;
-    border-style: none;
-    background-color: #e0ddd3;
-}
 textarea {
     resize: none;
 }
