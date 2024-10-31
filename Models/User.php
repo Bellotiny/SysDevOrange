@@ -1,58 +1,40 @@
 <?php
-    include_once dirname(__DIR__) . "/Models/Model.php";
 
-    class User extends Model{
+include_once "../Models/Model.php";
 
-        private $userID;
-        private $firstName;
-        private $lastName;
-        private $email;
-        private $phoneNumber;
+class User extends Model {
+    private int $id;
+    private string $firstName;
+    private string $lastName;
+    private string $email;
+    private ?string $phoneNumber;
+    private ?string $password;
+    private ?string $token;
 
-        private function __construct($id = -1){
-            parent::__construct();
-
-            $this->userID = $id;
-            if($id<0){
-                $this->firstName = "";
-                $this->lastName = "";
-                $this->email = "";
-                $this->phoneNumber = "";
-            }
-            else{
-                // Select Statement for listing
-                $sql = "SELECT * FROM `users` WHERE `userID`=" . $id;
-
-                $result = $this->conn->query($sql);
-
-                $data = $result->fetch_assoc();
-
-                // Assign values
-                $this->userID = $id;
-                $this->firstName = $data['firstName'];
-                $this->lastName = $data['lastName'];
-                $this->email = $data['email'];
-                $this->phoneNumber = $data['phoneNumber'];
-                
-            }
-        }
-
-        private static function listUser(){
-            $this->list('user','User');
-        }
-
-        private function updateUser($data, $id){
-            $this->update('user', $data, $id);
-        }
-
-        private function insertUser($table, $data){
-            $this->insert($table, $data);
-        }
-
-        private function deleteUser($table, $fieldID, $id){
-            $this->delete($table, $fieldID, $id);
-        }
-
+    /**
+     * @return User[]
+     */
+    public static function list(): array {
+        return Model::listAll("user", "User");
     }
 
-?>
+    public static function getFromId(int $id): User {
+        return Model::getAllWhere("users", "User", "id", $id);
+    }
+
+    public static function getFromToken(string $token): User {
+        return Model::getAllWhere("users", "User", "token", $token);
+    }
+
+
+    public function insert(): bool {
+        return Model::insertMany(
+            "users",
+            "id, firstName, lastName, email, phoneNumber, password, token",
+            $this->id . ", " . $this->firstName . ", " . $this->lastName . ", " . $this->email . ", " . $this->phoneNumber . ", " . $this->password . ", " . $this->token);
+    }
+
+    public function delete(): bool {
+        return Model::deleteAllWhere("users", "id", $this->id);
+    }
+}
