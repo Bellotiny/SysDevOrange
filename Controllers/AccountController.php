@@ -10,9 +10,9 @@ class AccountController extends Controller {
             case "login":
                 if (isset($_POST['email']) &&
                     isset($_POST['password']) &&
-                    User::login($_POST)
+                    $user = User::getFromEmailPassword($_POST['email'], $_POST['password'])
                 ) {
-                    $this->render("Account", "account");
+                    $this->render("Account", "account", [$user]);
                 } else {
                     $this->render("Account", "login");
                 }
@@ -21,10 +21,17 @@ class AccountController extends Controller {
                 if (isset($_POST['first_name']) &&
                     isset($_POST['last_name']) &&
                     isset($_POST['email']) &&
-                    isset($_POST['password']) &&
-                    $account = User::register($_POST)
+                    isset($_POST['password'])
                 ) {
-                    $this->render("Account", "account");
+                    try {
+                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null)) {
+                            $this->render("Account", "account", [$user]);
+                        } else {
+                            $this->render("Account", "register");
+                        }
+                    } catch (Exception $e) {
+                        // TODO Handle this error
+                    }
                 } else {
                     $this->render("Account", "register");
                 }
