@@ -1,5 +1,7 @@
 <?php
 
+include "Models/User.php";
+
 include_once "Controllers/Controller.php";
 
 class AccountController extends Controller {
@@ -10,36 +12,38 @@ class AccountController extends Controller {
             case "login":
                 if (isset($_POST['email']) &&
                     isset($_POST['password']) &&
-                    $user = User::getFromEmailPassword($_POST['email'], $_POST['password'])
+                    !is_null($user = User::getFromEmailPassword($_POST['email'], $_POST['password']))
                 ) {
+                    setcookie("token", $user->token);
                     $this->render("Account", "account", [$user]);
                 } else {
                     $this->render("Account", "login");
                 }
                 break;
             case "register":
-                if (isset($_POST['first_name']) &&
-                    isset($_POST['last_name']) &&
+                if (isset($_POST['firstName']) &&
+                    isset($_POST['lastName']) &&
                     isset($_POST['email']) &&
                     isset($_POST['password'])
                 ) {
                     try {
                         if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null)) {
+                            setcookie("token", $user->token);
                             $this->render("Account", "account", [$user]);
                         } else {
-                            $this->render("Account", "register");
+                            $this->render("Account", "login");
                         }
-                    } catch (Exception $e) {
-                        // TODO Handle this error
+                    } catch (Exception) {
+                        echo "Error Generating Token";  // TODO Improve this error handling (Maybe make an error page?)
                     }
                 } else {
                     $this->render("Account", "register");
                 }
                 break;
             default:
-                try {
-                    $this->render("Account", "account", User::getFromToken($_COOKIE['token']));
-                } catch (Exception $e) {
+                if ($user = $this->getUser()) {
+                    $this->render("Account", "account", $user);
+                } else {
                     $this->render("Account", "login");
                 }
                 break;

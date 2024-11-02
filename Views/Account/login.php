@@ -5,7 +5,7 @@
     <title>Register</title>
 </head>
 <body>
-    <form action="account/login" method="POST">
+    <form action="" method="POST">
         <label>Email: <input name="email" required></label>
         <br>
         <label>Password: <input type="password" name="password" required></label>
