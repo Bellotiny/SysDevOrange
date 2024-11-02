@@ -36,20 +36,16 @@ ini_set('display_errors', 1);
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
-    <madalid="contact_main">
-        <br>
-        <div id="contact_h1_div">
-            <h1 id="contact_h1">Contact Us</h1>    
-    <main class="container mt-5">
+    <main class="container my-5">
 
-        <div class="row justify-content-center card-container">
+        <div class="row justify-content-center card-container pt-5 slide-up">
             <div class="col-md-8 col-lg-6">
                 <div class="card shadow-lg border-0">
                     <!-- Card Header -->
                     <div class="card-header">
-                        <h1 class="custom-header">Contact Us</h1>
+                        <h1 class="custom-header amsterdamThree-fontstyle text-green text-shadow-pink">Contact Us</h1>
                     </div>
 
                     <!-- Card Body -->
@@ -80,11 +76,8 @@ ini_set('display_errors', 1);
             </div>
         </div>
     </main>
-
-    <footer class="mt-5">
-        <?php include_once ROOT . '/Views/footer.php'; ?>
-    </footer>
-
-    <script src="script.js"></script>
+    
+    <?php include_once ROOT . '/Views/footer.php'; ?>
+   
 </body>
 </html>

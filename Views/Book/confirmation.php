@@ -9,7 +9,7 @@ include_once ROOT . '/Views/head.php';
   <?php include_once ROOT . '/Views/nav.php'; ?>
 
   <main>
-    <div class="container py-4">
+    <div class="container py-4 slide-up">
     <div class="px-4 py-5 my-5 text-center">
       <img class="d-block mx-auto mb-4" src="<?=  BASE_URL ?>/Views/Images/cat3.jpg"  alt="" width="auto" height="150">
       <h3 class="display-5 fw-bold text-body-emphasis">Thank you for your order!</h3>
@@ -32,7 +32,7 @@ include_once ROOT . '/Views/head.php';
   </main>
 
   <!--progress-->
-  <div class="progress " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div class="progress-bar" style="width: 100%">100%</div>
   </div>
 

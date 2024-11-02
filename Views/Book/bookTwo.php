@@ -9,7 +9,7 @@ include_once ROOT . '/Views/head.php';
   <?php include_once ROOT . '/Views/nav.php'; ?>
 
   <main>
-    <div class="container">
+    <div class="container slide-up">
 <!---color---->
     <div class="py-4">
       <h3 class="mt-4">Pick your color:</h3>
@@ -23,7 +23,7 @@ include_once ROOT . '/Views/head.php';
           </button>
         </h3>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body slide-up">
             <div class="row text-center">
               <!----here are the colors--->
               <div class="col-lg-2 mb-3 color-item selected">
@@ -89,7 +89,7 @@ include_once ROOT . '/Views/head.php';
           </button>
         </h3>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body slide-up">
           <div class="row text-center">
               <!----here are the colors--->
               <div class="col-lg-2 mb-3 color-item selected">
@@ -155,7 +155,7 @@ include_once ROOT . '/Views/head.php';
           </button>
         </h3>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body slide-up">
           <div class="row text-center">
               <!----here are the colors--->
               <div class="col-lg-2 mb-3 color-item selected" >
@@ -209,7 +209,7 @@ include_once ROOT . '/Views/head.php';
                   <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Coral', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 127, 80)"></rect></svg>
                   <h5 class="fw-normal">Coral</h5>
               </div>
-            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -221,11 +221,11 @@ include_once ROOT . '/Views/head.php';
 <!--Date and time-->
   <div class=" my-5">
       
-      <div class="py-4">
+      <div class="py-4 slide-up">
         <h3>Pick your time and date:</h3>
       </div>
 
-      <div class="d-flex justify-content-around my-4">
+      <div class="d-flex justify-content-around my-4 slide-up">
           <!-- Date Selection -->
           <div class="form-group">
             <label for="availableDates">Available Dates</label>
@@ -269,7 +269,7 @@ include_once ROOT . '/Views/head.php';
 
  
   <!--progress-->
-  <div class="progress my-4 " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress my-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div class="progress-bar" style="width: 25%">25%</div>
   </div>
 
@@ -278,24 +278,21 @@ include_once ROOT . '/Views/head.php';
     // Get the specific color group container
     const groupContainer = document.getElementById(groupId);
 
-        // Remove 'selected' class from all color items in the group
-        groupContainer.querySelectorAll('.color-item').forEach(el => {
-            el.classList.remove('selected');
-        });
+    // Remove 'selected' class from all color items in the group
+    groupContainer.querySelectorAll('.color-item').forEach(el => {
+      el.classList.remove('selected');
+    });
 
-        // Find the specific color item to select
-        const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
-            return item.querySelector('h5').textContent === colorName;
-        });
+    // Find the specific color item to select
+    const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
+      return item.querySelector('h5').textContent === colorName;
+    });
 
-        // Check if the selected item exists and add the 'selected' class
-      
-            selectedItem.classList.add('selected'); // Add the 'selected' class to the clicked item
+    // Check if the selected item exists and add the 'selected' class
+    selectedItem.classList.add('selected'); // Add the 'selected' class to the clicked item
            
-            const selectedColorElement = document.getElementById(`selected${colorGroup}`);
-            selectedColorElement.textContent = colorName;
-      
-    
+    const selectedColorElement = document.getElementById(`selected${colorGroup}`);
+    selectedColorElement.textContent = colorName; 
    }
   
 

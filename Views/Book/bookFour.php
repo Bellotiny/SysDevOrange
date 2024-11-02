@@ -9,7 +9,7 @@ include_once ROOT . '/Views/head.php';
   <?php include_once ROOT . '/Views/nav.php'; ?>
 
   <main>
-    <div class="container">
+    <div class="container slide-up">
       <h3>
         Payment
       </h3>
@@ -27,7 +27,7 @@ include_once ROOT . '/Views/head.php';
 
  
   <!--progress-->
-  <div class="progress " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div class="progress-bar" style="width: 85%">85%</div>
   </div>
 

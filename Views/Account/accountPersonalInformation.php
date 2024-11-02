@@ -5,13 +5,13 @@ ini_set('display_errors', 1);
 include_once ROOT . '/Views/head.php';
 ?>
 
-    <body>
+    <body class="">
     <?php include_once ROOT . '/Views/nav.php'; ?>
     
     
-      <main class="d-flex flex-grow-1  max-vh-100" id="account-Main">
+      <main class="d-flex flex-grow-1  max-vh-100 " id="account-Main">
          <!--Sidebar--->
-          <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
+          <div class="d-flex flex-column flex-shrink-0 p-3 bg-light slide-up " style="width: 280px; height: 100vh;">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
@@ -71,7 +71,7 @@ include_once ROOT . '/Views/head.php';
           <!--content is load here-->
           
          
-       <div class="album py-5 bg-body-tertiary">
+       <div class="album py-5 bg-body-tertiary slide-up">
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center text-center">

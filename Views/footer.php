@@ -1,11 +1,11 @@
-<div class="">
+<div class=" slide-up">
   <footer class="mt-3 py-3 ">
     <ul class="nav justify-content-center border-bottom pb-3">
-      <li class="nav-item"><a href="<?php echo ROOT; ?>/index.php" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="<?php echo ROOT; ?>/gallery.php" class="nav-link px-2 text-body-secondary">Gallery</a></li>
-      <li class="nav-item"><a href="<?php echo ROOT; ?>/services.php" class="nav-link px-2 text-body-secondary">Services</a></li>
-      <li class="nav-item"><a href="<?php echo ROOT; ?>/contact.php" class="nav-link px-2 text-body-secondary">Contact us</a></li>
-      <li class="nav-item"><a href="<?php echo ROOT; ?>/about.php" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="<?php echo BASE_URL; ?>/index.php?controller=home" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="<?php echo BASE_URL; ?>/index.php?controller=gallery" class="nav-link px-2 text-body-secondary">Gallery</a></li>
+      <li class="nav-item"><a href="<?php echo BASE_URL; ?>/index.php?controller=services" class="nav-link px-2 text-body-secondary">Services</a></li>
+      <li class="nav-item"><a href="<?php echo BASE_URL; ?>/index.php?controller=about" class="nav-link px-2 text-body-secondary">Location</a></li>
+      <li class="nav-item"><a href="<?php echo BASE_URL; ?>/index.php?controller=contact" class="nav-link px-2 text-body-secondary">Contact Us</a></li>
     </ul>
     <p class="text-center text-body-secondary">© 2024 Madeleine Snook, Inc</p>
   </footer>

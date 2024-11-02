@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
   
 
   <main>
-    <div class="container">
+    <div class="container slide-up">
 
     <h3 class="mt-4">Booking</h3>
 <!--Base payment--->
@@ -25,15 +25,17 @@ ini_set('display_errors', 1);
           <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans" > 
             <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked="">
             <span>
-              Base Price
+              Base Price<small class="text-body-secondary"> ( It follows the natural length of your nails)</small>
             </span>
+            <div class="mb-1 d-block  text-success">35 CAD</div>
           </label>
           
           <label class="list-group-item d-flex gap-2 flex-fill booking-border-style  p-4 canvaSans" > 
             <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios2" value="">
             <span>
-              Base Price Extension
+              Base Price Extension<small class="text-body-secondary"> ( It extends your nail length depending on your preferrence)</small>
             </span>
+            <div class="mb-1 d-block  text-success">45 CAD</div>
           </label>
           
         </div>
@@ -50,12 +52,14 @@ ini_set('display_errors', 1);
                     <span>
                         Nail Art <small class=" text-body-secondary">(per nail)</small>
                     </span>
+                    <div class="mb-1 d-block  text-success">5 CAD</div>
                 </label>
                 <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans"> <!-- Added flex-fill for equal spacing -->
                     <input class="form-check-input flex-shrink-0" type="checkbox" value="">
                     <span>
                         French tips <small class=" text-body-secondary">(plus the preferred base )</small>
                     </span>
+                    <div class="mb-1 d-block  text-success">5 CAD</div>
                 </label>
             </div>
         </div>
@@ -72,18 +76,21 @@ ini_set('display_errors', 1);
                   <span>
                       Nail Take off
                   </span>
+                  <div class="mb-1 d-block  text-success">10 CAD</div>
               </label>
               <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans">
                   <input class="form-check-input flex-shrink-0" type="checkbox" value="">
                   <span>
                       Nail Polish Change
                   </span>
+                  <div class="mb-1 d-block  text-success">10 CAD</div>
               </label>
               <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans">
                   <input class="form-check-input flex-shrink-0" type="checkbox" value="">
                   <span>
                       Pre-Painted Nail Art
                   </span>
+                  <div class="mb-1 d-block  text-success">10 CAD</div>
               </label>
           </div>
       </div>
@@ -100,17 +107,21 @@ ini_set('display_errors', 1);
         <div class="list-group d-flex flex-row w-100"> 
           
           <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans" > 
-            <input class="form-check-input flex-shrink-0" type="radio" name="servicePlce" id="listGroupRadios1" value="" checked="">
+            <input class="form-check-input flex-shrink-0" type="radio" name="servicePlace" id="listGroupRadios1" value="owner" checked="">
             <span>
-              Owner's place
+              Owner's place<small class="text-body-secondary">
+                <a href="https://www.google.com/maps/place/Mon+Ami+Korean+BBQ+C%C3%B4te-des-Neiges/@45.4957199,-73.6227813,17z/" target="_blank" rel="noopener noreferrer">
+                  (View the Owner's place)
+                </a></small>
             </span>
           </label>
           
           <label class="list-group-item d-flex gap-2 flex-fill booking-border-style  p-4 canvaSans" > 
-            <input class="form-check-input flex-shrink-0" type="radio" name="servicePlce" id="listGroupRadios2" value="home">
+            <input class="form-check-input flex-shrink-0" type="radio" name="servicePlace" id="listGroupRadios2" value="home">
             <span>
-              Home service
+              Home service 
             </span>
+            <small class=" text-body-secondary">(The location must be 20km from the Owner's place)</small>
           </label>
           
         </div>
@@ -129,28 +140,32 @@ ini_set('display_errors', 1);
  
   <!--progress-->
 
-  <div class="progress my-4">
+  <div class="progress my-4  slide-up">
     <div class="progress-bar" role="progressbar" style="width: 5%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">5%</div>
   </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const nextButton = document.querySelector('.btn-primary[href*="bookTwo"]'); // Target the "Next" button
-        const homeServiceRadio = document.querySelector('input[name="servicePlce"][value="home"]');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const nextButton = document.querySelector('.btn-primary[href*="bookTwo"]'); // Target the "Next" button
+  const homeServiceRadio = document.querySelector('input[name="servicePlce"][value="home"]');
 
-        nextButton.addEventListener('click', function(event) {
-          const selectedService = document.querySelector('input[name="servicePlce"]:checked').nextElementSibling.textContent.trim();
+  nextButton.addEventListener('click', function(event) {
+    const selectedService = document.querySelector('input[name="servicePlace"]:checked').nextElementSibling.textContent.trim();
 
-          if (selectedService === 'Home service') {
-            // Update href for "Home service" selection
-            nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=homeServiceBooking";
-          } else {
-            // Set default href for "Owner's place"
-            nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=bookTwo";
-          }
-        });
-      });
-    </script>
+    if (selectedService === 'Home service') {
+      // Update href for "Home service" selection
+      nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=homeServiceBooking";
+    } else {
+      // Set default href for "Owner's place"
+      nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=bookTwo";
+    }
+  });
+});
+
+
+</script>
+
+
 
 
 

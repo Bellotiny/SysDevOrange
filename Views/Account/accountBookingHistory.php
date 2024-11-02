@@ -10,7 +10,7 @@ include_once ROOT . '/Views/head.php';
     
     <main class="d-flex max-vh-100" id="account-Main">
          <!--Sidebar--->
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light " style="width: 280px; height:100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light slide-up " style="width: 280px; height:100vh; z-index: 289;">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
@@ -65,7 +65,7 @@ include_once ROOT . '/Views/head.php';
         </div>
 
         <!---screen for sidebar--->
-        <div class="sideScreen">
+        <div class="sideScreen slide-up">
           <!---default content will be the Personal info-->
           <!--content is load here-->
           
@@ -141,12 +141,7 @@ include_once ROOT . '/Views/head.php';
         
       </main>
 
-      <script>
-
-  
-
-
-      </script>
+   
 
 
       <?php include_once ROOT . '/Views/footer.php'; ?>

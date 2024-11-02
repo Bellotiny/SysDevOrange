@@ -10,7 +10,7 @@ include_once ROOT . '/Views/head.php';
 
  
   <main>
-    <div class="container">
+    <div class="container slide-up">
     <div class="py-4">
      <h3>Home address</h3>
     </div>
@@ -63,7 +63,7 @@ include_once ROOT . '/Views/head.php';
  
   <!--progress-->
 
-    <div class="progress mt-4 " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="">
+    <div class="progress mt-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="">
       <div class="progress-bar" style="width: 20%">20%</div>
     </div>
 
