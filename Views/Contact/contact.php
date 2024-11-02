@@ -68,7 +68,7 @@ ini_set('display_errors', 1);
                             </div>
                             <!-- Submit Button -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">Send</button>
+                                <button type="submit" class="btn bttn-green slide-up">Send</button>
                             </div>
                         </form>
                     </div>
