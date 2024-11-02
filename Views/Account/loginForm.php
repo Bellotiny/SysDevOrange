@@ -84,7 +84,7 @@ ini_set('display_errors', 1);
               <a class="btn btn-secondary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPersonalInformation" role="button">Go Back</a> 
             </div>
            
-            <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
+            <p class="mt-3">Don't have an account? <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=registerForm" id="showRegisterForm">Register here</a></p>
           </form>
           </div>
 

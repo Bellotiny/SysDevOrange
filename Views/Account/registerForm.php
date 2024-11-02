@@ -80,7 +80,7 @@ ini_set('display_errors', 1);
             </div>
             <div class="form-group py-2">
               <label for="birthday">Birthday:</label>
-              <input type="date" class="form-control"  id="birthday" name="birthday" required>
+              <input type="date" class="form-control"  id="birthday" name="birthday" >
             </div>
             <div class="form-group py-2">
               <label for="registerEmail">Email</label>
