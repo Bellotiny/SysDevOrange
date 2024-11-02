@@ -1,7 +1,6 @@
 <?php
 
-include "Models/User.php";
-
+include_once "Models/User.php";
 include_once "Controllers/Controller.php";
 
 class AccountController extends Controller {
@@ -12,7 +11,7 @@ class AccountController extends Controller {
             case "login":
                 if (isset($_POST['email']) &&
                     isset($_POST['password']) &&
-                    !is_null($user = User::getFromEmailPassword($_POST['email'], $_POST['password']))
+                    $user = User::getFromEmailPassword($_POST['email'], $_POST['password'])
                 ) {
                     setcookie("token", $user->token);
                     $this->render("Account", "account", [$user]);
@@ -40,9 +39,16 @@ class AccountController extends Controller {
                     $this->render("Account", "register");
                 }
                 break;
+            case "logout":
+                if ($user = User::getFromCookie()) {
+                    setcookie("token", "", time() - 3600);
+                    $user->token = null;
+                }
+                $this->render("Account", "login");
+                break;
             default:
-                if ($user = $this->getUser()) {
-                    $this->render("Account", "account", $user);
+                if ($user = User::getFromCookie()) {
+                    $this->render("Account", "account", [$user]);
                 } else {
                     $this->render("Account", "login");
                 }

@@ -5,7 +5,7 @@ class Model {
 
     protected static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
-            $connection = new mysqli("localhost", "root", "", "snooknn_test");
+            $connection = new mysqli("174.93.150.8", "dev", "Vw3baJgbPS280RW", "snooknn_test");
             if ($connection->connect_error) die("Connection error!<br>" . $connection->connect_error);
             return self::$connection = $connection;
         }
@@ -14,7 +14,7 @@ class Model {
 
     protected static function listAll(string $table, string $class, Where $where = new Where()): array {
         $list = [];
-        $result = self::getConnection()->execute_query("SELECT * FROM ?" . $where, [$table, ...$where->getArgs()]);
+        $result = self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
         while ($obj = $result->fetch_object($class)) {
             $list[] = $obj;
         }
@@ -22,15 +22,15 @@ class Model {
     }
 
     protected static function getRows(string $table, Where $where = new Where()): mysqli_result|bool {
-        return self::getConnection()->execute_query("SELECT * FROM ?" . $where, [$table, ...$where->getArgs()]);
+        return self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
     }
 
     protected static function updateRow(string $table, Set $set, Where $where = new Where()): bool {
-        return self::getConnection()->execute_query("UPDATE ?" . $set . $where, [$table, ...$set->getArgs(), ...$where->getArgs()]);
+        return self::getConnection()->execute_query("UPDATE " . $table . $set . $where, [...$set->getArgs(), ...$where->getArgs()]);
     }
 
     protected static function deleteRow(string $table, Where $where = new Where()): bool {
-        return self::getConnection()->execute_query("DELETE FROM ?" . $where, [$table, ...$where->getArgs()]);
+        return self::getConnection()->execute_query("DELETE FROM " . $table . $where, [...$where->getArgs()]);
     }
 
     protected static function insertRow(string $table, Values $values): bool {
