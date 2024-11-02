@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once ROOT . '/Views/head.php';
+
 ?>
 
-    <body>
+   
     <?php include_once ROOT . '/Views/nav.php'; ?>
     
       <main class="d-flex" id="account-Main">

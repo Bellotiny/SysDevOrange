@@ -32,7 +32,7 @@
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/script.php"></script> 
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/nav_script.php"></script>   
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/home_script.php"></script>  
-    <script src="<?php echo BASE_URL; ?>/Views/Scripts/about_script.php"></script>   
+    <script src="<?php echo BASE_URL; ?>/Views/Scripts/about_script.js"></script>   
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/services_script.php"></script> 
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/gallery_script.php"></script>  
     <script src="<?php echo BASE_URL; ?>/Views/Scripts/contact_script.php"></script>   

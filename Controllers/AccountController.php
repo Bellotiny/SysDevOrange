@@ -24,6 +24,12 @@ class AccountController extends Controller {
 		case 'accountSchedule':
 			$this->render("Account", 'accountSchedule', array());
 			break;
+		case 'loginForm':
+				$this->render("Account", 'loginForm', array());
+				break;
+		case 'registerForm':
+				$this->render("Account", 'registerForm', array());
+				break;
 		default:
 		$this->render("Account", 'accountPersonalInformation', array());
 	  }
