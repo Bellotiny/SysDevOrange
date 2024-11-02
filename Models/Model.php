@@ -3,18 +3,22 @@
 class Model {
     private static mysqli $connection;
 
-    protected static function query(string $query, ?array $parameters = null): bool|mysqli_result {
+    protected static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
             $connection = new mysqli("localhost", "root", "", "snooknn");
             if ($connection->connect_error) {
                 die("Connection error!<br>" . $connection->connect_error);
             }
-            self::$connection = $connection;
+            return self::$connection = $connection;
         }
-        return self::$connection->execute_query($query, $parameters);
+        return self::$connection;
     }
 
-    protected static function listAll(String $table, String $class): array {
+    protected static function query(string $query, ?array $parameters = null): bool|mysqli_result {
+        return self::getConnection()->execute_query($query, $parameters);
+    }
+
+    protected static function listAll(string $table, string $class): array {
         $list = [];
         $result = self::query("SELECT * FROM ?", [$table]);
         while ($obj = $result->fetch_object($class)) {
@@ -23,23 +27,43 @@ class Model {
         return $list;
     }
 
-    protected static function deleteAllWhere(String $table, String $where, $whereArg): bool {
-        return self::query("DELETE FROM ? WHERE ? = ?", [$table, $where, $whereArg]);
+    protected static function deleteRow(string $table, string $where, array $whereArg): bool {
+        return self::query("DELETE FROM ? WHERE " . $where, [$table, $where, ...$whereArg]);
     }
 
-    protected static function updateOneWhere(String $table, String $where, $whereArg, String $column, $value): bool {
-        return self::query("UPDATE ? SET ? = ? WHERE ? = ?", [$table, $column, $value, $where, $whereArg]);
+    protected static function insertRow(string $table, array $columns, array $values, bool $ignore = false): bool {
+        return self::query("INSERT " . ($ignore ? "IGNORE" : "") . " INTO ? (" . self::multiValues($columns) . ") VALUES " . self::multiQuestion($values), [$table, ...$values]);
     }
 
-    protected static function updateManyWhere(String $table, String $where, $whereArg, array $values): bool {
-        return self::query("UPDATE ? SET " . implode(", ", array_map(fn($key)=>$key." = ?", array_keys($values))) . " WHERE ? = ?", [$table, ...array_values($values), $where, $whereArg]);
+    protected static function updateRow(string $table, string $where, array $whereArg, array $columns, array $values): bool {
+        return self::query("UPDATE ? SET " . self::multiEquals($columns) . " WHERE " . $where, [$table, ...$values, ...$whereArg]);
     }
 
-    protected static function insertMany(String $table, String $columns, String $values): bool {
-        return self::query("INSERT INTO ? (?) VALUES ?", [$table, $columns, $values]);
+    protected static function getRows(string $table, string $where, array $whereArg): mysqli_result {
+        return self::query("SELECT * FROM ? WHERE " . $where, [$table, ...$whereArg]);
     }
 
-    protected static function getAllWhere(String $table, String $class, String $where, $whereArg): Object {
-        return self::query("SELECT * FROM ? WHERE ? = ?", [$table, $where, $whereArg])->fetch_object($class);
+    /**
+     * @param string[] $options
+     * @return string Like "option1 = ?, option2 = ?, option3 = ?"
+     */
+    protected static function multiEquals(array $options): string {
+        return implode(", ", array_map(fn($key) => $key . " = ?", $options));
+    }
+
+    /**
+     * @param string[] $options
+     * @return string Like "?, ?, ?"
+     */
+    protected static function multiQuestion(array $options): string {
+        return implode(", ", array_fill(0, count($options), "?"));
+    }
+
+    /**
+     * @param string[] $options
+     * @return string Like "option1, option2, option3"
+     */
+    protected static function multiValues(array $options): string {
+        return implode(", ", $options);
     }
 }

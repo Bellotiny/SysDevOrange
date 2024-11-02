@@ -8,7 +8,6 @@ class User extends Model {
     private string $lastName;
     private string $email;
     private ?string $phoneNumber;
-    private ?string $password;
     private ?string $token;
 
     /**
@@ -18,23 +17,70 @@ class User extends Model {
         return Model::listAll("user", "User");
     }
 
-    public static function getFromId(int $id): User {
-        return Model::getAllWhere("users", "User", "id", $id);
-    }
+    /**
+     * @throws \Random\RandomException
+     */
+    public static function register(string $firstName, string $lastName, string $email, string $password, ?string $phoneNumber = null): User|false {
+        $token = random_bytes(16);  // Generate Random 16 Bytes or 128 Bits
 
-    public static function getFromToken(string $token): User {
-        return Model::getAllWhere("users", "User", "token", $token);
-    }
+        $user = new User();
+        $user->firstName = $firstName;
+        $user->lastName = $lastName;
+        $user->email = $email;
+        $user->phoneNumber = $phoneNumber;
+        $user->token = $token;
 
-
-    public function insert(): bool {
-        return Model::insertMany(
+        Model::insertRow(
             "users",
-            "id, firstName, lastName, email, phoneNumber, password, token",
-            $this->id . ", " . $this->firstName . ", " . $this->lastName . ", " . $this->email . ", " . $this->phoneNumber . ", " . $this->password . ", " . $this->token);
+            ["firstName", "lastName", "email", "phoneNumber", "password", "token"],
+            [$firstName, $lastName, $email, $phoneNumber, $password, $token],
+            true
+        );
+        if (Model::getConnection()->affected_rows == 0) {
+            return false;
+        }
+        return $user;
+    }
+
+    public static function getFromId(int $id): User|bool {
+        return Model::getRows("users", "id = ?", [$id])->fetch_object("User");
+    }
+
+    public static function getFromToken(string $token): User|bool {
+        return Model::getRows("users", "token = ?", [$token])->fetch_object("User");
+    }
+
+    public static function getFromEmailPassword(string $email, string $password): User|bool {
+        return Model::getRows("users", Model::multiEquals(["email", "password"]), [$email, $password])->fetch_object("User");
+    }
+
+    public function update(?string $firstName = null, ?string $lastName = null, ?string $email = null, ?string $password = null, ?string $phoneNumber = null): bool {
+        $columns = [];
+        $values = [];
+        if (isset($firstName)) {
+            $columns[] = "firstName";
+            $values[] = $firstName;
+        }
+        if (isset($lastName)) {
+            $columns[] = "lastName";
+            $values[] = $lastName;
+        }
+        if (isset($email)) {
+            $columns[] = "email";
+            $values[] = $email;
+        }
+        if (isset($password)) {
+            $columns[] = "password";
+            $values[] = $password;
+        }
+        if (isset($phoneNumber)) {
+            $columns[] = "phoneNumber";
+            $values[] = $phoneNumber;
+        }
+        return Model::updateRow("users", "id = ?", [$this->id], $columns, $values);
     }
 
     public function delete(): bool {
-        return Model::deleteAllWhere("users", "id", $this->id);
+        return Model::deleteRow("users", "id = ?", [$this->id]);
     }
 }
