@@ -1,15 +1,10 @@
 <?php
 
-class Controller{
+class Controller {
+    function route() {}
 
-	function route(){
-	}
-
-    function render($controller, $view, $data = []) {
+    function render($controller, $view, $data = []): void {
         extract($data);
-
         include "Views/$controller/$view.php";
     }
 }
-
-?>

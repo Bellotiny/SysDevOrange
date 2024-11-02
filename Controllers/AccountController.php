@@ -1,40 +1,58 @@
 <?php
 
+include_once "Models/User.php";
 include_once "Controllers/Controller.php";
 
 class AccountController extends Controller {
+    function route(): void {
+        $action = strtolower($_GET['action']) ?? "login";
 
-    
-    function route() {
-      $action = (isset($_GET['action'])) ? $_GET['action'] : 'accountPersonalInformation';
-
-	  switch($action) {
-		case 'accountBookingHistory':
-			$this->render("Account", 'accountBookingHistory', array());
-			break;
-		case 'accountInventory':
-			$this->render("Account", 'accountInventory', array());
-			break;
-		case 'accountBookingList':
-			$this->render("Account", 'accountBookingList', array());
-			break;
-		case 'accountPersonalInformation':
-			$this->render("Account", 'accountPersonalInformation', array());
-			break;
-		case 'accountSchedule':
-			$this->render("Account", 'accountSchedule', array());
-			break;
-		case 'loginForm':
-				$this->render("Account", 'loginForm', array());
-				break;
-		case 'registerForm':
-				$this->render("Account", 'registerForm', array());
-				break;
-		default:
-		$this->render("Account", 'accountPersonalInformation', array());
-	  }
-       
+        switch ($action) {
+            case "login":
+                if (isset($_POST['email']) &&
+                    isset($_POST['password']) &&
+                    $user = User::getFromEmailPassword($_POST['email'], $_POST['password'])
+                ) {
+                    setcookie("token", $user->token);
+                    $this->render("Account", "account", [$user]);
+                } else {
+                    $this->render("Account", "login");
+                }
+                break;
+            case "register":
+                if (isset($_POST['firstName']) &&
+                    isset($_POST['lastName']) &&
+                    isset($_POST['email']) &&
+                    isset($_POST['password'])
+                ) {
+                    try {
+                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null)) {
+                            setcookie("token", $user->token);
+                            $this->render("Account", "account", [$user]);
+                        } else {
+                            $this->render("Account", "login");
+                        }
+                    } catch (Exception) {
+                        echo "Error Generating Token";  // TODO Improve this error handling (Maybe make an error page?)
+                    }
+                } else {
+                    $this->render("Account", "register");
+                }
+                break;
+            case "logout":
+                if ($user = User::getFromCookie()) {
+                    setcookie("token", "", time() - 3600);
+                    $user->token = null;
+                }
+                $this->render("Account", "login");
+                break;
+            default:
+                if ($user = User::getFromCookie()) {
+                    $this->render("Account", "account", [$user]);
+                } else {
+                    $this->render("Account", "login");
+                }
+                break;
+        }
     }
-
 }
-?>

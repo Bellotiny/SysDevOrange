@@ -1,118 +1,141 @@
 <?php
 
-    class Model{
+class Model {
+    private static mysqli $connection;
 
-        private $controller;
-    
-        private $conn;
-
-        function __construct() {
-            $this->controller = isset($_GET['controller']) ? $_GET['controller'] : "home";
-            
-            $this->conn = Model::connectToDatabase();
+    protected static function getConnection(): mysqli {
+        if (!isset(self::$connection)) {
+            $connection = new mysqli("174.93.150.8", "dev", "Vw3baJgbPS280RW", "snooknn_test");
+            if ($connection->connect_error) die("Connection error!<br>" . $connection->connect_error);
+            return self::$connection = $connection;
         }
-
-        private static function connectToDatabase() {
-            $server = "localhost";
-            $user = "root";
-            $pass = "";
-            $db = "";
-
-            $conn = new mysqli($server, $user, $pass, $db);
-
-            if ($conn->connect_error) {
-                die("Connection error!<br>" . $conn->connect_error);
-            }
-            
-            return $conn;
-        }
-
-        private function list($table, $objectClass){
-            $list = array();
-            $sql = "SELECT * FROM `$table`";
-            $result = $this->conn->query($sql);
-
-            while($row = =$result->fetch_assoc()){
-                // Create an instance of the child class
-                $obj = new $objectClass();
-
-                //Dynamically assign the fetched fields to the object's properties
-                foreach($row as $key => $value){
-                    if(property_exists($obj, $key)){
-                        $obj->$key = $value;
-                    }
-                }
-
-                array_push($list, $obj);
-            }
-
-            return $list;
-        }
-
-        private function update($table, $data, $id){
-            $setClause = implode(" , ", array_map(function($key){ return "`$key` = ?";}, array_keys($data)));
-
-            $stmt = $this->conn->prepare("UPDATE `$table` SET $setClause WHERE id = ?");
-
-            $types = str_repeat("s", count($data) . "i");
-
-            $params = array_merge(array_values($data), [$id]);
-            $stmt->bind_param($types, ...$params);
-
-            if($stmt->execute()){
-                echo "Record updated successfully";
-            } else {
-                echo "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
-        }
-
-        private function insert($table, $data){
-            // Get all the column names
-            $cloumns = implode(", ", array_keys($data));
-
-            //Create the placeholders(?,?,?,?,?)
-            $placeholders = implode(", ", array_fill(0, count($data), "?"));
-
-            // Prepare statement for inserting 
-            $stmt = $this->conn->prepare("INSERT INTO `$table` ($cloumns) VALUES ($params)");
-
-            // Data types of each field being inserted
-            $types = str_repeat("s", count($data));
-            
-            $stmt->bind_param($types, ...array_values($data));
-
-            if($stmt->execute()){
-                echo "New record created successfully";
-            } else{
-                echo "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
-        }
-
-        private function delete($table, $fieldID, $id){
-            // Create type with int type
-            $type = "i";
-            if(is_string($id)){
-                $type = "s";
-            }
-
-            // Prepare statement for deleting
-            $stmt = $this->prepare("DELETE FROM `$table` WHERE `$fieldID` = ?");
-            $stmt->bind_param($type, $id);
-            
-            if($stmt->execute()){
-                echo "Record dleted successfully";
-            } else{
-                echo "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
-
-        }
-
+        return self::$connection;
     }
-    
-?>
+
+    protected static function listAll(string $table, string $class, Where $where = new Where()): array {
+        $list = [];
+        $result = self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
+        while ($obj = $result->fetch_object($class)) {
+            $list[] = $obj;
+        }
+        return $list;
+    }
+
+    protected static function getRows(string $table, Where $where = new Where()): mysqli_result|bool {
+        return self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
+    }
+
+    protected static function updateRow(string $table, Set $set, Where $where = new Where()): bool {
+        return self::getConnection()->execute_query("UPDATE " . $table . $set . $where, [...$set->getArgs(), ...$where->getArgs()]);
+    }
+
+    protected static function deleteRow(string $table, Where $where = new Where()): bool {
+        return self::getConnection()->execute_query("DELETE FROM " . $table . $where, [...$where->getArgs()]);
+    }
+
+    protected static function insertRow(string $table, Values $values): bool {
+        return self::getConnection()->execute_query("INSERT INTO " . $table . $values, [...$values->getArgs()]);
+    }
+}
+
+abstract class Statement {
+    protected string $statement = "";
+    protected array $args = [];
+
+    abstract function getStatement(): string;
+
+    public function getArgs(): array {
+        return $this->args;
+    }
+
+    public function __toString(): string {
+        return $this->getStatement();
+    }
+}
+
+class Where extends Statement {
+    private function add(string $condition): self {
+        $this->statement .= (empty($this->statement) ? "" : " AND ") . $condition;
+        return $this;
+    }
+
+    public function addEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " = ?");
+    }
+
+    public function addGreaterThan(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " > ?");
+    }
+
+    public function addLessThan(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " < ?");
+    }
+
+    public function addGreaterThanOrEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " >= ?");
+    }
+
+    public function addLessThanOrEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " <= ?");
+    }
+
+    public function addNotEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " <> ?");
+    }
+
+    public function addLike(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " LIKE ?");
+    }
+
+    public function addBetween(string $column, mixed $min, mixed $max): self {
+        $this->args[] = $min;
+        $this->args[] = $max;
+        return $this->add($column . " BETWEEN ? AND ?");
+    }
+
+    public function addIn(string $column, array $values): self {
+        $this->args = array_merge($this->args, $values);
+        return $this->add($column . " IN (" . implode(", ", array_fill(0, count($values), "?")) . ")");
+    }
+
+    public function getStatement(): string {
+        return " WHERE " . $this->statement;
+    }
+}
+
+class Set extends Statement {
+    public function add(string $column, mixed $value): self {
+        $this->statement .= (empty($this->statement) ? "" : ", ") . $column . " = ?";
+        $this->args[] = $value;
+        return $this;
+    }
+
+    public function getStatement(): string {
+        return " SET " . $this->statement;
+    }
+}
+
+class Values extends Statement {
+    private bool $ignoreDuplicates;
+
+    public function __construct(bool $ignoreDuplicates) {
+        $this->ignoreDuplicates = $ignoreDuplicates;
+    }
+
+    public function add(string $column, mixed $value): self {
+        $this->statement .= (empty($this->statement) ? "" : ", ") . $column;
+        $this->args[] = $value;
+        return $this;
+    }
+
+    public function getStatement(): string {
+        return " (" . $this->statement . ") VALUES (" . implode(", ", array_fill(0, count($this->args), "?")) . ") " . ($this->ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "");
+    }
+}
