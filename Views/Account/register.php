@@ -6,12 +6,12 @@ ini_set('display_errors', 1);
 ?>
 
    
-    <?php include_once ROOT . '/Views/nav.php'; ?>
+    <?php include_once 'Views/nav.php'; ?>
     
       <main class="d-flex" id="account-Main">
          <!--Sidebar--->
          <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <a href="<?=BASE_PATH?>/account" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
           </a>
@@ -68,27 +68,37 @@ ini_set('display_errors', 1);
         <div class="sideScreen">
           <!---default content will be the Personal info-->
           <!--content is load here-->
-          <div class="container">
-          <form id="loginForm" method="POST" action="index.php?controller=loginRegister&action=submit">
-            <div class="form-group">
-              <label for="loginEmail">Email</label>
-              <input type="email" class="form-control" id="loginEmail" name="email" required>
+         <div class="container">
+         <form method="POST">
+            <div class="form-group py-2">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" required>
             </div>
-            <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password" required>
+            <div class="form-group py-2">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" required>
             </div>
-
+            <div class="form-group py-2">
+              <label for="birthDate">Birthday:</label>
+              <input type="date" class="form-control"  id="birthDate" name="birthDate" >
+            </div>
+            <div class="form-group py-2">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group py-2">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-              <a class="btn btn-primary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=loginForm" role="button">Login</a>
-              <a class="btn btn-secondary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPersonalInformation" role="button">Go Back</a> 
+                <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/accountPersonalInformation" role="button">Go Back</a>
             </div>
            
-            <p class="mt-3">Don't have an account? <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=registerForm" id="showRegisterForm">Register here</a></p>
-          </form>
-          </div>
-
-         
+            <p class="mt-3">Already have an account? <a href="<?=BASE_PATH?>/account/login" id="showLoginForm">Login here</a></p>
+          </form> 
+         </div>
+          
          
           
 
@@ -104,6 +114,6 @@ ini_set('display_errors', 1);
       </script>
 
 
-      <?php include_once ROOT . '/Views/footer.php'; ?>
+      <?php include_once 'Views/footer.php'; ?>
     </body>
 </html>

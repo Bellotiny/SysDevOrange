@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ?>
 
 <body id="contact" class="background_color">
-    <?php include_once ROOT . '/Views/nav.php'; ?> 
+    <?php include_once 'Views/nav.php'; ?>
 
     <!-- Modal for Booking -->
     <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
@@ -30,8 +30,8 @@ ini_set('display_errors', 1);
                         </label>
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
-                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
 
                     </div>
                 </div>
@@ -77,7 +77,7 @@ ini_set('display_errors', 1);
         </div>
     </main>
     
-    <?php include_once ROOT . '/Views/footer.php'; ?>
+    <?php include_once 'Views/footer.php'; ?>
    
 </body>
 </html>

@@ -5,7 +5,7 @@ include_once "Controllers/Controller.php";
 
 class AccountController extends Controller {
     function route(): void {
-        $action = strtolower($_GET['action']) ?? "login";
+        $action = strtolower($_GET['action'] ?? "accountPersonalInformation");
 
         switch ($action) {
             case "login":
@@ -14,8 +14,9 @@ class AccountController extends Controller {
                     $user = User::getFromEmailPassword($_POST['email'], $_POST['password'])
                 ) {
                     setcookie("token", $user->token);
-                    $this->render("Account", "account", [$user]);
+                    header('Location: ' . BASE_PATH . "/account");
                 } else {
+                    // TODO Add error message
                     $this->render("Account", "login");
                 }
                 break;
@@ -26,16 +27,18 @@ class AccountController extends Controller {
                     isset($_POST['password'])
                 ) {
                     try {
-                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null)) {
+                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null)) {
                             setcookie("token", $user->token);
-                            $this->render("Account", "account", [$user]);
+                            header('Location: ' . BASE_PATH . "/account");
                         } else {
+                            // TODO Add error message
                             $this->render("Account", "login");
                         }
                     } catch (Exception) {
                         echo "Error Generating Token";  // TODO Improve this error handling (Maybe make an error page?)
                     }
                 } else {
+                    // TODO Add error message
                     $this->render("Account", "register");
                 }
                 break;
@@ -43,12 +46,13 @@ class AccountController extends Controller {
                 if ($user = User::getFromCookie()) {
                     setcookie("token", "", time() - 3600);
                     $user->token = null;
+                    $user->save();
                 }
-                $this->render("Account", "login");
+                header('Location: ' . BASE_PATH);
                 break;
             default:
                 if ($user = User::getFromCookie()) {
-                    $this->render("Account", "account", [$user]);
+                    $this->render("Account", $action, [$user]);
                 } else {
                     $this->render("Account", "login");
                 }

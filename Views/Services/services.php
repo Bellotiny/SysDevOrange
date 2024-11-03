@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 
 <body id="services-body" class="background_color">
-<?php include_once ROOT . '/Views/nav.php'; ?>  
+<?php include_once 'Views/nav.php'; ?>
 
  <!-- Modal for Booking -->
  <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
@@ -32,8 +32,8 @@ ini_set('display_errors', 1);
                         </label>
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
-                      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-                      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+                      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+                      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
 
                    
                     </div>
@@ -60,7 +60,7 @@ ini_set('display_errors', 1);
                 <p class="card-text mb-auto ">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care, <strong>extension</strong>  and polish application.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@ ini_set('display_errors', 1);
           <p class="card-text mb-auto">This is the starting rate charged for basic treatments.This price typically includes essential services like nail shaping, cuticle care and polish application.</p>
         </div>
         <div class="col-auto d-none d-lg-block">
-            <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+            <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ ini_set('display_errors', 1);
                 <p class="card-text mb-auto "> Our nail art service allows customers to choose stylish designs of their choice. <strong>Pricing is per nail</strong>, ensuring you get exactly what you want.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>//Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ ini_set('display_errors', 1);
                 <p class="card-text mb-auto "> This allows customers to enjoy the classic French tips that everyone is obsessed with.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@ ini_set('display_errors', 1);
                 <p class="card-text mb-auto ">This extra service is for customers whose nail base or extension is still intact </p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?php echo BASE_URL; ?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@ ini_set('display_errors', 1);
             <p class="card-text mb-auto">This extra service is for changing your nail polish only</p>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
             </div>
         </div>
         </div>
@@ -229,6 +229,6 @@ ini_set('display_errors', 1);
 
 
 </main>
-<?php include_once ROOT . '/Views/footer.php'; ?>
+<?php include_once 'Views/footer.php'; ?>
 </body>
 </html>

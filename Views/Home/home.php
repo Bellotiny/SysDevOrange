@@ -1,10 +1,8 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+include_once 'Views/nav.php';
 ?>
-
-
-  <?php include_once ROOT . '/Views/nav.php'; ?>
 
   <!-- Modal for Welcome/Login/Register -->
   <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="authModalTitle" aria-hidden="true">
@@ -21,12 +19,12 @@ ini_set('display_errors', 1);
             <div class="d-flex justify-content-center gap-4 my-5">
               <a href="#" class="btn btn-primary w-50" id="showLogin">Login</a>
               <a href="#" class="btn btn-primary w-50" id="showRegister">Register</a>
-              <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Home</a>
+              <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Home</a>
             </div>
           </div>
 
           <!-- Login Form (Initially Hidden) -->
-          <form id="loginForm" method="POST" action="index.php?controller=loginRegister&action=submit" style="display: none;">
+          <form id="loginForm" method="POST" action="<?=BASE_PATH?>/account/login" style="display: none;">
             <div class="form-group">
               <label for="loginEmail">Email</label>
               <input type="email" class="form-control" id="loginEmail" name="email" required>
@@ -41,7 +39,7 @@ ini_set('display_errors', 1);
           </form>
 
           <!-- Register Form (Initially Hidden) -->
-          <form id="registerForm" method="POST" action="index.php?controller=loginRegister&action=submit" style="display: none;">
+          <form id="registerForm" method="POST" action="<?=BASE_PATH?>/account/register" style="display: none;">
             <div class="form-group">
               <label for="fname">First Name</label>
               <input type="text" class="form-control" id="fname" name="fname" required>
@@ -90,8 +88,8 @@ ini_set('display_errors', 1);
           </label>
         </div>
         <div class="container d-flex justify-content-center gap-4 my-5">
-          <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
         </div>
       </div>
     </div>
@@ -117,7 +115,7 @@ ini_set('display_errors', 1);
       
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-        <img src="<?php echo BASE_URL; ?>/Views/Images/about1.png" class="img-fluid rounded-lg-3 slide-up" alt="Welcome image" height="500"  width="720"  >
+        <img src="<?=BASE_PATH?>/Views/Images/about1.png" class="img-fluid rounded-lg-3 slide-up" alt="Welcome image" height="500" width="720"  >
       </div>
     </div>
   </div>
@@ -133,7 +131,7 @@ ini_set('display_errors', 1);
     <!-- First Collapsible Section -->
     
     <div class="col-lg-3 canvaDiv m-3 p-3 ">
-        <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" 
+        <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg"
               class="img-fluid my-4 rounded  slide-up" 
               alt="Description of the image" 
               width="300" height="200" 
@@ -179,7 +177,7 @@ ini_set('display_errors', 1);
     <!-- Second offcanvas Section -->
 
     <div class="col-lg-3 canvaDiv  m-3 p-3 ">
-        <img src="<?php echo BASE_URL; ?>/Views/Images/about4.png" 
+        <img src="<?=BASE_PATH?>/Views/Images/about4.png"
               class="img-fluid my-4 rounded  slide-up" 
               alt="Description of the image" 
               width="300" height="200" 
@@ -210,7 +208,7 @@ ini_set('display_errors', 1);
 
     <!-- Third offcanvas Section -->
     <div class="col-lg-3 canvaDiv m-3 p-3 ">
-        <img src="<?php echo BASE_URL; ?>/Views/Images/about3.png" 
+        <img src="<?=BASE_PATH?>/Views/Images/about3.png"
           class="img-fluid my-4 rounded  slide-up" 
           alt="Description of the image" 
           width="250" height="200" 
@@ -326,10 +324,8 @@ ini_set('display_errors', 1);
 
 
 
-  <?php include_once ROOT . '/Views/footer.php'; ?>
+  <?php include_once 'Views/footer.php'; ?>
 
-
-
-  
 
 </body>
+</html>

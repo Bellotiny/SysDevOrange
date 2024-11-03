@@ -2,11 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once ROOT . '/Views/head.php';
+include_once 'Views/head.php';
 ?>
 
 <body>
-  <?php include_once ROOT . '/Views/nav.php'; ?>
+  <?php include_once 'Views/nav.php'; ?>
 
  
   <main>
@@ -53,8 +53,8 @@ include_once ROOT . '/Views/head.php';
 
     <!-----button--->
     <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Back</a>
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookTwo" role="button">Next</a>  
+      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Back</a>
+      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookTwo" role="button">Next</a>
     </div>
 
     </div>

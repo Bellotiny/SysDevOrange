@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ?>
 
 <body>
-  <?php include_once ROOT . '/Views/nav.php'; ?>
+  <?php include_once 'Views/nav.php'; ?>
 
   
 
@@ -129,8 +129,8 @@ ini_set('display_errors', 1);
     </div>
 
     <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookTwo" role="button">Next</a>
+      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookTwo" role="button">Next</a>
     
     </div>
 
@@ -154,10 +154,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (selectedService === 'Home service') {
       // Update href for "Home service" selection
-      nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=homeServiceBooking";
+      nextButton.href = "<?=BASE_PATH?>/book/homeServiceBooking";
     } else {
       // Set default href for "Owner's place"
-      nextButton.href = "<?php echo BASE_URL; ?>/index.php?controller=book&action=bookTwo";
+      nextButton.href = "<?=BASE_PATH?>/book/bookTwo";
     }
   });
 });
