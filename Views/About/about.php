@@ -2,10 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once ROOT . '/Views/head.php';
+include_once 'Views/head.php';
+include_once 'Views/nav.php';
 ?>
-
-  <?php include_once ROOT . '/Views/nav.php'; ?>  
 
   <!-- Modal for Booking -->
   <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
@@ -31,8 +30,8 @@ include_once ROOT . '/Views/head.php';
                         </label>
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
-                      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-                      <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+                      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+                      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
 
                    
                     </div>
@@ -61,8 +60,8 @@ include_once ROOT . '/Views/head.php';
   </div>
 
   <div class="d-flex justify-content-center align-items-center w-100 px-0 container py-4 " id="image-container">
-    <img src="<?= BASE_URL ?>/Views/Images/about1.png" alt="Image 1" class="mx-2 slide-up" id="image1">
-    <img src="<?= BASE_URL ?>/Views/Images/about2.png" alt="Image 2" class="mx-2 slide-up" id="image2">
+    <img src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1" class="mx-2 slide-up" id="image1">
+    <img src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 2" class="mx-2 slide-up" id="image2">
   </div>
 
   <div id="cat-warning-container">
@@ -116,6 +115,6 @@ include_once ROOT . '/Views/head.php';
 
 
 
-<?php include_once ROOT . '/Views/footer.php'; ?>
+<?php include_once 'Views/footer.php'; ?>
 </body>
 </html>

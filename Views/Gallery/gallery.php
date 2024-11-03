@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once ROOT . '/Views/head.php';
+include_once 'Views/head.php';
 ?>
 
-<?php include_once ROOT . '/Views/nav.php'; ?>
+<?php include_once 'Views/nav.php'; ?>
 
 
 <!-- Modal for Booking -->
@@ -32,8 +32,8 @@ include_once ROOT . '/Views/head.php';
                         </label>
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
-                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
-                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
+                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
 
                     </div>
                 </div>
@@ -49,12 +49,12 @@ include_once ROOT . '/Views/head.php';
   </div>
 
   <div id="instagram-pic">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 2">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about3.png" alt="Image 3">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 4">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/cat2.jpg" alt="Image 5">
-    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/cat3.jpg" alt="Image 6">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 2">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about3.png" alt="Image 3">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about4.png" alt="Image 4">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat2.jpg" alt="Image 5">
+    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat3.jpg" alt="Image 6">
       
   </div>
 
@@ -95,7 +95,7 @@ include_once ROOT . '/Views/head.php';
       <!------first reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -136,7 +136,7 @@ include_once ROOT . '/Views/head.php';
       <!------second reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -178,7 +178,7 @@ include_once ROOT . '/Views/head.php';
       <!------third reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
-            <img src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
+            <img src="<?=BASE_PATH?>/Views/Images/about4.png" alt="Image 1" class="img-fluid rounded me-4" style="width: 200px; height: auto;">
         </div>  
 
         <div class="w-100 ">
@@ -235,7 +235,7 @@ include_once ROOT . '/Views/head.php';
   
   </main>
 
-  <?php include_once ROOT . '/Views/footer.php'; ?>
+  <?php include_once 'Views/footer.php'; ?>
  
   <script>
     // Toggle review form visibility

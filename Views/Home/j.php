@@ -15,7 +15,7 @@
         }
         echo "<title>${page}</title>";
     ?>
-    <link rel="stylesheet" href="http://localhost/SysDevOrange/Views/CSS/style.css">
+    <link rel="stylesheet" href="<?=BASE_PATH?>/Views/CSS/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb5A1z3k8+V7D5cIHJ8+JID8+EO5+8XNZD7r5" crossorigin="anonymous"></script>
@@ -27,10 +27,10 @@
 
 
 
-<?php include_once ROOT . '/head.php'; ?>
+<?php include_once 'Views/head.php'; ?>
 
   <body>
-  <?php include_once ROOT . '/nav.php'; ?>
+  <?php include_once 'Views/nav.php'; ?>
 
       <div id="homeImage"></div>
 
@@ -40,7 +40,7 @@
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante, id congue sapien imperdiet sit amet. Praesent ac neque rutrum velit lobortis iaculis iaculis sed lacus. Praesent dictum sagittis ultrices. Nullam vitae dui mattis, mollis tortor id, euismod ligula. Integer a ligula magna. In hac habitasse platea dictumst. Aliquam erat volutpat. Donec scelerisque metus est.</p>
           </div>
           <div class="col-md-5">
-          <img src="<?php echo ROOT; ?>/Images/about1.png" alt="Welcome image" class="img-fluid mx-auto" width="500" height="500">
+          <img src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Welcome image" class="img-fluid mx-auto" width="500" height="500">
 
 
             
@@ -80,8 +80,6 @@
           </div>
         </div>
   
-      <?php 
-        include_once "footer.php";
-      ?>
+      <?php include_once "Views/footer.php"; ?>
 
     </body>

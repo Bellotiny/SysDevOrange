@@ -5,7 +5,7 @@ include_once "Controllers/Controller.php";
 
 class AccountController extends Controller {
     function route(): void {
-        $action = strtolower($_GET['action']) ?? "login";
+        $action = strtolower($_GET['action'] ?? "");
 
         switch ($action) {
             case "login":
@@ -26,7 +26,7 @@ class AccountController extends Controller {
                     isset($_POST['password'])
                 ) {
                     try {
-                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null)) {
+                        if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null)) {
                             setcookie("token", $user->token);
                             $this->render("Account", "account", [$user]);
                         } else {
@@ -44,6 +44,7 @@ class AccountController extends Controller {
                     setcookie("token", "", time() - 3600);
                     $user->token = null;
                 }
+                header('Location: ' . BASE_PATH);
                 $this->render("Account", "login");
                 break;
             default:

@@ -26,17 +26,17 @@ class User extends Model {
         $token = bin2hex(random_bytes(16));  // Generate Random 16 Bytes or 128 Bits
 
         $user = new User();
-        $values = new Values(false);
-        $values->add("firstName", $user->firstName = $firstName);
-        $values->add("lastName", $user->lastName = $lastName);
-        $values->add("email", $user->email = $email);
-        $values->add("phoneNumber", $user->phoneNumber = $phoneNumber);
-        $values->add("birthDate", $user->birthDate = $birthDate);
-        $values->add("password", $password);
-        $values->add("token", $user->token = $token);
+        $values = new Values();
+        $values->add(new Value($user->firstName = $firstName, "firstName"));
+        $values->add(new Value($user->lastName = $lastName, "lastName"));
+        $values->add(new Value($user->email = $email, "email"));
+        $values->add(new Value($user->phoneNumber = $phoneNumber, "phoneNumber"));
+        $values->add(new Value($user->birthDate = $birthDate, "birthDate"));
+        $values->add(new Value($password, "password"));
+        $values->add(new Value($user->token = $token, "token"));
 
         try {
-            Model::insertRow("users", $values);
+            Model::insertRow("users", $values, false);
             $user->id = self::getConnection()->insert_id;
             self::getConnection()->execute_query("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$user->id]);
             return $user;
@@ -48,20 +48,20 @@ class User extends Model {
 
     public static function getFromId(int $id): User|false|null {
         $where = new Where();
-        $where->addEquals("id", $id);
+        $where->addEquals(new Value($id, "id"));
         return Model::getRows("users", $where)->fetch_object("User");
     }
 
     public static function getFromToken(string $token): User|false|null {
         $where = new Where();
-        $where->addEquals("token", $token);
+        $where->addEquals(new Value($token, "token"));
         return Model::getRows("users", $where)->fetch_object("User");
     }
 
     public static function getFromEmailPassword(string $email, string $password): User|false|null {
         $where = new Where();
-        $where->addEquals("email", $email);
-        $where->addEquals("password", $password);
+        $where->addEquals(new Value($email, "email"));
+        $where->addEquals(new Value($password, "password"));
         return Model::getRows("users", $where)->fetch_object("User");
     }
 
@@ -74,23 +74,23 @@ class User extends Model {
     }
 
     public function save(): bool {
-        $set = new Set();
-        $set->add("firstName", $this->firstName);
-        $set->add("lastName", $this->lastName);
-        $set->add("email", $this->email);
-        $set->add("phoneNumber", $this->phoneNumber);
-        $set->add("birthDate", $this->birthDate);
-        $set->add("password", $this->password);
-        $set->add("token", $this->token);
+        $values = new Values();
+        $values->add(new Value($this->firstName, "firstName"));
+        $values->add(new Value($this->lastName, "lastName"));
+        $values->add(new Value($this->email, "email"));
+        $values->add(new Value($this->phoneNumber, "phoneNumber"));
+        $values->add(new Value($this->birthDate, "birthDate"));
+        $values->add(new Value($this->password, "password"));
+        $values->add(new Value($this->token, "token"));
         $where = new Where();
-        $where->addEquals("id", $this->id);
-        return Model::updateRow("users", $set, $where);
+        $where->addEquals(new Value($this->id, "id"));
+        return Model::updateRows("users", $values, $where);
     }
 
     public function delete(): bool {
         $where = new Where();
-        $where->addEquals("id", $this->id);
-        return Model::deleteRow("users", $where);
+        $where->addEquals(new Value($this->id, "id"));
+        return Model::deleteRows("users", $where);
     }
 
     public function verifyRights(string $controller, string $action): bool {

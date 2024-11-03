@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Views/config.php';
+define("BASE_PATH", dirname($_SERVER['SCRIPT_NAME']));
 
 $controller = $_GET['controller'] ?? "home";
 

@@ -7,12 +7,5 @@ class BookController extends Controller {
         $action = strtolower($_GET['action']) ?? "bookOne";
 
         $this->render("Book", $action);
-//        if ($action == "bookOne") {
-//            $this->render("Book", "bookOne");
-//        } else if ($action == "bookTwo") {
-//            $this->render("Book", "bookTwo");
-//        } else if ($action == "bookThree") {
-//            $this->render("Book", "bookThree");
-//        }
     }
 }
