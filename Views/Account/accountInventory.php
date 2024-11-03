@@ -18,7 +18,7 @@ include_once 'Views/head.php';
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-              <a href="<?=BASE_PATH?>/account/accountPeronsalInformation" class="nav-link link-dark" aria-current="page">
+              <a href="<?=BASE_PATH?>/account/accountPersonalInformation" class="nav-link link-dark" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Personal Information
               </a>
