@@ -66,6 +66,8 @@ include_once 'Views/nav.php';
           <!---default content will be the Personal info-->
           <!--content is load here-->
           <div class="container">
+
+              <?php if (isset($data["error"])) { echo "<p>" . $data['error'] . "</p>"; } ?>
           <form action="<?=BASE_PATH?>/account/login" method="POST">
             <div class="form-group">
               <label for="email">Email</label>
