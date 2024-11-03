@@ -16,8 +16,7 @@ class AccountController extends Controller {
                     setcookie("token", $user->token);
                     header('Location: ' . BASE_PATH . "/account");
                 } else {
-                    // TODO Add error message
-                    $this->render("Account", "login");
+                    $this->render("Account", "login", ["error" => "Invalid Email or Password"]);
                 }
                 break;
             case "register":
@@ -31,22 +30,18 @@ class AccountController extends Controller {
                             setcookie("token", $user->token);
                             header('Location: ' . BASE_PATH . "/account");
                         } else {
-                            // TODO Add error message
-                            $this->render("Account", "login");
+                            $this->render("Account", "register", ["error" => "Email already in user"]);
                         }
                     } catch (Exception) {
                         echo "Error Generating Token";  // TODO Improve this error handling (Maybe make an error page?)
                     }
                 } else {
-                    // TODO Add error message
-                    $this->render("Account", "register");
+                    $this->render("Account", "register", ["error" => "Missing Required Fields"]);
                 }
                 break;
             case "logout":
                 if ($user = User::getFromCookie()) {
                     setcookie("token", "", time() - 3600);
-                    $user->token = null;
-                    $user->save();
                 }
                 header('Location: ' . BASE_PATH);
                 break;

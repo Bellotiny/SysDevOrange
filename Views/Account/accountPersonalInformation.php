@@ -67,6 +67,7 @@ include_once 'Views/head.php';
 
         <!---screen for sidebar--->
         <div class="sideScreen">
+            <p><?= $data[0]->firstName . " " . $data[0]->lastName ?></p>
           <!---default content will be the Personal info-->
           <!--content is load here-->
           <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">

@@ -69,6 +69,7 @@ ini_set('display_errors', 1);
           <!---default content will be the Personal info-->
           <!--content is load here-->
          <div class="container">
+             <?php if (isset($data["error"])) { echo "<p>" . $data['error'] . "</p>"; } ?>
          <form method="POST">
             <div class="form-group py-2">
               <label for="firstName">First Name</label>
