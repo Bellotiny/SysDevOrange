@@ -36,14 +36,40 @@ class User extends Model {
         $values->add("token", $user->token = $token);
 
         try {
-            Model::insertRow("users", $values);
-            $user->id = self::getConnection()->insert_id;
-            self::getConnection()->execute_query("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$user->id]);
-            return $user;
+            $sanitizedData = $this->validateValues($values);
+            if ($sanitizedData) {
+                Model::insertRow("users", $sanitizedData);
+                $user->id = self::getConnection()->insert_id;
+                self::getConnection()->execute_query("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$user->id]);
+                return $user;
+            } else{
+                return false;
+            }
         } catch (Exception $e) {
             var_dump($e);
             return false;
         }
+    }
+
+    public function validateValues($values) {
+        $passwordPattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/';
+        $phonePattern = '/^(\(?\d{3}\)?)?[-.\s]?\d{3}[-.\s]?\d{4}$/';
+
+        if(!preg_match($passwordPattern, $values['password']) || !preg_match($phonePattern, $values['phoneNumber'])){
+            return false;
+        }
+
+        $data['firstName'] = filter_var($values['firstName'], FILTER_SANITIZE_STRING);
+        $data['lastName'] = filter_var($values['lastName'], FILTER_SANITIZE_STRING);
+        $sanitizedEmail = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
+        $data['email'] = filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) ? $sanitizedEmail;
+        $data['phoneNumber'] = filter_var($values['phoneNumber'], FILTER_SANITIZE_NUMBER_INT);
+
+        if ($data['email'] === null) {
+            return false;
+        }
+
+        return $data;
     }
 
     public static function getFromId(int $id): User|false|null {
