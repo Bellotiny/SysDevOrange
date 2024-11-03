@@ -68,7 +68,27 @@ ini_set('display_errors', 1);
         <div class="sideScreen">
           <!---default content will be the Personal info-->
           <!--content is load here-->
-          
+          <div class="container">
+          <form id="loginForm" method="POST" action="index.php?controller=loginRegister&action=submit">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" class="form-control" id="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" name="password" required>
+            </div>
+
+            <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
+              <a class="btn btn-primary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=loginForm" role="button">Login</a>
+              <a class="btn btn-secondary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPersonalInformation" role="button">Go Back</a> 
+            </div>
+           
+            <p class="mt-3">Don't have an account? <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=registerForm" id="showRegisterForm">Register here</a></p>
+          </form>
+          </div>
+
+         
          
           
 

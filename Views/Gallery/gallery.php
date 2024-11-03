@@ -5,54 +5,93 @@ ini_set('display_errors', 1);
 include_once ROOT . '/Views/head.php';
 ?>
 
-<body class="background_color">
 <?php include_once ROOT . '/Views/nav.php'; ?>
 
-  <main class="container">
-  <div class="accent-div">
-    <h1 class="accent-heading">Gallery</h1>
+
+<!-- Modal for Booking -->
+<div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalBookingWarningTitle">Booking Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <h4>Booking Rules:</h4>
+                        <ul>
+                            <li><strong>The client must pay <span style="color: #d9534f;">$10</span> upon booking</strong>, which will be deducted from the total payment.</li>
+                            <li><strong>They must choose at least <span style="color: #d9534f;">one color</span>.</strong></li>
+                            <li><strong>Home service is an option but available only <span style="color: #d9534f;">within a certain range</span>.</strong></li>
+                            <li><strong>There are <span style="color: #d9534f;">cats</span> in the owner's place.</strong></li>
+
+                        </ul>
+                        <hr>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <strong>I read all the reminder</strong>
+                        </label>
+                    </div>
+                    <div class="container d-flex justify-content-center gap-4 my-5">
+                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
+                        <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+
+                    </div>
+                </div>
+            </div>
+</div>
+
+  <main class="container py-4">
+
+  <div class="green-background text-secondary  container slide-up ">
+    <div class=" pb-5" >
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Gallery</h1>
+    </div>
   </div>
+
   <div id="instagram-pic">
-    <img src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1">
-    <img src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 2">
-    <img src="<?=  BASE_URL ?>/Views/Images/about3.png" alt="Image 3">
-    <img src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 4">
-    <img src="<?=  BASE_URL ?>/Views/Images/cat2.jpg" alt="Image 5">
-    <img src="<?=  BASE_URL ?>/Views/Images/cat3.jpg" alt="Image 6">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about1.png" alt="Image 1">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about2.png" alt="Image 2">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about3.png" alt="Image 3">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/about4.png" alt="Image 4">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/cat2.jpg" alt="Image 5">
+    <img class="slide-up" src="<?=  BASE_URL ?>/Views/Images/cat3.jpg" alt="Image 6">
       
   </div>
-  <hr>
 
   <div>
-    <div class="accent-div">
-    <h1 class="accent-heading">Reviews</h1>
-    </div>
-    <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
-      <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button" id="toggleReviewFormButton">Post Review</button>
-      </div>
-    </div>
 
-   <!-- Initially hidden review form -->
-    <div id="review-form-input" style="display: none; background-color: white; padding: 20px; border-radius: 5px;">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Review</label>
-        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile">
-      </div>
-      <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Post</button>
-      </div>
+  <div class="green-background text-secondary  container slide-up ">
+    <div class=" pb-5" >
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Reviews</h1>
     </div>
+  </div>
+    
+  <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
+  <div class="d-grid gap-2">
+    <button class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false">Write Review</button>
+  </div>
+</div>
 
-    <div class="w-100">
+<!-- Initially hidden review form -->
+<div id="review-form-input" class="pb-3" style="display: none;">
+  <div class="mb-3">
+    <label for="reviewTitle" class="form-label">Title</label>
+    <input class="form-control" id="reviewTitle" type="text" placeholder="Enter review title">
+  </div>
+  <div class="mb-3">
+    <label for="reviewContent" class="form-label">Review</label>
+    <textarea class="form-control" id="reviewContent" rows="3" placeholder="Write your review here"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Upload File</label>
+    <input class="form-control" type="file" id="formFile">
+  </div>
+  <div class="d-grid gap-2">
+    <button class="btn bttn-green" type="button">Post</button>
+  </div>
+</div>
+
+    <div class="w-100 slide-up">
       <!------first reviewws--->
       <div class="d-flex align-items-center py-2"> 
         <div class="me-3">
@@ -60,10 +99,20 @@ include_once ROOT . '/Views/head.php';
         </div>  
 
         <div class="w-100 ">
-            <div>
+           <div class="d-flex justify-content-between align-items-center">
               <!--date -->
-              <strong class="d-inline-block mb-2 text-primary-emphasis">Mar 16</strong>
+              <strong class="d-inline-block mb-2 text-primary-emphasis ">Mar 16</strong>
+             <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3 mx-3 text-primary-emphasis " viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-primary-emphasis" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+             </div>
             </div>
+
             <div>
               <!-- Title comment-->
               <h3 class="mb-0">Loveee!!</h3>
@@ -91,10 +140,20 @@ include_once ROOT . '/Views/head.php';
         </div>  
 
         <div class="w-100 ">
-            <div>
+          <div class="d-flex justify-content-between align-items-center">
               <!--date -->
-              <strong class="d-inline-block mb-2 text-primary-emphasis">Mar 16</strong>
+              <strong class="d-inline-block mb-2 text-primary-emphasis ">Mar 16</strong>
+             <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3 mx-3 text-primary-emphasis " viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-primary-emphasis" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+             </div>
             </div>
+
             <div>
               <!-- Title comment-->
               <h3 class="mb-0">Nailssss!!</h3>
@@ -123,10 +182,20 @@ include_once ROOT . '/Views/head.php';
         </div>  
 
         <div class="w-100 ">
-            <div>
+          <div class="d-flex justify-content-between align-items-center">
               <!--date -->
-              <strong class="d-inline-block mb-2 text-primary-emphasis">Oct 16</strong>
+              <strong class="d-inline-block mb-2 text-primary-emphasis ">Mar 16</strong>
+             <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3 mx-3 text-primary-emphasis " viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-primary-emphasis" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+             </div>
             </div>
+
             <div>
               <!-- Title comment-->
               <h3 class="mb-0">Great</h3>
@@ -171,13 +240,14 @@ include_once ROOT . '/Views/head.php';
   <script>
     // Toggle review form visibility
     document.getElementById('toggleReviewFormButton').addEventListener('click', function() {
-      const reviewForm = document.getElementById('review-form-input');
-      if (reviewForm.style.display === 'none' || reviewForm.style.display === '') {
-        reviewForm.style.display = 'block';
-      } else {
-        reviewForm.style.display = 'none';
-      }
-    });
+    const reviewForm = document.getElementById('review-form-input');
+    const isVisible = reviewForm.style.display === 'block';
+
+    // Toggle the display property
+    reviewForm.style.display = isVisible ? 'none' : 'block';
+    // Update aria-expanded attribute
+    this.setAttribute('aria-expanded', !isVisible);
+  });
   </script>
    
 </body>
