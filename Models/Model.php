@@ -5,65 +5,137 @@ class Model {
 
     protected static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
-            $connection = new mysqli("localhost", "root", "", "snooknn");
-            if ($connection->connect_error) {
-                die("Connection error!<br>" . $connection->connect_error);
-            }
+            $connection = new mysqli("174.93.150.8", "dev", "Vw3baJgbPS280RW", "snooknn_test");
+            if ($connection->connect_error) die("Connection error!<br>" . $connection->connect_error);
             return self::$connection = $connection;
         }
         return self::$connection;
     }
 
-    protected static function query(string $query, ?array $parameters = null): bool|mysqli_result {
-        return self::getConnection()->execute_query($query, $parameters);
-    }
-
-    protected static function listAll(string $table, string $class): array {
+    protected static function listAll(string $table, string $class, Where $where = new Where()): array {
         $list = [];
-        $result = self::query("SELECT * FROM ?", [$table]);
+        $result = self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
         while ($obj = $result->fetch_object($class)) {
             $list[] = $obj;
         }
         return $list;
     }
 
-    protected static function deleteRow(string $table, string $where, array $whereArg): bool {
-        return self::query("DELETE FROM ? WHERE " . $where, [$table, $where, ...$whereArg]);
+    protected static function getRows(string $table, Where $where = new Where()): mysqli_result|bool {
+        return self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
     }
 
-    protected static function insertRow(string $table, array $columns, array $values, bool $ignore = false): bool {
-        return self::query("INSERT " . ($ignore ? "IGNORE" : "") . " INTO ? (" . self::multiValues($columns) . ") VALUES " . self::multiQuestion($values), [$table, ...$values]);
+    protected static function updateRow(string $table, Set $set, Where $where = new Where()): bool {
+        return self::getConnection()->execute_query("UPDATE " . $table . $set . $where, [...$set->getArgs(), ...$where->getArgs()]);
     }
 
-    protected static function updateRow(string $table, string $where, array $whereArg, array $columns, array $values): bool {
-        return self::query("UPDATE ? SET " . self::multiEquals($columns) . " WHERE " . $where, [$table, ...$values, ...$whereArg]);
+    protected static function deleteRow(string $table, Where $where = new Where()): bool {
+        return self::getConnection()->execute_query("DELETE FROM " . $table . $where, [...$where->getArgs()]);
     }
 
-    protected static function getRows(string $table, string $where, array $whereArg): mysqli_result {
-        return self::query("SELECT * FROM ? WHERE " . $where, [$table, ...$whereArg]);
+    protected static function insertRow(string $table, Values $values): bool {
+        return self::getConnection()->execute_query("INSERT INTO " . $table . $values, [...$values->getArgs()]);
+    }
+}
+
+abstract class Statement {
+    protected string $statement = "";
+    protected array $args = [];
+
+    abstract function getStatement(): string;
+
+    public function getArgs(): array {
+        return $this->args;
     }
 
-    /**
-     * @param string[] $options
-     * @return string Like "option1 = ?, option2 = ?, option3 = ?"
-     */
-    protected static function multiEquals(array $options): string {
-        return implode(", ", array_map(fn($key) => $key . " = ?", $options));
+    public function __toString(): string {
+        return $this->getStatement();
+    }
+}
+
+class Where extends Statement {
+    private function add(string $condition): self {
+        $this->statement .= (empty($this->statement) ? "" : " AND ") . $condition;
+        return $this;
     }
 
-    /**
-     * @param string[] $options
-     * @return string Like "?, ?, ?"
-     */
-    protected static function multiQuestion(array $options): string {
-        return implode(", ", array_fill(0, count($options), "?"));
+    public function addEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " = ?");
     }
 
-    /**
-     * @param string[] $options
-     * @return string Like "option1, option2, option3"
-     */
-    protected static function multiValues(array $options): string {
-        return implode(", ", $options);
+    public function addGreaterThan(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " > ?");
+    }
+
+    public function addLessThan(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " < ?");
+    }
+
+    public function addGreaterThanOrEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " >= ?");
+    }
+
+    public function addLessThanOrEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " <= ?");
+    }
+
+    public function addNotEquals(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " <> ?");
+    }
+
+    public function addLike(string $column, mixed $value): self {
+        $this->args[] = $value;
+        return $this->add($column . " LIKE ?");
+    }
+
+    public function addBetween(string $column, mixed $min, mixed $max): self {
+        $this->args[] = $min;
+        $this->args[] = $max;
+        return $this->add($column . " BETWEEN ? AND ?");
+    }
+
+    public function addIn(string $column, array $values): self {
+        $this->args = array_merge($this->args, $values);
+        return $this->add($column . " IN (" . implode(", ", array_fill(0, count($values), "?")) . ")");
+    }
+
+    public function getStatement(): string {
+        return " WHERE " . $this->statement;
+    }
+}
+
+class Set extends Statement {
+    public function add(string $column, mixed $value): self {
+        $this->statement .= (empty($this->statement) ? "" : ", ") . $column . " = ?";
+        $this->args[] = $value;
+        return $this;
+    }
+
+    public function getStatement(): string {
+        return " SET " . $this->statement;
+    }
+}
+
+class Values extends Statement {
+    private bool $ignoreDuplicates;
+
+    public function __construct(bool $ignoreDuplicates) {
+        $this->ignoreDuplicates = $ignoreDuplicates;
+    }
+
+    public function add(string $column, mixed $value): self {
+        $this->statement .= (empty($this->statement) ? "" : ", ") . $column;
+        $this->args[] = $value;
+        return $this;
+    }
+
+    public function getStatement(): string {
+        return " (" . $this->statement . ") VALUES (" . implode(", ", array_fill(0, count($this->args), "?")) . ") " . ($this->ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "");
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-// include_once "Models/About.php";
 include_once "Controllers/Controller.php";
 
 class AboutController extends Controller {
