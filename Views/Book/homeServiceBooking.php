@@ -37,10 +37,10 @@ include_once 'Views/head.php';
         <input type="text" class="form-control" id="inputCity">
       </div>
       <div class="col-md-4">
-        <label for="inputState" class="form-label">State</label>
+        <label for="inputState" class="form-label">Province</label>
         <select id="inputState" class="form-select">
           <option selected>Choose...</option>
-          <option>...</option>
+          <option>Quebec</option>
         </select>
       </div>
       <div class="col-md-2">
