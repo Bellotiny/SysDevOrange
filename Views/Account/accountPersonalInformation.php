@@ -2,15 +2,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
+include_once ROOT . '/Views/head.php';
 ?>
 
-   
+    <body class="">
     <?php include_once ROOT . '/Views/nav.php'; ?>
     
-      <main class="d-flex" id="account-Main">
+    
+      <main class="d-flex flex-grow-1  max-vh-100 " id="account-Main">
          <!--Sidebar--->
-         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
+          <div class="d-flex flex-column flex-shrink-0 p-3 bg-light slide-up " style="width: 280px; height: 100vh;">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
@@ -18,32 +19,32 @@ ini_set('display_errors', 1);
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPeronsalInformation" class="nav-link active" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Personal Information
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark" id="loadBookingHistory">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountBookingHistory" class="nav-link link-dark" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 Booking History
               </a>
             </li>
 
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountSchedule" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                 Schedule
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountInventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 Inventory
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+            <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountBookingList" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                 Booking list
               </a>
@@ -68,22 +69,33 @@ ini_set('display_errors', 1);
         <div class="sideScreen">
           <!---default content will be the Personal info-->
           <!--content is load here-->
+          <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
+            <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=loginForm" role="button">Login</a>
+            <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=registerForm" role="button">Register</a>
+          
+          </div>
           
          
+      
+       <!---pagination--->
+      <div class="d-flex justify-content-center my-3">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+      </div>
           
 
-        </div>
-        
+       
       </main>
-
-      <script>
-
-  
-
-
-      </script>
-
-
       <?php include_once ROOT . '/Views/footer.php'; ?>
+
+      </div>
+      
     </body>
 </html>

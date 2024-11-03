@@ -28,11 +28,70 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Jimmy Script';
+    src: url('../Fonts/JimmyScript-Rg.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Silver Fake';
+    src: url('../Fonts/Silverfake.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*** CSS FOR THE FONT ***/
+
+.canvaSans-fontstyle{
+    font-family: "Canvas Sans", sans-serif;
+}
+
+.dmSans-fontstyle{
+    font-family: "DM Sans", sans-serif;
+}
+
+.amsterdamThree-fontstyle{
+    font-family: 'AmsterdamThree';  
+}
+
+.alice-fontstyle{
+    font-family: "Alice";
+}
+
+.forum-fontstyle{
+    font-family: "Forum";
+}
+
+.jimmyScript-fontstyle{
+    font-family: 'Jimmy Script';
+}
+
+.silverFake-fontstyle{
+    font-family: 'Silver Fake';
+}
+/** FONT COLOR **/
+.text-green{
+    color: #1b613e;
+}
+.text-green-two{
+    
+}
+.text-pink{
+    color: #f37a74;
+} 
+.text-shadow-pink{
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.5);
+}
+.text-shadow{
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/**CSS FOR THE HEADERS TEXT**/
 
 h1{
-    font-family: 'AmsterdamThree';
-    font-size: 80px;
     width: 100%;
+    font-size: calc(45px + 1.5vw);
 }
 h2{
     font-family: 'AmsterdamThree';
@@ -48,7 +107,22 @@ main {
     padding: 0%;
     margin: 0%;
 }
-/*nav*/
+h2{
+    font-family: 'AmsterdamThree';
+    font-size: 50px;
+    color: #57453d;
+    position: absolute;
+}
+/*** CSS BACKGROUND *****/
+
+.background_color{
+    background-color: #efede9;
+}
+.green-background{
+    background-color: #d2d8ce;
+    color: #667744;
+}
+/********* NAV *********/
 header {
     overflow: hidden;
     background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
@@ -65,19 +139,12 @@ header {
 
 
 #nav-container {
-    width: auto;
+ 
     height: 100%;
     padding: 0 20px;
 }
 
 
-#nav-main {
-    display: flex;
-    align-items: center;
- 
-    
-
-}
 
 #nav-main a {
     width: auto;
@@ -89,7 +156,6 @@ header {
     color: #1b613e;
     padding: 2% 15%; /* Add padding for clickable area */
     border-radius: 15px;
-
   
 }
 #nav-main a:hover {
@@ -99,12 +165,21 @@ header {
     color: #1b613e;
 }
 #nav-extra {
-    justify-content: flex-end;   
+    justify-content: flex-end;    
 }
 #nav-extra a{
-    padding: 2% 20%;
+    margin: 1% 15%
+
 }
 
+#nav li {
+    display: inline;
+    margin: 2%;
+}
+
+#nav li a {
+    text-decoration: none;
+}
 
 
 /* Special styling for the Book link */
@@ -119,13 +194,48 @@ header {
     font-family: "Canvas Sans", sans-serif;
     text-decoration: none;
     margin-top: auto;
-    margin-bottom: auto;
-  
-    
+    margin-bottom: auto;  
 }
 
-/* Homepage */
+/******** Home **********/
+#welcomeHeading{
+    position: absolute;
+    top: 111%;  /* Move the h1 50% from the top */
+    left: 20%; /* Move the h1 50% from the left */
+    transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
+    text-align: center;
+   
+}
 
+
+#overlay-text {
+    font-family: 'Jimmy Script';
+}
+#overlay-text2 {
+    font-family: 'Silver Fake';
+}
+
+#overlay-text {
+    position: absolute;
+    top: 50%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: black; 
+    padding: 10px 20px; 
+    font-size: 160px; 
+    width: 700px;
+    text-align: center;
+}
+#overlay-text2 {
+    position: absolute;
+    top: 60%; 
+    left: 80%; 
+    transform: translate(-50%, -50%);  
+    color: #fadaf6; 
+    font-size: 30px;
+    width: 700px; 
+    text-align: center;
+}
 #homeImage {
     background-image: url("../Images/homepage.jpg");
     width: 100%;
@@ -135,92 +245,34 @@ header {
     background-position: center;
 }
 
-h1{
-    font-family: 'AmsterdamThree';
-    font-size: 80px;
-    color: #57453d;
-    position: absolute;
-    top: 20%;
-    left: 5%;
-}
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;
-    color: #57453d;
-    position: absolute;
-}
 
-#nav li {
-    display: inline;
-    margin: 2%;
-}
 #logo_img {
     width: 60px; /* Adjust this value based on your logo size */
     height: auto; /* Maintains aspect ratio */
     margin-right: 20px; /* Adds space between logo and navigation items */
 }
-#nav li a {
-    text-decoration: none;
-}
-.background_color{
-    background-color: #efede9;
-}
-.div-background{
-    background-color: #008060;
-}
 
-/* About Us*/
-.divGreen{
-    background-color: #d2d8ce;
-    height: auto;/* Let the height adapt to the content */
-    width: 80%;
-    margin: 15% 10% 2% 10%; /* Center horizontally */
-    padding: 80px 80px 40px 140px; /* Add padding inside the div */
-    box-sizing: border-box; /* Ensure padding is included in the height and width */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: "DM Sans", sans-serif;
-    position: relative;
-}
 
-.about-heading{
-    position: relative; 
-    margin-top: -14%; 
-    margin-left:-20%;
-    margin-bottom: 3%;
-    color: #1b613e;
-}
-.about-heading::before {
-    content: ''; 
-    position: absolute;
-    top: 50%; /* Half of the height will be inside */
-    left: 0;
-    right: 0;
-    height: 50%; /* Adjust this value if necessary */
-    z-index: -1; /* Make sure the background is behind the text */
-}
 
+/******** About Us *******/
 #image-container{
-    display: flex;
-    justify-content: center; /* Centers the images */
-    align-items: center; /* Vertically centers the images */
-    width: 80%;
-    margin: 2% 10%;
+    padding: 0;
 }
-#image-container img{
-    width: 48%; /* Set both images to take up 48% of the container width */
+
+#image-container img {
+    width: 130%; /* Set both images to take up 48% of the container width */
     height: 500px; /* Ensure the height scales proportionally */
     object-fit: cover; /* Ensures the image covers its container without distortion */
-    margin-right: 2%; /* Adds space between the images */
+   /* Adds space between the images */
 }
-#image-container img:last-child {
-    margin-right: 0; /* Removes the margin for the last image to avoid overflow */
-}
+
 #cat-warning-container{
     height: 45vh;
     display: grid;
     grid-template-columns: 10% 30% 10% 30% 20%;
     grid-template-rows: 20% 10% 30% 10% 30%;
     margin-bottom: 100px;
+    margin-top: 50px;
 }
 #item-1{
     background-color: #09351c;
@@ -229,13 +281,14 @@ h2{
     
 }
 #item-2{
-    background-image: url('../Images/cat.jpg');
+    background-image: url('../Images/cat1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     grid-row: 2/ 6;
     grid-column: 2 / 4;
     border-radius: 20px;
+    z-index: 100;
 }
 #item-3{
     background-color: #f5e1c6;
@@ -243,38 +296,29 @@ h2{
     grid-column: 3 / 5;
     border-radius: 20px;
     padding: 4%;
+    z-index: 200;
+    overflow: auto;
 }
+
+/** ABOUT US -> LOCATION **/
 #location-parking-container{
     height: 50vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 100px;
-    background-color:#d2d8ce;
+    
 }
-#location-item{
-    grid-column: 1/2;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center; 
-}
-#parking-item{
-    grid-column: 2/3;
-    padding:5%;
-}
+
+/**CSS FOR PARKING **/
+
 .notice-title{
-    font-family: "DM Sans", 'Regular';
     font-size: 40px;
 }
 .notice-p{
-    font-family: "DM Sans", 'Regular' ;
     line-height: 2;
 }
 #parking-div {
     position: relative;
     width: 50%; /* Set width and height to create a square */
     height: 50%;
-    overflow: hidden; /* Ensure the content stays inside the circle */
-    margin: 0 auto; /* Center it horizontally if necessary */
+  
 }
 
 #parking-div iframe {
@@ -287,11 +331,18 @@ h2{
 }
 
 
-/*Gallery*/
+/********** SERVICES ***********/
+
+.services-card{
+    background-color: #f4f2ed;
+}
+
+
+/********** Gallery ***********/
 .accent-div{
     background-color: #f5e1c6;
     height:12vh ;
-    margin: 18% 0 0 0;
+    margin: 17% 0 0 0;
     display: flex;
     justify-content: center; 
     align-items: center;    
@@ -303,6 +354,7 @@ h2{
     left: 50%; /* Move the h1 50% from the left */
     transform: translate(-50%, -50%); /* Offset the h1 to perfectly center it */
     text-align: center;
+    font-size: calc(45px + 1.5vw);
 }
 #instagram-pic {
     margin: 10px 0;
@@ -317,18 +369,38 @@ h2{
     object-fit: cover;
   }
 
-/*reviews*/
+/****GALLERY -> REVIEWS****/
 #reviews-container{/* CSS for the main container in Reviews section*/
     background-color:#e0ddd3;
     height: auto;
     padding-top: 10%;
     font-family:"Canvas Sans" ;
 }
-/*Review*/
 
-/*Contact us*/
+.bttn-green{
+    color: #fadadd !important; /* Change to your desired color */
+    background-color: #1b613e !important; 
+    cursor: pointer;
+}
+
+
+
+
+
+/************ CONTACT US **********/
+.custom-header {
+    font-size: 50px; /* Adjust if necessary */ 
+    position: relative; /* Change to relative for proper positioning */
+    margin: 0; /* Remove default margins */
+    text-align: center; /* Center the text */
+}
+
+/* Add a custom class to control the card position */
+.card-container {
+    margin-top: 100px !important; 
+}
 #contact_h1 {
-    font-size: clamp(2rem, 1.296rem + 3.756vw, 4rem);
+    font-size: calc(1.375rem + 1.5vw);
     text-align: center;
     position: unset;
 }
@@ -365,29 +437,14 @@ textarea:focus {
 }
 
 /* Style each form group to have label and input on the same line */
-.form-group {
+.form-group1 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
 }
 
-label {
-    font-size:clamp(0.923rem, 0.842rem + 0.282vw, 1.154rem);
-    margin-right: 10px;
-    width: 100px; /* Align labels */
-    text-align: right;
-    font-family: "DM Sans", 'Regular';
-    font-weight: bold;
-}
 
-input[type="text"], textarea {
-    width: clamp(10vw, 50vw, 35vw); /* Adjusting the width of the input fields */
-    padding: 10px;
-    border-radius: 15px;
-    border-style: none;
-    background-color: #e0ddd3;
-}
 textarea {
     resize: none;
 }
@@ -428,159 +485,79 @@ form {
     font-family: "Canvas Sans", sans-serif;
 }
 
-/*Services*/
-#services-body{
-    background-color:#e0ddd3;
-}
 
-#services-heading{
-    position: relative;
-    left: -5%;
-    padding-bottom:8% ;
-}
 
-.card {
-    position: relative; /* Ensure cards have their own stacking context */
-    z-index: 0; /* Cards will be behind the heading */
-   
-}
-.services-card{
-    background-color: #f4f2ed;
-}
-.scrollable-paragraph {
-
-    overflow-y: auto;
-}
-
-#service_h1_div, #add_service_h1_div {
-    display: contents; /*Makes sure that changes are seen does not work well without not sure why -___- */
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-    background-color: #efede9;
-    border-radius: 15px;
-    
-}
-#service_h1, #add_service_h1 {
-    text-align: center;
-    position: unset;
-}
-#service_main, #add_service_main {
-    grid-row: 1;
-    grid-column: 1 / 4 ;
-    background-color: #e0ddd3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-#service-grid, #add-service-grid {
-    background-color: #e0ddd3;
-    display: grid;
-    grid-template-columns: 1fr 20% 1fr; /*Sizing of columns */
-    grid-template-rows: 1fr 0.5Fr 0.5fr; /*Sizing the rows*/
-    row-gap: 10px;
-    height: 75vh; 
-}
-
-#add-service-grid {
-    padding-top: 7%;
-    padding-bottom: 7%;
-}
-
-#left-column, #right-column, #add-left-column, #add-right-column {
-    grid-column: 1;
-    grid-row: 2 / 4; /* Span the middle two rows */
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 50% 50%;
-    justify-content: space-between; /* Ensures hgroup goes to the bottom */
-    padding: 10px;
-    border-radius: 15px;
-    gap: 10%;
-}
-/*Ensures that service is centered and price is at other end*/
-#top_left_service, #top_right_service, #add_left_service, #add_right_service, #add_bottom_info  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #efede9;
-    padding: 10px;
-    border-radius: 15px;
-}
-
-.service_left_description, .left_price, .service_right_description, .right_price,  #bottom_left_service h3,#add_bottom_left_service p, #add_bottom_left_service h3, #bottom_right_service h3, #add_left_service p, #add_left_service h3, #add_right_service h3, #add_right_service p {
-    
-    font-size: clamp(1rem, 10vw, 2rem);
-    font-family: "Alice";
-}
-
-.service_right_description {
-    margin-left: auto;
-}
-.left_price {
-    margin-left: auto !important; /*Pushes to the left*/
-}
-.right_price {
-    margin-right: auto;
-}
-/* Third row in main grid */
-#bottom_left_service, #bottom_right_service, #add_bottom_left_service  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #efede9;
-    padding: 10px;
-    border-radius: 15px;
-    
-}
-.bottom_info {
-    display: flex;
-    flex-direction: column;
-}
-
-/*Font edit for third row in main grid*/
-
-/*Font for sub details like 'per finger' */
-.extra_service_detail {
-    font-size: clamp(1rem, 5vw, 2rem);
-    font-family: "Forum";
-    color: gray;
-}
-
-#service_main, #add_serivce_main {
-    grid-column: 2; /* Center content in the second column */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #e0ddd3;
-}
-
-#service_h1_div, #add_service_h1_div {
-    background-color: #efede9;
-    padding: 10px;
-    border-radius: 15px;
-    width: 100%;
-}
-
-#right-column, #add-right-column {
-    grid-column: 3;
-    grid-row: 2 / 4;
-    border-radius: 15px;
-}
-
+/********** FOOTER ***********/
 footer {
     grid-row: 4;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
+    position: relative; /* Keep the footer static */
+    z-index: 100;
 }
 footer p{
     margin: 0;
     padding: 10px;
 }
+/********** ACCOUNT ***********/
 
 #account-Main{
     height: 80vh;
 }
+
+/* Change the active link color */
+a.nav-link.active {
+    color: #fadadd !important; /* Change to your desired color */
+    background-color: #1b613e !important; /* Optional: Change background color */
+}
+
+.sideScreen {
+    width: -webkit-fill-available;
+}
+
+/*********** BOOKING **********/
+
+.booking-border-style{
+    border:  1px solid #e0e0e0; 
+    border-radius: 5px;
+}
+
+.selected {
+    border: 3px solid #333; /* Adjust color as needed */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 3px; /* Adjust padding if needed */
+    border-radius: 50%;
+}
+ 
+/**** OFF CANVAS *****/
+.text-large-offcanvas{
+    font-size: 1.2em;
+}
+
+.canvaDiv {
+    border: 1px solid #ccc; 
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease;
+  
+}
+
+
+/***** ANIMATION ******/
+
+.slide-up {
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+
+
+.slide-up.active {
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+

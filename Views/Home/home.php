@@ -1,63 +1,335 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-include_once ROOT . '/Views/head.php';
 ?>
 
 
-<body>
   <?php include_once ROOT . '/Views/nav.php'; ?>
 
-      <div id="homeImage"></div>
-
-      <main class="container">
-        <div class="row featurette">
-          <div class="col-md-7">
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante, id congue sapien imperdiet sit amet. Praesent ac neque rutrum velit lobortis iaculis iaculis sed lacus. Praesent dictum sagittis ultrices. Nullam vitae dui mattis, mollis tortor id, euismod ligula. Integer a ligula magna. In hac habitasse platea dictumst. Aliquam erat volutpat. Donec scelerisque metus est.</p>
+  <!-- Modal for Welcome/Login/Register -->
+  <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="authModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="authModalTitle">Welcome to our nook!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="welcomeMessage">
+            Hello and welcome! I am excited to have you here. Whether you’re a new or returning guest, we invite you to explore our services and enjoy a relaxing experience.
+            <span class="fw-bold">Register now to experience exclusive features!</span>
+            <div class="d-flex justify-content-center gap-4 my-5">
+              <a href="#" class="btn btn-primary w-50" id="showLogin">Login</a>
+              <a href="#" class="btn btn-primary w-50" id="showRegister">Register</a>
+              <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Home</a>
+            </div>
           </div>
-          <div class="col-md-5">
-          <img src="<?php echo BASE_URL; ?>/Views/Images/about1.png" alt="Welcome image" class="img-fluid mx-auto" width="500" height="500">
 
+          <!-- Login Form (Initially Hidden) -->
+          <form id="loginForm" method="POST" action="index.php?controller=loginRegister&action=submit" style="display: none;">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" class="form-control" id="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Login</button>
+            <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
+            <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
+          </form>
 
-            
+          <!-- Register Form (Initially Hidden) -->
+          <form id="registerForm" method="POST" action="index.php?controller=loginRegister&action=submit" style="display: none;">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" class="form-control" id="fname" name="fname" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" class="form-control" id="lname" name="lname" required>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Email</label>
+              <input type="email" class="form-control" id="registerEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Password</label>
+              <input type="password" class="form-control" id="registerPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Register</button>
+            <button type="button" class="btn btn-secondary mt-3" id="goBackFromRegister">Go Back</button>
+            <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Booking -->
+  <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBookingWarningTitle">Booking Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4>Booking Rules:</h4>
+          <ul>
+            <li><strong>The client must pay <span style="color: #d9534f;">$10</span> upon booking</strong>, which will be deducted from the total payment.</li>
+            <li><strong>They must choose at least <span style="color: #d9534f;">one color</span>.</strong></li>
+            <li><strong>Home service is an option but available only <span style="color: #d9534f;">within a certain range</span>.</strong></li>
+            <li><strong>There are <span style="color: #d9534f;">cats</span> in the owner's place.</strong></li>
+          </ul>
+          <hr>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            <strong>I read all the reminders</strong>
+          </label>
+        </div>
+        <div class="container d-flex justify-content-center gap-4 my-5">
+          <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=home" role="button">Cancel</a>
+          <a class="btn btn-primary w-50" href="<?php echo BASE_URL; ?>/index.php?controller=book&action=bookOne" role="button">Confirm</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Section -->
+  <div id="homeImage" class=" slide-up">
+    <div id="overlay-text">Snook's</div>
+    <div id="overlay-text2">Nail Nook</div>
+  </div>
+
+<!----welcome--->
+<div class="container my-5 slide-up">
+    <div class="row p-4 pb-0 pe-lg-0  align-items-center rounded-3 border shadow-lg green-background ">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-2 pb-5 mb-5 fw-bold amsterdamThree-fontstyle text-green text-shadow-pink slide-up">Welcome</h1>
+        <p class="lead slide-up"> 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique 
+          tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in 
+          faucibus orci luctus et ultrices posuere cubilia curae; 
+
+        </p>
+      
+      </div>
+      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+        <img src="<?php echo BASE_URL; ?>/Views/Images/about1.png" class="img-fluid rounded-lg-3 slide-up" alt="Welcome image" height="500"  width="720"  >
+      </div>
+    </div>
+  </div>
+
+<!-----3 off canva--->
+
+<div class=" my-5 py-3 bg-light canvaDiv ">
+<div class=" slide-up">
+  <h3 class="text-center text-muted pt-4">Nail Care 101: Tips, Benefits, and Professional Insight</h3>
+</div>
+
+<div class="row justify-content-center text-center my-5  ">
+    <!-- First Collapsible Section -->
+    
+    <div class="col-lg-3 canvaDiv m-3 p-3 ">
+        <img src="<?php echo BASE_URL; ?>/Views/Images/pic1.jpg" 
+              class="img-fluid my-4 rounded  slide-up" 
+              alt="Description of the image" 
+              width="300" height="200" 
+              style="object-fit: cover; width: 250px; height: 200px;">
+        <p class=" slide-up">Nail Care Tips & Dos and Don'ts</p>
+        <strong class="d-block mb-2 text-pink  slide-up ">Must Read</strong>
+        <p>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCare" aria-controls="offcanvasBottom">View details »</a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasCare" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title " id="offcanvasBottomLabel">Nail Care Tips Dos and Don'ts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <h3 class="text-large-offcanvas">Nail Care (Dos)</h3>
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Keep Nails Clean:</strong> Wash hands regularly and dry thoroughly.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Moisturize:</strong> Apply hand cream or cuticle oil to keep nails hydrated.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Trime Regulary:</strong>  Use sharp tools to maintain a manageable length.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">File gently</strong>  Smooth edges by filing in one direction.</li>
+              </ul>
+            </div>
+
+            <div class="col">
+              <h3 class=""> Nail Care (Don'ts)</h3>
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Use Nails as Tools:</strong> Avoid using nails for opening packages.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Ignore Issues:</strong> Consult a professional for nail problems.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Avoid Harsh Products:</strong>  Limit the use of acetone removers.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Overdo Polish:</strong>  Too many layers can weaken nails.</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-      </main>
-      <div class="row my-5 justify-content-center text-center bg-light p-5">
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>Nail Care Tips & Dos and Don'ts </p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>The Importance of Professional</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-            <p>The Benefits of Regular Manicures</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div>
+      
+    </div>
 
-        <div class="container my-5">
-          <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 div-background">
-            <button type="button" class="position-absolute top-0 end-0 p-3 m-3 btn-close bg-secondary bg-opacity-10 rounded-pill" aria-label="Close"></button>
-            <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
-            <h3 class="text-body-emphasis">Safe, Clean, and Beautiful Nails</h3>
-            <p class="col-lg-6 mx-auto mb-4">
-              This faded back jumbotron is useful for placeholder content. It's also a great way to add a bit of context to a page or section when no content is available and to encourage visitors to take a specific action.
+    
+
+    <!-- Second offcanvas Section -->
+
+    <div class="col-lg-3 canvaDiv  m-3 p-3 ">
+        <img src="<?php echo BASE_URL; ?>/Views/Images/about4.png" 
+              class="img-fluid my-4 rounded  slide-up" 
+              alt="Description of the image" 
+              width="300" height="200" 
+              style="object-fit: cover; width: 250px; height: 200px;">
+        <p class=" slide-up">Importance of Professional Care</p>
+        <strong class="d-block mb-2 text-pink  slide-up ">Must Read</strong>
+        <p>
+            <a class="btn btn-secondary slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasImportance" aria-controls="offcanvasBottom">View details »</a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasImportance" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Importance of Professional Care</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body small mx-5 ">
+            <p class="text-large-offcanvas">
+            Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
+            health, prevent infections, and address underlying issues that might not be visible to the 
+            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
+            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.
             </p>
-            <button class="btn btn-primary px-5 mb-5" type="button">
-              Call to action
-            </button>
           </div>
         </div>
-  <!----FOOTER--->
-        <?php include_once ROOT . '/Views/footer.php'; ?>
+      
+    </div>
 
-    </body>
+    
 
+    <!-- Third offcanvas Section -->
+    <div class="col-lg-3 canvaDiv m-3 p-3 ">
+        <img src="<?php echo BASE_URL; ?>/Views/Images/about3.png" 
+          class="img-fluid my-4 rounded  slide-up" 
+          alt="Description of the image" 
+          width="250" height="200" 
+          style="object-fit: cover; width: 300px; height: 200px;">
+
+        <p class=" slide-up">Benefit of Regular Manicure</p>
+        <strong class="d-block mb-2 text-pink  slide-up ">Must Read</strong>
+        <p>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBenefit" aria-controls="offcanvasBottom">View details »</a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body smalls">
+            <p class="text-large-offcanvas">
+            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
+            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
+            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
+            </p>
+          </div>
+        </div>
+      
+    </div>
+   
+</div>
+
+</div>
+
+<script>
+    const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+    const slideElements = document.querySelectorAll('.slide-up');
+
+  // Show the modal only once per session
+  if (!sessionStorage.getItem('modalShown')) {
+    modal.show();
+    sessionStorage.setItem('modalShown', 'true');
+  }
+
+  const checkSlide = () => {
+        slideElements.forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                element.classList.add('active'); // Add active class when in viewport
+            } else {
+                element.classList.remove('active'); // Remove active class if out of viewport
+            }
+        });
+    };
+
+  // JavaScript to toggle between login, register forms, and welcome message
+  document.addEventListener("DOMContentLoaded", function() {
+    const welcomeMessage = document.getElementById("welcomeMessage");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const authModalTitle = document.getElementById("authModalTitle");
+
+    //
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); 
+
+    // Show login form
+    document.getElementById("showLogin").addEventListener("click", function(event) {
+      event.preventDefault();
+      welcomeMessage.style.display = "none";
+      registerForm.style.display = "none";
+      loginForm.style.display = "block";
+      authModalTitle.textContent = "Login";
+    });
+
+    // Show register form
+    document.getElementById("showRegister").addEventListener("click", function(event) {
+      event.preventDefault();
+      welcomeMessage.style.display = "none";
+      loginForm.style.display = "none";
+      registerForm.style.display = "block";
+      authModalTitle.textContent = "Register";
+    });
+
+    // Show register form from within login form
+    document.getElementById("showRegisterForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      loginForm.style.display = "none";
+      registerForm.style.display = "block";
+      authModalTitle.textContent = "Register";
+    });
+
+    // Show login form from within register form
+    document.getElementById("showLoginForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      registerForm.style.display = "none";
+      loginForm.style.display = "block";
+      authModalTitle.textContent = "Login";
+    });
+
+    // Go back to welcome message from login form
+    document.getElementById("goBackFromLogin").addEventListener("click", function() {
+      loginForm.style.display = "none";
+      welcomeMessage.style.display = "block";
+      authModalTitle.textContent = "Welcome to our nook!";
+    });
+
+    // Go back to welcome message from register form
+    document.getElementById("goBackFromRegister").addEventListener("click", function() {
+      registerForm.style.display = "none";
+      welcomeMessage.style.display = "block";
+      authModalTitle.textContent = "Welcome to our nook!";
+    });
+  });
+  </script>
+
+
+
+
+  <?php include_once ROOT . '/Views/footer.php'; ?>
+
+
+
+  
+
+</body>

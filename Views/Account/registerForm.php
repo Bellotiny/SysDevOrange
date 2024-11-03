@@ -68,6 +68,36 @@ ini_set('display_errors', 1);
         <div class="sideScreen">
           <!---default content will be the Personal info-->
           <!--content is load here-->
+         <div class="container">
+         <form id="registerForm" method="POST" action="index.php?controller=loginRegister&action=submit">
+            <div class="form-group py-2">
+              <label for="fname">First Name</label>
+              <input type="text" class="form-control" id="fname" name="fname" required>
+            </div>
+            <div class="form-group py-2">
+              <label for="lname">Last Name</label>
+              <input type="text" class="form-control" id="lname" name="lname" required>
+            </div>
+            <div class="form-group py-2">
+              <label for="birthday">Birthday:</label>
+              <input type="date" class="form-control"  id="birthday" name="birthday" >
+            </div>
+            <div class="form-group py-2">
+              <label for="registerEmail">Email</label>
+              <input type="email" class="form-control" id="registerEmail" name="email" required>
+            </div>
+            <div class="form-group py-2">
+              <label for="registerPassword">Password</label>
+              <input type="password" class="form-control" id="registerPassword" name="password" required>
+            </div>
+            <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
+              <a class="btn btn-primary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=loginForm" role="button">Register</a>
+              <a class="btn btn-secondary mt-3" href="<?php echo BASE_URL; ?>/index.php?controller=account&action=accountPersonalInformation" role="button">Go Back</a> 
+            </div>
+           
+            <p class="mt-3">Already have an account? <a href="<?php echo BASE_URL; ?>/index.php?controller=account&action=loginForm" id="showLoginForm">Login here</a></p>
+          </form> 
+         </div>
           
          
           
