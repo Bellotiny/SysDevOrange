@@ -503,7 +503,7 @@ footer p{
 /********** ACCOUNT ***********/
 
 #account-Main{
-    height: 80vh;
+    height: fit-content;
 }
 
 /* Change the active link color */
