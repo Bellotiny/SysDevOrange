@@ -3,23 +3,13 @@
 include_once "Model.php";
 
 class Service extends Model {
-    private $id;
-    private $name;
-    private $price;
-    private $description;
-    private $duration;
+    public string $name;
+    public float $price;
+    public string $description;
+    public int $duration;
 
-    /**
-     * @return Service[]
-     */
-    public static function list(): array {
-        return Model::listAll("services", "Service");
-    }
-
-    public static function getFromId(int $id): Service|false|null {
-        $where = new Where();
-        $where->addEquals(new Value($id, "id"));
-        return Model::getRows("services", $where)->fetch_object("Service");
+    protected static function getTable(): string {
+        return "bookings";
     }
 
     public static function new(string $name, float $price, string $description, int $duration): Service|false {
@@ -31,10 +21,10 @@ class Service extends Model {
         $values->add(new Value($service->duration = $duration, "duration"));
 
         try {
-            Model::insertRow("services", $values, false);
+            self::insertRow($values, false);
             $service->id = self::getConnection()->insert_id;
             return $service;
-        } catch (Exception $e) {
+        } catch (Exception) {
             return false;
         }
     }
@@ -47,12 +37,12 @@ class Service extends Model {
         $values->add(new Value($this->duration, "duration"));
         $where = new Where();
         $where->addEquals(new Value($this->id, "id"));
-        return Model::updateRows("services", $values, $where);
+        return self::updateRows($values, $where);
     }
 
     public function delete(): bool {
         $where = new Where();
         $where->addEquals(new Value($this->id, "id"));
-        return Model::deleteRows("services", $where);
+        return self::deleteRows($where);
     }
 }

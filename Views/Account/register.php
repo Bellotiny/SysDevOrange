@@ -93,7 +93,7 @@ ini_set('display_errors', 1);
             </div>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/accountPersonalInformation" role="button">Go Back</a>
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/personalInformation" role="button">Go Back</a>
             </div>
            
             <p class="mt-3">Already have an account? <a href="<?=BASE_PATH?>/account/login" id="showLoginForm">Login here</a></p>
