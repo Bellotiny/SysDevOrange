@@ -38,7 +38,7 @@ class AccountController extends Controller {
                         $this->render("Account", "register", ["error" => "Invalid Email format"]);  // TODO Improve this error message
                         break;
                     }
-                    if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/", $_POST['password'])) {
+                    if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{6,}$/", $_POST['password'])) {
                         $this->render("Account", "register", ["error" => "Password must be 6 characters, One uppercase, One lowercase, One digit, One symbol"]);  // TODO Improve this error message
                         break;
                     }
@@ -49,6 +49,9 @@ class AccountController extends Controller {
                             break;
                         }
                     }
+
+                    $_POST['firstName'] = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
+                    $_POST['lastName'] = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
 
                     try {
                         if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null)) {
