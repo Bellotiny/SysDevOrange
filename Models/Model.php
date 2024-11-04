@@ -12,7 +12,7 @@ abstract class Model {
 
     public static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
-            $connection = new mysqli("174.93.150.8", "dev", "Vw3baJgbPS280RW", "snooknn_test");
+            $connection = new mysqli("localhost", "root", "", "snooknn_test");
             if ($connection->connect_error) die("Connection error!<br>" . $connection->connect_error);
             return self::$connection = $connection;
         }
