@@ -61,6 +61,17 @@ include_once 'Views/nav.php';
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
               </div>
+              <?php if (isset($data["error"])): ?>
+                <span style="color:red"><p><?php echo $data['error']; ?></p></span>
+            <?php endif; ?>
+            <ul>
+            Password must contain
+              <li>1 uppercase</li>
+              <li>1 lowercase</li>
+              <li>1 number</li>
+              <li>1 symbol</li>
+              <li>Minimum of 6 characters</li>
+            </ul>
             <button type="submit" class="btn btn-primary mt-3">Register</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromRegister">Go Back</button>
             <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>

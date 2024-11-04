@@ -69,8 +69,8 @@ ini_set('display_errors', 1);
           <!---default content will be the Personal info-->
           <!--content is load here-->
          <div class="container">
-             <?php if (isset($data["error"])) { echo "<p>" . $data['error'] . "</p>"; } ?>
          <form method="POST">
+          
             <div class="form-group py-2">
               <label for="firstName">First Name</label>
               <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -91,6 +91,17 @@ ini_set('display_errors', 1);
               <label for="password">Password</label>
               <input type="password" class="form-control" id="password" name="password" required>
             </div>
+            <?php if (isset($data["error"])): ?>
+                <span style="color:red"><p><?php echo $data['error']; ?></p></span>
+            <?php endif; ?>
+            <ul>
+            Password must contain
+              <li>1 uppercase</li>
+              <li>1 lowercase</li>
+              <li>1 number</li>
+              <li>1 symbol</li>
+              <li>Minimum of 6 characters</li>
+            </ul>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">
               <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/accountPersonalInformation" role="button">Go Back</a>
