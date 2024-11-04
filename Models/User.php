@@ -32,41 +32,18 @@ class User extends Model {
         $values->add(new Value($user->email = $email, "email"));
         $values->add(new Value($user->phoneNumber = $phoneNumber, "phoneNumber"));
         $values->add(new Value($user->birthDate = $birthDate, "birthDate"));
-        $values->add(new Value($password, "password"));
+        $values->add(new Value($password, "password", true));
         $values->add(new Value($user->token = $token, "token"));
 
         try {
-            //$sanitizedData = User::validateValues($values);
             Model::insertRow("users", $values, false);
             $user->id = self::getConnection()->insert_id;
             self::getConnection()->execute_query("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$user->id]);
             return $user;
-        } catch (Exception $e) {
-            var_dump($e);
+        } catch (Exception) {
             return false;
         }
     }
-
-//    public static function validateValues(Values $values): false|array {
-//        $passwordPattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/';
-//        $phonePattern = '/^(\(?\d{3}\)?)?[-.\s]?\d{3}[-.\s]?\d{4}$/';
-//
-//        if(!preg_match($passwordPattern, $values['password']) || !preg_match($phonePattern, $values['phoneNumber'])){
-//            return false;
-//        }
-//
-//        $data['firstName'] = filter_var($values->values->arg['firstName'], FILTER_SANITIZE_STRING);
-//        $data['lastName'] = filter_var($values['lastName'], FILTER_SANITIZE_STRING);
-//        $sanitizedEmail = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
-//        $data['email'] = filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) ? $sanitizedEmail;
-//        $data['phoneNumber'] = filter_var($values['phoneNumber'], FILTER_SANITIZE_NUMBER_INT);
-//
-//        if ($data['email'] === null) {
-//            return false;
-//        }
-//
-//        return $data;
-//    }
 
     public static function getFromId(int $id): User|false|null {
         $where = new Where();
@@ -83,7 +60,7 @@ class User extends Model {
     public static function getFromEmailPassword(string $email, string $password): User|false|null {
         $where = new Where();
         $where->addEquals(new Value($email, "email"));
-        $where->addEquals(new Value($password, "password"));
+        $where->addEquals(new Value($password, "password", true));
         return Model::getRows("users", $where)->fetch_object("User");
     }
 

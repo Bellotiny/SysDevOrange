@@ -14,7 +14,7 @@ class Model {
 
     public static function listAll(string $table, string $class, Where $where = new Where()): array {
         $list = [];
-        $result = self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
+        $result = self::getConnection()->execute_query("SELECT * FROM " . $table . $where, $where->getArgs());
         while ($obj = $result->fetch_object($class)) {
             $list[] = $obj;
         }
@@ -22,7 +22,7 @@ class Model {
     }
 
     public static function getRows(string $table, Where $where = new Where()): mysqli_result|bool {
-        return self::getConnection()->execute_query("SELECT * FROM " . $table . $where, [...$where->getArgs()]);
+        return self::getConnection()->execute_query("SELECT * FROM " . $table . $where, $where->getArgs());
     }
 
     public static function updateRows(string $table, Values $values, Where $where = new Where()): bool {
@@ -30,27 +30,27 @@ class Model {
     }
 
     public static function deleteRows(string $table, Where $where = new Where()): bool {
-        return self::getConnection()->execute_query("DELETE FROM " . $table . $where, [...$where->getArgs()]);
+        return self::getConnection()->execute_query("DELETE FROM " . $table . $where . ";", $where->getArgs());
     }
 
     public static function insertRow(string $table, Values $values, bool $ignoreDuplicates): bool {
-        return self::getConnection()->execute_query("INSERT INTO " . $table . " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ") " . ($ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "") . ";", [...$values->getArgs()]);
+        return self::getConnection()->execute_query("INSERT INTO " . $table . " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ") " . ($ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "") . ";", $values->getArgs());
     }
 }
 
 class Value {
     private mixed $arg;
     private string $column;
-    private bool $encrypted;
+    private bool $hash;
 
-    public function __construct(mixed $arg, string $column, bool $encrypted = false) {
+    public function __construct(mixed $arg, string $column, bool $hash = false) {
         $this->arg = $arg;
         $this->column = $column;
-        $this->encrypted = $encrypted;
+        $this->hash = $hash;
     }
 
     public function getMarker(): string {
-        return $this->encrypted ? "SHA1(?)" : "?";
+        return $this->hash ? "SHA1(?)" : "?";
     }
 
     public function getArg(): mixed {
@@ -96,7 +96,14 @@ class Values {
 }
 
 class Where {
+    /**
+     * @var string[]
+     */
     private array $conditions = [];
+
+    /**
+     * @var array
+     */
     private array $args = [];
 
     public function addEquals(Value $value): self {

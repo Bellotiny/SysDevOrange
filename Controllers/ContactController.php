@@ -3,7 +3,11 @@
 include_once "Controllers/Controller.php";
 
 class ContactController extends Controller {
-    function route(): void {
+    public static function redirect(string $action = ""): void {
+        header('Location: ' . BASE_PATH . "/contact/" . $action);
+    }
+
+    public function route(): void {
         $this->render("Contact", "contact");
     }
 }
