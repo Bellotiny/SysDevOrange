@@ -2,6 +2,7 @@
 
 include_once "Models/User.php";
 include_once "Controllers/Controller.php";
+include_once "Controllers/HomeController.php";
 
 class AccountController extends Controller {
     public static function redirect(string $action = ""): void {
@@ -35,14 +36,17 @@ class AccountController extends Controller {
                     $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         $this->render("Account", "register", ["error" => "Invalid Email format"]);  // TODO Improve this error message
+                        break;
                     }
                     if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/", $_POST['password'])) {
                         $this->render("Account", "register", ["error" => "Password must be 6 characters, One uppercase, One lowercase, One digit, One symbol"]);  // TODO Improve this error message
+                        break;
                     }
                     if (isset($_POST['phoneNumber'])) {
                         $_POST['phoneNumber'] = filter_var($_POST['phoneNumber'], FILTER_SANITIZE_NUMBER_INT);
                         if (!preg_match("/^(\(?\d{3}\)?)?[-.\s]?\d{3}[-.\s]?\d{4}$/", $_POST['phoneNumber'])) {
                             $this->render("Account", "register", ["error" => "Invalid Phone Number format"]);  // TODO Improve this error message
+                            break;
                         }
                     }
 
