@@ -125,7 +125,7 @@ h2{
 /********* NAV *********/
 header {
     overflow: hidden;
-    background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
+    background-color: rgb(255, 255, 255, 0.9); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
     width: 100%;
@@ -158,12 +158,10 @@ header {
     border-radius: 15px;
   
 }
-#nav-main a:hover {
-    color: white;
+#nav-main a:hover, #nav-extra a:hover {
+    color: #f37a74;
 }
-#nav-extra a:hover {
-    color: #1b613e;
-}
+
 #nav-extra {
     justify-content: flex-end;    
 }
