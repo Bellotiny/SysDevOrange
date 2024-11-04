@@ -26,13 +26,14 @@ include_once 'Views/nav.php';
           <!-- Login Form (Initially Hidden) -->
           <form id="loginForm" method="POST" action="<?=BASE_PATH?>/account/login" style="display: none;">
             <div class="form-group">
-              <label for="loginEmail">Email</label>
-              <input type="email" class="form-control" id="loginEmail" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password" required>
-            </div> 
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>

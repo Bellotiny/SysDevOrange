@@ -57,8 +57,7 @@ include_once 'Views/head.php';
               <strong>mdo</strong>
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-              <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-              <li><a class="dropdown-item" href="#">Delete Account</a></li>
+              <li><a class="dropdown-item" href="#">Account settings</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Sign out</a></li>
             </ul>
