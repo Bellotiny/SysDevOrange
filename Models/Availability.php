@@ -3,21 +3,11 @@
 include_once "Model.php";
 
 class Availability extends Model {
-    private int $id;
-    private int $start;
-    private int $end;
+    public int $start;
+    public int $end;
 
-    /**
-     * @return Availability[]
-     */
-    public static function list(): array {
-        return Model::listAll("availabilities", "Availability");
-    }
-
-    public static function getFromId(int $id): Availability|false|null {
-        $where = new Where();
-        $where->addEquals(new Value($id, "id"));
-        return Model::getRows("availabilities", $where)->fetch_object("Availability");
+    protected static function getTable(): string {
+        return "availabilities";
     }
 
     public static function new(int $start, int $end): Availability|false {
@@ -27,10 +17,10 @@ class Availability extends Model {
         $values->add(new Value($availability->end = $end, "end"));
 
         try {
-            Model::insertRow("availabilities", $values, false);
+            self::insertRow($values, false);
             $availability->id = self::getConnection()->insert_id;
             return $availability;
-        } catch (Exception $e) {
+        } catch (Exception) {
             return false;
         }
     }
@@ -41,12 +31,6 @@ class Availability extends Model {
         $values->add(new Value($this->end, "end"));
         $where = new Where();
         $where->addEquals(new Value($this->id, "id"));
-        return Model::updateRows("availabilities", $values, $where);
-    }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return Model::deleteRows("availabilities", $where);
+        return self::updateRows($values, $where);
     }
 }

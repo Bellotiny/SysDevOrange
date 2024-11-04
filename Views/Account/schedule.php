@@ -18,32 +18,32 @@ include_once 'Views/head.php';
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-              <a href="<?=BASE_PATH?>/account/accountPersonalInformation" class="nav-link link-dark" aria-current="page">
+              <a href="<?=BASE_PATH?>/account/personalInformation" class="nav-link link-dark" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Personal Information
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountBookingHistory" class="nav-link link-dark" id="loadBookingHistory">
+              <a href="<?=BASE_PATH?>/account/bookingHistory" class="nav-link link-dark" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 Booking History
               </a>
             </li>
 
             <li>
-              <a href="<?=BASE_PATH?>/account/accountSchedule" class="nav-link link-dark">
+              <a href="<?=BASE_PATH?>/account/schedule" class="nav-link active">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                 Schedule
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountInventory" class="nav-link active">
+              <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 Inventory
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountBookingList" class="nav-link link-dark">
+              <a href="<?=BASE_PATH?>/account/bookingList" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                 Booking list
               </a>
@@ -68,12 +68,15 @@ include_once 'Views/head.php';
         <div class="sideScreen slide-up">
           <!---default content will be the Personal info-->
           <!--content is load here-->
-          <div>
+          
+          <div >
         <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Time</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Service</th>
         
             </tr>
           </thead>
@@ -81,7 +84,40 @@ include_once 'Views/head.php';
                       <tr>
                           <td>Aug 26</td>
                           <td>10:10 am</td>
-                        
+                          <td>Sen Bellotiny</td>
+                          <td>Extenion</td>
+                          <td>
+                          
+                            <a href="#">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
+                              </svg>
+
+                            </a>
+                            
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Aug 28</td>
+                          <td>12:20 pm</td>
+                          <td>Jessica Curry</td>
+                          <td>Extenion</td>
+                          <td>
+                          
+                            <a href="#">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
+                              </svg>
+
+                            </a>
+                            
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Sept 2</td>
+                          <td>1:40 pm</td>
+                          <td>Melanie Nature</td>
+                          <td>Nail Removal</td>
                           <td>
                           
                             <a href="#">
@@ -108,14 +144,19 @@ include_once 'Views/head.php';
         </a>
       </d>
     </div>
-         
           
 
         </div>
         
       </main>
 
-     
+      <script>
+
+  
+
+
+      </script>
+
 
       <?php include_once 'Views/footer.php'; ?>
     </body>

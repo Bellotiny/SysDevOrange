@@ -26,13 +26,13 @@ include_once 'Views/nav.php';
           <!-- Login Form (Initially Hidden) -->
           <form id="loginForm" method="POST" action="<?=BASE_PATH?>/account/login" style="display: none;">
             <div class="form-group">
-              <label for="loginEmail">Email</label>
-              <input type="email" class="form-control" id="loginEmail" name="email" required>
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password" required>
-            </div> 
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
@@ -43,23 +43,23 @@ include_once 'Views/nav.php';
             <div class="form-group py-2">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" required>
-              </div>
-              <div class="form-group py-2">
+            </div>
+            <div class="form-group py-2">
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" required>
-              </div>
-              <div class="form-group py-2">
+            </div>
+            <div class="form-group py-2">
                 <label for="birthDate">Birthday:</label>
                 <input type="date" class="form-control"  id="birthDate" name="birthDate" >
-              </div>
-              <div class="form-group py-2">
+            </div>
+            <div class="form-group py-2">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
-              </div>
-              <div class="form-group py-2">
+            </div>
+            <div class="form-group py-2">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
-              </div>
+            </div>
             <button type="submit" class="btn btn-primary mt-3">Register</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromRegister">Go Back</button>
             <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>

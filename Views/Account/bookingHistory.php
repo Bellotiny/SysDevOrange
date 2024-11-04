@@ -18,32 +18,32 @@ include_once 'Views/head.php';
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="<?=BASE_PATH?>/account/accountPersonalInformation" class="nav-link link-dark" aria-current="page">
+              <a href="<?=BASE_PATH?>/account/personalInformation" class="nav-link link-dark" aria-current="page">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Personal Information
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountBookingHistory" class="nav-link active" id="loadBookingHistory">
+              <a href="<?=BASE_PATH?>/account/bookingHistory" class="nav-link active" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 Booking History
               </a>
             </li>
 
             <li>
-              <a href="<?=BASE_PATH?>/account/accountSchedule" class="nav-link link-dark">
+              <a href="<?=BASE_PATH?>/account/schedule" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                 Schedule
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountInventory" class="nav-link link-dark">
+              <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 Inventory
               </a>
             </li>
             <li>
-              <a href="<?=BASE_PATH?>/account/accountBookingList" class="nav-link link-dark">
+              <a href="<?=BASE_PATH?>/account/bookingList" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                 Booking list
               </a>
