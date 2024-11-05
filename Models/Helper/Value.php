@@ -12,11 +12,13 @@ class Value {
     }
 
     public function getMarker(): string {
-        return $this->hash ? "SHA2(?)" : "?";
+        var_dump($this->hash ? "SHA2(?)" : "?");
+        return $this->hash ? "SHA2(?,256)" : "?";
     }
 
     public function getArg(): mixed {
-        return ($this->hash && $this->arg) ? $this->arg . "Sg3y03TCNltqaxNP" : $this->arg;
+        var_dump( ($this->hash && $this->arg) ? ($this->arg . "Sg3y03TCNltqaxNP") : $this->arg);
+        return ($this->hash && $this->arg) ? ($this->arg . "Sg3y03TCNltqaxNP") : $this->arg;
     }
 
     public function getColumn(): string {
