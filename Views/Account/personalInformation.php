@@ -59,7 +59,7 @@ include_once 'Views/head.php';
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
               <li><a class="dropdown-item" href="#">Account settings</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+              <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/logout">Sign out</a></li>
             </ul>
           </div>
         </div>
@@ -93,7 +93,7 @@ include_once 'Views/head.php';
 
        
       </main>
-      <?php include_once 'Views/footer.php'; ?>
+     
 
       </div>
       
