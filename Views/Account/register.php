@@ -10,8 +10,10 @@ ini_set('display_errors', 1);
     
       <main class="d-flex" id="account-Main">
       
-
+  
+      
            <div class="container">
+           <h1>Register</h1>
            <?php include_once 'Views/registerForm.php'; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">

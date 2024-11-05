@@ -9,7 +9,9 @@ include_once 'Views/nav.php';
 
           <!---default content will be the Personal info-->
           <!--content is load here-->
+         
           <div class="container">
+          <h1>Login</h1>
           <form action="<?=BASE_PATH?>/account/login" method="POST">
             <div class="form-group">
               <label for="email">Email</label>

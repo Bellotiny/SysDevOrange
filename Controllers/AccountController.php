@@ -23,8 +23,13 @@ class AccountController extends Controller {
                 if (isset($_POST['firstName']) &&
                     isset($_POST['lastName']) &&
                     isset($_POST['email']) &&
-                    isset($_POST['password'])
+                    isset($_POST['password'])&&
+                    isset($_POST['confirmPassword'])
                 ) {
+                    if ($_POST['password'] != $_POST['confirmPassword']) {
+                        $this->render("Account", "register", ["error" => "Passwords do not match"]);
+                        break;
+                    } 
                     try {
                         if ($user = User::register($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null)) {
                             setcookie("token", $user->token);
