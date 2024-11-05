@@ -152,7 +152,7 @@ include_once 'Views/nav.php';
           </div>
           <div class="offcanvas-body small text-start mx-5 row">
             <div class="col">
-              <h3 class="text-large-offcanvas">Nail Care (Dos)</h3>
+              <h3 class="">Nail Care (Dos)</h3>
               <ul>
                 <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Keep Nails Clean:</strong> Wash hands regularly and dry thoroughly.</li>
                 <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Moisturize:</strong> Apply hand cream or cuticle oil to keep nails hydrated.</li>

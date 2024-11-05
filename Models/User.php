@@ -33,14 +33,23 @@ class User extends Model {
             return false;
         }
     }
-
+  
+//get user based on the token
+    public static function getFromToken(string $token): User|false|null {
+        $where = new Where();
+        $where->addEquals(new Value($token, "token"));
+        return self::getRows($where)->fetch_object("User");
+    }
+  
+//get user based on the email and password
     public static function getFromEmailPassword(string $email, string $password): User|false {
         $where = new Where();
         $where->addEquals(new Value($email, "email"));
         $where->addEquals(new Value($password, "password", true));
         return self::getRows($where)->fetch_object("User");
     }
-
+  
+//retrieve a User object based on a token stored in a cookie.
     public static function getFromCookie(): User|false {
         if (isset($_COOKIE['token'])) {
             $where = new Where();

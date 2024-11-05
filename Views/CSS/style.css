@@ -493,8 +493,8 @@ footer {
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
-    position: relative; /* Keep the footer static */
-    z-index: 100;
+    /*position: relative;  Keep the footer static */
+    display: none;
 }
 footer p{
     margin: 0;
@@ -529,6 +529,23 @@ a.nav-link.active {
     padding: 3px; /* Adjust padding if needed */
     border-radius: 50%;
 }
+
+.form-section {
+    display: none; /* Hide all sections by default */
+  }
+
+  .form-section.active {
+    display: block; /* Show the active section */
+  }
+
+  .form-section h2 {
+    margin-bottom: 10px;
+  }
+
+  .form-section label, .form-section input, .form-section textarea {
+    display: block;
+    margin-bottom: 10px;
+  }
  
 /**** OFF CANVAS *****/
 .text-large-offcanvas{

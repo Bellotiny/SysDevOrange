@@ -84,7 +84,7 @@ class AccountController extends Controller {
                 break;
             case "logout":
                 if (User::getFromCookie()) {
-                    setcookie("token", "", time() - 3600);
+                    setcookie("token", "", time() - 3600);//setCookie is set to " ",expiration time of 1hr
                 }
                 HomeController::redirect();
                 break;
