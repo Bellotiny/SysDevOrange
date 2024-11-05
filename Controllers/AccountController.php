@@ -46,8 +46,13 @@ class AccountController extends Controller {
                 if (isset($_POST['firstName']) &&
                     isset($_POST['lastName']) &&
                     isset($_POST['email']) &&
-                    isset($_POST['password'])
+                    isset($_POST['password'])&&
+                    isset($_POST['confirmPassword'])
                 ) {
+                    if ($_POST['password'] != $_POST['confirmPassword']) {
+                        $this->render("Account", "register", ["error" => "Passwords do not match"]);
+                        break;
+                    }
                     $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         $this->render("Account", "register", ["error" => "Invalid Email format"]);  // TODO Improve this error message
@@ -79,7 +84,7 @@ class AccountController extends Controller {
                         $this->render("Account", "register", ["error" => "Email already in use"]);
                     }
                 } else {
-                    $this->render("Account", "register");
+                    $this->render("Account", "register", ["error" => "Missing Required Fields"]);
                 }
                 break;
             case "logout":
