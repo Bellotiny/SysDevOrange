@@ -5,14 +5,15 @@ include_once "Helper/Values.php";
 include_once "Helper/Where.php";
 
 abstract class Model {
+    public int $id;
     private static mysqli $connection;
-    protected int $id;
 
     protected abstract static function getTable(): string;
 
     public static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
-            $connection = new mysqli("174.93.150.8", "dev", "Vw3baJgbPS280RW", "snooknn_test");
+            //$connection = new mysqli("174.94.90.171", "dev", "Vw3baJgbPS280RW", "snooknn_test");
+            $connection = new mysqli("localhost", "root", "", "snooknn_test");
             if ($connection->connect_error) die("Connection error!<br>" . $connection->connect_error);
             return self::$connection = $connection;
         }

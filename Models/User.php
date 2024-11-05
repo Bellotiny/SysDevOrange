@@ -1,7 +1,5 @@
 <?php
 
-use Random\RandomException;
-
 include_once "Model.php";
 
 class User extends Model {
@@ -11,18 +9,12 @@ class User extends Model {
     public ?string $phoneNumber;
     public ?string $birthDate;
     public ?string $token;
-    public ?string $password;
 
     protected static function getTable(): string {
         return "users";
     }
 
-    /**
-     * @throws RandomException
-     */
-    public static function register(string $firstName, string $lastName, string $email, string $password, ?string $phoneNumber = null, ?string $birthDate = null): User|false {
-        $token = bin2hex(random_bytes(16));  // Generate Random 16 Bytes or 128 Bits
-
+    public static function register(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): User|false {
         $user = new User();
         $values = new Values();
         $values->add(new Value($user->firstName = $firstName, "firstName"));
@@ -31,7 +23,6 @@ class User extends Model {
         $values->add(new Value($user->phoneNumber = $phoneNumber, "phoneNumber"));
         $values->add(new Value($user->birthDate = $birthDate, "birthDate"));
         $values->add(new Value($password, "password", true));
-        $values->add(new Value($user->token = $token, "token"));
 
         try {
             self::insertRow($values, false);
@@ -42,23 +33,28 @@ class User extends Model {
             return false;
         }
     }
+  
 //get user based on the token
     public static function getFromToken(string $token): User|false|null {
         $where = new Where();
         $where->addEquals(new Value($token, "token"));
         return self::getRows($where)->fetch_object("User");
     }
+  
 //get user based on the email and password
-    public static function getFromEmailPassword(string $email, string $password): User|false|null {
+    public static function getFromEmailPassword(string $email, string $password): User|false {
         $where = new Where();
         $where->addEquals(new Value($email, "email"));
         $where->addEquals(new Value($password, "password", true));
         return self::getRows($where)->fetch_object("User");
     }
+  
 //retrieve a User object based on a token stored in a cookie.
     public static function getFromCookie(): User|false {
         if (isset($_COOKIE['token'])) {
-            return self::getFromToken($_COOKIE['token']) ?? false;
+            $where = new Where();
+            $where->addEquals(new Value($_COOKIE['token'], "token"));
+            return self::getRows($where)->fetch_object("User") ?? false;
         } else {
             return false;
         }
@@ -82,8 +78,15 @@ class User extends Model {
         $values->add(new Value($this->email, "email"));
         $values->add(new Value($this->phoneNumber, "phoneNumber"));
         $values->add(new Value($this->birthDate, "birthDate"));
-        $values->add(new Value($this->password, "password"));
         $values->add(new Value($this->token, "token"));
+        $where = new Where();
+        $where->addEquals(new Value($this->id, "id"));
+        return self::updateRows($values, $where);
+    }
+
+    public function updatePassword(string $password): bool {
+        $values = new Values();
+        $values->add(new Value($password, "password", true));
         $where = new Where();
         $where->addEquals(new Value($this->id, "id"));
         return self::updateRows($values, $where);
