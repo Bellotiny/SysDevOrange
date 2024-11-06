@@ -17,12 +17,12 @@ class Booking extends Model {
     public static function new(string $status, int $start, int $end, int $userID, int $paymentID, int $discountID): Booking|false {
         $booking = new Booking();
         $values = new Values();
-        $values->add(new Value($booking->status = $status, "status"));
-        $values->add(new Value($booking->start = $start, "start"));
-        $values->add(new Value($booking->end = $end, "end"));
-        $values->add(new Value($booking->userID = $userID, "userID"));
-        $values->add(new Value($booking->paymentID = $paymentID, "paymentID"));
-        $values->add(new Value($booking->discountID = $discountID, "discountID"));
+        $values->add(new Value("status", $booking->status = $status));
+        $values->add(new Value("start", $booking->start = $start));
+        $values->add(new Value("end", $booking->end = $end));
+        $values->add(new Value("userID", $booking->userID = $userID));
+        $values->add(new Value("paymentID", $booking->paymentID = $paymentID));
+        $values->add(new Value("discountID", $booking->discountID = $discountID));
 
 
         try {
@@ -36,14 +36,14 @@ class Booking extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->status, "status"));
-        $values->add(new Value($this->start, "start"));
-        $values->add(new Value($this->end, "end"));
-        $values->add(new Value($this->userID, "userID"));
-        $values->add(new Value($this->paymentID, "paymentID"));
-        $values->add(new Value($this->discountID, "discountID"));
+        $values->add(new Value("status", $this->status));
+        $values->add(new Value("start", $this->start));
+        $values->add(new Value("end", $this->end));
+        $values->add(new Value("userID", $this->userID));
+        $values->add(new Value("paymentID", $this->paymentID));
+        $values->add(new Value("discountID", $this->discountID));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
     }
 }

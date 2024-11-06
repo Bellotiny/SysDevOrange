@@ -15,10 +15,10 @@ class Service extends Model {
     public static function new(string $name, float $price, string $description, int $duration): Service|false {
         $service = new Service();
         $values = new Values();
-        $values->add(new Value($service->name = $name, "name"));
-        $values->add(new Value($service->price = $price, "price"));
-        $values->add(new Value($service->description = $description, "description"));
-        $values->add(new Value($service->duration = $duration, "duration"));
+        $values->add(new Value("name", $service->name = $name));
+        $values->add(new Value("price", $service->price = $price));
+        $values->add(new Value("description", $service->description = $description));
+        $values->add(new Value("duration", $service->duration = $duration));
 
         try {
             self::insertRow($values, false);
@@ -31,18 +31,12 @@ class Service extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->name, "name"));
-        $values->add(new Value($this->price, "price"));
-        $values->add(new Value($this->description, "description"));
-        $values->add(new Value($this->duration, "duration"));
+        $values->add(new Value("name", $this->name));
+        $values->add(new Value("price", $this->price));
+        $values->add(new Value("description", $this->description));
+        $values->add(new Value("duration", $this->duration));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
-    }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return self::deleteRows($where);
     }
 }
