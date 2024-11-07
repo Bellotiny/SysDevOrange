@@ -125,7 +125,7 @@ h2{
 /********* NAV *********/
 header {
     overflow: hidden;
-    background-color: rgb(255, 255, 255, 0.5); /*Add transparency to navbar */
+    background-color: rgb(255, 255, 255, 0.9); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
     width: 100%;
@@ -158,12 +158,10 @@ header {
     border-radius: 15px;
   
 }
-#nav-main a:hover {
-    color: white;
+#nav-main a:hover, #nav-extra a:hover {
+    color: #f37a74;
 }
-#nav-extra a:hover {
-    color: #1b613e;
-}
+
 #nav-extra {
     justify-content: flex-end;    
 }
@@ -493,8 +491,8 @@ footer {
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
-    position: relative; /* Keep the footer static */
-    z-index: 100;
+    /*position: relative;  Keep the footer static */
+    display: none;
 }
 footer p{
     margin: 0;
@@ -503,7 +501,7 @@ footer p{
 /********** ACCOUNT ***********/
 
 #account-Main{
-    height: 80vh;
+    height: fit-content;
 }
 
 /* Change the active link color */
@@ -529,6 +527,23 @@ a.nav-link.active {
     padding: 3px; /* Adjust padding if needed */
     border-radius: 50%;
 }
+
+.form-section {
+    display: none; /* Hide all sections by default */
+  }
+
+  .form-section.active {
+    display: block; /* Show the active section */
+  }
+
+  .form-section h2 {
+    margin-bottom: 10px;
+  }
+
+  .form-section label, .form-section input, .form-section textarea {
+    display: block;
+    margin-bottom: 10px;
+  }
  
 /**** OFF CANVAS *****/
 .text-large-offcanvas{
@@ -559,5 +574,4 @@ a.nav-link.active {
     opacity: 1; 
     transform: translateY(0); 
 }
-
 

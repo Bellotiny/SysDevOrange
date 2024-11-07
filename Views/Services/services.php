@@ -80,16 +80,16 @@ ini_set('display_errors', 1);
     </div>
 
     <div class="row ">
-        <div class="col-md-6 slide-up ">
-            <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-white">
+        <div class="col-md-6 slide-up">
+            <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative  bg-white">
                 <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary-emphasis">Style</strong>
                 <h3 class="mb-0">Nail Art</h3>
                 <div class="mb-1  text-success">5 CAD</div>
-                <p class="card-text mb-auto "> Our nail art service allows customers to choose stylish designs of their choice. <strong>Pricing is per nail</strong>, ensuring you get exactly what you want.</p>
+                <p class="card-text mb-auto">Our nail art service allows customers to choose stylish designs of their choice. <strong>Pricing is per nail</strong>, ensuring you get exactly what you want</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?=BASE_PATH?>//Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ ini_set('display_errors', 1);
                 <p class="card-text mb-auto "> This allows customers to enjoy the classic French tips that everyone is obsessed with.</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -116,13 +116,13 @@ ini_set('display_errors', 1);
    
 
     <div class="row py-2 mb-5 ">
-        <div class="col-md-6 slide-up ">
+        <div class="col-md-6 slide-up">
             <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative  bg-white">
                 <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary-emphasis">Extra</strong>
-                <h3 class="mb-0">Nail Take Off</h3>
+                <h3 class="mb-0">Nail Take off</h3>
                 <div class="mb-1  text-success">10 CAD</div>
-                <p class="card-text mb-auto ">This extra service is for customers whose nail base or extension is still intact </p>
+                <p class="card-text mb-auto">This extra service is for changing your nail base and extension is sitll intact</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
@@ -130,17 +130,17 @@ ini_set('display_errors', 1);
             </div>
         </div>
         <div class="col-md-6 slide-up">
-        <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative  bg-white">
-            <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary-emphasis">Extra</strong>
-            <h3 class="mb-0">Nail Polish Change</h3>
-            <div class="mb-1  text-success">10 CAD</div>
-            <p class="card-text mb-auto">This extra service is for changing your nail polish only</p>
+            <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative  bg-white">
+                <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary-emphasis">Extra</strong>
+                <h3 class="mb-0">Nail Polish Change</h3>
+                <div class="mb-1  text-success">10 CAD</div>
+                <p class="card-text mb-auto">This extra service is for changing your nail polish only</p>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                </div>
             </div>
-            <div class="col-auto d-none d-lg-block">
-                <img src="<?=BASE_PATH?>/Views/Images/pic1.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
-            </div>
-        </div>
         </div>
     </div>
 

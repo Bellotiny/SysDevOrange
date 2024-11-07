@@ -5,8 +5,8 @@ include_once "Helper/Values.php";
 include_once "Helper/Where.php";
 
 abstract class Model {
+    public int $id;
     private static mysqli $connection;
-    protected int $id;
 
     protected abstract static function getTable(): string;
 
