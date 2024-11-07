@@ -13,7 +13,10 @@ include_once 'Views/head.php';
     <?php include_once 'Views/sidebar.php'; ?>
 
     <div class="sideScreen container">
-        <p><?= $data[0]->firstName . " " . $data[0]->lastName ?></p>
+        <p>Name: <?= $data[0]->firstName . " " . $data[0]->lastName ?></p>
+        <p>Email: <?= $data[0]->email ?></p>
+        <p>Phone Number: <?= $data[0]->phoneNumber ?></p>
+        <p>Birthday: <?= $data[0]->birthDate ?></p>
         <!-- Default content will be the Personal info -->
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
             <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/account/login" role="button">Login</a>

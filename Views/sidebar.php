@@ -55,7 +55,7 @@
         $(document).ready(function() {
     // Get the current URL path
     var currentPath = window.location.pathname;
-
+    
     // Loop through each link in the sidebar
     $('.nav-link').each(function() {
         var linkPath = $(this).attr('href');
