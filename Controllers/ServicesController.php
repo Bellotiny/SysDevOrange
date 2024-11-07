@@ -8,6 +8,13 @@ class ServicesController extends Controller {
     }
 
     public function route(): void {
-        $this->render("Services", "services");
+        $action = strtolower($_GET['action']);
+
+        if($action == "list"){
+            $services = Service::list();
+            $colors = Color::list();
+            $this->render("Services", "services", ["services" => $services, "colors" => $colors]);
+        }
     }
+    
 }

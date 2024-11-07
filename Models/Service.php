@@ -9,7 +9,7 @@ class Service extends Model {
     public int $duration;
 
     protected static function getTable(): string {
-        return "bookings";
+        return "services";
     }
 
     public static function new(string $name, float $price, string $description, int $duration): Service|false {
