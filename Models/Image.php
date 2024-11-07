@@ -13,8 +13,8 @@ class Image extends Model {
     public static function new(string $name, string $data): Image|false {
         $image = new Image();
         $values = new Values();
-        $values->add(new Value($image->name = $name, "name"));
-        $values->add(new Value($image->data = $data, "data"));
+        $values->add(new Value("name", $image->name = $name));
+        $values->add(new Value("data", $image->data = $data));
 
         try {
             self::insertRow($values, false);
@@ -27,17 +27,10 @@ class Image extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->name, "name"));
-        $values->add(new Value($this->data, "data"));
+        $values->add(new Value("name", $this->name));
+        $values->add(new Value("data", $this->data));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
     }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return self::deleteRows($where);
-    }
-
 }
