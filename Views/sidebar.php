@@ -53,18 +53,23 @@
         </div>
         <script>
         $(document).ready(function() {
-    // Get the current URL path
-    var currentPath = window.location.pathname;
+            // Get the current URL path
+            var currentPath = window.location.pathname;
+            var isActiveFound = false;
 
-    // Loop through each link in the sidebar
-    $('.nav-link').each(function() {
-        var linkPath = $(this).attr('href');
 
-        // Check if the link's href matches the current path
-        if (linkPath && currentPath.includes(linkPath)) {
-            $(this).addClass('active');
-        }
-    });
-});
+            // Loop through each link in the sidebar
+            $('.nav-link').each(function() {
+                var linkPath = $(this).attr('href');
 
-</script>
+                // Check if the link's href matches the current path
+                if (linkPath && currentPath.includes(linkPath)) {
+                    $(this).addClass('active');
+                    isActiveFound = true;
+                }
+            });
+            if (!isActiveFound) {
+                $('.nav-link').first().addClass('active');
+            }
+        });
+        </script>
