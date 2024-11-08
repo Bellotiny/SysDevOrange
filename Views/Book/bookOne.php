@@ -455,15 +455,13 @@ ini_set('display_errors', 1);
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
 
-        <!-- Section Home Service -->
         <h3>Address</h3>
+
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4">Back</a>
           <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4">Next</a>   
         </div>
-
-
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 10%">10%</div>
