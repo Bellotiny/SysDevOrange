@@ -70,7 +70,7 @@ include_once 'Views/head.php';
   <div class="d-grid gap-2">
     <button class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false">Write Review</button>
   </div>
-</div>
+  </div>
 
 <!-- Initially hidden review form -->
 <div id="review-form-input" class="pb-3" style="display: none;">

@@ -6,10 +6,10 @@ ini_set('display_errors', 1);
 
 <?php include_once 'Views/nav.php'; ?>
 
-<div class="form-container">
+<div id="form-container" data-section="1" class="my-5">
   <form method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
-     <div class="form-section active container py-5 " id="section1">
+     <div class="form-section active container pt-5 "  id="section1">
 
        <!-- Section 1 Base Service -->
         <h3>Base Service</h3>
@@ -108,8 +108,8 @@ ini_set('display_errors', 1);
         </div>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service">Next</a>   
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" >Cancel</a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-1">Next</a>   
         </div>
 
         <div class="progress my-4  slide-up">
@@ -119,7 +119,7 @@ ini_set('display_errors', 1);
      </div>
 
       <!-- Section 2 -->
-      <div class="form-section  container py-5" id="section2">
+      <div class="form-section  container pt-5"  id="section2">
 
         <!-- Section 2 Color -->
         <h3>Pick your color(s):</h3>
@@ -359,8 +359,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50" onclick="prevSection()" role="button">Back</a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button">Next</a>   
+          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2">Cancel</a>
+          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2">Next</a>   
         </div>
 
         <div class="progress my-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -370,11 +370,11 @@ ini_set('display_errors', 1);
       </div>
 
       <!-- Section 3 -->
-      <div class="form-section  container py-5" id="section3">
+      <div class="form-section  container pt-5" id="section3">
 
         <!-- Section 3 Personal Information -->
         <h3>Personal Information:</h3>
-        <div class="row g-3">
+        <div class="row g-3 mt-5">
           <div class="col-sm-6">
             <label for="firstName" class="form-label">First name</label>
             <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
@@ -406,7 +406,7 @@ ini_set('display_errors', 1);
 
         <!-- Section # cart -->
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
+          <span class="text-primary ">Your cart</span>
           <span class="badge bg-primary rounded-pill">3</span>
         </h4>
 
@@ -442,8 +442,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50" onclick="prevSection()" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button">Next</a>   
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
+          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a>   
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -452,162 +452,114 @@ ini_set('display_errors', 1);
     
       </div>
 
-      <!-- Home service Section -->
-      <div class="form-section  container py-5" id="section4">
+       <!----- Home service Section ----->
+      <div class="form-section  container pt-5" id="section4">
 
-        <!-- Section 3 Personal Information -->
-        <h3>Home:</h3>
-        <div class="row g-3">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid first name is required.
-             </div>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
-          </div>
-
-          <div class="col-12">
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group has-validation">
-              <span class="input-group-text">@</span>
-              <input type="text" class="form-control" id="username" placeholder="Username" required="">
-            <div class="invalid-feedback">
-                Your username is required.
-              </div>
-            </div>
-          </div>
-        </div>
-       
-
-        <!-- Section # cart -->
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
-        </h4>
-
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Base Price</h6>
-              <small class="text-body-secondary">This follows your natural nail shape and length</small>
-            </div>
-              <span class="text-body-secondary">$35</span>
-          </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Nail art</h6>
-                <small class="text-body-secondary">This is totaled for 4 nails.</small>
-              </div>
-              <span class="text-body-secondary">$20</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Nail Take off</h6>
-                <small class="text-body-secondary">Extra service</small>
-              </div>
-              <span class="text-body-secondary">$10</span>
-            </li>
-        
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (CAD)</span>
-              <strong>$60</strong>
-            </li>
-        </ul>
-
-
+        <!-- Section Home Service -->
+        <h3>Address</h3>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50" onclick="prevSection()" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button">Next</a>   
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4">Back</a>
+          <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4">Next</a>   
         </div>
 
+
+
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar" style="width: 65%">65%</div>
+          <div class="progress-bar" style="width: 10%">10%</div>
         </div>
-    
+
       </div>
+
+      
   </form>
 </div>
 
 <script>
-    // JavaScript
-    let currentSection = 1;
-    const nextButton = document.querySelector('#next-button-service'); // Target the "Next" button
-    const homeServiceRadio = document.querySelector('input[name="servicePlce"][value="home"]');
+  
 
-    
-    function selectColor(colorGroup, colorName, groupId) {
-    // Get the specific color group container
+function selectColor(colorGroup, colorName, groupId) {
     const groupContainer = document.getElementById(groupId);
 
-    // Remove 'selected' class from all color items in the group
     groupContainer.querySelectorAll('.color-item').forEach(el => {
-      el.classList.remove('selected');
+        el.classList.remove('selected');
     });
 
-    // Find the specific color item to select
     const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
-      return item.querySelector('h5').textContent === colorName;
+        return item.querySelector('h5').textContent === colorName;
     });
 
-    // Check if the selected item exists and add the 'selected' class
     selectedItem.classList.add('selected'); // Add the 'selected' class to the clicked item
-           
+
     const selectedColorElement = document.getElementById(`selected${colorGroup}`);
-    selectedColorElement.textContent = colorName; 
-   }
+    selectedColorElement.textContent = colorName;
+}
 
 //SECTION AREA
-
+let currentSection = 1; 
+    let serviceSelected = null;
+  
+    showSection(currentSection);
+  
+    // Function to show a specific section
     function showSection(sectionNumber) {
       document.querySelectorAll('.form-section').forEach(section => {
         section.classList.remove('active');
       });
       document.getElementById(`section${sectionNumber}`).classList.add('active');
     }
-
-    function nextSection() {
-      if (currentSection < 3) {
-        currentSection += 1;
+  
+    // Handle the next button click for each section
+    document.querySelectorAll('[id^="next-button-service"]').forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+  
+        const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
+        if (!selectedServiceRadio) {
+          console.error("No service selected");
+          return;
+        }
+        serviceSelected = selectedServiceRadio.value;
+  
+        // Handle navigation based on the current section and selected service
+        if (serviceSelected === 'home') {
+          if (currentSection === 1) {
+            currentSection = 4; //special section
+          } else if (currentSection === 4) {
+            currentSection = 2; 
+          } else if (currentSection === 2) {
+            currentSection = 3; 
+          }
+        } else if (serviceSelected === 'owner') {
+          if (currentSection === 1) {
+            currentSection = 2; 
+          } else if (currentSection === 2) {
+            currentSection = 3;
+          }
+        }
+  
         showSection(currentSection);
-      }
-    }
-
-    function prevSection() {
-      if (currentSection > 1) {
-        currentSection -= 1;
-        showSection(currentSection);
-      }
-    }
-
-    function homeService(){
-      showSection(4);
-    }
-
-    nextButton.addEventListener('click', function(event) {
-    const selectedService = document.querySelector('input[name="servicePlace"]:checked').nextElementSibling.textContent.trim();
-
-    console.log(selectedService);
-
-    if (selectedService === 'Home service') {
-      // Update onclick to a special nextSection 
-      nextButton.onclick = "homeService()";
-    } else {
-    
-      nextButton.onclick = "prevSection()";
-    }
-  });
-
-    // Initialize the form by showing the first section
-    showSection(currentSection);
+      });
+    });
+  
+    // Handle the back button click
+    document.querySelectorAll('[id^="back-button-service"]').forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+  
+        // Handle going back depending on current section
+        if (currentSection === 3) {
+          currentSection = 2; 
+        } else if (currentSection === 2) {
+          currentSection = 1;
+        } else if (currentSection === 4) {
+          currentSection = 1;
+        }
+  
+        showSection(currentSection); // Show the new section
+      });
+    });
 </script>
+
 </body>
 </html>

@@ -10,34 +10,27 @@ class Color extends Model {
         return "colors";
     }
 
-    public static function new(string $name, string $code): Color|false {
+    public static function new(string $name, string $code): ?Color {
         $color = new Color();
         $values = new Values();
-        $values->add(new Value($color->name = $name, "name"));
-        $values->add(new Value($color->code = $code, "code"));
+        $values->add(new Value("name", $color->name = $name));
+        $values->add(new Value("code", $color->code = $code));
 
         try {
             self::insertRow($values, false);
             $color->id = self::getConnection()->insert_id;
             return $color;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->name, "name"));
-        $values->add(new Value($this->code, "code"));
+        $values->add(new Value("name", $this->name));
+        $values->add(new Value("code", $this->code));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
     }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return self::deleteRows($where);
-    }
-
 }

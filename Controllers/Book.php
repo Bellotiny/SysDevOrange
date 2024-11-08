@@ -2,7 +2,7 @@
 
 include_once "Controllers/Controller.php";
 
-class BookController extends Controller {
+class Book extends Controller {
     public static function redirect(string $action = ""): void {
         header('Location: ' . BASE_PATH . "/book/" . $action);
     }

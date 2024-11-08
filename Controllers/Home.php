@@ -2,12 +2,12 @@
 
 include_once "Controllers/Controller.php";
 
-class GalleryController extends Controller {
+class Home extends Controller {
     public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/gallery/" . $action);
+        header('Location: ' . BASE_PATH . "/" . $action);
     }
 
     public function route(): void {
-        $this->render("Gallery", "gallery");
+        $this->render("Home", "home");
     }
 }
