@@ -14,9 +14,9 @@ class Payment extends Model {
     public static function new(bool $status, float $amount, int $dateTime): Payment|false {
         $Payment = new Payment();
         $values = new Values();
-        $values->add(new Value($Payment->status = $status, "status"));
-        $values->add(new Value($Payment->amount = $amount, "amount"));
-        $values->add(new Value($Payment->dateTime = $dateTime, "dateTime"));
+        $values->add(new Value("status", $Payment->status = $status));
+        $values->add(new Value("amount", $Payment->amount = $amount));
+        $values->add(new Value("dateTime", $Payment->dateTime = $dateTime));
 
         try {
             self::insertRow($values, false);
@@ -29,17 +29,11 @@ class Payment extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->status, "status"));
-        $values->add(new Value($this->amount, "amount"));
-        $values->add(new Value($this->dateTime, "dateTime"));
+        $values->add(new Value("status", $this->status));
+        $values->add(new Value("amount", $this->amount));
+        $values->add(new Value("dateTime", $this->dateTime));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
-    }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return self::deleteRows($where);
     }
 }

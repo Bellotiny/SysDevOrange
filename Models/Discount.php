@@ -16,11 +16,11 @@ class Discount extends Model {
     public static function new(string $name, int $start, int $end, float $percent, float $amount): Discount|false {
         $discount = new Discount();
         $values = new Values();
-        $values->add(new Value($discount->name = $name, "name"));
-        $values->add(new Value($discount->start = $start, "start"));
-        $values->add(new Value($discount->end = $end, "end"));
-        $values->add(new Value($discount->percent = $percent, "percent"));
-        $values->add(new Value($discount->amount = $amount, "amount"));
+        $values->add(new Value("name", $discount->name = $name));
+        $values->add(new Value("start", $discount->start = $start));
+        $values->add(new Value("end", $discount->end = $end));
+        $values->add(new Value("percent", $discount->percent = $percent));
+        $values->add(new Value("amount", $discount->amount = $amount));
 
 
         try {
@@ -34,20 +34,13 @@ class Discount extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value($this->name, "name"));
-        $values->add(new Value($this->start, "start"));
-        $values->add(new Value($this->end, "end"));
-        $values->add(new Value($this->percent, "percent"));
-        $values->add(new Value($this->amount, "amount"));
+        $values->add(new Value("name", $this->name));
+        $values->add(new Value("start", $this->start));
+        $values->add(new Value("end", $this->end));
+        $values->add(new Value("percent", $this->percent));
+        $values->add(new Value("amount", $this->amount));
         $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
+        $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
     }
-
-    public function delete(): bool {
-        $where = new Where();
-        $where->addEquals(new Value($this->id, "id"));
-        return self::deleteRows($where);
-    }
-
 }

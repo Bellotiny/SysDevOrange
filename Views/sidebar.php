@@ -1,4 +1,4 @@
-         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light slide-up" style="width: 280px; height: 100vh;">
+         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light slide-up" style="width: 280px; height: 90vh;">
           <a href="<?=BASE_PATH?>/account" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Account</span>
@@ -40,8 +40,8 @@
           <hr>
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>mdo</strong>
+              
+              <strong><?= $data[0]->firstName . " " . $data[0]->lastName ?></strong>
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
               <li><a class="dropdown-item" href="#">Edit Profile</a></li>
@@ -53,18 +53,23 @@
         </div>
         <script>
         $(document).ready(function() {
-    // Get the current URL path
-    var currentPath = window.location.pathname;
+            // Get the current URL path
+            var currentPath = window.location.pathname;
+            var isActiveFound = false;
 
-    // Loop through each link in the sidebar
-    $('.nav-link').each(function() {
-        var linkPath = $(this).attr('href');
 
-        // Check if the link's href matches the current path
-        if (linkPath && currentPath.includes(linkPath)) {
-            $(this).addClass('active');
-        }
-    });
-});
+            // Loop through each link in the sidebar
+            $('.nav-link').each(function() {
+                var linkPath = $(this).attr('href');
 
-</script>
+                // Check if the link's href matches the current path
+                if (linkPath && currentPath.includes(linkPath)) {
+                    $(this).addClass('active');
+                    isActiveFound = true;
+                }
+            });
+            if (!isActiveFound) {
+                $('.nav-link').first().addClass('active');
+            }
+        });
+        </script>

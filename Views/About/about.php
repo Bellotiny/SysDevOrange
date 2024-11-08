@@ -87,7 +87,7 @@ include_once 'Views/nav.php';
     <div class="row h-100">
         <!-- Location Item -->
         <div class="col-md-6 d-flex justify-content-center align-items-center slide-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5593.426392454826!2d-73.6227813235352!3d45.49571993133485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc919ffcf1c68a3%3A0x4703d638d8de8b46!2sMon%20Ami%20Korean%20BBQ%20C%C3%B4te-des-Neiges!5e0!3m2!1sen!2sca!4v1727067483644!5m2!1sen!2sca" 
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2799.722524292248!2d-73.67220439999998!3d45.4350945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc916eaa06448d1%3A0x67b6e59d74aadb8d!2s980%20Rue%20Notre%20Dame%2C%20Lachine%2C%20QC%20H8S%202B9!5e0!3m2!1sen!2sca!4v1731001751030!5m2!1sen!2sca"
                 class="w-100 h-100" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
@@ -103,7 +103,7 @@ include_once 'Views/nav.php';
 
             <!--  Map Container -->
             <div class=" mx-auto slide-up" id="parking-div">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89500.75621796442!2d-73.84378810273436!3d45.491986000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc917d1536e3e4f%3A0x628982dfacdbf88d!2sIKEA%20Montr%C3%A9al!5e0!3m2!1sfr!2sca!4v1728793160923!5m2!1sfr!2sca" 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d341.64767448886255!2d-73.6735138755337!3d45.43439545676149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc9171879484665%3A0x26561a85b5a50684!2sStationnement%20municipal!5e0!3m2!1sen!2sca!4v1731002594499!5m2!1sen!2sca"
                     class="position-absolute top-0 start-0 w-100 h-100" style="border: none;">
                 </iframe>
             </div>
