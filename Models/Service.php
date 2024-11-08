@@ -12,7 +12,7 @@ class Service extends Model {
         return "bookings";
     }
 
-    public static function new(string $name, float $price, string $description, int $duration): Service|false {
+    public static function new(string $name, float $price, string $description, int $duration): ?Service {
         $service = new Service();
         $values = new Values();
         $values->add(new Value("name", $service->name = $name));
@@ -25,7 +25,7 @@ class Service extends Model {
             $service->id = self::getConnection()->insert_id;
             return $service;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

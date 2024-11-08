@@ -10,7 +10,7 @@ class Image extends Model {
         return "bookings";
     }
 
-    public static function new(string $name, string $data): Image|false {
+    public static function new(string $name, string $data): ?Image {
         $image = new Image();
         $values = new Values();
         $values->add(new Value("name", $image->name = $name));
@@ -21,7 +21,7 @@ class Image extends Model {
             $image->id = self::getConnection()->insert_id;
             return $image;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

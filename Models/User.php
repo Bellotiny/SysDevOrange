@@ -15,7 +15,7 @@ class User extends Model {
         return "users";
     }
 
-    public static function new(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): User|false {
+    public static function new(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): ?User {
         $user = new User();
         $values = new Values();
         $values->add(new Value("firstName", $user->firstName = $firstName));
@@ -31,7 +31,7 @@ class User extends Model {
             self::executeQuery("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$user->id]);
             return $user;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 
@@ -67,7 +67,7 @@ class User extends Model {
         }
     }
 
-    public function verifyRights(string $controller, string $action): bool {
+    public function hasRights(string $controller, string $action): bool {
         return self::getConnection()->execute_query("
             SELECT COUNT(users.id) FROM users
             INNER JOIN users_groups ON users_groups.userID = users.id
