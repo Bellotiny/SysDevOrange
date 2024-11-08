@@ -455,16 +455,18 @@ ini_set('display_errors', 1);
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
 
-        <div class="container my-2">
+        <div class="container my-3">
           <div class="p-5 text-center green-background rounded-3">
             <h1 class="text-body-emphasis">Enter your address to verfiy</h1>
             <p class="lead">
               Take note: Home service is only available  <code>20 km </code> from the owner's place.
               
-              <div id="output">
-                Janna
-
+              <div class="row">
+                <div class=" col-4  " id=""></div>
+                <div class=" col-4 green-background " id="output"></div>
+                <div class=" col-4  " id=""></div>
               </div>
+              
             </p>
           </div>
         </div>
@@ -625,17 +627,19 @@ function calcRoute() {
       const distanceInMeters = result.routes[0].legs[0].distance.value;
       const distanceInKm = (distanceInMeters / 1000).toFixed(2); // Convert to km and round to 2 decimals
       output.innerHTML = `<h3>${distanceInKm} km</h3>`;
+      output.classList.add('result-design');
 
       // Check if within 20 km range
       if (distanceInKm <= 20) {
-        output.innerHTML += `<p>Within 20 km range for home service.</p>`;
+        output.innerHTML = `<p>Within 20 km range for home service.</p>`;
+        output.style.color = "#667744";
       } else {
-        output.innerHTML += `<p>Outside the 20 km range for home service.</p>`;
+        output.innerHTML = `<p>Outside the 20 km range for home service.</p>`;
         output.style.color = "#D9534F";
       }
 
     } else {
-      output.innerHTML = `<h3>Location not found</h3>`;
+      output.innerHTML = `<p>Location not found</p>`;
       output.style.color = "#D9534F";
     }
   });

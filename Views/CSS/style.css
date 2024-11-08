@@ -122,6 +122,7 @@ h2{
     background-color: #d2d8ce;
     color: #667744;
 }
+
 /********* NAV *********/
 header {
     overflow: hidden;
@@ -544,7 +545,14 @@ a.nav-link.active {
     display: block;
     margin-bottom: 10px;
   }
- 
+  .result-design {
+    border: 1px solid #a6ab9f; 
+    border-radius: 8px; 
+    padding: 20px;
+    box-shadow: 5px 5px 5px rgba(85, 107, 47, 0.3); 
+    
+    font-size: 1.2em; 
+  }
 /**** OFF CANVAS *****/
 .text-large-offcanvas{
     font-size: 1.2em;
