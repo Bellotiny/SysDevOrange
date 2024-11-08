@@ -26,9 +26,9 @@ abstract class Model {
     /**
      * @return static[]
      */
-    public static function list(int $limit = 0, int $offset = 0, Where $where = new Where()): array {
+    public static function list(?int $limit = null, ?int $offset = null, Where $where = new Where()): array {
         $list = [];
-        $result = self::executeQuery("SELECT * FROM " . static::getTable() . $where . " LIMIT ? OFFSET ?", [...$where->getArgs(), $limit, $offset]);
+        $result = self::executeQuery("SELECT * FROM " . static::getTable() . $where . ($limit ? " LIMIT " . $limit : "") . ($offset ? " OFFSET " . $offset : ""), $where->getArgs());
         while ($obj = $result->fetch_object(static::class)) {
             $list[] = $obj;
         }

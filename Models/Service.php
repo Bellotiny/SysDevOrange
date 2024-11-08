@@ -7,6 +7,7 @@ class Service extends Model {
     public float $price;
     public string $description;
     public int $duration;
+    public string $type;
 
     protected static function getTable(): string {
         return "services";
@@ -19,6 +20,7 @@ class Service extends Model {
         $values->add(new Value("price", $service->price = $price));
         $values->add(new Value("description", $service->description = $description));
         $values->add(new Value("duration", $service->duration = $duration));
+        $values->add(new Value("type", $service->type = $type));
 
         try {
             self::insertRow($values, false);
@@ -35,6 +37,7 @@ class Service extends Model {
         $values->add(new Value("price", $this->price));
         $values->add(new Value("description", $this->description));
         $values->add(new Value("duration", $this->duration));
+        $values->add(new Value("type", $this->type));
         $where = new Where();
         $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);
