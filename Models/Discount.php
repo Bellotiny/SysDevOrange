@@ -9,24 +9,52 @@ class Discount extends Model {
     public float $percent;
     public float $amount;
 
+    public function __construct(array $fields) {
+        $this->id = $fields[self::getTable() . '.id'];
+        $this->name = $fields[self::getTable() . '.name'];
+        $this->start = $fields[self::getTable() . '.start'];
+        $this->end = $fields[self::getTable() . '.end'];
+        $this->percent = $fields[self::getTable() . '.percent'];
+        $this->amount = $fields[self::getTable() . '.amount'];
+    }
+
     public static function getTable(): string {
         return "discounts";
     }
 
+    public static function getFields(): array {
+        return ["id", "name", "start", "end", "percent", "amount"];
+    }
+
+    public function getAssoc(): array {
+        return [
+            self::getTable() . ".id" => $this->id,
+            self::getTable() . ".name" => $this->name,
+            self::getTable() . ".start" => $this->start,
+            self::getTable() . ".end" => $this->end,
+            self::getTable() . ".percent" => $this->percent,
+            self::getTable() . ".amount" => $this->amount,
+        ];
+    }
+
     public static function new(string $name, int $start, int $end, float $percent, float $amount): ?Discount {
-        $discount = new Discount();
         $values = new Values();
-        $values->add(new Value("name", $discount->name = $name));
-        $values->add(new Value("start", $discount->start = $start));
-        $values->add(new Value("end", $discount->end = $end));
-        $values->add(new Value("percent", $discount->percent = $percent));
-        $values->add(new Value("amount", $discount->amount = $amount));
-
-
+        $values->add(new Value(self::getTable() . ".name", $name));
+        $values->add(new Value(self::getTable() . ".start", $start));
+        $values->add(new Value(self::getTable() . ".end", $end));
+        $values->add(new Value(self::getTable() . ".percent", $percent));
+        $values->add(new Value(self::getTable() . ".amount", $amount));
         try {
-            self::insertRow($values, false);
-            $discount->id = self::getConnection()->insert_id;
-            return $discount;
+            self::insert($values, false);
+            $id = self::getConnection()->insert_id;
+            return new Discount([
+                self::getTable() . ".id" => $id,
+                self::getTable() . ".name" => $name,
+                self::getTable() . ".start" => $start,
+                self::getTable() . ".end" => $end,
+                self::getTable() . ".percent" => $percent,
+                self::getTable() . ".amount" => $amount,
+            ]);
         } catch (Exception) {
             return null;
         }
@@ -34,13 +62,13 @@ class Discount extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value("name", $this->name));
-        $values->add(new Value("start", $this->start));
-        $values->add(new Value("end", $this->end));
-        $values->add(new Value("percent", $this->percent));
-        $values->add(new Value("amount", $this->amount));
+        $values->add(new Value(self::getTable() . ".name", $this->name));
+        $values->add(new Value(self::getTable() . ".start", $this->start));
+        $values->add(new Value(self::getTable() . ".end", $this->end));
+        $values->add(new Value(self::getTable() . ".percent", $this->percent));
+        $values->add(new Value(self::getTable() . ".amount", $this->amount));
         $where = new Where();
-        $where->addEquals(new Value("id", $this->id));
-        return self::updateRows($values, $where);
+        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
+        return self::update($values, $where);
     }
 }

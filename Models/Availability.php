@@ -6,20 +6,33 @@ class Availability extends Model {
     public int $start;
     public int $end;
 
+    public function __construct(array $fields) {
+        $this->id = $fields[self::getTable() . '.id'];
+        $this->start = $fields[self::getTable() . '.start'];
+        $this->end = $fields[self::getTable() . '.end'];
+    }
+
     public static function getTable(): string {
         return "availabilities";
     }
 
+    public static function getFields(): array {
+        return ["id", "start", "end"];
+    }
+
     public static function new(int $start, int $end): ?Availability {
-        $availability = new Availability();
         $values = new Values();
-        $values->add(new Value("start", $availability->start = $start));
-        $values->add(new Value("end", $availability->end = $end));
+        $values->add(new Value(self::getTable() . ".start", $start));
+        $values->add(new Value(self::getTable() . ".end", $end));
 
         try {
-            self::insertRow($values, false);
-            $availability->id = self::getConnection()->insert_id;
-            return $availability;
+            self::insert($values, false);
+            $id = self::getConnection()->insert_id;
+            return new Availability([
+                self::getTable() . ".id" => $id,
+                self::getTable() . ".start" => $start,
+                self::getTable() . ".end" => $end,
+            ]);
         } catch (Exception) {
             return null;
         }
@@ -27,10 +40,10 @@ class Availability extends Model {
 
     public function save(): bool {
         $values = new Values();
-        $values->add(new Value("start", $this->start));
-        $values->add(new Value("end", $this->end));
+        $values->add(new Value(self::getTable() . ".start", $this->start));
+        $values->add(new Value(self::getTable() . ".end", $this->end));
         $where = new Where();
-        $where->addEquals(new Value("id", $this->id));
-        return self::updateRows($values, $where);
+        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
+        return self::update($values, $where);
     }
 }

@@ -21,7 +21,7 @@ class Gallery extends Controller {
                     $this->render("Gallery", $action, ["user" => $this->user]);
                     break;
                 }
-                Review::new($this->user->id, $_POST['title'], $_POST['message'], date("Y-m-d H:i:s"));
+                Review::new($this->user, $_POST['title'], $_POST['message'], date("Y-m-d H:i:s"));
                 $this->redirect();
                 break;
             case "edit":
@@ -58,8 +58,7 @@ class Gallery extends Controller {
                 $this->redirect();
                 break;
             default:
-                $this->render("Gallery", "list", ["user" => $this->user, "reviews" => Review::list(10, (10 * (int)($_GET['id'] ?? 0)), new Join(User::getTable(), User::getTable() . ".id", Review::getTable() . ".userID"))]);
+                $this->render("Gallery", "list", ["user" => $this->user, "reviews" => Review::list(null, 10, (10 * (int)($_GET['id'] ?? 0)))]);
         }
-
     }
 }

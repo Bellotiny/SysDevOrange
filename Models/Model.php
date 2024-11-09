@@ -8,7 +8,17 @@ abstract class Model {
     public int $id;
     private static mysqli $connection;
 
+    public abstract function __construct(array $fields);
+
     public abstract static function getTable(): string;
+
+    public abstract static function getFields(): array;
+
+    public abstract function save(): bool;
+
+    protected static function getSelectFields(): string {
+        return implode(", ", array_map(fn($field) => static::getTable() . "." . $field . " as '" . static::getTable() . "." . $field . "'", static::getFields()));
+    }
 
     public static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
@@ -23,39 +33,55 @@ abstract class Model {
         return self::getConnection()->execute_query($query, $args);
     }
 
-    /**
-     * @return static[]
-     */
-    public static function list(?int $limit = null, ?int $offset = null, ?Join $join = null, Where $where = new Where()): array {
-        $list = [];
-        $result = self::getRows($where, $join, $limit, $offset);
-        while ($obj = $result->fetch_object(static::class)) {
-            $list[] = $obj;
-        }
-        return $list;
+    protected static function update(Values $values, ?Where $where = null): bool {
+        return self::executeQuery(
+            "UPDATE " . static::getTable() .
+            " SET " . implode(", ", array_map(fn($value) => $value->getColumn() . " = " . $value->getMarker(), $values->values)) .
+            ($where ?? "") .
+            ";",
+            [...$values->getArgs(), ...($where ? $where->getArgs() : [])]
+        );
     }
 
-    protected static function getRows(Where $where = new Where(), ?Join $join = null, ?int $limit = null, ?int $offset = null): mysqli_result|bool {
-        return self::executeQuery("SELECT * FROM " . static::getTable() . ($join ?? "") . $where . ($limit ? " LIMIT " . $limit : "") . ($offset ? " OFFSET " . $offset : ""), $where->getArgs());
-    }
-
-    protected static function updateRows(Values $values, Where $where = new Where()): bool {
-        return self::executeQuery("UPDATE " . static::getTable() . " SET " . implode(", ", array_map(fn($value) => $value->getColumn() . " = " . $value->getMarker(), $values->values)) . $where, [...$values->getArgs(), ...$where->getArgs()]);
-    }
-
-    protected static function insertRow(Values $values, bool $ignoreDuplicates): bool {
-        return self::executeQuery("INSERT INTO " . static::getTable() . " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ") " . ($ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "") . ";", $values->getArgs());
-    }
-
-    public static function getFromId(int $id): ?static {
-        $where = new Where();
-        $where->addEquals(new Value("id", $id));
-        return self::getRows($where)->fetch_object(static::class) ?? null;
+    protected static function insert(Values $values, bool $ignoreDuplicates): bool {
+        return self::executeQuery(
+            "INSERT INTO " . static::getTable() .
+            " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ") " .
+            ($ignoreDuplicates ? "ON DUPLICATE KEY UPDATE" : "") .
+            ";",
+            $values->getArgs()
+        );
     }
 
     public function delete(): bool {
         return self::executeQuery("DELETE FROM " . static::getTable() . " WHERE id = ?;", [$this->id]);
     }
 
-    public abstract function save(): bool;
+    protected static function select(?Where $where = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {
+        return self::executeQuery(
+            "SELECT " . self::getSelectFields() . "  FROM " . static::getTable() .
+            ($where ?? "") .
+            ($limit ? " LIMIT " . $limit : "") .
+            ($offset ? " OFFSET " . $offset : ""),
+            ($where ? $where->getArgs() : [])
+        );
+    }
+
+    /**
+     * @return static[]
+     */
+    public static function list(?Where $where = null, ?int $limit = null, ?int $offset = null): array {
+        $list = [];
+        $result = static::select($where, $limit, $offset);
+        while ($fields = $result->fetch_assoc()) {
+            $list[] = new static($fields);
+        }
+        return $list;
+    }
+
+    public static function getFromId(int $id): ?static {
+        $where = new Where();
+        $where->addEquals(new Value(static::getTable() . ".id", $id));
+        return static::list($where)[0] ?? null;
+    }
 }
