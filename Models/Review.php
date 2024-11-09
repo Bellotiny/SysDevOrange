@@ -9,7 +9,7 @@ class Review extends Model {
     public string $date;
     public ?int $imageID;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "reviews";
     }
 

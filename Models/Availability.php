@@ -6,7 +6,7 @@ class Availability extends Model {
     public int $start;
     public int $end;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "availabilities";
     }
 

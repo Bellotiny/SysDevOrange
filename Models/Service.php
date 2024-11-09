@@ -8,7 +8,7 @@ class Service extends Model {
     public string $description;
     public int $duration;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "bookings";
     }
 

@@ -9,7 +9,7 @@ class Discount extends Model {
     public float $percent;
     public float $amount;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "discounts";
     }
 

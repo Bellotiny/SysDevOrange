@@ -49,14 +49,14 @@ include_once 'Views/head.php';
         </div>
 
         <!-- Initially hidden review form -->
-        <form id="review-form-input" class="pb-3">
+        <form id="review-form-input" class="pb-3" method="POST">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title" value="<?= $data["review"]->title ?>" required>
             </div>
             <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
-                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here"></textarea>
+                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required><?= $data["review"]->message ?></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Upload Image</label>

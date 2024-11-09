@@ -6,7 +6,7 @@ class Color extends Model {
     public string $name;
     public string $code;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "colors";
     }
 

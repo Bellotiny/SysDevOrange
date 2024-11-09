@@ -2,6 +2,7 @@
 
 include_once "Controllers/Controller.php";
 include_once "Models/Review.php";
+include_once "Models/Helper/Join.php";
 
 class Gallery extends Controller {
     public static function redirect(string $action = ""): void {
@@ -27,13 +28,13 @@ class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                if (!isset($_POST['title']) || !isset($_POST['message'])) {
-                    $this->render("Gallery", $action, ["user" => $this->user]);
-                    break;
-                }
                 $review = Review::getfromId((int)$_GET['id']);
                 if (is_null($review)) {
                     $this->redirect();
+                    break;
+                }
+                if (!isset($_POST['title']) || !isset($_POST['message'])) {
+                    $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
                     break;
                 }
                 $review->title = $_POST['title'];
@@ -57,7 +58,7 @@ class Gallery extends Controller {
                 $this->redirect();
                 break;
             default:
-                $this->render("Gallery", "list", ["user" => $this->user, "reviews" => Review::list(10, (10 * (int)($_GET['id'] ?? 0)))]);
+                $this->render("Gallery", "list", ["user" => $this->user, "reviews" => Review::list(10, (10 * (int)($_GET['id'] ?? 0)), new Join(User::getTable(), User::getTable() . ".id", Review::getTable() . ".userID"))]);
         }
 
     }

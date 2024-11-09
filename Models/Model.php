@@ -8,7 +8,7 @@ abstract class Model {
     public int $id;
     private static mysqli $connection;
 
-    protected abstract static function getTable(): string;
+    public abstract static function getTable(): string;
 
     public static function getConnection(): mysqli {
         if (!isset(self::$connection)) {
@@ -26,17 +26,17 @@ abstract class Model {
     /**
      * @return static[]
      */
-    public static function list(int $limit = 0, int $offset = 0, Where $where = new Where()): array {
+    public static function list(?int $limit = null, ?int $offset = null, ?Join $join = null, Where $where = new Where()): array {
         $list = [];
-        $result = self::executeQuery("SELECT * FROM " . static::getTable() . $where . " LIMIT ? OFFSET ?", [...$where->getArgs(), $limit, $offset]);
+        $result = self::getRows($where, $join, $limit, $offset);
         while ($obj = $result->fetch_object(static::class)) {
             $list[] = $obj;
         }
         return $list;
     }
 
-    protected static function getRows(Where $where = new Where()): mysqli_result|bool {
-        return self::executeQuery("SELECT * FROM " . static::getTable() . $where, $where->getArgs());
+    protected static function getRows(Where $where = new Where(), ?Join $join = null, ?int $limit = null, ?int $offset = null): mysqli_result|bool {
+        return self::executeQuery("SELECT * FROM " . static::getTable() . ($join ?? "") . $where . ($limit ? " LIMIT " . $limit : "") . ($offset ? " OFFSET " . $offset : ""), $where->getArgs());
     }
 
     protected static function updateRows(Values $values, Where $where = new Where()): bool {

@@ -10,7 +10,7 @@ class Booking extends Model {
     public int $paymentID;
     public int $discountID;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "bookings";
     }
 

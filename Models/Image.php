@@ -6,7 +6,7 @@ class Image extends Model {
     public string $name;
     public string $data;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "bookings";
     }
 

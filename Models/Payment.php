@@ -7,7 +7,7 @@ class Payment extends Model {
     public float $amount;
     public int $dateTime;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "payments";
     }
 

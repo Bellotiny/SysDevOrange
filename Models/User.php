@@ -11,7 +11,7 @@ class User extends Model {
 
     private ?string $token;
 
-    protected static function getTable(): string {
+    public static function getTable(): string {
         return "users";
     }
 
