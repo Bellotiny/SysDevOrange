@@ -123,6 +123,20 @@ h2{
     color: #667744;
 }
 /********* NAV *********/
+#logo {
+    margin-right: auto; /* Ensures the logo stays on the far left */
+}
+
+.nav-logo {
+    height: 90px;
+    position: relative;
+    left: 15px;
+}
+
+#nav-container .nav-item {
+    margin-left: 10px; /* Space out navigation items if needed */
+}
+
 #hamburger{
     display: none;
 }
@@ -167,7 +181,8 @@ header {
 }
 
 #nav-extra {
-    justify-content: flex-end;    
+    justify-content: flex-end; 
+    margin-left: auto; /* Ensures the extra items are on the far right */   
 }
 #nav-extra a{
     margin: 1% 15%
@@ -600,22 +615,12 @@ a.nav-link.active {
     width: auto;
     height: 90px; /* Adjust the height of the logo */
 }
-    #overlay-text {
-        top: 90%;
-        left: 75%;
-        font-size: 85px;
-    }
-    #overlay-text2 {
-        top: 96%;
-        left: 75%;
-        font-size: 30px;
-    }
-    #hamburger{
-        display: contents;
-    }
-    #desktop-nav{
-        display: none;
-    }
+#hamburger{
+    display: contents;
+}
+#desktop-nav{
+    display: none;
+}
 /* Keep the hamburger icon fixed at the top-left */
 .navbar-toggler {
     position: fixed;
@@ -697,9 +702,29 @@ a.nav-link.active {
     text-decoration: none;
     color: #333;
 }
+/* Home */
+    #overlay-text {
+        top: 90%;
+        left: 75%;
+        font-size: 85px;
+    }
+    #overlay-text2 {
+        top: 96%;
+        left: 75%;
+        font-size: 30px;
+    }
 
 /*About us*/
 #item-3{
     width: 55vw; 
 }
   }
+  @media (max-width: 1200px) {
+    /* Navbar */
+    #nav-main a {
+        padding: 0 10px; /* Reduce padding to allow more space */
+    }
+    #nav-extra a {
+        margin: 0 5px; /* Reduce margin on the 'Book' link so it does not overlap contact link */
+    }
+}
