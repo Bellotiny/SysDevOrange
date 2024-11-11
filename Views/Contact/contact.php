@@ -17,7 +17,7 @@ ini_set('display_errors', 1);
                 <div class="card shadow-lg border-0">
                     <!-- Card Header -->
                     <div class="card-header">
-                        <h1 class="custom-header amsterdamThree-fontstyle text-green text-shadow-pink">Contact Us</h1>
+                        <h1 class="custom-header display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up">Contact Us</h1>
                     </div>
 
                     <!-- Card Body -->

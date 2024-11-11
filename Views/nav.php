@@ -7,7 +7,9 @@ include_once 'head.php';
         
         <!-- Logo on the far left -->
         <div id="logo">
-            <img src="./Views/Images/logo.png" alt="Logo" class="nav-logo">
+            <a href="<?=BASE_PATH?>/home">
+            <img src="<?=BASE_PATH?>/Views/Images/logo.png" alt="Logo" class="nav-logo">
+            </a>
         </div>
 
         <!-- Navigation Links in the center -->
@@ -43,7 +45,7 @@ include_once 'head.php';
             <!-- Centered Logo -->
             <div class="logo-container">
                 <a href="<?=BASE_PATH?>/home">
-                     <img src="./Views/Images/logo.png" id="navbarLogo" alt="logo">
+                     <img src="<?=BASE_PATH?>/Views/Images/logo.png" id="navbarLogo" alt="Logo">
                 </a>
             </div>
         </div>
