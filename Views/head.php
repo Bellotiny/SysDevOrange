@@ -29,6 +29,8 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzbh1Yz6rZjixF1W8z4xGZ5VFMfbg0g5E7IlBRp1aCzj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--GOOGLE MAP API--->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoXn_Mhjl6UIT0kzatQQTuKAsAdz_5wF8&libraries=places"async defer></script>
       <!-- Include customize js in head.php -->
     <script src="<?=BASE_PATH?>/Views/Scripts/script.php"></script>
     <script src="<?=BASE_PATH?>/Views/Scripts/nav_script.php"></script>

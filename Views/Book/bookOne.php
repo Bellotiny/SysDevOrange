@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ?>
 
 <?php include_once 'Views/nav.php'; ?>
-
+<body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
   <form method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
@@ -455,15 +455,38 @@ ini_set('display_errors', 1);
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
 
-        <!-- Section Home Service -->
-        <h3>Address</h3>
+        <div class="container my-3">
+          <div class="p-5 text-center green-background rounded-3">
+            <h1 class="text-body-emphasis">Enter your address to verfiy</h1>
+            <p class="lead">
+              Take note: Home service is only available  <code>20 km </code> from the owner's place.
+              
+              <div class="row">
+                <div class=" col-4  " id=""></div>
+                <div class=" col-4 green-background " id="output"></div>
+                <div class=" col-4  " id=""></div>
+              </div>
+              
+            </p>
+          </div>
+        </div>
+
+        <div class="container">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Destination Location" id="destination">
+        </div>
+        <br>
+       <button type="button" onclick="calcRoute()" class="btn btn-primary"  >Verify Address</button>
+       <hr>
+       <div id="map" style="height: 250px; width: 100%;"></div>
+        </div>
+
+
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4">Back</a>
           <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4">Next</a>   
         </div>
-
-
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 10%">10%</div>
@@ -477,7 +500,7 @@ ini_set('display_errors', 1);
 
 <script>
   
-
+//colors select
 function selectColor(colorGroup, colorName, groupId) {
     const groupContainer = document.getElementById(groupId);
 
@@ -559,6 +582,69 @@ let currentSection = 1;
         showSection(currentSection); // Show the new section
       });
     });
+
+    //google mapppp
+    let map;
+let directionsService;
+let directionsRenderer;
+let destinationAutoComplete;
+let sourceAddress = { lat: 45.435095, lng: -73.672204 };
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 45.5017, lng: -73.5673 },
+    zoom: 13
+  });
+
+  google.maps.event.addListener(map, "click", function(event) {
+    this.setOptions({ scrollwheel: true });
+  });
+
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+
+  destinationAutoComplete = new google.maps.places.Autocomplete(
+    document.getElementById('destination')
+  );
+}
+
+function calcRoute() {
+  let destination = document.getElementById('destination').value;
+  var output =  document.getElementById('output');
+
+  let request = {
+    origin: sourceAddress,
+    destination: destination,
+    travelMode: 'DRIVING'
+  };
+
+  directionsService.route(request, function(result, status) {
+    if (status === "OK") {
+      directionsRenderer.setDirections(result);
+      
+      // Calculate and display the distance
+      const distanceInMeters = result.routes[0].legs[0].distance.value;
+      const distanceInKm = (distanceInMeters / 1000).toFixed(2); // Convert to km and round to 2 decimals
+      output.innerHTML = `<h3>${distanceInKm} km</h3>`;
+      output.classList.add('result-design');
+
+      // Check if within 20 km range
+      if (distanceInKm <= 20) {
+        output.innerHTML = `<p>Within 20 km range for home service.</p>`;
+        output.style.color = "#667744";
+      } else {
+        output.innerHTML = `<p>Outside the 20 km range for home service.</p>`;
+        output.style.color = "#D9534F";
+      }
+
+    } else {
+      output.innerHTML = `<p>Location not found</p>`;
+      output.style.color = "#D9534F";
+    }
+  });
+}
+
 </script>
 
 </body>
