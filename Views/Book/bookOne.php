@@ -12,73 +12,35 @@ ini_set('display_errors', 1);
      <div class="form-section active container pt-5 "  id="section1">
 
        <!-- Section 1 Base Service -->
-        <h3>Base Service</h3>
-        <div class="list-group d-flex flex-row w-100 m-2">     
-          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans" > 
-            <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked="">
-            <span>
-              Base Price<small class="text-body-secondary"> ( It follows the natural length of your nails)</small>
-            </span>
-            <div class="mb-1 d-block  text-success">35 CAD</div>
-          </label>
-          
-          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style  p-4 canvaSans" > 
-            <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios2" value="">
-            <span>
-              Base Price Extension<small class="text-body-secondary"> ( It extends your nail length depending on your preferrence)</small>
-            </span>
-            <div class="mb-1 d-block  text-success">45 CAD</div>
-          </label> 
-        </div>
+       <?php
+          $countType = 0;
+              $maxCount = array_count_values(array_map(function($service) {
+                  return $service->type;
+              }, $data['services']));
 
-         <!-- Section 1 Design Service -->
-         <h3>Design Service:</h3>
-         <div class="d-flex justify-content-around " > 
-            <div class="list-group flex-row w-100"> 
-                <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans"> 
-                    <input class="form-check-input flex-shrink-0" type="checkbox" value="" >
-                    <span>
-                        Nail Art <small class=" text-body-secondary">(per nail)</small>
-                    </span>
-                    <div class="mb-1 d-block  text-success">5 CAD</div>
-                </label>
-                <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans">
-                    <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-                    <span>
-                        French tips <small class=" text-body-secondary">(plus the preferred base )</small>
-                    </span>
-                    <div class="mb-1 d-block  text-success">5 CAD</div>
-                </label>
-            </div>
-        </div>
+          foreach($data['services'] as $service){
+                  if ($countType < $maxCount[$service->type]) {
+                      if ($countType == 0) {
+                          echo '<h3>' . $service->type . '</h3>';
+                      }
+                      $countType++;
+                  } else {
+                      $countType = 0;
+                      echo '<h3>' . $service->type . '</h3>';
+                      $countType++;
+                  }
 
-         <!-- Section 1 Additional Service -->
-         <h3>Additional services:</h3>
-         <div class="d-flex justify-content-around" style="width: 100%;"> 
-          <div class="list-group flex-row w-100"> 
-              <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans"> 
-                  <input class="form-check-input flex-shrink-0" type="checkbox" value="" >
-                  <span>
-                      Nail Take off
-                  </span>
-                  <div class="mb-1 d-block  text-success">10 CAD</div>
-              </label>
-              <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans">
-                  <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-                  <span>
-                      Nail Polish Change
-                  </span>
-                  <div class="mb-1 d-block  text-success">10 CAD</div>
-              </label>
-              <label class="list-group-item d-flex gap-2 flex-fill  p-4 canvaSans">
-                  <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-                  <span>
-                      Pre-Painted Nail Art
-                  </span>
-                  <div class="mb-1 d-block  text-success">10 CAD</div>
-              </label>
-          </div>
-        </div>
+                  echo '<div class="list-group d-flex flex-row w-100 m-2">
+                          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
+                              <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked="">
+                              <span>
+                                  ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
+                              </span><br><br>
+                              <div class="mb-1 d-block text-success">' . $service->price . ' CAD</div>
+                          </label>
+                        </div>';
+              }
+      ?>
 
         <!-- Section 1 Location Service -->
         <h3>Service Location:</h3>
@@ -131,60 +93,23 @@ ini_set('display_errors', 1);
               </button>
             </h3>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body slide-up">
+            <div class="accordion-body slide-up">
                 <div class="row text-center">
-                  <!----here are the colors--->
-                  <div class="col-lg-2 mb-3 color-item selected">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color1', 'Classic Red', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 0, 0)"></rect></svg>
-                      <h5 class="fw-normal">Classic Red</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Baby Pink', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 182, 193)"></rect></svg>
-                      <h5 class="fw-normal">Baby Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Nude Beige', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(222, 184, 135)"></rect></svg>
-                      <h5 class="fw-normal">Nude Beige</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Peach', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 218, 185)"></rect></svg>
-                      <h5 class="fw-normal">Peach</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Lavender', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(230, 230, 250)"></rect></svg>
-                      <h5 class="fw-normal">Lavender</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Mint Green', 'colorGroup1')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(152, 251, 152)"></rect></svg>
-                      <h5 class="fw-normal">Mint Green</h5>
-                  </div>
-
-
-                  <!-----more colors--->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Sky Blue', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(135, 206, 235)"></rect></svg>
-                      <h5 class="fw-normal">Sky Blue</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Deep Purple', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(75, 0, 130)"></rect></svg>
-                      <h5 class="fw-normal">Deep Purple</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Bold Orange', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect></svg>
-                      <h5 class="fw-normal">Bold Orange</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Sunny Yellow', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 223, 0)"></rect></svg>
-                      <h5 class="fw-normal">Sunny Yellow</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Berry Pink', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(199, 21, 133)"></rect></svg>
-                      <h5 class="fw-normal">Berry Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color1', 'Coral', 'colorGroup1')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 127, 80)"></rect></svg>
-                      <h5 class="fw-normal">Coral</h5>
-                  </div>
+                    <!----here are the colors--->
+                    <?php
+                        $selectedColor = false; // Use this flag if you need to mark a selected color
+                        foreach ($data['colors'] as $colors) {
+                            // Determine if the current color should be selected
+                            $isSelected = $selectedColor ? 'selected' : '';
+                            echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . addslashes($colors->name) . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                    </svg>
+                                    <h5 class="fw-normal">' . $colors->name . '</h5>
+                                  </div>';
+                        }
+                    ?>
                 </div>
               </div>
             </div>
