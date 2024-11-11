@@ -36,7 +36,7 @@ include_once 'head.php';
             <!-- Centered Logo -->
             <div class="logo-container">
                 <a href="<?=BASE_PATH?>/home">
-                     <img src="./Views/Images/logo.png" id="navbarLogo">
+                     <img src="./Views/Images/logo.png" id="navbarLogo" alt="logo">
                 </a>
             </div>
         </div>

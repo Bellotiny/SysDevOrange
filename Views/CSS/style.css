@@ -131,7 +131,7 @@ header {
     background-color: rgb(255, 255, 255, 0.9); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
-    width: 100%;
+    width: 100vw;
     height: 11vh;
     max-height: 100vh;
     z-index: 300;
@@ -592,21 +592,22 @@ a.nav-link.active {
 .logo-container {
     position: absolute;
     left: 50%;
-    right: 50%;
+    transform: translateX(-50%);
+   
 }
 
 #navbarLogo {
     width: auto;
-    height: 100px; /* Adjust the height of the logo */
+    height: 90px; /* Adjust the height of the logo */
 }
     #overlay-text {
         top: 85%;
-        left: 50%;
+        left: 65%;
         font-size: 75px;
     }
     #overlay-text2 {
         top: 90%;
-        left: 50%;
+        left: 65%;
         font-size: 20px;
     }
     #hamburger{
