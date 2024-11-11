@@ -176,9 +176,11 @@ header {
     border-radius: 15px;
   
 }
-#nav-main a:hover, #nav-extra a:hover {
+#nav-main a:hover, #nav-extra a:hover, .account-image:hover {
     color: #f37a74;
+    fill: #f37a74; /* Applies pink color on hover for SVG */
 }
+
 
 #nav-extra {
     justify-content: flex-end; 
@@ -704,12 +706,12 @@ a.nav-link.active {
 }
 /* Home */
     #overlay-text {
-        top: 90%;
+        top: 75%;
         left: 75%;
         font-size: 85px;
     }
     #overlay-text2 {
-        top: 96%;
+        top: 81%;
         left: 75%;
         font-size: 30px;
     }
