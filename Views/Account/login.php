@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include_once 'Views/nav.php';
+include_once 'Views/bookingModal.php';
 ?>
     
       <main class="d-flex" id="account-Main">

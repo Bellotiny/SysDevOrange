@@ -580,7 +580,7 @@ a.nav-link.active {
 }
 
 /**** Mobile ****/
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
 /* Navbar container */
 .container-fluid {
     display: flex;
@@ -601,14 +601,14 @@ a.nav-link.active {
     height: 90px; /* Adjust the height of the logo */
 }
     #overlay-text {
-        top: 85%;
-        left: 65%;
-        font-size: 75px;
+        top: 90%;
+        left: 75%;
+        font-size: 85px;
     }
     #overlay-text2 {
-        top: 90%;
-        left: 65%;
-        font-size: 20px;
+        top: 96%;
+        left: 75%;
+        font-size: 30px;
     }
     #hamburger{
         display: contents;
@@ -698,5 +698,8 @@ a.nav-link.active {
     color: #333;
 }
 
-
+/*About us*/
+#item-3{
+    width: 55vw; 
+}
   }
