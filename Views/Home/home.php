@@ -257,6 +257,8 @@ include_once 'Views/nav.php';
     window.addEventListener('scroll', checkSlide);
     checkSlide(); 
 
+    
+
     // Show login form
     document.getElementById("showLogin").addEventListener("click", function(event) {
       event.preventDefault();
@@ -306,12 +308,8 @@ include_once 'Views/nav.php';
     });
   });
   </script>
-
-
-
-
+  
   <?php include_once 'Views/footer.php'; ?>
-
 
 </body>
 </html>

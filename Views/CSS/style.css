@@ -123,6 +123,9 @@ h2{
     color: #667744;
 }
 /********* NAV *********/
+#hamburger{
+    display: none;
+}
 header {
     overflow: hidden;
     background-color: rgb(255, 255, 255, 0.9); /*Add transparency to navbar */
@@ -130,7 +133,8 @@ header {
     top: 0; 
     width: 100%;
     height: 11vh;
-    z-index: 3;
+    max-height: 100vh;
+    z-index: 300;
     
 }
  #account_img {
@@ -214,14 +218,14 @@ header {
 }
 
 #overlay-text {
-    position: absolute;
+    position: relative;
     top: 50%; 
     left: 80%; 
     transform: translate(-50%, -50%);  
     color: black; 
     padding: 10px 20px; 
     font-size: 160px; 
-    width: 700px;
+    width: 100%;
     text-align: center;
 }
 #overlay-text2 {
@@ -575,3 +579,123 @@ a.nav-link.active {
     transform: translateY(0); 
 }
 
+/**** Mobile ****/
+@media only screen and (max-width: 1000px) {
+/* Navbar container */
+.container-fluid {
+    display: flex;
+    justify-content: space-between; /* Aligns hamburger on the left */
+    align-items: center; /* Vertically centers the elements */
+}
+
+/* Centered logo */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+}
+
+#navbarLogo {
+    width: auto;
+    height: 100px; /* Adjust the height of the logo */
+}
+    #overlay-text {
+        top: 85%;
+        left: 50%;
+        font-size: 75px;
+    }
+    #overlay-text2 {
+        top: 90%;
+        left: 50%;
+        font-size: 20px;
+    }
+    #hamburger{
+        display: contents;
+    }
+    #desktop-nav{
+        display: none;
+    }
+/* Keep the hamburger icon fixed at the top-left */
+.navbar-toggler {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100; /* Higher than the overlay */
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Full-screen overlay for mobile nav */
+.full-screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Show overlay when menu is open */
+.full-screen-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Centered menu items in column */
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+/* Styling for nav links */
+.menu-content a {
+    font-family: "Canvas Sans", sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #1b613e;
+    padding: 0.5rem 1rem;
+}
+.menu-content a:hover, .nav-row a:hover {
+    color: #f37a74;
+}
+
+.menu-content a.active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Row layout for the last two links */
+.nav-row {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+.nav-row a {
+    color: white;
+}
+#mobile-account {
+    color: black;
+}
+
+.Nav-Split {
+    
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #333;
+}
+
+
+  }
