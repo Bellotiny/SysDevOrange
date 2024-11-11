@@ -48,13 +48,13 @@ include_once 'Views/head.php';
     </div>
   </div>
 
-  <div id="instagram-pic">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 2">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about3.png" alt="Image 3">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about4.png" alt="Image 4">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat2.jpg" alt="Image 5">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat3.jpg" alt="Image 6">
+  <div id="instagram-pic">   
+
+    <?php
+    foreach ($data['data'] as $post) {
+      echo "<img class='slide-up' src='{$post['media_url']}' alt='instagram_post'>";
+    }
+    ?>
       
   </div>
 
