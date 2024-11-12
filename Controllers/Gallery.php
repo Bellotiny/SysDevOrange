@@ -2,7 +2,7 @@
 
 include_once "Controllers/Controller.php";
 include_once "Models/Review.php";
-include_once "Models/Helper/Join.php";
+include_once "Models/Booking.php";
 
 class Gallery extends Controller {
     public static function redirect(string $action = ""): void {
@@ -17,11 +17,35 @@ class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                if (!isset($_POST['title']) || !isset($_POST['message'])) {
+//                if (count(Booking::getFromUser($this->user)) <= count(Review::getFromUser($this->user))) {
+//                    $this->render("Gallery", $action, [
+//                        "user" => $this->user,
+//                        "error" => "You are only allowed 1 review per booking.",
+//                    ]);
+//                    break;
+//                }
+                if (!isset($_POST['title']) || !isset($_POST['message']) || !isset($_FILES['image'])) {
                     $this->render("Gallery", $action, ["user" => $this->user]);
                     break;
                 }
-                Review::new($this->user, $_POST['title'], $_POST['message'], date("Y-m-d H:i:s"));
+                if ($_POST['title'] === "" || $_POST['message'] === "") {
+                    $this->render("Gallery", $action, [
+                        "user" => $this->user,
+                        "error" => "Title or Message cannot be empty",
+                        "title" => $_POST['title'],
+                        "message" => $_POST['message'],
+                    ]);
+                    break;
+                }
+                $image = null;
+                if ($_FILES['image']['name'] !== "" && $_FILES['image']['tmp_name'] !== "") {
+                    $image = Image::new(
+                        pathinfo($_FILES['image']['name'], PATHINFO_FILENAME),
+                        pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+                    );
+                    move_uploaded_file($_FILES['image']['tmp_name'], $image->getPath());
+                }
+                Review::new($this->user, $_POST['title'], $_POST['message'], date("Y-m-d H:i:s"), $image);
                 $this->redirect();
                 break;
             case "edit":
@@ -37,12 +61,34 @@ class Gallery extends Controller {
                     $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
                     break;
                 }
-                $review->title = $_POST['title'];
-                $review->message = $_POST['message'];
-                if (!$review->save()) {
-                    $this->render("Gallery", $action, ["user" => $this->user, "error" => "Unable to update review. Try Again Later."]);
+                if ($_POST['title'] === "" || $_POST['message'] === "") {
+                    $this->render("Gallery", $action, [
+                        "user" => $this->user,
+                        "error" => "Title or Message cannot be empty",
+                        "title" => $_POST['title'],
+                        "message" => $_POST['message'],
+                    ]);
                     break;
                 }
+                $review->title = $_POST['title'];
+                $review->message = $_POST['message'];
+                if ($_FILES['image']['name'] !== "" && $_FILES['image']['tmp_name'] !== "") {
+                    if ($review->image) {
+                        if ($review->image->extension !== pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION) && file_exists($review->image->getPath())) {
+                            unlink($review->image->getPath());
+                        }
+                        $review->image->name = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME);
+                        $review->image->extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                        $review->image->save();
+                    } else {
+                        $review->image = Image::new(
+                            pathinfo($_FILES['image']['name'], PATHINFO_FILENAME),
+                            pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+                        );
+                    }
+                    move_uploaded_file($_FILES['image']['tmp_name'], $review->image->getPath());
+                }
+                $review->save();
                 $this->redirect();
                 break;
             case "delete":
@@ -54,11 +100,24 @@ class Gallery extends Controller {
                     $this->redirect();
                     break;
                 }
+                if (!isset($_POST['confirm'])) {
+                    $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
+                    break;
+                }
+                if ($review->image) {
+                    $review->image->delete();
+                    if (file_exists($review->image->getPath())) {
+                        unlink($review->image->getPath());
+                    }
+                }
                 $review->delete();
                 $this->redirect();
                 break;
             default:
-                $this->render("Gallery", "list", ["user" => $this->user, "reviews" => Review::list(null, 10, (10 * (int)($_GET['id'] ?? 0)))]);
+                $this->render("Gallery", "list", [
+                    "user" => $this->user,
+                    "reviews" => Review::list(null, 10, (10 * (int)($_GET['id'] ?? 0))),
+                ]);
         }
     }
 }

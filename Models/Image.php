@@ -4,12 +4,12 @@ include_once "Model.php";
 
 class Image extends Model {
     public string $name;
-    public string $data;
+    public string $extension;
 
     public function __construct(array $fields) {
         $this->id = $fields[self::getTable() . '.id'];
         $this->name = $fields[self::getTable() . '.name'];
-        $this->data = $fields[self::getTable() . '.data'];
+        $this->extension = $fields[self::getTable() . '.extension'];
     }
 
     public static function getTable(): string {
@@ -17,20 +17,28 @@ class Image extends Model {
     }
 
     public static function getFields(): array {
-        return ["id", "name", "data"];
+        return ["id", "name", "extension"];
     }
 
-    public static function new(string $name, string $data): ?Image {
+    public function getAssoc(): array {
+        return [
+            self::getTable() . ".id" => $this->id,
+            self::getTable() . ".name" => $this->name,
+            self::getTable() . ".extension" => $this->extension,
+        ];
+    }
+
+    public static function new(string $name, string $extension): ?Image {
         $values = new Values();
         $values->add(new Value(self::getTable() . ".name", $name));
-        $values->add(new Value(self::getTable() . ".data", $data));
+        $values->add(new Value(self::getTable() . ".extension", $extension));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             return new Image([
                 self::getTable() . ".id" => $id,
                 self::getTable() . ".name" => $name,
-                self::getTable() . ".data" => $data,
+                self::getTable() . ".extension" => $extension,
             ]);
         } catch (Exception) {
             return null;
@@ -40,9 +48,13 @@ class Image extends Model {
     public function save(): bool {
         $values = new Values();
         $values->add(new Value(self::getTable() . ".name", $this->name));
-        $values->add(new Value(self::getTable() . ".data", $this->data));
+        $values->add(new Value(self::getTable() . ".extension", $this->extension));
         $where = new Where();
         $where->addEquals(new Value(self::getTable() . ".id", $this->id));
         return self::update($values, $where);
+    }
+
+    public function getPath(): string {
+        return "images/" . $this->id . "." . $this->extension;
     }
 }

@@ -68,4 +68,14 @@ class Booking extends Model {
         $where->addEquals(new Value(self::getTable() . ".id", $this->id));
         return self::update($values, $where);
     }
+
+    /**
+     * Get bookings based on User
+     * @return Booking[]
+     */
+    public static function getFromUser(User $user): array {
+        $where = new Where();
+        $where->addEquals(new Value(self::getTable() . ".userID", $user->id));
+        return self::list($where) ?? [];
+    }
 }
