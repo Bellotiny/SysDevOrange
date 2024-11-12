@@ -48,17 +48,25 @@ include_once 'Views/head.php';
     </div>
   </div>
 
-  <div id="instagram-pic">   
+  <div id="instagram-pic"> 
 
-    <?php
-    foreach ($data['data'] as $post) {
-      echo "<img class='slide-up' src='{$post['media_url']}' alt='instagram_post'>";
+  <?php
+    foreach ($mediaItems as $item) {
+      if($item['type'] == 'CAROUSEL_ALBUM' || $item['type'] == 'IMAGE') {
+        echo "<img class='slide-up' src='" . htmlspecialchars($item['url']) . "' alt='instagram_post'>";
+      } elseif ($item['type'] == 'VIDEO') {
+        echo "<video controls>
+                <source src='" . htmlspecialchars($item['url']) . "' type='video/mp4'>
+                Your browser does not support the video tag.
+              </video>";
+      }
     }
-    ?>
-      
-  </div>
+  ?>
+  
+  </div>  
 
-  <div>
+
+
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >

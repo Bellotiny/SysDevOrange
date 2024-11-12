@@ -10,6 +10,7 @@ abstract class Controller {
     }
 
     public function render($controller, $view, $data = []): void {
+        extract($data);
         include "Views/$controller/$view.php";
     }
 }
