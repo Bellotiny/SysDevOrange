@@ -1,11 +1,11 @@
 <?php
 
+include_once "Models/User.php";
+
 define("BASE_PATH", dirname($_SERVER['SCRIPT_NAME']));
 
-$controller = $_GET['controller'] ?? "home";
+$controller = ucfirst($_GET['controller'] ?? "home");
+include_once "Controllers/$controller.php";
 
-$controllerClassName = ucfirst($controller) . "Controller";
-include_once "Controllers/$controllerClassName.php";
-
-$ct = new $controllerClassName();
+$ct = new $controller(User::getFromCookie());
 $ct->route();

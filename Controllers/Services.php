@@ -2,12 +2,12 @@
 
 include_once "Controllers/Controller.php";
 
-class ContactController extends Controller {
+class Services extends Controller {
     public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/contact/" . $action);
+        header('Location: ' . BASE_PATH . "/services/" . $action);
     }
 
     public function route(): void {
-        $this->render("Contact", "contact");
+        $this->render("Services", "services");
     }
 }
