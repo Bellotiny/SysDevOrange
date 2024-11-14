@@ -10,7 +10,7 @@ class Color extends Model {
         return "colors";
     }
 
-    public static function new(string $name, string $code): Color|false {
+    public static function new(string $name, string $code): ?Color {
         $color = new Color();
         $values = new Values();
         $values->add(new Value("name", $color->name = $name));
@@ -21,7 +21,7 @@ class Color extends Model {
             $color->id = self::getConnection()->insert_id;
             return $color;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

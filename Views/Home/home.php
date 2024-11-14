@@ -33,7 +33,6 @@ include_once 'Views/nav.php';
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
               </div>
-
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
@@ -75,7 +74,7 @@ include_once 'Views/nav.php';
         </div>
         <div class="container d-flex justify-content-center gap-4 my-5">
           <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
+          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/" role="button">Confirm</a>
         </div>
       </div>
     </div>

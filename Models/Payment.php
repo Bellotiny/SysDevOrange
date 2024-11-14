@@ -11,7 +11,7 @@ class Payment extends Model {
         return "payments";
     }
 
-    public static function new(bool $status, float $amount, int $dateTime): Payment|false {
+    public static function new(bool $status, float $amount, int $dateTime): ?Payment {
         $Payment = new Payment();
         $values = new Values();
         $values->add(new Value("status", $Payment->status = $status));
@@ -23,7 +23,7 @@ class Payment extends Model {
             $Payment->id = self::getConnection()->insert_id;
             return $Payment;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

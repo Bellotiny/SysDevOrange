@@ -33,7 +33,7 @@ include_once 'Views/head.php';
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
                         <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
-                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/bookOne" role="button">Confirm</a>
+                        <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/" role="button">Confirm</a>
 
                     </div>
                 </div>
@@ -78,7 +78,7 @@ include_once 'Views/head.php';
   <div class="d-grid gap-2">
     <button class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false">Write Review</button>
   </div>
-</div>
+  </div>
 
 <!-- Initially hidden review form -->
 <div id="review-form-input" class="pb-3" style="display: none;">

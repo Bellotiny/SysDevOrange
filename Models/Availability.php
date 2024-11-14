@@ -10,7 +10,7 @@ class Availability extends Model {
         return "availabilities";
     }
 
-    public static function new(int $start, int $end): Availability|false {
+    public static function new(int $start, int $end): ?Availability {
         $availability = new Availability();
         $values = new Values();
         $values->add(new Value("start", $availability->start = $start));
@@ -21,7 +21,7 @@ class Availability extends Model {
             $availability->id = self::getConnection()->insert_id;
             return $availability;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

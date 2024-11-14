@@ -13,7 +13,7 @@ class Discount extends Model {
         return "discounts";
     }
 
-    public static function new(string $name, int $start, int $end, float $percent, float $amount): Discount|false {
+    public static function new(string $name, int $start, int $end, float $percent, float $amount): ?Discount {
         $discount = new Discount();
         $values = new Values();
         $values->add(new Value("name", $discount->name = $name));
@@ -28,7 +28,7 @@ class Discount extends Model {
             $discount->id = self::getConnection()->insert_id;
             return $discount;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 

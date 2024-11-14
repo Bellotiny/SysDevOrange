@@ -7,25 +7,27 @@ class Service extends Model {
     public float $price;
     public string $description;
     public int $duration;
+    public string $type;
 
     protected static function getTable(): string {
-        return "bookings";
+        return "services";
     }
 
-    public static function new(string $name, float $price, string $description, int $duration): Service|false {
+    public static function new(string $name, float $price, string $description, int $duration): ?Service {
         $service = new Service();
         $values = new Values();
         $values->add(new Value("name", $service->name = $name));
         $values->add(new Value("price", $service->price = $price));
         $values->add(new Value("description", $service->description = $description));
         $values->add(new Value("duration", $service->duration = $duration));
+        $values->add(new Value("type", $service->type = $type));
 
         try {
             self::insertRow($values, false);
             $service->id = self::getConnection()->insert_id;
             return $service;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 
@@ -35,6 +37,7 @@ class Service extends Model {
         $values->add(new Value("price", $this->price));
         $values->add(new Value("description", $this->description));
         $values->add(new Value("duration", $this->duration));
+        $values->add(new Value("type", $this->type));
         $where = new Where();
         $where->addEquals(new Value("id", $this->id));
         return self::updateRows($values, $where);

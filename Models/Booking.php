@@ -14,7 +14,7 @@ class Booking extends Model {
         return "bookings";
     }
 
-    public static function new(string $status, int $start, int $end, int $userID, int $paymentID, int $discountID): Booking|false {
+    public static function new(string $status, int $start, int $end, int $userID, int $paymentID, int $discountID): ?Booking {
         $booking = new Booking();
         $values = new Values();
         $values->add(new Value("status", $booking->status = $status));
@@ -23,14 +23,12 @@ class Booking extends Model {
         $values->add(new Value("userID", $booking->userID = $userID));
         $values->add(new Value("paymentID", $booking->paymentID = $paymentID));
         $values->add(new Value("discountID", $booking->discountID = $discountID));
-
-
         try {
             self::insertRow($values, false);
             $booking->id = self::getConnection()->insert_id;
             return $booking;
         } catch (Exception) {
-            return false;
+            return null;
         }
     }
 
