@@ -33,19 +33,31 @@ include_once 'Views/bookingModal.php';
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                <p class="mt-3"><a href="#" id="showForgotForm">Forgot Your Password?</a></p>
               </div>
 
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
           </form>
-
+         
+          <!-- Forgot Form (Initially Hidden) -->
+          <form id="forgotForm" method="POST" action="#" style="display: none;">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            <button type="submit" class="btn btn-primary mt-3">Send Email</button>
+            <button type="button" class="btn btn-secondary mt-3" id="goBackFromForgot">Go Back</button>
+            <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>
+          </form>
+          
           <!-- Register Form (Initially Hidden) -->
           <form id="registerForm" method="POST" action="<?=BASE_PATH?>/account/register" style="display: none;">
             <?php include_once 'Views/registerForm.php'; ?>
             <button type="submit" class="btn btn-primary mt-3">Register</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromRegister">Go Back</button>
-            <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>
+            <p class="mt-3">Already have an account? <a href="#" id="showLoginFormRegister">Login here</a></p>
           </form>
         </div>
       </div>
@@ -222,6 +234,7 @@ include_once 'Views/bookingModal.php';
     const welcomeMessage = document.getElementById("welcomeMessage");
     const loginForm = document.getElementById("loginForm");
     const registerForm = document.getElementById("registerForm");
+    const forgotForm = document.getElementById("forgotForm");
     const authModalTitle = document.getElementById("authModalTitle");
 
     //
@@ -239,12 +252,22 @@ include_once 'Views/bookingModal.php';
       authModalTitle.textContent = "Login";
     });
 
+    // Show forgot form
+    document.getElementById("showForgotForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      welcomeMessage.style.display = "none";
+      registerForm.style.display = "none";
+      loginForm.style.display = "none";
+      forgotForm.style.display = "block";
+      authModalTitle.textContent = "Forgot Password";
+    });
     // Show register form
     document.getElementById("showRegister").addEventListener("click", function(event) {
       event.preventDefault();
       welcomeMessage.style.display = "none";
       loginForm.style.display = "none";
       registerForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Register";
     });
 
@@ -253,15 +276,35 @@ include_once 'Views/bookingModal.php';
       event.preventDefault();
       loginForm.style.display = "none";
       registerForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Register";
     });
 
     // Show login form from within register form
-    document.getElementById("showLoginForm").addEventListener("click", function(event) {
+    document.getElementById("showLoginFormRegister").addEventListener("click", function(event) {
       event.preventDefault();
       registerForm.style.display = "none";
       loginForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Login";
+    });
+
+        // Show login form from within forgot form
+        document.getElementById("showLoginForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      registerForm.style.display = "none";
+      loginForm.style.display = "block";
+      forgotForm.style.display = "none";
+      authModalTitle.textContent = "Login";
+    });
+
+    // Show forgot form from within login form
+    document.getElementById("showForgotForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      registerForm.style.display = "none";
+      loginForm.style.display = "none";
+      forgotForm.style.display = "block";
+      authModalTitle.textContent = "Forgot Password";
     });
 
     // Go back to welcome message from login form
@@ -278,6 +321,12 @@ include_once 'Views/bookingModal.php';
       authModalTitle.textContent = "Welcome to our nook!";
     });
   });
+    // Go back to login form from forgot form
+    document.getElementById("goBackFromForgot").addEventListener("click", function() {
+      forgotForm.style.display = "none";
+      loginForm.style.display = "block";
+      authModalTitle.textContent = "Login";
+    });  
   </script>
   
   <?php include_once 'Views/footer.php'; ?>

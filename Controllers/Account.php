@@ -88,6 +88,10 @@ class Account extends Controller {
                 setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
                 Home::redirect();
                 break;
+                // Wrote this to render forgot.php for forgetting password
+            case "forgot":
+                $this->render("Account", $action);
+                 break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action, [$this->user]);
