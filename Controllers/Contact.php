@@ -41,6 +41,12 @@ class GalleryController extends Controller {
         } else {
             echo "Error fetching data.";
         }
+<<<<<<< HEAD:Controllers/GalleryController.php
         
+=======
+
+
+      
+>>>>>>> SenBranch:Controllers/Contact.php
     }
 }
