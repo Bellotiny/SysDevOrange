@@ -29,7 +29,7 @@ abstract class Controller {
         header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? dirname($_SERVER['PHP_SELF'])));
     }
 
-    public function render($controller, $view, $data = []): void {
+    public function render(string $controller, string $view, array $data = []): void {
         include "Views/$controller/$view.php";
     }
 }
