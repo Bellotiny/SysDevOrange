@@ -49,19 +49,22 @@ include_once 'Views/head.php';
         </div>
 
         <!-- Initially hidden review form -->
-        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/add" method="POST">
+        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/add" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title" required>
             </div>
             <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
-                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here"></textarea>
+                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Upload Image</label>
                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
             </div>
+            <?php if (isset($data['error'])): ?>
+                <p><span style="color:red"><?php echo $data['error']; ?></span></p>
+            <?php endif; ?>
             <div class="d-grid gap-2">
                 <input type="submit" class="btn bttn-green" value="Post">
                 <!-- <button class="btn bttn-green" type="button">Post</button> -->
