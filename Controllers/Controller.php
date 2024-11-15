@@ -4,9 +4,12 @@ include_once "Controllers/Account.php";
 
 abstract class Controller {
     protected ?User $user;
+    protected string $lang;
 
-    public function __construct(?User $user) {
-        $this->user = $user;
+    public function __construct() {
+        $this->user = User::getFromCookie();
+        $this->lang = $_COOKIE['lang'] ?? "en";
+        setcookie("token", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
     }
 
     public abstract static function redirect(string $action = ""): void;

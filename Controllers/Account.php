@@ -16,7 +16,7 @@ class Account extends Controller {
      */
     private static function makeCookie(User $user): void {
         $token = hash("sha256", $user->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16)));
-        setcookie("token", $token, time() + 2592000, "/");
+        setcookie("token", $token, time() + 34560000, "/");
         $user->setToken($token);
     }
 
