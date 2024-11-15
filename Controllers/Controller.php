@@ -9,7 +9,7 @@ abstract class Controller {
     public function __construct() {
         $this->user = User::getFromCookie();
         $this->lang = $_COOKIE['lang'] ?? "en";
-        setcookie("token", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
+        setcookie("lang", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
     }
 
     public abstract static function redirect(string $action = ""): void;
