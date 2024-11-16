@@ -10,27 +10,26 @@ class GalleryController extends Controller {
     }
 
     public function route(): void {
-        $url = "https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=" . self::INSTAGRAM_ACCESS_TOKEN;
-        //var_dump($url);
-
-        // Initialize cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        // Execute the request
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $data = json_decode($response, true);
-        //var_dump($response);
-        if (isset($data['data'])) {
-            $this->render("Gallery", "gallery",$data);
-            
-        } else {
-            echo "Error fetching data.";
+        if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['message'])) {
+            $this->render("Contact", "contact");
+            return;
         }
-
-
-      
+        $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $this->render("Contact", "contact", ["error" => "Invalid Email format"]);
+            return;
+        }
+        mail(  // TODO This doesnt seem to work on localhost, maybe it will work on a live server but if not we need to find another solution.
+            "maxime.mirorefice@gmail.com",
+            "Website Contact Form",
+            "FROM: {$_POST['firstName']} {$_POST['lastName']}\n\nMESSAGE: {$_POST['message']}",
+            array(
+                "From" => $_POST['email'],
+                "Reply-To" => $_POST['email'],
+                "Content-Type" => 'text/html; charset=UTF-8',
+                "X-Mailer" => 'PHP/' . phpversion(),
+            ),
+        );
+        $this->render("Contact", "confirmation");
     }
 }

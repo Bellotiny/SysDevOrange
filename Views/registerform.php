@@ -1,6 +1,6 @@
 
   
-         <form method="POST">
+         <form method="POST" action="<?=BASE_PATH?>/account/register" >
           
             <div class="form-group py-2">
               <label for="firstName">First Name</label>
