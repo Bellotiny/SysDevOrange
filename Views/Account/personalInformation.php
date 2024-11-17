@@ -14,50 +14,52 @@ include_once 'Views/bookingModal.php';
     <!-- Added inline style so navbar does not clip the text -->
     <div class="sideScreen container m-3" >
 
-       <div class="container my-2">
-        <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-20" id="divAccount">
-            <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
-            <h1 class="text-body-emphasis">Hello, <?= $data[0]->firstName ?></h1>
-            <p class="col-lg-6 mx-auto mb-4">
-            We're so happy to see you.<br> Your little nook of joy is ready and waiting for you.&#127752;
-            </p>
-        </div>
+        <div class= "container my-2">
+            <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-10" id="divAccount">
+                <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
+                <h1 class="text-body-emphasis">Hello, <?= $data[0]->firstName ?></h1>
+                <p class="col-lg-6 mx-auto mb-4">
+                We're so happy to see you.<br> Your little nook of joy is ready and waiting for you.&#127752;
+                </p>
+            </div>
         </div>
        
-    <div class="my-4">
-        <form>
-            <div class="form-group row my-3">
-                <label for="staticEmail" class="col-sm-2 col-form-label canvaSans-fontstyle display-3">First Name:</label><br>
-                <div class="col-sm-10 border bg-light">
-                    <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->firstName ?>">
+        <div class="my-2 mx-3 on">
+           <div>
+           <form>
+                <div class="form-group  my-1">
+                    <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">First Name:</label><br>
+                    <div class="col-sm-10 border bg-light  p-1">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->firstName ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row my-3">
-                <label for="staticEmail" class="col-sm-2 col-form-label canvaSans-fontstyle display-3">Last Name:</label><br>
-                <div class="col-sm-10 border bg-light">
-                    <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->lastName ?>">
+                <div class="form-group  my-3">
+                    <label for="staticEmail" class=" col-form-label canvaSans-fontstyle">Last Name:</label><br>
+                    <div class="col-sm-10 border bg-light p-1">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->lastName ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row my-3">
-                <label for="staticEmail" class="col-sm-2 col-form-label canvaSans-fontstyle display-3">Email:</label><br>
-                <div class="col-sm-10 border bg-light">
-                    <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->email ?>">
+                <div class="form-group  my-3">
+                    <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Email:</label><br>
+                    <div class="col-sm-10 border bg-light p-2">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->email ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row my-3">
-                <label for="staticEmail" class="col-sm-2 col-form-label canvaSans-fontstyle display-3">Phone Number:</label><br>
-                <div class="col-sm-10 border bg-light">
-                    <input type="text" readonly class="form-control-plaintext  " id="staticEmail" value="<?= $data[0]->phoneNumber ?>">
+                <div class="form-group  my-3">
+                    <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Phone Number:</label><br>
+                    <div class="col-sm-10 border bg-light p-2">
+                        <input type="text" readonly class="form-control-plaintext  " id="staticEmail" value="<?= $data[0]->phoneNumber ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row my-3">
-                <label for="staticEmail" class="col-sm-2 col-form-label canvaSans-fontstyle display-3">Birthday:</label><br>
-                <div class="col-sm-10 border bg-light">
-                    <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->birthDate ?>">
+                <div class="form-group  my-3">
+                    <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Birthday:</label><br>
+                    <div class="col-sm-10 border bg-light p-2">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->birthDate ?>">
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+           </div>
+        </div>
 
     </main>
 
