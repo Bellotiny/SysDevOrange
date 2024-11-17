@@ -124,14 +124,32 @@ h2{
 }
 
 /********* NAV *********/
+#logo {
+    margin-right: auto; /* Ensures the logo stays on the far left */
+}
+
+.nav-logo {
+    height: 90px;
+    position: relative;
+    left: 15px;
+}
+
+#nav-container .nav-item {
+    margin-left: 10px; /* Space out navigation items if needed */
+}
+
+#hamburger{
+    display: none;
+}
 header {
     overflow: hidden;
     background-color: rgb(255, 255, 255, 0.9); /*Add transparency to navbar */
     position: fixed; /* Set the navbar to fixed position */
     top: 0; 
-    width: 100%;
+    width: 100vw;
     height: 11vh;
-    z-index: 3;
+    max-height: 100vh;
+    z-index: 300;
     
 }
  #account_img {
@@ -159,12 +177,15 @@ header {
     border-radius: 15px;
   
 }
-#nav-main a:hover, #nav-extra a:hover {
+#nav-main a:hover, #nav-extra a:hover, .account-image:hover {
     color: #f37a74;
+    fill: #f37a74; /* Applies pink color on hover for SVG */
 }
 
+
 #nav-extra {
-    justify-content: flex-end;    
+    justify-content: flex-end; 
+    margin-left: auto; /* Ensures the extra items are on the far right */   
 }
 #nav-extra a{
     margin: 1% 15%
@@ -215,14 +236,14 @@ header {
 }
 
 #overlay-text {
-    position: absolute;
+    position: relative;
     top: 50%; 
     left: 80%; 
     transform: translate(-50%, -50%);  
     color: black; 
     padding: 10px 20px; 
     font-size: 160px; 
-    width: 700px;
+    width: 100%;
     text-align: center;
 }
 #overlay-text2 {
@@ -584,3 +605,137 @@ a.nav-link.active {
     transform: translateY(0); 
 }
 
+/**** Mobile ****/
+@media only screen and (max-width: 1024px) {
+/* Navbar container */
+.container-fluid {
+    display: flex;
+    justify-content: space-between; /* Aligns hamburger on the left */
+    align-items: center; /* Vertically centers the elements */
+}
+
+/* Centered logo */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+
+#navbarLogo {
+    width: auto;
+    height: 90px; /* Adjust the height of the logo */
+}
+#hamburger{
+    display: contents;
+}
+#desktop-nav{
+    display: none;
+}
+/* Keep the hamburger icon fixed at the top-left */
+.navbar-toggler {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100; /* Higher than the overlay */
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Full-screen overlay for mobile nav */
+.full-screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Show overlay when menu is open */
+.full-screen-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Centered menu items in column */
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+/* Styling for nav links */
+.menu-content a {
+    font-family: "Canvas Sans", sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #1b613e;
+    padding: 0.5rem 1rem;
+}
+.menu-content a:hover, .nav-row a:hover {
+    color: #f37a74;
+}
+
+.menu-content a.active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Row layout for the last two links */
+.nav-row {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+.nav-row a {
+    color: white;
+}
+#mobile-account {
+    color: black;
+}
+
+.Nav-Split {
+    
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #333;
+}
+/* Home */
+    #overlay-text {
+        top: 75%;
+        left: 75%;
+        font-size: 85px;
+    }
+    #overlay-text2 {
+        top: 81%;
+        left: 75%;
+        font-size: 30px;
+    }
+
+/*About us*/
+#item-3{
+    width: 55vw; 
+}
+  }
+  @media (max-width: 1200px) {
+    /* Navbar */
+    #nav-main a {
+        padding: 0 10px; /* Reduce padding to allow more space */
+    }
+    #nav-extra a {
+        margin: 0 5px; /* Reduce margin on the 'Book' link so it does not overlap contact link */
+    }
+}

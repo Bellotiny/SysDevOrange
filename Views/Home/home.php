@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once 'Views/nav.php';
+include_once 'Views/bookingModal.php';
 ?>
 
   <!-- Modal for Welcome/Login/Register -->
@@ -32,49 +33,31 @@ include_once 'Views/nav.php';
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                <p class="mt-3"><a href="#" id="showForgotForm">Forgot Your Password?</a></p>
               </div>
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>
           </form>
-
+         
+          <!-- Forgot Form (Initially Hidden) -->
+          <form id="forgotForm" method="POST" action="#" style="display: none;">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            <button type="submit" class="btn btn-primary mt-3">Send Email</button>
+            <button type="button" class="btn btn-secondary mt-3" id="goBackFromForgot">Go Back</button>
+            <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>
+          </form>
+          
           <!-- Register Form (Initially Hidden) -->
           <form id="registerForm" method="POST" action="<?=BASE_PATH?>/account/register" style="display: none;">
             <?php include_once 'Views/registerForm.php'; ?>
             <button type="submit" class="btn btn-primary mt-3">Register</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromRegister">Go Back</button>
-            <p class="mt-3">Already have an account? <a href="#" id="showLoginForm">Login here</a></p>
+            <p class="mt-3">Already have an account? <a href="#" id="showLoginFormRegister">Login here</a></p>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for Booking -->
-  <div class="modal fade" id="modalBookingWarning" tabindex="-1" role="dialog" aria-labelledby="modalBookingWarningTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalBookingWarningTitle">Booking Information</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h4>Booking Rules:</h4>
-          <ul>
-            <li><strong>The client must pay <span style="color: #d9534f;">$10</span> upon booking</strong>, which will be deducted from the total payment.</li>
-            <li><strong>They must choose at least <span style="color: #d9534f;">one color</span>.</strong></li>
-            <li><strong>Home service is an option but available only <span style="color: #d9534f;">within a certain range</span>.</strong></li>
-            <li><strong>There are <span style="color: #d9534f;">cats</span> in the owner's place.</strong></li>
-          </ul>
-          <hr>
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            <strong>I read all the reminders</strong>
-          </label>
-        </div>
-        <div class="container d-flex justify-content-center gap-4 my-5">
-          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
-          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/" role="button">Confirm</a>
         </div>
       </div>
     </div>
@@ -250,11 +233,14 @@ include_once 'Views/nav.php';
     const welcomeMessage = document.getElementById("welcomeMessage");
     const loginForm = document.getElementById("loginForm");
     const registerForm = document.getElementById("registerForm");
+    const forgotForm = document.getElementById("forgotForm");
     const authModalTitle = document.getElementById("authModalTitle");
 
     //
     window.addEventListener('scroll', checkSlide);
     checkSlide(); 
+
+    
 
     // Show login form
     document.getElementById("showLogin").addEventListener("click", function(event) {
@@ -265,12 +251,22 @@ include_once 'Views/nav.php';
       authModalTitle.textContent = "Login";
     });
 
+    // Show forgot form
+    document.getElementById("showForgotForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      welcomeMessage.style.display = "none";
+      registerForm.style.display = "none";
+      loginForm.style.display = "none";
+      forgotForm.style.display = "block";
+      authModalTitle.textContent = "Forgot Password";
+    });
     // Show register form
     document.getElementById("showRegister").addEventListener("click", function(event) {
       event.preventDefault();
       welcomeMessage.style.display = "none";
       loginForm.style.display = "none";
       registerForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Register";
     });
 
@@ -279,15 +275,35 @@ include_once 'Views/nav.php';
       event.preventDefault();
       loginForm.style.display = "none";
       registerForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Register";
     });
 
     // Show login form from within register form
-    document.getElementById("showLoginForm").addEventListener("click", function(event) {
+    document.getElementById("showLoginFormRegister").addEventListener("click", function(event) {
       event.preventDefault();
       registerForm.style.display = "none";
       loginForm.style.display = "block";
+      forgotForm.style.display = "none";
       authModalTitle.textContent = "Login";
+    });
+
+        // Show login form from within forgot form
+        document.getElementById("showLoginForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      registerForm.style.display = "none";
+      loginForm.style.display = "block";
+      forgotForm.style.display = "none";
+      authModalTitle.textContent = "Login";
+    });
+
+    // Show forgot form from within login form
+    document.getElementById("showForgotForm").addEventListener("click", function(event) {
+      event.preventDefault();
+      registerForm.style.display = "none";
+      loginForm.style.display = "none";
+      forgotForm.style.display = "block";
+      authModalTitle.textContent = "Forgot Password";
     });
 
     // Go back to welcome message from login form
@@ -304,13 +320,15 @@ include_once 'Views/nav.php';
       authModalTitle.textContent = "Welcome to our nook!";
     });
   });
+    // Go back to login form from forgot form
+    document.getElementById("goBackFromForgot").addEventListener("click", function() {
+      forgotForm.style.display = "none";
+      loginForm.style.display = "block";
+      authModalTitle.textContent = "Login";
+    });  
   </script>
-
-
-
-
+  
   <?php include_once 'Views/footer.php'; ?>
-
 
 </body>
 </html>
