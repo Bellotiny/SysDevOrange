@@ -5,6 +5,7 @@ use Random\RandomException;
 include_once "Models/User.php";
 include_once "Controllers/Controller.php";
 include_once "Controllers/Home.php";
+include_once "Controllers/Mail/Mailer.php";
 
 class Account extends Controller {
     public static function redirect(string $action = "personalInformation"): void {
@@ -35,11 +36,56 @@ class Account extends Controller {
                     break;
                 }
                 try {
-                    self::makeCookie($user);
+                    $code = random_int(100000, 999999);
+                } catch (Exception) {
+                    $this->render("Account", $action, ["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST['email']]);
+                }
+                session_start();
+                $_SESSION["user"] = $user;
+                $_SESSION["code"] = $code;
+                $_SESSION["time"] = time();
+                $_SESSION["tries"] = 0;
+                self::redirect("2fa");
+                flush();
+                Mailer::send(
+                    "2FA Code for Snook's Nail Nook",
+                    "Your 2FA Code is: $code",
+                    $user->email, "$user->firstName $user->lastName",
+                    $user->email, "$user->firstName $user->lastName"
+                );
+                break;
+            case "2fa":
+                if (!isset($_POST["code"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                session_start();
+                if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
+                    self::redirect("login");
+                    break;
+                }
+                if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
+                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
+                    session_destroy();
+                    break;
+                }
+                if ($_SESSION["code"] != $_POST["code"]) {
+                    $_SESSION["tries"]++;
+                    if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
+                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
+                        session_destroy();
+                    } else {
+                        $this->render("Account", $action, ["error" => "Invalid Code"]);
+                    }
+                    break;
+                }
+                try {
+                    self::makeCookie($_SESSION["user"]);
                     self::redirect();
                 } catch (Exception) {
                     $this->render("Account", $action, ["error" => "Error While Generating Token. Try Again Later", "email" => $_POST['email']]);
                 }
+                session_destroy();
                 break;
             case "register":
                 if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['confirmPassword'])) {
@@ -88,10 +134,10 @@ class Account extends Controller {
                 setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
                 Home::redirect();
                 break;
-                // Wrote this to render forgot.php for forgetting password
+            // Wrote this to render forgot.php for forgetting password
             case "forgot":
                 $this->render("Account", $action);
-                 break;
+                break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action, [$this->user]);
