@@ -10,43 +10,7 @@ class GalleryController extends Controller {
     }
 
     public function route(): void {
-        $url = "https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=" . self::INSTAGRAM_ACCESS_TOKEN;
-
-        //var_dump($url);
-
-        // Initialize cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        // Execute the request
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $data = json_decode($response, true);
+        $this->render("Contact", "contact");
         
-
-        if (isset($data['data'])) {
-            // Separate media items for easier handling
-            //var_dump($data['data']);
-            $mediaItems = array_map(function($item) {
-                return [
-                    'url' => $item['media_url'],
-                    'type' => $item['media_type'],
-                    'caption' => $item['caption'] ?? ''
-                ];
-            }, $data['data']);
-            //var_dump( $mediaItems);
-            // Pass media items to the view for rendering
-            $this->render("Gallery", "gallery", ['mediaItems' => $mediaItems]);
-        } else {
-            echo "Error fetching data.";
-        }
-<<<<<<< HEAD:Controllers/GalleryController.php
-        
-=======
-
-
-      
->>>>>>> SenBranch:Controllers/Contact.php
     }
 }
