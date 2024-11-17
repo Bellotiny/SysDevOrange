@@ -31,7 +31,7 @@ class Account extends Controller {
                     break;
                 }
                 $user = User::getFromEmailPassword($_POST['email'], $_POST['password']);
-                if (is_null($user)) {
+                if ($user === null) {
                     $this->render("Account", $action, ["error" => "Invalid Email or Password", "email" => $_POST['email']]);
                     break;
                 }
@@ -119,7 +119,7 @@ class Account extends Controller {
                     }
                 }
                 $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null);
-                if (is_null($user)) {
+                if ($user === null) {
                     $this->registerError("Email already in use");
                     break;
                 }
@@ -130,13 +130,24 @@ class Account extends Controller {
                     $this->registerError("Unable to generate token. Try Again Later");
                 }
                 break;
+            case "forgot":
+                $this->render("Account", $action);
+                break;
             case "logout":
                 setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
                 Home::redirect();
                 break;
-            // Wrote this to render forgot.php for forgetting password
-            case "forgot":
-                $this->render("Account", $action);
+            case "delete":
+                if (!$this->verifyUser()) {
+                    break;
+                }
+                if (!isset($_POST['confirm'])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $this->user->delete();
+                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
+                Home::redirect();
                 break;
             default:
                 if ($this->verifyRights($action)) {
