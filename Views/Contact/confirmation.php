@@ -24,6 +24,7 @@ include_once 'Views/bookingModal.php';
                 <div class="card-body p-4">
                     Thank you for contacting us! We will respond to your email as soon as possible.
                 </div>
+                <a href="<?=BASE_PATH?>" class="btn bttn-green slide-up">Back to Home</a>
             </div>
         </div>
     </div>
