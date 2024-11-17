@@ -12,6 +12,7 @@ class Service extends Model {
     public function __construct(array $fields) {
         $this->id = $fields[self::getTable() . '.id'];
         $this->name = $fields[self::getTable() . '.name'];
+        $this->price = $fields[self::getTable() . '.price'];
         $this->type = $fields[self::getTable() . '.type'];
         $this->description = $fields[self::getTable() . '.description'];
         $this->duration = $fields[self::getTable() . '.duration'];
@@ -22,7 +23,7 @@ class Service extends Model {
     }
 
     public static function getFields(): array {
-        return ["id", "name", "price", "description", "duration"];
+        return ["id", "name", "type", "price", "description", "duration"];
     }
 
     public static function new(string $name,string $type, float $price, string $description, int $duration): ?Service {
