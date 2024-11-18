@@ -635,15 +635,17 @@ a.nav-link.active {
     font-size: 1.5rem;
 }
 
-/* Full-screen overlay for mobile nav */
+.no-scroll {
+    overflow: hidden;
+    height: 100vh; /* Prevent scrolling by locking height */
+}
+
 .full-screen-overlay {
     position: fixed;
-    max-height: inherit;
-    max-width: 100vw;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh; 
     background-color: rgba(255, 255, 255, 0.95);
     z-index: 1050;
     display: flex;
@@ -652,6 +654,11 @@ a.nav-link.active {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.full-screen-overlay.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Show overlay when menu is open */
