@@ -638,6 +638,8 @@ a.nav-link.active {
 /* Full-screen overlay for mobile nav */
 .full-screen-overlay {
     position: fixed;
+    max-height: inherit;
+    max-width: 100vw;
     top: 0;
     left: 0;
     width: 100%;
@@ -706,13 +708,13 @@ a.nav-link.active {
 }
 /* Home */
     #overlay-text {
-        top: 75%;
-        left: 75%;
+        top: 78%;
+        left: 60%;
         font-size: 85px;
     }
     #overlay-text2 {
-        top: 81%;
-        left: 75%;
+        top: 84%;
+        left: 60%;
         font-size: 30px;
     }
 
