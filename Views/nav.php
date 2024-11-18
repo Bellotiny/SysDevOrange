@@ -7,14 +7,14 @@ include_once 'head.php';
         
         <!-- Logo on the far left -->
         <div id="logo">
-            <a href="<?=BASE_PATH?>/home">
+            <a href="<?=BASE_PATH?>/">
             <img src="<?=BASE_PATH?>/Views/Images/logo.png" alt="Logo" class="nav-logo">
             </a>
         </div>
 
         <!-- Navigation Links in the center -->
         <div id="nav-main" class="d-flex justify-content-center">
-            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/home">Home</a>
+            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
             <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about">About</a>
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services">Services</a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery">Gallery</a>
@@ -44,7 +44,7 @@ include_once 'head.php';
 
             <!-- Centered Logo -->
             <div class="logo-container">
-                <a href="<?=BASE_PATH?>/home">
+                <a href="<?=BASE_PATH?>/">
                      <img src="<?=BASE_PATH?>/Views/Images/logo.png" id="navbarLogo" alt="Logo">
                 </a>
             </div>
@@ -52,7 +52,7 @@ include_once 'head.php';
     </nav>
     <div class="full-screen-overlay" id="navbarMenu">
         <div class="menu-content">
-            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/home">Home</a>
+            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
             <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about">About</a>
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services">Services</a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery">Gallery</a>

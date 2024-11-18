@@ -14,10 +14,10 @@ include_once 'Views/bookingModal.php';
     <?php include_once 'Views/sidebar.php'; ?>
     <!-- Added inline style so navbar does not clip the text -->
     <div class="sideScreen container" style="margin-top: 4%;">
-        <p>Name: <?= $data[0]->firstName . " " . $data[0]->lastName ?></p>
-        <p>Email: <?= $data[0]->email ?></p>
-        <p>Phone Number: <?= $data[0]->phoneNumber ?></p>
-        <p>Birthday: <?= $data[0]->birthDate ?></p>
+        <p>Name: <?= $this->user->firstName . " " . $this->user->lastName ?></p>
+        <p>Email: <?= $this->user->email ?></p>
+        <p>Phone Number: <?= $this->user->phoneNumber ?></p>
+        <p>Birthday: <?= $this->user->birthDate ?></p>
 </main>
 
       <!-- Include scripts here -->
