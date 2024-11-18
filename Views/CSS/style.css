@@ -634,23 +634,23 @@ a.nav-link.active {
     color: #333;
     font-size: 1.5rem;
 }
-#nav-wrapper {
-    position: relative; 
+
+.no-scroll {
     overflow: hidden;
+    height: 100vh; /* Prevent scrolling by locking height */
 }
-/* Full-screen overlay for mobile nav */
+
 .full-screen-overlay {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100vh; 
     background-color: rgba(255, 255, 255, 0.95);
     z-index: 1050;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Prevents scrolling within the overlay */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -658,13 +658,13 @@ a.nav-link.active {
 
 .full-screen-overlay.show {
     opacity: 1;
-    overflow: hidden;
     visibility: visible;
 }
 
-.no-scroll {
-    overflow: hidden;
-    height: 100vh; /* Prevent background jump due to scrollbar removal */
+/* Show overlay when menu is open */
+.full-screen-overlay.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Centered menu items in column */
