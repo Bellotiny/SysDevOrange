@@ -50,6 +50,7 @@ include_once 'head.php';
             </div>
         </div>
     </nav>
+    <div id="nav-wrapper">
     <div class="full-screen-overlay" id="navbarMenu">
         <div class="menu-content">
             <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
@@ -70,15 +71,31 @@ include_once 'head.php';
         </div>
     </div>
 </div>
+</div>
 
 
 
 
 </header>
 <script>
-    document.getElementById('menuToggle').addEventListener('click', function() {
+document.getElementById('menuToggle').addEventListener('click', function () {
     const navbarMenu = document.getElementById('navbarMenu');
-    navbarMenu.classList.toggle('show');
+    const body = document.body;
+
+    if (navbarMenu.classList.contains('show')) {
+        // Close the menu
+        navbarMenu.style.opacity = "0";
+        navbarMenu.style.visibility = "hidden";
+        navbarMenu.classList.remove('show');
+        body.classList.remove('no-scroll');
+    } else {
+        // Open the menu
+        navbarMenu.style.opacity = "1";
+        navbarMenu.style.visibility = "visible";
+        navbarMenu.classList.add('show');
+        body.classList.add('no-scroll');
+    }
 });
+
 </script>
 
