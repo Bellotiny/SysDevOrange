@@ -90,10 +90,7 @@ h1{
     width: 100%;
     font-size: calc(45px + 1.5vw);
 }
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;  
-}
+
 p{
     font-family: "Canvas Sans", sans-serif;
 }
@@ -104,12 +101,7 @@ main {
     padding: 0%;
     margin: 0%;
 }
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;
-    color: #57453d;
-    position: absolute;
-}
+
 /*** CSS BACKGROUND *****/
 
 .background_color{

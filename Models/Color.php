@@ -5,11 +5,13 @@ include_once "Model.php";
 class Color extends Model {
     public string $name;
     public string $code;
+    public int $visibility;
 
     public function __construct(array $fields) {
         $this->id = $fields[self::getTable() . '.id'];
         $this->name = $fields[self::getTable() . '.name'];
         $this->code = $fields[self::getTable() . '.code'];
+        $this->visibility = (int) $fields[self::getTable() . '.visibility'];
     }
 
     public static function getTable(): string {
@@ -17,13 +19,15 @@ class Color extends Model {
     }
 
     public static function getFields(): array {
-        return ["id", "name", "code"];
+        return ["id", "name", "code","visibility"];
     }
 
-    public static function new(string $name, string $code): ?Color {
+    public static function new(string $name, string $code, int $visibility ): ?Color {
         $values = new Values();
         $values->add(new Value(self::getTable() . ".name", $name));
         $values->add(new Value(self::getTable() . ".code", $code));
+        $values->add(new Value(self::getTable() . ".visibility", $visibility));
+        
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
@@ -31,6 +35,7 @@ class Color extends Model {
                 self::getTable() . ".id" => $id,
                 self::getTable() . ".name" => $name,
                 self::getTable() . ".code" => $code,
+                self::getTable() . ".visibility" => $visibility,
             ]);
         } catch (Exception) {
             return null;
@@ -41,6 +46,7 @@ class Color extends Model {
         $values = new Values();
         $values->add(new Value(self::getTable() . ".name", $this->name));
         $values->add(new Value(self::getTable() . ".code", $this->code));
+        $values->add(new Value(self::getTable() . ".visibility", $this->visibility));
         $where = new Where();
         $where->addEquals(new Value(self::getTable() . ".id", $this->id));
         return self::update($values, $where);

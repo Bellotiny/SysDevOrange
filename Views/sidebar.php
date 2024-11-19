@@ -41,7 +41,7 @@
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
               
-              <strong><?= $data[0]->firstName . " " . $data[0]->lastName ?></strong>
+              <!--<strong><?= $data[0]->firstName . " " . $data[0]->lastName ?></strong>-->
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
               <li><a class="dropdown-item" href="#">Edit Profile</a></li>

@@ -3,8 +3,11 @@
 use Random\RandomException;
 
 include_once "Models/User.php";
+include_once "Models/Service.php";
+include_once "Models/Color.php";
 include_once "Controllers/Controller.php";
 include_once "Controllers/Home.php";
+
 
 class Account extends Controller {
     public static function redirect(string $action = "personalInformation"): void {
@@ -92,6 +95,17 @@ class Account extends Controller {
             case "forgot":
                 $this->render("Account", $action);
                  break;
+            case "inventory":
+                $services = Service::list();
+                $colors = Color::list();
+                $this->render("Account", $action, ["services" => $services, "colors" => $colors]);
+    
+                break;
+            case "addInventory":
+                $services = Service::list();
+                $this->render("Account", $action);
+        
+                    break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action, [$this->user]);
