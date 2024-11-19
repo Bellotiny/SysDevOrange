@@ -9,7 +9,6 @@ include_once 'Views/bookingModal.php';
 <body id="services-body" class="background_color">
 <?php include_once 'Views/nav.php'; ?>
 
-
 <main class="container py-5">
 
   <div class="green-background text-secondary  container slide-up">
@@ -60,49 +59,6 @@ include_once 'Views/bookingModal.php';
           </div>
     </div>
 
-    <!-- More colors -->
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Sky Blue', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(135, 206, 235)"></rect>
-        </svg>
-        <h5 class="fw-normal">Sky Blue</h5>
-    </div><!-- /.col-lg-2 -->
-
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Deep Purple', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(75, 0, 130)"></rect>
-        </svg>
-        <h5 class="fw-normal">Deep Purple</h5>
-    </div><!-- /.col-lg-2 -->
-
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Bold Orange', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect>
-        </svg>
-        <h5 class="fw-normal">Bold Orange</h5>
-    </div>
-
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Sunny Yellow', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(255, 223, 0)"></rect>
-        </svg>
-        <h5 class="fw-normal">Sunny Yellow</h5>
-    </div><!-- /.col-lg-2 -->
-
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Berry Pink', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(199, 21, 133)"></rect>
-        </svg>
-        <h5 class="fw-normal">Berry Pink</h5>
-    </div><!-- /.col-lg-2 -->
-
-    <div class="col-6 col-sm-4 col-md-2 mb-3 color-item">
-        <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Coral', 'colorGroup3')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="RGB(255, 127, 80)"></rect>
-        </svg>
-        <h5 class="fw-normal">Coral</h5>
-    </div>
-</div>
 
     <!---pagination--->
     <div class="d-flex justify-content-center my-3">

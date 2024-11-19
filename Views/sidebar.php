@@ -44,8 +44,8 @@
               <!--<strong><?= $data[0]->firstName . " " . $data[0]->lastName ?></strong>-->
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-              <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-              <li><a class="dropdown-item" href="#">Delete Account</a></li>
+              <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/edit">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/delete">Delete Account</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/logout">Sign out</a></li>
             </ul>

@@ -19,13 +19,13 @@ class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-//                if (count(Booking::getFromUser($this->user)) <= count(Review::getFromUser($this->user))) {
-//                    $this->render("Gallery", $action, [
-//                        "user" => $this->user,
-//                        "error" => "You are only allowed 1 review per booking.",
-//                    ]);
-//                    break;
-//                }
+                if (count(Booking::getFromUser($this->user)) <= count(Review::getFromUser($this->user))) {
+                    $this->render("Gallery", $action, [
+                        "user" => $this->user,
+                        "error" => "You are only allowed 1 review per booking.",
+                    ]);
+                    break;
+                }
                 if (!isset($_POST['title']) || !isset($_POST['message']) || !isset($_FILES['image'])) {
                     $this->render("Gallery", $action, ["user" => $this->user]);
                     break;

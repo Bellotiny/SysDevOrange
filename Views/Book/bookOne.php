@@ -125,123 +125,20 @@ ini_set('display_errors', 1);
               <div class="accordion-body slide-up">
               <div class="row text-center">
                   <!----here are the colors--->
-                  <div class="col-lg-2 mb-3 color-item selected">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color2', 'None', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill=""></rect></svg>
-                      <h5 class="fw-normal">None</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Baby Pink', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 182, 193)"></rect></svg>
-                      <h5 class="fw-normal">Baby Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Nude Beige', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(222, 184, 135)"></rect></svg>
-                      <h5 class="fw-normal">Nude Beige</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Peach', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 218, 185)"></rect></svg>
-                      <h5 class="fw-normal">Peach</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Lavender', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(230, 230, 250)"></rect></svg>
-                      <h5 class="fw-normal">Lavender</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Mint Green', 'colorGroup2')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(152, 251, 152)"></rect></svg>
-                      <h5 class="fw-normal">Mint Green</h5>
-                  </div>
-
-
-                  <!-----more colors--->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Sky Blue', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(135, 206, 235)"></rect></svg>
-                      <h5 class="fw-normal">Sky Blue</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Deep Purple', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(75, 0, 130)"></rect></svg>
-                      <h5 class="fw-normal">Deep Purple</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Bold Orange', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect></svg>
-                      <h5 class="fw-normal">Bold Orange</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Sunny Yellow', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 223, 0)"></rect></svg>
-                      <h5 class="fw-normal">Sunny Yellow</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Berry Pink', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(199, 21, 133)"></rect></svg>
-                      <h5 class="fw-normal">Berry Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color2', 'Coral', 'colorGroup2')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 127, 80)"></rect></svg>
-                      <h5 class="fw-normal">Coral</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item" id="colorGroup3">
-            <h3 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Color 3:<span id="selectedColor3">None</span>
-              </button>
-            </h3>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-              <div class="accordion-body slide-up">
-              <div class="row text-center">
-                  <!----here are the colors--->
-                  <div class="col-lg-2 mb-3 color-item selected" >
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color3', 'None', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill=""></rect></svg>
-                      <h5 class="fw-normal">None</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item"  >
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Baby Pink', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 182, 193)"></rect></svg>
-                      <h5 class="fw-normal">Baby Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Nude Beige', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(222, 184, 135)"></rect></svg>
-                      <h5 class="fw-normal">Nude Beige</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Peach', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 218, 185)"></rect></svg>
-                      <h5 class="fw-normal">Peach</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Lavender', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(230, 230, 250)"></rect></svg>
-                      <h5 class="fw-normal">Lavender</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Mint Green', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(152, 251, 152)"></rect></svg>
-                      <h5 class="fw-normal">Mint Green</h5>
-                  </div>
-
-
-                  <!-----more colors--->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Sky Blue', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(135, 206, 235)"></rect></svg>
-                      <h5 class="fw-normal">Sky Blue</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Deep Purple', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(75, 0, 130)"></rect></svg>
-                      <h5 class="fw-normal">Deep Purple</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor('Color3', 'Bold Orange', 'colorGroup3')"  width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 165, 0)"></rect></svg>
-                      <h5 class="fw-normal">Bold Orange</h5>
-                  </div>
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Sunny Yellow', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 223, 0)"></rect></svg>
-                      <h5 class="fw-normal">Sunny Yellow</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Berry Pink', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(199, 21, 133)"></rect></svg>
-                      <h5 class="fw-normal">Berry Pink</h5>
-                  </div><!-- /.col-lg-2 -->
-                  <div class="col-lg-2 mb-3 color-item">
-                      <svg class="bd-placeholder-img rounded-circle" onclick="selectColor('Color3', 'Coral', 'colorGroup3')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="RGB(255, 127, 80)"></rect></svg>
-                      <h5 class="fw-normal">Coral</h5>
-                  </div>
+                  <?php
+                        $selectedColor = false; // Use this flag if you need to mark a selected color
+                        foreach ($data['colors'] as $colors) {
+                            // Determine if the current color should be selected
+                            $isSelected = $selectedColor ? 'selected' : '';
+                            echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . addslashes($colors->name) . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                    </svg>
+                                    <h5 class="fw-normal">' . $colors->name . '</h5>
+                                  </div>';
+                        }
+                    ?>
               </div>
               </div>
             </div>
@@ -302,7 +199,7 @@ ini_set('display_errors', 1);
         <div class="row g-3 mt-5">
           <div class="col-sm-6">
             <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="" required="">
             <div class="invalid-feedback">
               Valid first name is required.
              </div>
@@ -310,7 +207,7 @@ ini_set('display_errors', 1);
 
           <div class="col-sm-6">
             <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required="">
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
@@ -320,7 +217,7 @@ ini_set('display_errors', 1);
             <label for="username" class="form-label">Username</label>
             <div class="input-group has-validation">
               <span class="input-group-text">@</span>
-              <input type="text" class="form-control" id="username" placeholder="Username" required="">
+              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
             <div class="invalid-feedback">
                 Your username is required.
               </div>

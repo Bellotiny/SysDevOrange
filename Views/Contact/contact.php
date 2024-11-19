@@ -22,21 +22,25 @@ ini_set('display_errors', 1);
 
                     <!-- Card Body -->
                     <div class="card-body p-4">
-                        <form autocomplete="on">
+                        <form autocomplete="on" action="<?=BASE_PATH?>/contact" method="POST">
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
                             <!-- First Name -->
                             <div class="form-group mb-3">
-                                <label for="contact_fname" class="form-label">First Name:</label>
-                                <input type="text" class="form-control" id="contact_fname" name="contact_fname" required>
+                                <label for="firstName" class="form-label">First Name:</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" required>
                             </div>
                             <!-- Last Name -->
                             <div class="form-group mb-3">
-                                <label for="contact_lname" class="form-label">Last Name:</label>
-                                <input type="text" class="form-control" id="contact_lname" name="contact_lname">
+                                <label for="lastName" class="form-label">Last Name:</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" required>
                             </div>
                             <!-- Message -->
                             <div class="form-group mb-4">
-                                <label for="contact_message" class="form-label">Message:</label>
-                                <textarea class="form-control" id="contact_message" name="contact_message" rows="5" required></textarea>
+                                <label for="message" class="form-label">Message:</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                             </div>
                             <!-- Submit Button -->
                             <div class="d-grid">

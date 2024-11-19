@@ -18,11 +18,16 @@ class Book extends Controller {
 
         switch ($action) {
             case "list":
+                //If current user is loggedin
+                
                 $services = Service::list();
                 $colors = Color::list();
                 $this->render("Book", "bookOne", ["services" => $services, "colors" => $colors]);
             break;
             case "add":
+                if(!isset($_POST['selectedService'])||!isset($_POST['selectedColor'])||!isset($_POST['selected_date'])
+                ||!isset($_POST['selected_time']))
+                $selectedService = isset($_POST['selectedService']);
                 // $data = isset($_POST['']);
                 // $services = Service::list();
                 // $colors = Color::list();

@@ -8,7 +8,6 @@ include_once 'Views/head.php';
 <?php include_once 'Views/nav.php'; ?>
 <?php include_once 'Views/bookingModal.php'; ?>
 
-
   <main class="container py-4">
 
   <div class="green-background text-secondary  container slide-up ">
