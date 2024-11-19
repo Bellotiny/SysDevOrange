@@ -128,6 +128,34 @@ class Account extends Controller {
             case "forgot":
                 $this->render("Account", $action);
                  break;
+            case "inventory":
+                $services = Service::list();
+                $colors = Color::list();
+                    
+                $this->render("Account", $action, ["services" => $services, "colors" => $colors, "user" => $this->user]);
+        
+                break;
+            case "addInventory":
+                $services = Service::list();
+                $this->render("Account", $action);
+            
+                break;
+            case "k":
+                $this->render("Account", $action);
+                    
+                  
+                break;
+            case "deleteInventory":
+                var_dump($_GET['id']);
+                   
+        
+                $service = Service::getfromId((int)$_GET['id']);
+                if (is_null($service)) {
+                       
+                    var_dump($service);
+                }
+                   
+                break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action);

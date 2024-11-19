@@ -3,7 +3,7 @@
 include_once "Controllers/Controller.php";
 include_once "Controllers/Mail/Mailer.php";
 
-class GalleryController extends Controller {
+class Contact extends Controller {
     private const INSTAGRAM_ACCESS_TOKEN = 'IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD';
 
     public static function redirect(string $action = ""): void {
