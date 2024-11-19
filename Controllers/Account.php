@@ -158,7 +158,7 @@ class Account extends Controller {
                 break;
             default:
                 if ($this->verifyRights($action)) {
-                    $this->render("Account", $action);
+                    $this->render("Account", $action, [$this->user]);
                 }
                 break;
         }
