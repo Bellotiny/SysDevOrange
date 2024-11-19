@@ -12,18 +12,18 @@ include_once 'Views/bookingModal.php';
           <!--content is load here-->
          
           <div class="container">
-          <h1>2FA</h1>
-          <form action="<?=BASE_PATH?>/account/2fa" method="POST">
+          <h1>Delete Account</h1>
+          <form action="<?=BASE_PATH?>/account/delete" method="POST">
             <div class="form-group">
-              <label for="code">Code</label>
-              <input type="number" class="form-control" id="code" name="code" required>
+              <label for="confirm">Confirm</label>
+              <input type="checkbox" id="confirm" name="confirm">
             </div>
             <?php if (isset($data["error"])): ?>
               <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Login">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/login" role="button">Go Back</a>
+              <input class="btn btn-primary mt-3" role="button" type="submit" value="Delete">
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account" role="button">Go Back</a>
             </div>
           </form>
           </div>

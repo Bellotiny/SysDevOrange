@@ -17,12 +17,19 @@ abstract class Controller {
     public abstract function route(): void;
 
     protected function verifyRights(string $action): bool {
-        if (is_null($this->user)) {
-            Account::redirect("login");
+        if (!$this->verifyUser()) {
             return false;
         }
         if (!$this->user->hasRights(static::class, $action)) {
             $this->back();
+            return false;
+        }
+        return true;
+    }
+
+    protected function verifyUser(): bool {
+        if ($this->user === null) {
+            Account::redirect("login");
             return false;
         }
         return true;
