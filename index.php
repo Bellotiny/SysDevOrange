@@ -1,7 +1,4 @@
 <?php
-
-include_once "Models/User.php";
-
 define("BASE_PATH", dirname($_SERVER['SCRIPT_NAME']));
 
 $controller = ucfirst($_GET['controller'] ?? "home");

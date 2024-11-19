@@ -35,7 +35,6 @@ include_once 'Views/bookingModal.php';
                 <input type="password" class="form-control" id="password" name="password" required>
                 <p class="mt-3"><a href="#" id="showForgotForm">Forgot Your Password?</a></p>
               </div>
-
             <button type="submit" class="btn btn-primary mt-3">Login</button>
             <button type="button" class="btn btn-secondary mt-3" id="goBackFromLogin">Go Back</button>
             <p class="mt-3">Don't have an account? <a href="#" id="showRegisterForm">Register here</a></p>

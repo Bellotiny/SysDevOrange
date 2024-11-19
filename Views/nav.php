@@ -50,6 +50,7 @@ include_once 'head.php';
             </div>
         </div>
     </nav>
+    <div id="nav-wrapper">
     <div class="full-screen-overlay" id="navbarMenu">
         <div class="menu-content">
             <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
@@ -69,6 +70,7 @@ include_once 'head.php';
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

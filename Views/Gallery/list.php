@@ -8,7 +8,6 @@ include_once 'Views/head.php';
 <?php include_once 'Views/nav.php'; ?>
 <?php include_once 'Views/bookingModal.php'; ?>
 
-
   <main class="container py-4">
 
   <div class="green-background text-secondary  container slide-up ">
@@ -24,7 +23,6 @@ include_once 'Views/head.php';
     <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about4.png" alt="Image 4">
     <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat2.jpg" alt="Image 5">
     <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat3.jpg" alt="Image 6">
-
   </div>
 
   <div>
