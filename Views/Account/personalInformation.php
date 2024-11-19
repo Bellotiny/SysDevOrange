@@ -13,7 +13,7 @@ include_once 'Views/bookingModal.php';
     <main class="d-flex flex-grow-1 max-vh-100" id="account-Main">
     <?php include_once 'Views/sidebar.php'; ?>
     <!-- Added inline style so navbar does not clip the text -->
-    <div class="sideScreen container" style="margin-top: 4%;">
+    <div class="sideScreen container"  id="content" style="margin-top: 4%;">
         <p>Name: <?= $this->user->firstName . " " . $this->user->lastName ?></p>
         <p>Email: <?= $this->user->email ?></p>
         <p>Phone Number: <?= $this->user->phoneNumber ?></p>
