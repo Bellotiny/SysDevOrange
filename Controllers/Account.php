@@ -25,8 +25,9 @@ class Account extends Controller {
 
     public function route(): void {
         $action = strtolower($_GET['action'] ?? "personalInformation");
-
+        var_dump($action);
         switch ($action) {
+           
             case "login":
                 if (!isset($_POST['email']) || !isset($_POST['password'])) {
                     $this->render("Account", $action);
@@ -98,14 +99,35 @@ class Account extends Controller {
             case "inventory":
                 $services = Service::list();
                 $colors = Color::list();
-                $this->render("Account", $action, ["services" => $services, "colors" => $colors]);
+                //var_dump($_GET['id']);
+               // var_dump($jann);
+                $this->render("Account", $action, ["services" => $services, "colors" => $colors, "user" => $this->user]);
     
                 break;
             case "addInventory":
                 $services = Service::list();
                 $this->render("Account", $action);
         
-                    break;
+                break;
+            case "k":
+                $this->render("Account", $action);
+                
+              
+                break;
+            case "deleteInventory":
+                var_dump($_GET['id']);
+                //var_dump($jann);
+    
+                $service = Service::getfromId((int)$_GET['id']);
+                if (is_null($service)) {
+                   // $this->redirect();
+                    //break;
+                    var_dump($service);
+                }
+               // $service->delete();
+               // $this->redirect();
+            
+                break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action, [$this->user]);
