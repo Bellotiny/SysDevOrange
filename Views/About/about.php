@@ -7,6 +7,8 @@ include_once 'Views/nav.php';
 include_once 'Views/bookingModal.php';
 ?>
 
+
+
 <main class="py-5 background_color  ">
 
   <div class="green-background text-secondary  container slide-up">

@@ -74,9 +74,6 @@
 .text-green{
     color: #1b613e;
 }
-.text-green-two{
-    
-}
 .text-pink{
     color: #f37a74;
 } 
@@ -93,10 +90,7 @@ h1{
     width: 100%;
     font-size: calc(45px + 1.5vw);
 }
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;  
-}
+
 p{
     font-family: "Canvas Sans", sans-serif;
 }
@@ -107,12 +101,7 @@ main {
     padding: 0%;
     margin: 0%;
 }
-h2{
-    font-family: 'AmsterdamThree';
-    font-size: 50px;
-    color: #57453d;
-    position: absolute;
-}
+
 /*** CSS BACKGROUND *****/
 
 .background_color{
@@ -383,7 +372,8 @@ header {
     gap: 15px; 
   }
   
-#instagram-pic img {
+#instagram-pic img,
+#instagram-pic video {
     flex-basis: calc(33.33% - 10px); 
     height: 300px; 
     object-fit: cover;
@@ -536,6 +526,12 @@ a.nav-link.active {
     width: -webkit-fill-available;
 }
 
+#divAccount{
+    background-image: url('../Images/logo_bg.png');
+   
+    background-size: cover;     
+    background-position: center;
+}
 /*********** BOOKING **********/
 
 .booking-border-style{

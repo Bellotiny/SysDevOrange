@@ -3,9 +3,10 @@
 use Random\RandomException;
 
 include_once "Models/User.php";
+include_once "Models/Service.php";
+include_once "Models/Color.php";
 include_once "Controllers/Controller.php";
 include_once "Controllers/Home.php";
-include_once "Controllers/Mail/Mailer.php";
 
 class Account extends Controller {
     public static function redirect(string $action = "personalInformation"): void {
@@ -14,8 +15,9 @@ class Account extends Controller {
 
     public function route(): void {
         $action = strtolower($_GET['action'] ?? "personalInformation");
-
+        var_dump($action);
         switch ($action) {
+           
             case "login":
                 if (!isset($_POST['email']) || !isset($_POST['password'])) {
                     $this->render("Account", "login");
@@ -122,68 +124,37 @@ class Account extends Controller {
                 setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
                 Home::redirect();
                 break;
-            case "delete":
-                if (!$this->verifyRights("delete")) {
-                    break;
-                }
-                if (!isset($_POST['confirm'])) {
-                    $this->render("Account", "delete");
-                    break;
-                }
-                $this->user->delete();
-                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
-                Home::redirect();
+                // Wrote this to render forgot.php for forgetting password
+            case "forgot":
+                $this->render("Account", $action);
+                 break;
+            case "inventory":
+                $services = Service::list();
+                $colors = Color::list();
+                    
+                $this->render("Account", $action, ["services" => $services, "colors" => $colors, "user" => $this->user]);
+        
                 break;
-            case "edit":
-                if (!$this->verifyRights("edit")) {
-                    break;
+            case "addInventory":
+                $services = Service::list();
+                $this->render("Account", $action);
+            
+                break;
+            case "k":
+                $this->render("Account", $action);
+                    
+                  
+                break;
+            case "deleteInventory":
+                var_dump($_GET['id']);
+                   
+        
+                $service = Service::getfromId((int)$_GET['id']);
+                if (is_null($service)) {
+                       
+                    var_dump($service);
                 }
-                if (isset($_POST['password']) && isset($_POST['confirmPassword'])) {
-                    if ($_POST['password'] != $_POST['confirmPassword']) {
-                        $this->render("Account", "edit", ["passwordError" => "Passwords do not match"]);
-                        break;
-                    }
-                    if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{6,}$/", $_POST['password'])) {
-                        $this->render("Account", "edit", ["passwordError" => "Password must be at least 6 characters long and include at least one number, one symbol, one lowercase letter, and one uppercase letter"]);
-                        break;
-                    }
-                    if (!$this->user->updatePassword($_POST['password'])) {
-                        $this->render("Account", "edit", ["passwordError" => "Failed to update password"]);
-                        break;
-                    }
-                    $this->render("Account", "edit", ["passwordMessage" => "Password saved"]);
-                } else if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['birthDate'])) {
-                    $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                        $this->error("edit", "Invalid Email format");
-                        break;
-                    }
-                    if ($_POST['phoneNumber']) {
-                        $_POST['phoneNumber'] = filter_var($_POST['phoneNumber'], FILTER_SANITIZE_NUMBER_INT);
-                    } else {
-                        $_POST['phoneNumber'] = null;
-                    }
-                    if ($_POST['birthDate']) {
-                        if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $_POST['birthDate'])) {
-                            $this->error("edit", "Invalid Birth Date format");
-                            break;
-                        }
-                    } else {
-                        $_POST['birthDate'] = null;
-                    }
-                    $this->user->firstName = $_POST['firstName'];
-                    $this->user->lastName = $_POST['lastName'];
-                    $this->user->email = $_POST['email'];
-                    $this->user->phoneNumber = $_POST['phoneNumber'];
-                    $this->user->birthDate = $_POST['birthDate'];
-                    if (!$this->user->save()) {
-                        $this->error("edit", "Email already in use");
-                        break;
-                    }
-                    $this->render("Account", "edit", ["message" => "Changes saved"]);
-                } else {
-                    $this->render("Account", "edit");
-                }
+                   
                 break;
             default:
                 if ($this->verifyRights($action)) {
