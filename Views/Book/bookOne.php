@@ -154,8 +154,17 @@ ini_set('display_errors', 1);
             <label for="availableDates">Available Dates</label>
             <select class="form-control" id="availableDates" name="selected_date">
               <?php
+                $available_dates = [];
+                $available_times = [];
+                var_dump($data['availabilities']);
+            
+                foreach ($data['availabilities'] as $datetime) {
+                  $dateTimeObj = $datetime->timeslot;
+                    $available_dates[] = $dateTimeObj->format('Y-m-d');
+                    $available_times[] = $dateTimeObj->format('H:i');
+                }
                 // Assuming you have an array of available dates from the owner schedule
-                $available_dates = ['2024-10-25', '2024-10-26', '2024-10-27']; // Example dates
+                //$available_dates = ['2024-10-25', '2024-10-26', '2024-10-27']; // Example dates
                 foreach ($available_dates as $date) {
                   echo "<option value=\"$date\">$date</option>";
                 }
@@ -169,7 +178,7 @@ ini_set('display_errors', 1);
             <select class="form-control" id="availableTimes" name="selected_time">
               <?php
                 // Assuming you have an array of available times for the selected date
-                $available_times = ['10:00 AM - 10:30 AM', '12:00 PM - 1:00PM', '3:00 PM - 4:00PM']; // Example times
+                //$available_times = ['10:00 AM - 10:30 AM', '12:00 PM - 1:00PM', '3:00 PM - 4:00PM']; // Example times
                 foreach ($available_times as $time) {
                   echo "<option value=\"$time\">$time</option>";
                 }
