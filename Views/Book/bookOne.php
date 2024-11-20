@@ -7,40 +7,41 @@ ini_set('display_errors', 1);
 <?php include_once 'Views/nav.php'; ?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
-  <form method="POST" novalidate="" class="needs-validation ">
+  <form id="bookForm" method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
      <div class="form-section active container pt-5 "  id="section1">
 
        <!-- Section 1 Base Service -->
        <?php
           $countType = 0;
-              $maxCount = array_count_values(array_map(function($service) {
-                  return $service->type;
-              }, $data['services']));
+          $maxCount = array_count_values(array_map(function($service) {
+              return $service->type;
+          }, $data['services']));
 
-          foreach($data['services'] as $service){
-                  if ($countType < $maxCount[$service->type]) {
-                      if ($countType == 0) {
-                          echo '<h3>' . $service->type . '</h3>';
-                      }
-                      $countType++;
-                  } else {
-                      $countType = 0;
+          foreach ($data['services'] as $service) {
+              if ($countType < $maxCount[$service->type]) {
+                  if ($countType == 0) {
                       echo '<h3>' . $service->type . '</h3>';
-                      $countType++;
                   }
-
-                  echo '<div class="list-group d-flex flex-row w-100 m-2">
-                          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
-                              <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked="">
-                              <span>
-                                  ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
-                              </span><br><br>
-                              <div class="mb-1 d-block text-success">' . $service->price . ' CAD</div>
-                          </label>
-                        </div>';
+                  $countType++;
+              } else {
+                  $countType = 0;
+                  echo '<h3>' . $service->type . '</h3>';
+                  $countType++;
               }
-      ?>
+
+              echo '<div class="list-group d-flex flex-row w-100 m-2">
+                      <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
+                          <input class="form-check-input flex-shrink-0" type="radio" name="selectedServices[]" value="' . $service->name . '">
+                          <span>
+                              ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
+                          </span><br><br>
+                          <div class="mb-1 d-block text-success">' . $service->price . ' CAD</div>
+                      </label>
+                    </div>';
+          }
+        ?>
+
 
         <!-- Section 1 Location Service -->
         <h3>Service Location:</h3>
@@ -131,7 +132,36 @@ ini_set('display_errors', 1);
                             // Determine if the current color should be selected
                             $isSelected = $selectedColor ? 'selected' : '';
                             echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . addslashes($colors->name) . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . addslashes($colors->name) . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                    </svg>
+                                    <h5 class="fw-normal">' . $colors->name . '</h5>
+                                  </div>';
+                        }
+                    ?>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="colorGroup3">
+            <h3 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Color 3:<span id="selectedColor3">None</span>
+              </button>
+            </h3>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body slide-up">
+              <div class="row text-center">
+                  <!----here are the colors--->
+                  <?php
+                        $selectedColor = false; // Use this flag if you need to mark a selected color
+                        foreach ($data['colors'] as $colors) {
+                            // Determine if the current color should be selected
+                            $isSelected = $selectedColor ? 'selected' : '';
+                            echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color3\', \'' . addslashes($colors->name) . '\', \'colorGroup3\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                                         <title>Placeholder</title>
                                         <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
                                     </svg>
@@ -194,38 +224,49 @@ ini_set('display_errors', 1);
       <!-- Section 3 -->
       <div class="form-section  container pt-5" id="section3">
 
-        <!-- Section 3 Personal Information -->
-        <h3>Personal Information:</h3>
-        <div class="row g-3 mt-5">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid first name is required.
-             </div>
-          </div>
+      <?php
+      include_once 'Controllers/Controller.php';
+      if($this->user == null){
+        echo '<!-- Section 3 Personal Information -->
+                <h3>Personal Information:</h3>
+                <div class="row g-3 mt-5">
+                  <div class="col-sm-6">
+                    <label for="firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
 
-          <div class="col-sm-6">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
-          </div>
+                  <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                      Valid last name is required.
+                    </div>
+                  </div>
 
-          <div class="col-12">
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group has-validation">
-              <span class="input-group-text">@</span>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
-            <div class="invalid-feedback">
-                Your username is required.
-              </div>
-            </div>
-          </div>
-        </div>
-       
-
+                  <div class="col-12">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text">@</span>
+                      <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
+                    <div class="invalid-feedback">
+                        Your username is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>';
+      }
+      ?>
+        <script>
+          function getCart(){
+            const services = document.querySelector("#selectedService");
+            const color = document.querySelector("#selectedColor");
+            const date = document.querySelector("#selected_date");
+            const time = document.querySelector("#selected_time");
+          }
+        </script>
         <!-- Section # cart -->
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary ">Your cart</span>
@@ -295,7 +336,7 @@ ini_set('display_errors', 1);
 
         <div class="container">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Destination Location" id="destination">
+          <input name="destination" type="text" class="form-control" placeholder="Destination Location" id="destination">
         </div>
         <br>
        <button type="button" onclick="calcRoute()" class="btn btn-primary"  >Verify Address</button>
@@ -420,6 +461,8 @@ function initMap() {
 
   google.maps.event.addListener(map, "click", function(event) {
     this.setOptions({ scrollwheel: true });
+
+    mapLocation(event.latLng);
   });
 
   directionsService = new google.maps.DirectionsService();
@@ -429,6 +472,20 @@ function initMap() {
   destinationAutoComplete = new google.maps.places.Autocomplete(
     document.getElementById('destination')
   );
+}
+
+function mapLocation(latLng) {
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ 'location': latLng }, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        // Update the destination input field with the formatted address
+        document.getElementById('destination').value = results[0].formatted_address;
+      }
+    } else {
+      alert("Geocoder failed due to: " + status);
+    }
+  });
 }
 
 function calcRoute() {
