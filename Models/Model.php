@@ -15,7 +15,7 @@ abstract class Model {
 
     public function save(): bool {
         $values = new Values();
-        foreach(self::toAssoc() as $field => $value) {
+        foreach(static::toAssoc() as $field => $value) {
             $values->add(new Value($field, $value));
         }
         $where = new Where();
