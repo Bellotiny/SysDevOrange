@@ -19,7 +19,7 @@ class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                if (count(Booking::getFromUser($this->user)) <= count(Review::getFromUser($this->user))) {
+                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
                     $this->render("Gallery", $action, [
                         "user" => $this->user,
                         "error" => "You are only allowed 1 review per booking.",

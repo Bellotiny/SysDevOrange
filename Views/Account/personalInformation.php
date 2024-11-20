@@ -17,7 +17,7 @@ include_once 'Views/bookingModal.php';
         <div class= "container my-2">
             <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-10" id="divAccount">
                 <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
-                <h1 class="text-body-emphasis">Hello, <?= $data[0]->firstName ?></h1>
+                <h1 class="text-body-emphasis">Hello, <?= $this->user->firstName ?></h1>
                 <p class="col-lg-6 mx-auto mb-4 text-green">
                 We're so happy to see you.<br> Your little nook of joy is ready and waiting for you.&#127752;
                 </p>
@@ -30,31 +30,31 @@ include_once 'Views/bookingModal.php';
                 <div class="form-group  my-1">
                     <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">First Name:</label><br>
                     <div class="col-sm-10 border bg-light  p-1">
-                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->firstName ?>">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $this->user->firstName ?>">
                     </div>
                 </div>
                 <div class="form-group  my-3">
                     <label for="staticEmail" class=" col-form-label canvaSans-fontstyle">Last Name:</label><br>
                     <div class="col-sm-10 border bg-light p-1">
-                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->lastName ?>">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $this->user->lastName ?>">
                     </div>
                 </div>
                 <div class="form-group  my-3">
                     <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Email:</label><br>
                     <div class="col-sm-10 border bg-light p-2">
-                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->email ?>">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $this->user->email ?>">
                     </div>
                 </div>
                 <div class="form-group  my-3">
                     <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Phone Number:</label><br>
                     <div class="col-sm-10 border bg-light p-2">
-                        <input type="text" readonly class="form-control-plaintext  " id="staticEmail" value="<?= $data[0]->phoneNumber ?>">
+                        <input type="text" readonly class="form-control-plaintext  " id="staticEmail" value="<?= $this->user->phoneNumber ?>">
                     </div>
                 </div>
                 <div class="form-group  my-3">
                     <label for="staticEmail" class=" col-form-label canvaSans-fontstyle ">Birthday:</label><br>
                     <div class="col-sm-10 border bg-light p-2">
-                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $data[0]->birthDate ?>">
+                        <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="<?= $this->user->birthDate ?>">
                     </div>
                 </div>
             </form>

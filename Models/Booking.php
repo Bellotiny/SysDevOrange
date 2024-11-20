@@ -3,79 +3,64 @@
 include_once "Model.php";
 
 class Booking extends Model {
+    public const TABLE = "bookings";
+
+    public final const id = self::TABLE . ".id";
+    public final const status = self::TABLE . ".status";
+    public final const location = self::TABLE . ".location";
+    public final const userID = self::TABLE . ".userID";
+    public final const paymentID = self::TABLE . ".paymentID";
+    public final const discountID = self::TABLE . ".discountID";
+
     public string $status;
-    public int $start;
-    public int $end;
+    public string $location;
     public User $user;
     public Payment $payment;
-    public Discount $discount;
+    public ?Discount $discount;
 
     public function __construct(array $fields) {
-        $this->id = $fields[self::getTable() . '.id'];
-        $this->status = $fields[self::getTable() . '.status'];
-        $this->start = $fields[self::getTable() . '.start'];
-        $this->end = $fields[self::getTable() . '.end'];
+        $this->id = $fields[self::id];
+        $this->status = $fields[self::status];
+        $this->location = $fields[self::location];
         $this->user = new User($fields);
         $this->payment = new Payment($fields);
-        $this->discount = new Discount($fields);
+        $this->discount = ($fields[Discount::id] ? new Discount($fields) : null);
     }
 
-    public static function getTable(): string {
-        return "bookings";
+    public function toAssoc(): array {
+        return [
+            self::id => $this->id,
+            self::status => $this->status,
+            self::location => $this->location,
+            self::userID => $this->user->id,
+            self::paymentID => $this->payment->id,
+            self::discountID => $this->discount?->id,
+        ];
     }
 
-    public static function getFields(): array {
-        return ["id", "status", "start", "end", "userID", "paymentID", "discountID"];
-    }
-
-    public static function new(string $status, int $start, int $end, User $user, Payment $payment, Discount $discount): ?Booking {
+    public static function new(string $status, string $location, User $user, Payment $payment, ?Discount $discount): ?Booking {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".status", $status));
-        $values->add(new Value(self::getTable() . ".start", $start));
-        $values->add(new Value(self::getTable() . ".end", $end));
-        $values->add(new Value(self::getTable() . ".userID", $user->id));
-        $values->add(new Value(self::getTable() . ".paymentID", $payment->id));
-        $values->add(new Value(self::getTable() . ".discountID", $discount->id));
+        $values->add(new Value(self::status, $status));
+        $values->add(new Value(self::location, $location));
+        $values->add(new Value(self::userID, $user->id));
+        $values->add(new Value(self::paymentID, $payment->id));
+        $values->add(new Value(self::discountID, $discount?->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             return new Booking([
-                self::getTable() . ".id" => $id,
-                self::getTable() . ".status" => $status,
-                self::getTable() . ".start" => $start,
-                self::getTable() . ".end" => $end,
-                self::getTable() . ".userID" => $user->id,
-                self::getTable() . ".paymentID" => $payment->id,
-                self::getTable() . ".discountID" => $discount->id,
-                ...$user->getAssoc(),
-                ...$payment->getAssoc(),
-                ...$discount->getAssoc(),
+                self::id => $id,
+                self::status => $status,
+                self::location => $location,
+                self::userID => $user->id,
+                self::paymentID => $payment->id,
+                self::discountID => $discount?->id,
+                ...$user->toAssoc(),
+                ...$payment->toAssoc(),
+                ...($discount ? $discount->toAssoc() : []),
             ]);
         } catch (Exception) {
             return null;
         }
-    }
-
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".status", $this->status));
-        $values->add(new Value(self::getTable() . ".start", $this->start));
-        $values->add(new Value(self::getTable() . ".end", $this->end));
-        $values->add(new Value(self::getTable() . ".userID", $this->user->id));
-        $values->add(new Value(self::getTable() . ".paymentID", $this->payment->id));
-        $values->add(new Value(self::getTable() . ".discountID", $this->discount->id));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
-    }
-
-    /**
-     * Get bookings based on User
-     * @return Booking[]
-     */
-    public static function getFromUser(User $user): array {
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".userID", $user->id));
-        return self::list($where) ?? [];
     }
 }

@@ -3,6 +3,15 @@
 include_once "Model.php";
 
 class Discount extends Model {
+    public const TABLE = "discounts";
+
+    public final const id = self::TABLE . ".id";
+    public final const name = self::TABLE . ".name";
+    public final const start = self::TABLE . ".start";
+    public final const end = self::TABLE . ".end";
+    public final const percent = self::TABLE . ".percent";
+    public final const amount = self::TABLE . ".amount";
+
     public string $name;
     public int $start;
     public int $end;
@@ -10,65 +19,45 @@ class Discount extends Model {
     public float $amount;
 
     public function __construct(array $fields) {
-        $this->id = $fields[self::getTable() . '.id'];
-        $this->name = $fields[self::getTable() . '.name'];
-        $this->start = $fields[self::getTable() . '.start'];
-        $this->end = $fields[self::getTable() . '.end'];
-        $this->percent = $fields[self::getTable() . '.percent'];
-        $this->amount = $fields[self::getTable() . '.amount'];
+        $this->id = $fields[self::id];
+        $this->name = $fields[self::name];
+        $this->start = $fields[self::start];
+        $this->end = $fields[self::end];
+        $this->percent = $fields[self::percent];
+        $this->amount = $fields[self::amount];
     }
 
-    public static function getTable(): string {
-        return "discounts";
-    }
-
-    public static function getFields(): array {
-        return ["id", "name", "start", "end", "percent", "amount"];
-    }
-
-    public function getAssoc(): array {
+    public function toAssoc(): array {
         return [
-            self::getTable() . ".id" => $this->id,
-            self::getTable() . ".name" => $this->name,
-            self::getTable() . ".start" => $this->start,
-            self::getTable() . ".end" => $this->end,
-            self::getTable() . ".percent" => $this->percent,
-            self::getTable() . ".amount" => $this->amount,
+            self::id => $this->id,
+            self::name => $this->name,
+            self::start => $this->start,
+            self::end => $this->end,
+            self::percent => $this->percent,
+            self::amount => $this->amount,
         ];
     }
 
     public static function new(string $name, int $start, int $end, float $percent, float $amount): ?Discount {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".name", $name));
-        $values->add(new Value(self::getTable() . ".start", $start));
-        $values->add(new Value(self::getTable() . ".end", $end));
-        $values->add(new Value(self::getTable() . ".percent", $percent));
-        $values->add(new Value(self::getTable() . ".amount", $amount));
+        $values->add(new Value(self::name, $name));
+        $values->add(new Value(self::start, $start));
+        $values->add(new Value(self::end, $end));
+        $values->add(new Value(self::percent, $percent));
+        $values->add(new Value(self::amount, $amount));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             return new Discount([
-                self::getTable() . ".id" => $id,
-                self::getTable() . ".name" => $name,
-                self::getTable() . ".start" => $start,
-                self::getTable() . ".end" => $end,
-                self::getTable() . ".percent" => $percent,
-                self::getTable() . ".amount" => $amount,
+                self::id => $id,
+                self::name => $name,
+                self::start => $start,
+                self::end => $end,
+                self::percent => $percent,
+                self::amount => $amount,
             ]);
         } catch (Exception) {
             return null;
         }
-    }
-
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".name", $this->name));
-        $values->add(new Value(self::getTable() . ".start", $this->start));
-        $values->add(new Value(self::getTable() . ".end", $this->end));
-        $values->add(new Value(self::getTable() . ".percent", $this->percent));
-        $values->add(new Value(self::getTable() . ".amount", $this->amount));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
     }
 }
