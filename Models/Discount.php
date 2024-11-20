@@ -2,15 +2,15 @@
 
 include_once "Model.php";
 
-class Discount extends Model {
+final class Discount extends Model {
     public const TABLE = "discounts";
 
-    public final const id = self::TABLE . ".id";
-    public final const name = self::TABLE . ".name";
-    public final const start = self::TABLE . ".start";
-    public final const end = self::TABLE . ".end";
-    public final const percent = self::TABLE . ".percent";
-    public final const amount = self::TABLE . ".amount";
+    final public const id = self::TABLE . ".id";
+    final public const name = self::TABLE . ".name";
+    final public const start = self::TABLE . ".start";
+    final public const end = self::TABLE . ".end";
+    final public const percent = self::TABLE . ".percent";
+    final public const amount = self::TABLE . ".amount";
 
     public string $name;
     public int $start;

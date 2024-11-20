@@ -1,17 +1,20 @@
 <?php
 
 include_once "Model.php";
+include_once "UserGroup.php";
+include_once "GroupAction.php";
+include_once "Action.php";
 
-class User extends Model {
+final class User extends Model {
     public const TABLE = "users";
 
-    public final const id = self::TABLE . ".id";
-    public final const firstName = self::TABLE . ".firstName";
-    public final const lastName = self::TABLE . ".lastName";
-    public final const email = self::TABLE . ".email";
-    public final const phoneNumber = self::TABLE . ".phoneNumber";
-    public final const birthDate = self::TABLE . ".birthDate";
-    public final const token = self::TABLE . ".token";
+    final public const id = self::TABLE . ".id";
+    final public const firstName = self::TABLE . ".firstName";
+    final public const lastName = self::TABLE . ".lastName";
+    final public const email = self::TABLE . ".email";
+    final public const phoneNumber = self::TABLE . ".phoneNumber";
+    final public const birthDate = self::TABLE . ".birthDate";
+    final public const token = self::TABLE . ".token";
 
     private const password = self::TABLE . ".password";
 
@@ -55,8 +58,7 @@ class User extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            self::executeQuery("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM `groups` WHERE name = 'registeredUsers'))", [$id]);
-            return new User([
+            $user = new User([
                 self::id => $id,
                 self::firstName => $firstName,
                 self::lastName => $lastName,
@@ -64,6 +66,8 @@ class User extends Model {
                 self::phoneNumber => $phoneNumber,
                 self::birthDate => $birthDate,
             ]);
+            UserGroup::new($user, Group::getFromName("registeredUsers"));
+            return $user;
         } catch (Exception) {
             return null;
         }
@@ -113,15 +117,15 @@ class User extends Model {
     }
 
     public function hasRights(string $controller, string $action): bool {
-        return self::getConnection()->execute_query("
-            SELECT COUNT(users.id) FROM `" . self::TABLE . "`
-            INNER JOIN users_groups ON users_groups.userID = " .  self::id . "
-            INNER JOIN group_actions ON group_actions.groupID = users_groups.groupID
-            INNER JOIN actions ON actions.id = group_actions.actionID
-            WHERE " . self::id . " = ?
-            AND actions.action = ?
-            AND actions.controller = ?
-        ", [$this->id, $action, $controller])->fetch_row()[0];
+        $join = (new Join())
+            ->addInner(UserGroup::getFields(), UserGroup::TABLE, UserGroup::userID, self::id)
+            ->addInner(GroupAction::getFields(), GroupAction::TABLE, GroupAction::groupID, UserGroup::groupID)
+            ->addInner(Action::getFields(), Action::TABLE, Action::id, GroupAction::actionID);
+        $where = (new Where())
+            ->addEquals(new Value(self::id, $this->id))
+            ->addEquals(new Value(Action::controller, $controller))
+            ->addEquals(new Value(Action::action, $action));
+        return is_array(self::select($join, $where)->fetch_assoc());
     }
 
     /**

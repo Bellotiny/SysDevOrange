@@ -1,6 +1,7 @@
 <?php
 
-include_once "Controllers/Account.php";
+include_once "Account.php";
+include_once "Home.php";
 
 abstract class Controller {
     protected ?User $user;
@@ -12,35 +13,33 @@ abstract class Controller {
         setcookie("lang", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
     }
 
-    public abstract static function redirect(string $action = ""): void;
-
     public abstract function route(): void;
 
-    protected function verifyRights(string $action): bool {
-        if (!$this->verifyUser()) {
-            return false;
-        }
-        if (!$this->user->hasRights(static::class, $action)) {
-            $this->back();
-            return false;
-        }
-        return true;
+    public final function render($controller, $view, $data = []): void {
+        extract($data);
+        include "Views/$controller/$view.php";
     }
 
-    protected function verifyUser(): bool {
+    protected final function verifyRights(string $action): bool {
         if ($this->user === null) {
             Account::redirect("login");
             return false;
         }
+        if (!$this->user->hasRights(static::class, $action)) {
+            $this::back();
+            return false;
+        }
         return true;
     }
 
-    protected function back(): void {
-        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? dirname($_SERVER['PHP_SELF'])));
+    final public static function redirect(string $action = "", ?string $id = null): void {
+        if (self::class === static::class) {
+            Home::redirect();
+        }
+        header("Location: " . BASE_PATH . "/" . strtolower(static::class) . "/" . $action . ($id ? "/$id" : ""));
     }
 
-    public function render($controller, $view, $data = []): void {
-        extract($data);
-        include "Views/$controller/$view.php";
+    protected final static function back(): void {
+        header("Location: " . ($_SERVER['HTTP_REFERER'] ?? dirname($_SERVER['PHP_SELF'])));
     }
 }

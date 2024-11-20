@@ -1,17 +1,17 @@
 <?php
 
 include_once "Model.php";
-include_once "Models/Image.php";
+include_once "Image.php";
 
-class Review extends Model {
+final class Review extends Model {
     public const TABLE = "reviews";
 
-    public final const id = self::TABLE . ".id";
-    public final const title = self::TABLE . ".title";
-    public final const message = self::TABLE . ".message";
-    public final const date = self::TABLE . ".date";
-    public final const userID = self::TABLE . ".userID";
-    public final const imageID = self::TABLE . ".imageID";
+    final public const id = self::TABLE . ".id";
+    final public const title = self::TABLE . ".title";
+    final public const message = self::TABLE . ".message";
+    final public const date = self::TABLE . ".date";
+    final public const userID = self::TABLE . ".userID";
+    final public const imageID = self::TABLE . ".imageID";
 
     public string $title;
     public string $message;

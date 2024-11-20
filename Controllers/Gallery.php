@@ -1,18 +1,13 @@
 <?php
 
-include_once "Controllers/Controller.php";
 include_once "Models/Review.php";
 include_once "Models/Booking.php";
 
-class Gallery extends Controller {
-    private const INSTAGRAM_ACCESS_TOKEN = 'IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD';
-
-    public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/gallery/" . $action);
-    }
+final class Gallery extends Controller {
+    private const INSTAGRAM_ACCESS_TOKEN = "IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD";
 
     public function route(): void {
-        $action = isset($_GET['action']) ? strtolower($_GET['action']) : "";
+        $action = isset($_GET["action"]) ? strtolower($_GET["action"]) : "";
 
         switch ($action) {
             case "add":
@@ -26,69 +21,69 @@ class Gallery extends Controller {
                     ]);
                     break;
                 }
-                if (!isset($_POST['title']) || !isset($_POST['message']) || !isset($_FILES['image'])) {
+                if (!isset($_POST["title"]) || !isset($_POST["message"]) || !isset($_FILES["image"])) {
                     $this->render("Gallery", $action, ["user" => $this->user]);
                     break;
                 }
-                if ($_POST['title'] === "" || $_POST['message'] === "") {
+                if ($_POST["title"] === "" || $_POST["message"] === "") {
                     $this->render("Gallery", $action, [
                         "user" => $this->user,
                         "error" => "Title or Message cannot be empty",
-                        "title" => $_POST['title'],
-                        "message" => $_POST['message'],
+                        "title" => $_POST["title"],
+                        "message" => $_POST["message"],
                     ]);
                     break;
                 }
                 $image = null;
-                if ($_FILES['image']['name'] !== "" && $_FILES['image']['tmp_name'] !== "") {
+                if ($_FILES["image"]["name"] !== "" && $_FILES["image"]["tmp_name"] !== "") {
                     $image = Image::new(
-                        pathinfo($_FILES['image']['name'], PATHINFO_FILENAME),
-                        pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+                        pathinfo($_FILES["image"]["name"], PATHINFO_FILENAME),
+                        pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION),
                     );
-                    move_uploaded_file($_FILES['image']['tmp_name'], $image->getPath());
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $image->getPath());
                 }
-                Review::new($this->user, $_POST['title'], $_POST['message'], date("Y-m-d H:i:s"), $image);
+                Review::new($this->user, $_POST["title"], $_POST["message"], date("Y-m-d H:i:s"), $image);
                 $this->redirect();
                 break;
             case "edit":
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                $review = Review::getfromId((int)$_GET['id']);
+                $review = Review::getfromId((int)$_GET["id"]);
                 if (is_null($review)) {
                     $this->redirect();
                     break;
                 }
-                if (!isset($_POST['title']) || !isset($_POST['message'])) {
+                if (!isset($_POST["title"]) || !isset($_POST["message"])) {
                     $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
                     break;
                 }
-                if ($_POST['title'] === "" || $_POST['message'] === "") {
+                if ($_POST["title"] === "" || $_POST["message"] === "") {
                     $this->render("Gallery", $action, [
                         "user" => $this->user,
                         "error" => "Title or Message cannot be empty",
-                        "title" => $_POST['title'],
-                        "message" => $_POST['message'],
+                        "title" => $_POST["title"],
+                        "message" => $_POST["message"],
                     ]);
                     break;
                 }
-                $review->title = $_POST['title'];
-                $review->message = $_POST['message'];
-                if ($_FILES['image']['name'] !== "" && $_FILES['image']['tmp_name'] !== "") {
+                $review->title = $_POST["title"];
+                $review->message = $_POST["message"];
+                if ($_FILES["image"]["name"] !== "" && $_FILES["image"]["tmp_name"] !== "") {
                     if ($review->image) {
-                        if ($review->image->extension !== pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION) && file_exists($review->image->getPath())) {
+                        if ($review->image->extension !== pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION) && file_exists($review->image->getPath())) {
                             unlink($review->image->getPath());
                         }
-                        $review->image->name = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME);
-                        $review->image->extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                        $review->image->name = pathinfo($_FILES["image"]["name"], PATHINFO_FILENAME);
+                        $review->image->extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
                         $review->image->save();
                     } else {
                         $review->image = Image::new(
-                            pathinfo($_FILES['image']['name'], PATHINFO_FILENAME),
-                            pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+                            pathinfo($_FILES["image"]["name"], PATHINFO_FILENAME),
+                            pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION),
                         );
                     }
-                    move_uploaded_file($_FILES['image']['tmp_name'], $review->image->getPath());
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $review->image->getPath());
                 }
                 $review->save();
                 $this->redirect();
@@ -97,12 +92,12 @@ class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                $review = Review::getfromId((int)$_GET['id']);
+                $review = Review::getfromId((int)$_GET["id"]);
                 if (is_null($review)) {
                     $this->redirect();
                     break;
                 }
-                if (!isset($_POST['confirm'])) {
+                if (!isset($_POST["confirm"])) {
                     $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
                     break;
                 }
@@ -125,34 +120,17 @@ class Gallery extends Controller {
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $data = json_decode($response, true);
-                
-                if (isset($data['data'])) {
-                    // Separate media items for easier handling
-                    //var_dump($data['data']);
-                
-                    $mediaItems = array_map(function($item) {
-                        return [
-                            'url' => $item['media_url'],
-                            'type' => $item['media_type'],
-                            'caption' => $item['caption'] ?? ''
-                        ];
-                    }, $data['data']);
 
-                    $this->render("Gallery", "list", [
-                        "user" => $this->user,
-                        "reviews" => Review::list(null, 10, (10 * (int)($_GET['id'] ?? 0))),
-                        'mediaItems' => $mediaItems
-                    ]);
-                    
-                   // $this->render("Gallery", "gallery", ['mediaItems' => $mediaItems]);
-                } else {
-                    echo "Error fetching data.";
-                }
-        
-
-
-
-                
+                $this->render("Gallery", "list", [
+                    "user" => $this->user,
+                    "reviews" => Review::list(null, 10, (10 * (int)($_GET["id"] ?? 0))),
+                    "mediaItems" => array_map(fn($item) => [
+                        "url" => $item["media_url"],
+                        "type" => $item["media_type"],
+                        "caption" => $item["caption"] ?? ""
+                    ], $data["data"] ?? []),
+                ]);
+                break;
         }
     }
 }

@@ -6,7 +6,7 @@ include_once "PHPMailer/src/PHPMailer.php";
 include_once "PHPMailer/src/Exception.php";
 include_once "PHPMailer/src/SMTP.php";
 
-class Mailer {
+class Mail {
     public static function send(string $subject, string $message, string $sendEmail, string $sendName, string $replyEmail, string $replyName): string|true {
         $mail = new PHPMailer(true);
         try {

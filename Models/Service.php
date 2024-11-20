@@ -2,16 +2,16 @@
 
 include_once "Model.php";
 
-class Service extends Model {
+final class Service extends Model {
     public const TABLE = "services";
 
-    public final const id = self::TABLE . ".id";
-    public final const name = self::TABLE . ".name";
-    public final const description = self::TABLE . ".description";
-    public final const type = self::TABLE . ".type";
-    public final const price = self::TABLE . ".price";
-    public final const duration = self::TABLE . ".duration";
-    public final const visibility = self::TABLE . ".visibility";
+    final public const id = self::TABLE . ".id";
+    final public const name = self::TABLE . ".name";
+    final public const description = self::TABLE . ".description";
+    final public const type = self::TABLE . ".type";
+    final public const price = self::TABLE . ".price";
+    final public const duration = self::TABLE . ".duration";
+    final public const visibility = self::TABLE . ".visibility";
 
     public string $name;
     public string $description;

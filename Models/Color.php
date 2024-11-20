@@ -2,13 +2,13 @@
 
 include_once "Model.php";
 
-class Color extends Model {
+final class Color extends Model {
     public const TABLE = "colors";
 
-    public final const id = self::TABLE . ".id";
-    public final const name = self::TABLE . ".name";
-    public final const code = self::TABLE . ".code";
-    public final const visibility = self::TABLE . ".visibility";
+    final public const id = self::TABLE . ".id";
+    final public const name = self::TABLE . ".name";
+    final public const code = self::TABLE . ".code";
+    final public const visibility = self::TABLE . ".visibility";
 
     public string $name;
     public string $code;

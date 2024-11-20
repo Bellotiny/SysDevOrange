@@ -1,13 +1,14 @@
 <?php
 
 include_once "Model.php";
+include_once "Booking.php";
 
-class Availability extends Model {
+final class Availability extends Model {
     public const TABLE = "availabilities";
 
-    public final const id = self::TABLE . ".id";
-    public final const timeSlot = self::TABLE . ".timeSlot";
-    public final const bookingID = self::TABLE . ".bookingID";
+    final public const id = self::TABLE . ".id";
+    final public const timeSlot = self::TABLE . ".timeSlot";
+    final public const bookingID = self::TABLE . ".bookingID";
 
     public int $timeSlot;
     public ?Booking $booking;

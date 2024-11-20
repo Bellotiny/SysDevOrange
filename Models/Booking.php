@@ -1,16 +1,19 @@
 <?php
 
 include_once "Model.php";
+include_once "User.php";
+include_once "Payment.php";
+include_once "Discount.php";
 
-class Booking extends Model {
+final class Booking extends Model {
     public const TABLE = "bookings";
 
-    public final const id = self::TABLE . ".id";
-    public final const status = self::TABLE . ".status";
-    public final const location = self::TABLE . ".location";
-    public final const userID = self::TABLE . ".userID";
-    public final const paymentID = self::TABLE . ".paymentID";
-    public final const discountID = self::TABLE . ".discountID";
+    final public const id = self::TABLE . ".id";
+    final public const status = self::TABLE . ".status";
+    final public const location = self::TABLE . ".location";
+    final public const userID = self::TABLE . ".userID";
+    final public const paymentID = self::TABLE . ".paymentID";
+    final public const discountID = self::TABLE . ".discountID";
 
     public string $status;
     public string $location;

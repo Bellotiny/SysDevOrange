@@ -2,13 +2,13 @@
 
 include_once "Model.php";
 
-class Payment extends Model {
+final class Payment extends Model {
     public const TABLE = "payments";
 
-    public final const id = self::TABLE . ".id";
-    public final const status = self::TABLE . ".status";
-    public final const amount = self::TABLE . ".amount";
-    public final const dateTime = self::TABLE . ".dateTime";
+    final public const id = self::TABLE . ".id";
+    final public const status = self::TABLE . ".status";
+    final public const amount = self::TABLE . ".amount";
+    final public const dateTime = self::TABLE . ".dateTime";
 
     public bool $status;
     public float $amount;

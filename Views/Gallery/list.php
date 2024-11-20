@@ -18,7 +18,7 @@ include_once 'Views/head.php';
 
   <div id="instagram-pic">
   <?php
-    foreach ($mediaItems as $item) {
+    foreach ($data["mediaItems"] as $item) {
       if($item['type'] == 'CAROUSEL_ALBUM' || $item['type'] == 'IMAGE') {
         echo "<img class='slide-up' src='" . htmlspecialchars($item['url']) . "' alt='instagram_post'>";
       } elseif ($item['type'] == 'VIDEO') {
