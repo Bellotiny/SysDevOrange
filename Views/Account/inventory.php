@@ -16,6 +16,7 @@ include_once 'Views/bookingModal.php';
         <div class="sideScreen slide-up container mt-4">
           <!---default content will be the Personal info-->
           <!--content is load here-->
+          <?php include_once 'Views/menuAccount.php'; ?>
           <div class="accordion" id="accordionExample" >
             <div class="accordion-item" id="">
               <h3 class="accordion-header" id="headingOne">
