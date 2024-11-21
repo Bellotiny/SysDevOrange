@@ -16,7 +16,9 @@ include_once 'Views/bookingModal.php';
         <div class="sideScreen slide-up">
           <!---default content will be the Personal info-->
           <!--content is load here-->
-          
+          <div class= "container my-2">
+            <?php include_once 'Views/menuAccount.php'; ?>
+          </div>
           <div >
         <table class="table table-hover">
           <thead>

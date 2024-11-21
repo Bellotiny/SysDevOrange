@@ -28,14 +28,20 @@ final class GroupAction extends Model {
         ];
     }
 
-    public static function new(Group $group, Action $action): ?GroupAction {
+    protected static function getJoin(): ?Join {
+        return (new Join())
+            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID)
+            ->addInner(Action::getFields(), Action::TABLE, Action::id, self::actionID);
+    }
+
+    public static function new(Group $group, Action $action): ?self {
         $values = new Values();
         $values->add(new Value(self::groupID, $group->id));
         $values->add(new Value(self::actionID, $action->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new GroupAction([
+            return new self([
                 self::id => $id,
                 self::groupID => $group->id,
                 self::actionID => $action->id,

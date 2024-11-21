@@ -14,13 +14,7 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                //If current user is loggedin
-                
-                $services = Service::list();
-                $colors = Color::list();
-                $availabilities = Availability::list() ?: '';
-                //var_dump($availabilities);
-                $this->render("Book", "bookOne", ["services" => $services, "colors" => $colors, "availabilities" => $availabilities]);
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list()]);
             break;
             case "add":
                 $services = $_POST['selectedServices'] ?? null;

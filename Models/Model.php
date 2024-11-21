@@ -68,9 +68,10 @@ abstract class Model {
         );
     }
 
-    protected final static function select(?Join $join = null, ?Where $where = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {
+    protected final static function select(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {
+        if ($join === null) $join = static::getJoin();
         return self::executeQuery(
-            "SELECT " . implode(", ", array_map(fn($field) => $field . " as '" . $field . "'", array_merge(self::getFields(), ($join ? $join->getFields() : [])))) .
+            "SELECT " . implode(", ", array_map(fn($field) => $field . " as '" . $field . "'", array_merge(static::getFields(), ($join ? $join->getFields() : [])))) .
             " FROM `" . static::TABLE . "`" .
             ($join ?? "") .
             ($where ?? "") .
@@ -83,17 +84,17 @@ abstract class Model {
     /**
      * @return static[]
      */
-    public final static function list(?Where $where = null, ?int $limit = null, ?int $offset = null): array {
+    public final static function list(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): array {
         $list = [];
-        $result = self::select(self::getJoin(), $where, $limit, $offset);
+        $result = self::select($where, $join, $limit, $offset);
         while ($fields = $result->fetch_assoc()) {
             $list[] = new static($fields);
         }
         return $list;
     }
 
-    public final static function get(?Where $where = null, ?int $limit = null, ?int $offset = null): ?static {
-        $fields = self::select(self::getJoin(), $where, $limit, $offset);
+    public final static function get(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): ?static {
+        $fields = self::select($where, $join, $limit, $offset);
         if ($fields) {
             return new static($fields->fetch_assoc());
         }

@@ -14,13 +14,13 @@ final class Gallery extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
-                    $this->render("Gallery", $action, [
-                        "user" => $this->user,
-                        "error" => "You are only allowed 1 review per booking.",
-                    ]);
-                    break;
-                }
+//                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
+//                    $this->render("Gallery", $action, [
+//                        "user" => $this->user,
+//                        "error" => "You are only allowed 1 review per booking.",
+//                    ]);
+//                    break;
+//                }
                 if (!isset($_POST["title"]) || !isset($_POST["message"]) || !isset($_FILES["image"])) {
                     $this->render("Gallery", $action, ["user" => $this->user]);
                     break;
@@ -123,7 +123,7 @@ final class Gallery extends Controller {
 
                 $this->render("Gallery", "list", [
                     "user" => $this->user,
-                    "reviews" => Review::list(null, 10, (10 * (int)($_GET["id"] ?? 0))),
+                    "reviews" => Review::list(null, null, 10, (10 * (int)($_GET["id"] ?? 0))),
                     "mediaItems" => array_map(fn($item) => [
                         "url" => $item["media_url"],
                         "type" => $item["media_type"],

@@ -2,68 +2,112 @@
 
 include_once "Model.php";
 include_once "User.php";
-include_once "Payment.php";
 include_once "Discount.php";
 
 final class Booking extends Model {
     public const TABLE = "bookings";
 
     final public const id = self::TABLE . ".id";
-    final public const status = self::TABLE . ".status";
-    final public const location = self::TABLE . ".location";
     final public const userID = self::TABLE . ".userID";
-    final public const paymentID = self::TABLE . ".paymentID";
+    final public const bookedOn = self::TABLE . ".bookedOn";
+    final public const location = self::TABLE . ".location";
+    final public const price = self::TABLE . ".price";
+    final public const payedOn = self::TABLE . ".payedOn";
     final public const discountID = self::TABLE . ".discountID";
 
-    public string $status;
-    public string $location;
     public User $user;
-    public Payment $payment;
+    public float $price;
+    public ?string $payedOn;
+    public ?string $bookedOn;
+    public ?string $location;
     public ?Discount $discount;
+
+    public ?array $images = null;
+    public ?array $colors = null;
+    public ?array $services = null;
 
     public function __construct(array $fields) {
         $this->id = $fields[self::id];
-        $this->status = $fields[self::status];
-        $this->location = $fields[self::location];
         $this->user = new User($fields);
-        $this->payment = new Payment($fields);
-        $this->discount = ($fields[Discount::id] ? new Discount($fields) : null);
+        $this->price = $fields[self::price];
+        $this->payedOn = $fields[self::payedOn];
+        $this->bookedOn = $fields[self::bookedOn];
+        $this->location = $fields[self::location];
+        $this->discount = isset($fields[Discount::id]) ? new Discount($fields) : null;
     }
 
     public function toAssoc(): array {
         return [
             self::id => $this->id,
-            self::status => $this->status,
-            self::location => $this->location,
             self::userID => $this->user->id,
-            self::paymentID => $this->payment->id,
+            self::price => $this->price,
+            self::payedOn => $this->payedOn,
+            self::bookedOn => $this->bookedOn,
+            self::location => $this->location,
             self::discountID => $this->discount?->id,
         ];
     }
 
-    public static function new(string $status, string $location, User $user, Payment $payment, ?Discount $discount): ?Booking {
+    protected static function getJoin(): ?Join {
+        return (new Join())
+            ->addInner(User::getFields(), User::TABLE, User::id, self::userID)
+            ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID);
+    }
+
+    public static function new(User $user, float $price, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
         $values = new Values();
-        $values->add(new Value(self::status, $status));
-        $values->add(new Value(self::location, $location));
         $values->add(new Value(self::userID, $user->id));
-        $values->add(new Value(self::paymentID, $payment->id));
+        $values->add(new Value(self::price, $price));
+        $values->add(new Value(self::payedOn, $payedOn));
+        $values->add(new Value(self::bookedOn, $bookedOn));
+        $values->add(new Value(self::location, $location));
         $values->add(new Value(self::discountID, $discount?->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Booking([
+            return new self([
                 self::id => $id,
-                self::status => $status,
-                self::location => $location,
-                self::userID => $user->id,
-                self::paymentID => $payment->id,
-                self::discountID => $discount?->id,
                 ...$user->toAssoc(),
-                ...$payment->toAssoc(),
+                self::price => $price,
+                self::payedOn => $payedOn,
+                self::bookedOn => $bookedOn,
+                self::location => $location,
                 ...($discount ? $discount->toAssoc() : []),
             ]);
         } catch (Exception) {
             return null;
         }
+    }
+
+    /**
+     * @throws DateMalformedStringException
+     */
+    public function getBookedDateTime(): DateTime {
+        return new DateTime($this->bookedOn);
+    }
+
+    /**
+     * @throws DateMalformedStringException
+     */
+    public function getPayedDateTime(): DateTime {
+        return new DateTime($this->payedOn);
+    }
+
+    public function getImages(): array {
+        $join = (new Join())->addInner(BookingImage::getFields(), BookingImage::TABLE, BookingImage::imageID, Image::id);
+        $where = (new Where())->addEquals(new Value(BookingImage::bookingID, $this->id));
+        return Image::list($where, $join);
+    }
+
+    public function getServices(): array {
+        $join = (new Join())->addInner(BookingService::getFields(), BookingService::TABLE, BookingService::serviceID, Service::id);
+        $where = (new Where())->addEquals(new Value(BookingService::bookingID, $this->id));
+        return Service::list($where, $join);
+    }
+
+    public function getColors(): array {
+        $join = (new Join())->addInner(BookingColor::getFields(), BookingColor::TABLE, BookingColor::colorID, Color::id);
+        $where = (new Where())->addEquals(new Value(BookingColor::bookingID, $this->id));
+        return Color::list($where, $join);
     }
 }

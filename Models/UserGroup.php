@@ -28,14 +28,20 @@ final class UserGroup extends Model {
         ];
     }
 
-    public static function new(User $user, Group $group): ?UserGroup {
+    protected static function getJoin(): ?Join {
+        return (new Join())
+            ->addInner(User::getFields(), User::TABLE, User::id, self::userID)
+            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID);
+    }
+
+    public static function new(User $user, Group $group): ?self {
         $values = new Values();
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::groupID, $group->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new UserGroup([
+            return new self([
                 self::id => $id,
                 self::userID => $user->id,
                 self::groupID => $group->id,
