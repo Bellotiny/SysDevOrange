@@ -28,14 +28,14 @@ final class Action extends Model {
         ];
     }
 
-    public static function new(string $controller, string $action): ?Action {
+    public static function new(string $controller, string $action): ?self {
         $values = new Values();
         $values->add(new Value(self::controller, $controller));
         $values->add(new Value(self::action, $action));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Action([
+            return new self([
                 self::id => $id,
                 self::controller => $controller,
                 self::action => $action,

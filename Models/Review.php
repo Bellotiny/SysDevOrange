@@ -25,7 +25,7 @@ final class Review extends Model {
         $this->message = $fields[self::message];
         $this->date = $fields[self::date];
         $this->user = new User($fields);
-        $this->image = ($fields[Image::id] ? new Image($fields) : null);
+        $this->image = isset($fields[Image::id]) ? new Image($fields) : null;
     }
 
     protected function toAssoc(): array {
@@ -45,7 +45,7 @@ final class Review extends Model {
             ->addLeft(Image::getFields(), Image::TABLE, Image::id, self::imageID);
     }
 
-    public static function new(User $user, string $title, string $message, string $date, ?Image $image = null): ?Review {
+    public static function new(User $user, string $title, string $message, string $date, ?Image $image = null): ?self {
         $values = new Values();
         $values->add(new Value(self::title, $title));
         $values->add(new Value(self::message, $message));
@@ -55,7 +55,7 @@ final class Review extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Review([
+            return new self([
                 self::id => $id,
                 self::title => $title,
                 self::message => $message,
@@ -63,7 +63,7 @@ final class Review extends Model {
                 self::userID => $user->id,
                 self::imageID => $image->id,
                 ...$user->toAssoc(),
-                ...($image ? $image->getAssoc() : [])
+                ...($image ? $image->toAssoc() : [])
             ]);
         } catch (Exception) {
             return null;

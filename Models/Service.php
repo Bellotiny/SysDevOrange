@@ -24,7 +24,7 @@ final class Service extends Model {
         $this->id = $fields[self::id];
         $this->name = $fields[self::name];
         $this->description = $fields[self::description];
-        $this->type = $fields[self::type] ?? "Unknown";
+        $this->type = $fields[self::type];
         $this->price = $fields[self::price];
         $this->duration = $fields[self::duration];
         $this->visibility = $fields[self::visibility];
@@ -42,7 +42,7 @@ final class Service extends Model {
         ];
     }
 
-    public static function new(string $name, string $description, string $type, float $price, int $duration, bool $visibility): ?Service {
+    public static function new(string $name, string $description, string $type, float $price, int $duration, bool $visibility): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::description, $description));
@@ -53,7 +53,7 @@ final class Service extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new service([
+            return new self([
                 self::id => $id,
                 self::name => $name,
                 self::description => $description,

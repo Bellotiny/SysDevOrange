@@ -10,13 +10,13 @@ final class Availability extends Model {
     final public const timeSlot = self::TABLE . ".timeSlot";
     final public const bookingID = self::TABLE . ".bookingID";
 
-    public int $timeSlot;
+    public string $timeSlot;
     public ?Booking $booking;
 
     public function __construct(array $fields) {
         $this->id = $fields[self::id];
         $this->timeSlot = $fields[self::timeSlot];
-        $this->booking = ($fields[Booking::id] ? new Booking($fields) : null);
+        $this->booking = isset($fields[Booking::id]) ? new Booking($fields) : null;
     }
 
     public function toAssoc(): array {
@@ -27,14 +27,14 @@ final class Availability extends Model {
         ];
     }
 
-    public static function new(int $timeSlot, ?Booking $booking): ?Availability {
+    public static function new(string $timeSlot, ?Booking $booking): ?self {
         $values = new Values();
         $values->add(new Value(self::timeSlot, $timeSlot));
         $values->add(new Value(self::bookingID, $booking?->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Availability([
+            return new self([
                 self::id => $id,
                 self::timeSlot => $timeSlot,
                 ...($booking ? $booking->toAssoc() : []),

@@ -24,13 +24,13 @@ final class Group extends Model {
         ];
     }
 
-    public static function new(string $name): ?Group {
+    public static function new(string $name): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Group([
+            return new self([
                 self::id => $id,
                 self::name => $name,
             ]);
@@ -39,7 +39,7 @@ final class Group extends Model {
         }
     }
 
-    public static function getFromName(string $name): ?Group {
+    public static function getFromName(string $name): ?self {
         $where = new Where();
         $where->addEquals(new Value(self::name, $name));
         return self::get($where);

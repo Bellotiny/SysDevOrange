@@ -18,7 +18,7 @@ final class Color extends Model {
         $this->id = $fields[self::id];
         $this->name = $fields[self::name];
         $this->code = $fields[self::code];
-        $this->visibility = (int) $fields[self::visibility];
+        $this->visibility = $fields[self::visibility];
     }
 
     public function toAssoc(): array {
@@ -30,7 +30,7 @@ final class Color extends Model {
         ];
     }
 
-    public static function new(string $name, string $code, bool $visibility): ?Color {
+    public static function new(string $name, string $code, bool $visibility): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::code, $code));
@@ -38,7 +38,7 @@ final class Color extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Color([
+            return new self([
                 self::id => $id,
                 self::name => $name,
                 self::code => $code,

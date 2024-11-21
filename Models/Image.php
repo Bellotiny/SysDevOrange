@@ -26,14 +26,14 @@ final class Image extends Model {
         ];
     }
 
-    public static function new(string $name, string $extension): ?Image {
+    public static function new(string $name, string $extension): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::extension, $extension));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Image([
+            return new self([
                 self::id => $id,
                 self::name => $name,
                 self::extension => $extension,

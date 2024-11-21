@@ -22,50 +22,50 @@ final class Account extends Controller {
                     $this->render("Account", $action, ["error" => "Invalid Email or Password", "email" => $_POST["email"]]);
                     break;
                 }
-                try {
-                    $code = random_int(100000, 999999);
-                } catch (Exception) {
-                    $this->render("Account", $action, ["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST["email"]]);
-                }
+//                try {
+//                    $code = random_int(100000, 999999);
+//                } catch (Exception) {
+//                    $this->render("Account", $action, ["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST["email"]]);
+//                }
                 session_start();
                 $_SESSION["user"] = $user;
-                $_SESSION["code"] = $code;
-                $_SESSION["time"] = time();
-                $_SESSION["tries"] = 0;
-                self::redirect("2fa");
-                flush();
-                Mail::send(
-                    "2FA Code for Snook's Nail Nook",
-                    "Your 2FA Code is: $code",
-                    $user->email, "$user->firstName $user->lastName",
-                    $user->email, "$user->firstName $user->lastName"
-                );
-                break;
-            case "2fa":
-                if (!isset($_POST["code"])) {
-                    $this->render("Account", $action);
-                    break;
-                }
-                session_start();
-                if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
-                    self::redirect("login");
-                    break;
-                }
-                if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
-                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
-                    session_destroy();
-                    break;
-                }
-                if ($_SESSION["code"] != $_POST["code"]) {
-                    $_SESSION["tries"]++;
-                    if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
-                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
-                        session_destroy();
-                    } else {
-                        $this->render("Account", $action, ["error" => "Invalid Code"]);
-                    }
-                    break;
-                }
+//                $_SESSION["code"] = $code;
+//                $_SESSION["time"] = time();
+//                $_SESSION["tries"] = 0;
+//                self::redirect("2fa");
+//                flush();
+//                Mail::send(
+//                    "2FA Code for Snook's Nail Nook",
+//                    "Your 2FA Code is: $code",
+//                    $user->email, "$user->firstName $user->lastName",
+//                    $user->email, "$user->firstName $user->lastName"
+//                );
+//                break;
+//            case "2fa":
+//                if (!isset($_POST["code"])) {
+//                    $this->render("Account", $action);
+//                    break;
+//                }
+//                session_start();
+//                if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
+//                    self::redirect("login");
+//                    break;
+//                }
+//                if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
+//                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
+//                    session_destroy();
+//                    break;
+//                }
+//                if ($_SESSION["code"] != $_POST["code"]) {
+//                    $_SESSION["tries"]++;
+//                    if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
+//                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
+//                        session_destroy();
+//                    } else {
+//                        $this->render("Account", $action, ["error" => "Invalid Code"]);
+//                    }
+//                    break;
+//                }
                 try {
                     self::login($_SESSION["user"]);
                 } catch (Exception) {

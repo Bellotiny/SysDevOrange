@@ -38,7 +38,7 @@ final class Discount extends Model {
         ];
     }
 
-    public static function new(string $name, int $start, int $end, float $percent, float $amount): ?Discount {
+    public static function new(string $name, int $start, int $end, float $percent, float $amount): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::start, $start));
@@ -48,7 +48,7 @@ final class Discount extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new Discount([
+            return new self([
                 self::id => $id,
                 self::name => $name,
                 self::start => $start,

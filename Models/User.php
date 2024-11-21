@@ -30,9 +30,9 @@ final class User extends Model {
         $this->firstName = $fields[self::firstName];
         $this->lastName = $fields[self::lastName];
         $this->email = $fields[self::email];
-        $this->phoneNumber = $fields[self::phoneNumber] ?? null;
-        $this->birthDate = $fields[self::birthDate] ?? null;
-        $this->token = $fields[self::token] ?? null;
+        $this->phoneNumber = $fields[self::phoneNumber];
+        $this->birthDate = $fields[self::birthDate];
+        $this->token = $fields[self::token];
     }
 
     protected function toAssoc(): array {
@@ -47,7 +47,7 @@ final class User extends Model {
         ];
     }
 
-    public static function new(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): ?User {
+    public static function new(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): ?self {
         $values = new Values();
         $values->add(new Value(self::firstName, $firstName));
         $values->add(new Value(self::lastName, $lastName));
@@ -58,7 +58,7 @@ final class User extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            $user = new User([
+            $user = new self([
                 self::id => $id,
                 self::firstName => $firstName,
                 self::lastName => $lastName,
@@ -76,7 +76,7 @@ final class User extends Model {
     /**
      * Get user based on the email and password
      */
-    public static function getFromEmailPassword(string $email, string $password): ?User {
+    public static function getFromEmailPassword(string $email, string $password): ?self {
         $where = new Where();
         $where->addEquals(new Value(self::email, $email));
         $where->addEquals(new Value(self::password, $password, true));
@@ -86,7 +86,7 @@ final class User extends Model {
     /**
      * Retrieve a User object based on a token stored in a cookie.
      */
-    public static function getFromCookie(): ?User {
+    public static function getFromCookie(): ?self {
         if (isset($_COOKIE['token'])) {
             $where = new Where();
             $where->addEquals(new Value(self::token, $_COOKIE['token']));
@@ -125,7 +125,7 @@ final class User extends Model {
             ->addEquals(new Value(self::id, $this->id))
             ->addEquals(new Value(Action::controller, $controller))
             ->addEquals(new Value(Action::action, $action));
-        return is_array(self::select($join, $where)->fetch_assoc());
+        return is_array(self::select($where, $join)->fetch_assoc());
     }
 
     /**
