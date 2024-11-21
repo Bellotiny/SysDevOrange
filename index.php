@@ -8,5 +8,10 @@ $controller = ucfirst($_GET['controller'] ?? "home");
 include_once "Controllers/Controller.php";
 include_once "Controllers/$controller.php";
 
+$lang = $_COOKIE['lang'] ?? "en";
+setcookie("lang", $lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
+
+include_once "language/$lang.php";
+
 $ct = new $controller();
 $ct->route();
