@@ -1,8 +1,23 @@
 <?php
 
 include_once "Model.php";
+include_once "UserGroup.php";
+include_once "GroupAction.php";
+include_once "Action.php";
 
-class User extends Model {
+final class User extends Model {
+    public const TABLE = "users";
+
+    final public const id = self::TABLE . ".id";
+    final public const firstName = self::TABLE . ".firstName";
+    final public const lastName = self::TABLE . ".lastName";
+    final public const email = self::TABLE . ".email";
+    final public const phoneNumber = self::TABLE . ".phoneNumber";
+    final public const birthDate = self::TABLE . ".birthDate";
+    final public const token = self::TABLE . ".token";
+
+    private const password = self::TABLE . ".password";
+
     public string $firstName;
     public string $lastName;
     public string $email;
@@ -11,70 +26,51 @@ class User extends Model {
     private ?string $token;
 
     public function __construct(array $fields) {
-        $this->id = $fields[self::getTable() . '.id'];
-        $this->firstName = $fields[self::getTable() . '.firstName'];
-        $this->lastName = $fields[self::getTable() . '.lastName'];
-        $this->email = $fields[self::getTable() . '.email'];
-        $this->phoneNumber = $fields[self::getTable() . '.phoneNumber'] ?? null;
-        $this->birthDate = $fields[self::getTable() . '.birthDate'] ?? null;
-        $this->token = $fields[self::getTable() . '.token'] ?? null;
+        $this->id = $fields[self::id];
+        $this->firstName = $fields[self::firstName];
+        $this->lastName = $fields[self::lastName];
+        $this->email = $fields[self::email];
+        $this->phoneNumber = $fields[self::phoneNumber] ?? null;
+        $this->birthDate = $fields[self::birthDate] ?? null;
+        $this->token = $fields[self::token] ?? null;
     }
 
-    public static function getTable(): string {
-        return "users";
-    }
-
-    public static function getFields(): array {
-        return ["id", "firstName", "lastName", "email", "phoneNumber", "birthDate", "token"];
-    }
-
-    public function getAssoc(): array {
+    protected function toAssoc(): array {
         return [
-            self::getTable() . ".id" => $this->id,
-            self::getTable() . ".firstName" => $this->firstName,
-            self::getTable() . ".lastName" => $this->lastName,
-            self::getTable() . ".email" => $this->email,
-            self::getTable() . ".phoneNumber" => $this->phoneNumber,
-            self::getTable() . ".birthDate" => $this->birthDate,
-            self::getTable() . ".token" => $this->token,
+            self::id => $this->id,
+            self::firstName => $this->firstName,
+            self::lastName => $this->lastName,
+            self::email => $this->email,
+            self::phoneNumber => $this->phoneNumber,
+            self::birthDate => $this->birthDate,
+            self::token => $this->token,
         ];
     }
 
     public static function new(string $firstName, string $lastName, string $email, ?string $password = null, ?string $phoneNumber = null, ?string $birthDate = null): ?User {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".firstName", $firstName));
-        $values->add(new Value(self::getTable() . ".lastName", $lastName));
-        $values->add(new Value(self::getTable() . ".email", $email));
-        $values->add(new Value(self::getTable() . ".phoneNumber", $phoneNumber));
-        $values->add(new Value(self::getTable() . ".birthDate", $birthDate));
-        $values->add(new Value(self::getTable() . ".password", $password, true));
+        $values->add(new Value(self::firstName, $firstName));
+        $values->add(new Value(self::lastName, $lastName));
+        $values->add(new Value(self::email, $email));
+        $values->add(new Value(self::phoneNumber, $phoneNumber));
+        $values->add(new Value(self::birthDate, $birthDate));
+        $values->add(new Value(self::password, $password, true));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            self::executeQuery("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM groups WHERE name = 'registeredUsers'))", [$id]);
-            return new User([
-                self::getTable() . ".id" => $id,
-                self::getTable() . ".firstName" => $firstName,
-                self::getTable() . ".lastName" => $lastName,
-                self::getTable() . ".email" => $email,
-                self::getTable() . ".phoneNumber" => $phoneNumber,
-                self::getTable() . ".birthDate" => $birthDate,
+            $user = new User([
+                self::id => $id,
+                self::firstName => $firstName,
+                self::lastName => $lastName,
+                self::email => $email,
+                self::phoneNumber => $phoneNumber,
+                self::birthDate => $birthDate,
             ]);
+            UserGroup::new($user, Group::getFromName("registeredUsers"));
+            return $user;
         } catch (Exception) {
             return null;
         }
-    }
-
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".firstName", $this->firstName));
-        $values->add(new Value(self::getTable() . ".lastName", $this->lastName));
-        $values->add(new Value(self::getTable() . ".email", $this->email));
-        $values->add(new Value(self::getTable() . ".phoneNumber", $this->phoneNumber));
-        $values->add(new Value(self::getTable() . ".birthDate", $this->birthDate));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
     }
 
     /**
@@ -82,9 +78,9 @@ class User extends Model {
      */
     public static function getFromEmailPassword(string $email, string $password): ?User {
         $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".email", $email));
-        $where->addEquals(new Value(self::getTable() . ".password", $password, true));
-        return self::list($where)[0] ?? null;
+        $where->addEquals(new Value(self::email, $email));
+        $where->addEquals(new Value(self::password, $password, true));
+        return self::get($where);
     }
 
     /**
@@ -93,8 +89,8 @@ class User extends Model {
     public static function getFromCookie(): ?User {
         if (isset($_COOKIE['token'])) {
             $where = new Where();
-            $where->addEquals(new Value(self::getTable() . ".token", $_COOKIE['token']));
-            return self::list($where)[0] ?? null;
+            $where->addEquals(new Value(self::token, $_COOKIE['token']));
+            return self::get($where);
         } else {
             return null;
         }
@@ -106,29 +102,49 @@ class User extends Model {
 
     public function setToken(string $token): bool {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".token", $token));
+        $values->add(new Value(self::token, $token));
         $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
+        $where->addEquals(new Value(self::id, $this->id));
         return self::update($values, $where);
     }
 
     public function updatePassword(string $password): bool {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".password", $password, true));
+        $values->add(new Value(self::password, $password, true));
         $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
+        $where->addEquals(new Value(self::id, $this->id));
         return self::update($values, $where);
     }
 
     public function hasRights(string $controller, string $action): bool {
-        return self::getConnection()->execute_query("
-            SELECT COUNT(users.id) FROM users
-            INNER JOIN users_groups ON users_groups.userID = users.id
-            INNER JOIN group_actions ON group_actions.groupID = users_groups.groupID
-            INNER JOIN actions ON actions.id = group_actions.actionID
-            WHERE users.id = ?
-            AND actions.action = ?
-            AND actions.controller = ?
-        ", [$this->id, $action, $controller])->fetch_row()[0];
+        $join = (new Join())
+            ->addInner(UserGroup::getFields(), UserGroup::TABLE, UserGroup::userID, self::id)
+            ->addInner(GroupAction::getFields(), GroupAction::TABLE, GroupAction::groupID, UserGroup::groupID)
+            ->addInner(Action::getFields(), Action::TABLE, Action::id, GroupAction::actionID);
+        $where = (new Where())
+            ->addEquals(new Value(self::id, $this->id))
+            ->addEquals(new Value(Action::controller, $controller))
+            ->addEquals(new Value(Action::action, $action));
+        return is_array(self::select($join, $where)->fetch_assoc());
+    }
+
+    /**
+     * Get Reviews
+     * @return Review[]
+     */
+    public function getReviews(): array {
+        $where = new Where();
+        $where->addEquals(new Value(Review::userID, $this->id));
+        return Review::list($where);
+    }
+
+    /**
+     * Get Bookings
+     * @return Booking[]
+     */
+    public function getBookings(): array {
+        $where = new Where();
+        $where->addEquals(new Value(Booking::userID, $this->id));
+        return Booking::list($where);
     }
 }

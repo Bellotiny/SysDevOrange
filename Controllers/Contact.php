@@ -1,13 +1,8 @@
 <?php
 
-include_once "Controllers/Controller.php";
-include_once "Controllers/Mail/Mailer.php";
+include_once "Mail/Mail.php";
 
-class Contact extends Controller {
-    public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/contact/" . $action);
-    }
-
+final class Contact extends Controller {
     public function route(): void {
         if (isset($_GET['action']) && strtolower($_GET['action']) === "confirmation") {
             $this->render("Contact", "confirmation");
@@ -24,7 +19,7 @@ class Contact extends Controller {
         }
         self::redirect("confirmation");
         flush();
-        Mailer::send(
+        Mail::send(
             "Website Contact-Us Form",
             $_POST['message'] . "\n\nFrom: " . $_POST['firstName'] . " " . $_POST['lastName'] . " <" . $_POST['email'] . ">",
             "snooknail@gmail.com", "Snook's Nail Salon",

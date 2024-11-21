@@ -8,7 +8,6 @@ include_once 'Views/head.php';
 <?php include_once 'Views/nav.php'; ?>
 <?php include_once 'Views/bookingModal.php'; ?>
 
-
   <main class="container py-4">
 
   <div class="green-background text-secondary  container slide-up ">
@@ -18,16 +17,22 @@ include_once 'Views/head.php';
   </div>
 
   <div id="instagram-pic">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 2">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about3.png" alt="Image 3">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/about4.png" alt="Image 4">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat2.jpg" alt="Image 5">
-    <img class="slide-up" src="<?=BASE_PATH?>/Views/Images/cat3.jpg" alt="Image 6">
+  <?php
+    foreach ($data["mediaItems"] as $item) {
+      if($item['type'] == 'CAROUSEL_ALBUM' || $item['type'] == 'IMAGE') {
+        echo "<img class='slide-up' src='" . htmlspecialchars($item['url']) . "' alt='instagram_post'>";
+      } elseif ($item['type'] == 'VIDEO') {
+        echo "<video controls>
+                <source src='" . htmlspecialchars($item['url']) . "' type='video/mp4'>
+                Your browser does not support the video tag.
+              </video>";
+      }
+    }
+  ?>
 
+   
   </div>
 
-  <div>
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >

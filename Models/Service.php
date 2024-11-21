@@ -2,56 +2,69 @@
 
 include_once "Model.php";
 
-class Service extends Model {
+final class Service extends Model {
+    public const TABLE = "services";
+
+    final public const id = self::TABLE . ".id";
+    final public const name = self::TABLE . ".name";
+    final public const description = self::TABLE . ".description";
+    final public const type = self::TABLE . ".type";
+    final public const price = self::TABLE . ".price";
+    final public const duration = self::TABLE . ".duration";
+    final public const visibility = self::TABLE . ".visibility";
+
     public string $name;
-    public float $price;
     public string $description;
+    public string $type;
+    public float $price;
     public int $duration;
+    public bool $visibility;
 
     public function __construct(array $fields) {
-        $this->id = $fields[self::getTable() . '.id'];
-        $this->name = $fields[self::getTable() . '.name'];
-        $this->description = $fields[self::getTable() . '.description'];
-        $this->duration = $fields[self::getTable() . '.duration'];
+        $this->id = $fields[self::id];
+        $this->name = $fields[self::name];
+        $this->description = $fields[self::description];
+        $this->type = $fields[self::type] ?? "Unknown";
+        $this->price = $fields[self::price];
+        $this->duration = $fields[self::duration];
+        $this->visibility = $fields[self::visibility];
     }
 
-    public static function getTable(): string {
-        return "services";
+    protected function toAssoc(): array {
+        return [
+            self::id => $this->id,
+            self::name => $this->name,
+            self::description => $this->description,
+            self::type => $this->type,
+            self::price => $this->price,
+            self::duration => $this->duration,
+            self::visibility => $this->visibility,
+        ];
     }
 
-    public static function getFields(): array {
-        return ["id", "name", "price", "description", "duration"];
-    }
-
-    public static function new(string $name, float $price, string $description, int $duration): ?Service {
+    public static function new(string $name, string $description, string $type, float $price, int $duration, bool $visibility): ?Service {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".name", $name));
-        $values->add(new Value(self::getTable() . ".price", $price));
-        $values->add(new Value(self::getTable() . ".description", $description));
-        $values->add(new Value(self::getTable() . ".duration", $duration));
+        $values->add(new Value(self::name, $name));
+        $values->add(new Value(self::description, $description));
+        $values->add(new Value(self::type, $type));
+        $values->add(new Value(self::price, $price));
+        $values->add(new Value(self::duration, $duration));
+        $values->add(new Value(self::visibility, $visibility));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             return new service([
-                self::getTable() . ".id" => $id,
-                self::getTable() . ".name" => $name,
-                self::getTable() . ".price" => $price,
-                self::getTable() . ".description" => $description,
-                self::getTable() . ".duration" => $duration,
+                self::id => $id,
+                self::name => $name,
+                self::description => $description,
+                self::type => $type,
+                self::price => $price,
+                self::duration => $duration,
+                self::visibility => $visibility,
+                
             ]);
         } catch (Exception) {
             return null;
         }
-    }
-
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".name", $this->name));
-        $values->add(new Value(self::getTable() . ".price", $this->price));
-        $values->add(new Value(self::getTable() . ".description", $this->description));
-        $values->add(new Value(self::getTable() . ".duration", $this->duration));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
     }
 }
