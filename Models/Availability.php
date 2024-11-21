@@ -1,49 +1,48 @@
 <?php
 
 include_once "Model.php";
+include_once "Booking.php";
 
-class Availability extends Model {
-    public \DateTime $timeslot;
-    public ?int $bookingID;
+final class Availability extends Model {
+    public const TABLE = "availabilities";
+
+    final public const id = self::TABLE . ".id";
+    final public const timeSlot = self::TABLE . ".timeSlot";
+    final public const bookingID = self::TABLE . ".bookingID";
+
+    public int $timeSlot;
+    public ?Booking $booking;
 
     public function __construct(array $fields) {
-        $this->id = $fields[self::getTable() . '.id'];
-        $this->timeslot = new \DateTime($fields[self::getTable() . '.timeslot']);
-        $this->bookingID = $fields[self::getTable() . '.bookingID'];
+        $this->id = $fields[self::id];
+        $this->timeSlot = $fields[self::timeSlot];
+        $this->booking = ($fields[Booking::id] ? new Booking($fields) : null);
+
     }
 
-    public static function getTable(): string {
-        return "availabilities";
+    public function toAssoc(): array {
+        return [
+            self::id => $this->id,
+            self::timeSlot => $this->timeSlot,
+            self::bookingID => $this->booking?->id,
+        ];
     }
-
-    public static function getFields(): array {
-        return ["id", "timeslot", "bookingID"];
-    }
-
-    public static function new(\DateTime $timeslot, int $bookingID): ?Availability {
+    public static function new(int $timeSlot, ?Booking $booking): ?Availability {
         $values = new Values();
-        $values->add(new Value(self::getTable() . ".timeslot", $start));
-        $values->add(new Value(self::getTable() . ".bookingID", $bookingID));
+        $values->add(new Value(self::timeSlot, $timeSlot));
+        $values->add(new Value(self::bookingID, $booking?->id));
 
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             return new Availability([
-                self::getTable() . ".id" => $id,
-                self::getTable() . ".timeslot" => $timeslot,
-                self::getTable() . ".bookingID" => $bookingID,
+
+                self::id => $id,
+                self::timeSlot => $timeSlot,
+                ...($booking ? $booking->toAssoc() : []),
             ]);
         } catch (Exception) {
             return null;
         }
-    }
-
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".timeslot", $this->timeslot));
-        $values->add(new Value(self::getTable() . ".bookingID", $this->bookingID));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
     }
 }
