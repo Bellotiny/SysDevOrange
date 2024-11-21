@@ -9,8 +9,6 @@ abstract class Controller {
 
     public function __construct() {
         $this->user = User::getFromCookie();
-        $this->lang = $_COOKIE['lang'] ?? "en";
-        setcookie("lang", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
     }
 
     public abstract function route(): void;
