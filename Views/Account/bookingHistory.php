@@ -15,12 +15,13 @@ include_once 'Views/bookingModal.php';
         <!---screen for sidebar--->
         <div class="sideScreen slide-up">
           <!---default content will be the Personal info-->
-          <!--content is load here-->
-          <?php include_once 'Views/menuAccount.php'; ?> 
+          <!--content is load here--> 
          
        <div class="album py-5 bg-body-tertiary">
         <div class="container">
-        
+        <div class= "container my-2">
+            <?php include_once 'Views/menuAccount.php'; ?>
+        </div>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center text-center" id="content">
             <div class="col">
               <div class="card shadow-sm">
