@@ -17,26 +17,53 @@ include_once 'Views/bookingModal.php';
     </div>
   </div>
 
-    <?php
-        foreach($data['services'] as $services){
-            echo '<div class="row py-2  ">
+  <div class="row py-2  ">
+  <?php  foreach($data['services'] as $services){?>
+    <?php  if($services->type != "Additional"){?>
+           
                 <div class="col-md-6 slide-up ">
                     <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-white">
                         <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary-emphasis">' . $services->type . '</strong>
-                        <h3 class="mb-0">' . $services->name  . '</h3>
-                        <div class="mb-1  text-success">' . $services->price . '</div>
-                        <p class="card-text mb-auto ">' . $services->description . '</p>
+                        <strong class="d-inline-block mb-2 text-primary-emphasis"><?= $services->type ?></strong>
+                        <h3 class="mb-0"><?= $services->name  ?></h3>
+                        <div class="mb-1  text-success"><?= $services->price ?></div>
+                        <p class="card-text mb-auto "><?= $services->description ?></p>
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
                         </div>
                     </div>
-                </div>';
+                </div>
+         <?php } ?>
+     <?php }?>
+     </div>
     
-        }
-    ?>
-    
+     <div class="green-background text-secondary  container slide-up">
+      <div class=" pb-5" >
+        <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Additional</h1>
+      </div>
+    </div>
+
+    <div class="row py-2  ">
+    <?php  foreach($data['services'] as $services){?>
+      <?php  if($services->type == "Additional"){?>
+            
+                  <div class="col-md-6 slide-up ">
+                      <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-white">
+                          <div class="col p-4 d-flex flex-column position-static">
+                          <strong class="d-inline-block mb-2 text-primary-emphasis"><?= $services->type ?></strong>
+                          <h3 class="mb-0"><?= $services->name  ?></h3>
+                          <div class="mb-1  text-success"><?= $services->price ?></div>
+                          <p class="card-text mb-auto "><?= $services->description ?></p>
+                          </div>
+                          <div class="col-auto d-none d-lg-block">
+                              <img src="<?=BASE_PATH?>/Views/Images/pic2.jpg" alt="Thumbnail" width="200" height="250" class="img-fluid">
+                          </div>
+                      </div>
+                  </div>
+          <?php } ?>
+      <?php }?>
+     </div>
 
     <div class="mt-3 green-background text-secondary  container slide-up">
         <div class=" pb-5" >
