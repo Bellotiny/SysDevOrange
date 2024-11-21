@@ -22,7 +22,7 @@ abstract class Controller {
 
     protected final function verifyRights(string $action): bool {
         if ($this->user === null) {
-            Account::redirect("login");
+            Account::redirect(Account::LOGIN);
             return false;
         }
         if (!$this->user->hasRights(static::class, $action)) {

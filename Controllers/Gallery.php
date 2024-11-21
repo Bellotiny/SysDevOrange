@@ -4,30 +4,31 @@ include_once "Models/Review.php";
 include_once "Models/Booking.php";
 
 final class Gallery extends Controller {
+    final public const ADD = "add";
+    final public const EDIT = "edit";
+    final public const DELETE = "delete";
+    final public const LIST = "list";
+
     private const INSTAGRAM_ACCESS_TOKEN = "IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD";
 
     public function route(): void {
-        $action = isset($_GET["action"]) ? strtolower($_GET["action"]) : "";
+        $action = strtolower($_GET["action"] ?? self::LIST);
 
         switch ($action) {
-            case "add":
+            case self::ADD:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
 //                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
-//                    $this->render("Gallery", $action, [
-//                        "user" => $this->user,
-//                        "error" => "You are only allowed 1 review per booking.",
-//                    ]);
+//                    $this->render("Gallery", $action, ["error" => "You are only allowed 1 review per booking."]);
 //                    break;
 //                }
                 if (!isset($_POST["title"]) || !isset($_POST["message"]) || !isset($_FILES["image"])) {
-                    $this->render("Gallery", $action, ["user" => $this->user]);
+                    $this->render("Gallery", $action);
                     break;
                 }
                 if ($_POST["title"] === "" || $_POST["message"] === "") {
                     $this->render("Gallery", $action, [
-                        "user" => $this->user,
                         "error" => "Title or Message cannot be empty",
                         "title" => $_POST["title"],
                         "message" => $_POST["message"],
@@ -45,7 +46,7 @@ final class Gallery extends Controller {
                 Review::new($this->user, $_POST["title"], $_POST["message"], date("Y-m-d H:i:s"), $image);
                 $this->redirect();
                 break;
-            case "edit":
+            case self::EDIT:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -55,12 +56,11 @@ final class Gallery extends Controller {
                     break;
                 }
                 if (!isset($_POST["title"]) || !isset($_POST["message"])) {
-                    $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
+                    $this->render("Gallery", $action, ["review" => $review]);
                     break;
                 }
                 if ($_POST["title"] === "" || $_POST["message"] === "") {
                     $this->render("Gallery", $action, [
-                        "user" => $this->user,
                         "error" => "Title or Message cannot be empty",
                         "title" => $_POST["title"],
                         "message" => $_POST["message"],
@@ -88,7 +88,7 @@ final class Gallery extends Controller {
                 $review->save();
                 $this->redirect();
                 break;
-            case "delete":
+            case self::DELETE:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -98,7 +98,7 @@ final class Gallery extends Controller {
                     break;
                 }
                 if (!isset($_POST["confirm"])) {
-                    $this->render("Gallery", $action, ["user" => $this->user, "review" => $review]);
+                    $this->render("Gallery", $action, ["review" => $review]);
                     break;
                 }
                 if ($review->image) {
@@ -122,7 +122,6 @@ final class Gallery extends Controller {
                 $data = json_decode($response, true);
 
                 $this->render("Gallery", "list", [
-                    "user" => $this->user,
                     "reviews" => Review::list(null, null, 10, (10 * (int)($_GET["id"] ?? 0))),
                     "mediaItems" => array_map(fn($item) => [
                         "url" => $item["media_url"],

@@ -110,4 +110,13 @@ final class Booking extends Model {
         $where = (new Where())->addEquals(new Value(BookingColor::bookingID, $this->id));
         return Color::list($where, $join);
     }
+
+    public function getFinalPrice(): float {
+        $final = $this->price;
+        if ($this->discount) {
+            $final = (($this->discount->percent / 100) * $final) - $this->discount->percent;
+        }
+        // TODO Apply birthday discount if it is their birthday
+        return $final;
+    }
 }

@@ -4,7 +4,6 @@ include_once "Models/Booking.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Discount.php";
-include_once "Models/Payment.php";
 include_once "Models/User.php";
 
 final class Book extends Controller {
