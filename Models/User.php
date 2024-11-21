@@ -1,6 +1,9 @@
 <?php
 
 include_once "Model.php";
+include_once "Discount.php";
+include_once "Payment.php";
+include_once "Availability.php";
 
 class User extends Model {
     public string $firstName;
@@ -49,6 +52,7 @@ class User extends Model {
         $values->add(new Value(self::getTable() . ".birthDate", $birthDate));
         $values->add(new Value(self::getTable() . ".password", $password, true));
         try {
+            //createDiscount($firstName, $birthDate);
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
             self::executeQuery("INSERT INTO users_groups (userID, groupID) VALUES (?, (SELECT id FROM groups WHERE name = 'registeredUsers'))", [$id]);
@@ -63,6 +67,16 @@ class User extends Model {
         } catch (Exception) {
             return null;
         }
+    }
+
+    public function createDiscount($firstName, $birthDate){
+        $birthDateTime = new DateTime($birthDate);
+        $birthDateTimeStart = clone $birthDateTime;
+        $birthDateTimeStart->setTime(8, 0, 0);
+
+        $birthDateTimeEnd = clone $birthDateTime;
+        $birthDateTimeEnd->setTime(16, 0, 0);
+        //Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
     }
 
     public function save(): bool {

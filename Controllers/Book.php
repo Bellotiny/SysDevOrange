@@ -34,10 +34,17 @@ class Book extends Controller {
                     $_POST['colorGroupColor2'] ?? null,
                     $_POST['colorGroupColor3'] ?? null
                 ]));
-                $date = $_POST['selected_date'] ?? null;
-                $time = $_POST['selected_time'] ?? null;
+                $date_time = $_POST['selected_date_time'] ?? null;
+                if($this->user != null){
+                    $userID = $this->user->id;
+                } else{
+                    // if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
+                    //     $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username'], $_POST['password'] ?? null, $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null);
+                    //     $userID = $newUser->id;
+                    // }
+                }
                 $userID = (($this->user == null) && (isset($_POST['personalInfo']))) ? $_POST['personalInfo'] : $this->user->id;
-                if($services != null||$colors != null||$date != null||$time != null){
+                if($services != null||$colors != null||$date_time != null){
                     // $booking = Booking::new($services, $location, $colors, $date, $time, $userID);
                     // if($booking === null){
                     //     $this->error('booking','There was a mistake in the booking');

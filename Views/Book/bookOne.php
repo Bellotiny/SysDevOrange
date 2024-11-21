@@ -151,22 +151,22 @@ ini_set('display_errors', 1);
 
           <!-- Date Selection -->
           <div class="form-group">
-            <label for="availableDates">Available Dates</label>
-            <select class="form-control" id="availableDates" name="selected_date">
+          <label for="availableDates">Available Dates</label>
+          <select class="form-control" id="availableDates" name="selected_date">
               <?php
-                $available_dates = [];
-                $available_times = [];
-                var_dump($data['availabilities']);
+                $available_dates_times = [];
             
                 foreach ($data['availabilities'] as $datetime) {
                   $dateTimeObj = $datetime->timeslot;
-                    $available_dates[] = $dateTimeObj->format('Y-m-d');
-                    $available_times[] = $dateTimeObj->format('H:i');
+                    $dates = $dateTimeObj->format('Y-m-d');
+                    $times = $dateTimeObj->format('H:i');
+                    $available_dates_times[$dates][] = $times;
                 }
                 // Assuming you have an array of available dates from the owner schedule
                 //$available_dates = ['2024-10-25', '2024-10-26', '2024-10-27']; // Example dates
-                foreach ($available_dates as $date) {
-                  echo "<option value=\"$date\">$date</option>";
+                foreach (array_keys($available_dates_times) as $date) {
+                  $formatted_date = date('M j, Y', strtotime($date));
+                  echo "<option value=\"$date\">$formatted_date</option>";
                 }
               ?>
             </select>
@@ -176,15 +176,12 @@ ini_set('display_errors', 1);
           <div class="form-group">
             <label for="availableTimes">Available Times</label>
             <select class="form-control" id="availableTimes" name="selected_time">
-              <?php
-                // Assuming you have an array of available times for the selected date
-                //$available_times = ['10:00 AM - 10:30 AM', '12:00 PM - 1:00PM', '3:00 PM - 4:00PM']; // Example times
-                foreach ($available_times as $time) {
-                  echo "<option value=\"$time\">$time</option>";
-                }
-              ?>
+                
             </select>
-          </div>
+        </div>
+
+          <!-- Hidden input for the combined date and time -->
+          <input type="hidden" id="selected_date_time" name="selected_date_time">
         </div>
 
 
@@ -348,6 +345,48 @@ function selectColor(colorGroup, colorName, groupId) {
     const selectedColorElement = document.getElementById(`selected${colorGroup}`);
     selectedColorElement.textContent = colorName;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+        selectedTime();
+    });
+
+function selectedTime(){
+  const availableDatesTimes = <?php echo json_encode($available_dates_times); ?>;
+
+    const dateSelect = document.getElementById('availableDates');
+    const timeSelect = document.getElementById('availableTimes');
+    const dateTimeInput = document.getElementById('selected_date_time');
+
+    function updateTimes(selectedDate) {
+        timeSelect.innerHTML = '';
+
+        const times = availableDatesTimes[selectedDate] || [];
+        times.forEach(time => {
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time;
+            timeSelect.appendChild(option);
+        });
+
+        if (times.length > 0) {
+            dateTimeInput.value = `${selectedDate} ${times[0]}`;
+        } else {
+            dateTimeInput.value = '';
+        }
+    }
+
+    dateSelect.addEventListener('change', (event) => {
+        updateTimes(event.target.value);
+    });
+
+    timeSelect.addEventListener('change', (event) => {
+        const selectedDate = dateSelect.value;
+        const selectedTime = event.target.value;
+        dateTimeInput.value = `${selectedDate} ${selectedTime}`; // Update hidden input with selected date and time
+    });
+
+    updateTimes(dateSelect.value);
+  }
 
 //SECTION AREA
 let currentSection = 1; 
