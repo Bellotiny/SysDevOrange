@@ -15,9 +15,8 @@ include_once 'Views/bookingModal.php';
     <div class="sideScreen container m-3" >
 
         <div class= "container my-2">
-            <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-10" id="divAccount">
-                <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
-                <h1 class="text-body-emphasis">Hello, <?= $data[0]->firstName ?></h1>
+            <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-20" id="divAccount">
+                <h1 class="text-body-emphasis mt-5">Hello, <?= $data[0]->firstName ?></h1>
                 <p class="col-lg-6 mx-auto mb-4 text-green">
                 We're so happy to see you.<br> Your little nook of joy is ready and waiting for you.&#127752;
                 </p>

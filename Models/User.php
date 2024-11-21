@@ -124,8 +124,8 @@ class User extends Model {
         return self::getConnection()->execute_query("
             SELECT COUNT(users.id) FROM users
             INNER JOIN users_groups ON users_groups.userID = users.id
-            INNER JOIN group_actions ON group_actions.groupID = users_groups.groupID
-            INNER JOIN actions ON actions.id = group_actions.actionID
+            INNER JOIN groups_actions ON groups_actions.groupID = users_groups.groupID
+            INNER JOIN actions ON actions.id = groups_actions.actionID
             WHERE users.id = ?
             AND actions.action = ?
             AND actions.controller = ?

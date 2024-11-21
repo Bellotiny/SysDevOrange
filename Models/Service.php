@@ -34,7 +34,6 @@ class Service extends Model {
         $values->add(new Value(self::getTable() . ".name", $name));
         $values->add(new Value(self::getTable() . ".type", $type));
         $values->add(new Value(self::getTable() . ".price", $price));
-        $values->add(new Value(self::getTable() . ".type", $type));
         $values->add(new Value(self::getTable() . ".description", $description));
         $values->add(new Value(self::getTable() . ".duration", $duration));
         $values->add(new Value(self::getTable() . ".visibility", $visibility));

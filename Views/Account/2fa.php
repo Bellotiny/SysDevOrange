@@ -10,7 +10,7 @@ include_once 'Views/bookingModal.php';
 
           <!---default content will be the Personal info-->
           <!--content is load here-->
-         <?=  $_SESSION["code"] ?>
+         
           <div class="container">
           <h1>2FA</h1>
           <form action="<?=BASE_PATH?>/account/2fa" method="POST">
