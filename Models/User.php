@@ -84,18 +84,6 @@ final class User extends Model {
         //Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
     }
 
-    public function save(): bool {
-        $values = new Values();
-        $values->add(new Value(self::getTable() . ".firstName", $this->firstName));
-        $values->add(new Value(self::getTable() . ".lastName", $this->lastName));
-        $values->add(new Value(self::getTable() . ".email", $this->email));
-        $values->add(new Value(self::getTable() . ".phoneNumber", $this->phoneNumber));
-        $values->add(new Value(self::getTable() . ".birthDate", $this->birthDate));
-        $where = new Where();
-        $where->addEquals(new Value(self::getTable() . ".id", $this->id));
-        return self::update($values, $where);
-    }
-
     /**
      * Get user based on the email and password
      */

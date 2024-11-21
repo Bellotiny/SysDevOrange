@@ -153,22 +153,29 @@ ini_set('display_errors', 1);
           <div class="form-group">
           <label for="availableDates">Available Dates</label>
           <select class="form-control" id="availableDates" name="selected_date">
-              <?php
-                $available_dates_times = [];
-            
-                foreach ($data['availabilities'] as $datetime) {
-                  $dateTimeObj = $datetime->timeslot;
-                    $dates = $dateTimeObj->format('Y-m-d');
-                    $times = $dateTimeObj->format('H:i');
-                    $available_dates_times[$dates][] = $times;
-                }
-                // Assuming you have an array of available dates from the owner schedule
-                //$available_dates = ['2024-10-25', '2024-10-26', '2024-10-27']; // Example dates
-                foreach (array_keys($available_dates_times) as $date) {
+          <?php
+              $available_dates_times = [];
+              foreach ($data['availabilities'] as $availability) {
+                  $datetime = $availability->timeSlot;
+
+                  $parts = explode(' ', $datetime);
+
+                  $dates = $parts[0];
+                  $times = $parts[1];
+
+                  $available_dates_times[$dates][] = $times;
+              }
+
+              // Debug: Log the processed data
+              error_log("Processed dates and times: " . print_r($available_dates_times, true));
+
+              // Generate dropdown options
+              foreach (array_keys($available_dates_times) as $date) {
                   $formatted_date = date('M j, Y', strtotime($date));
                   echo "<option value=\"$date\">$formatted_date</option>";
-                }
+              }
               ?>
+
             </select>
           </div>
 
@@ -362,9 +369,10 @@ function selectedTime(){
 
         const times = availableDatesTimes[selectedDate] || [];
         times.forEach(time => {
+          const formattedTime = formatTime(time);
             const option = document.createElement('option');
             option.value = time;
-            option.textContent = time;
+            option.textContent = formattedTime;
             timeSelect.appendChild(option);
         });
 
@@ -382,8 +390,15 @@ function selectedTime(){
     timeSelect.addEventListener('change', (event) => {
         const selectedDate = dateSelect.value;
         const selectedTime = event.target.value;
-        dateTimeInput.value = `${selectedDate} ${selectedTime}`; // Update hidden input with selected date and time
+        dateTimeInput.value = `${selectedDate} ${selectedTime}`;
     });
+
+    function formatTime(time) {
+        const dateObj = new Date(`1970-01-01T${time}`);
+        const hours = String(dateObj.getHours()).padStart(2, '0');
+        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
 
     updateTimes(dateSelect.value);
   }

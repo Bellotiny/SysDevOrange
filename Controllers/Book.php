@@ -19,6 +19,7 @@ final class Book extends Controller {
                 $services = Service::list();
                 $colors = Color::list();
                 $availabilities = Availability::list() ?: '';
+                //var_dump($availabilities);
                 $this->render("Book", "bookOne", ["services" => $services, "colors" => $colors, "availabilities" => $availabilities]);
             break;
             case "add":
