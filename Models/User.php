@@ -65,6 +65,7 @@ final class User extends Model {
                 self::email => $email,
                 self::phoneNumber => $phoneNumber,
                 self::birthDate => $birthDate,
+                self::token => null,
             ]);
             UserGroup::new($user, Group::getFromName("registeredUsers"));
             return $user;

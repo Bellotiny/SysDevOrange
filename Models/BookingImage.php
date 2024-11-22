@@ -43,8 +43,8 @@ final class BookingImage extends Model {
             $id = self::getConnection()->insert_id;
             return new self([
                 self::id => $id,
-                self::bookingID => $booking->id,
-                self::imageID => $image->id,
+                $booking->toAssoc(),
+                $image->toAssoc(),
             ]);
         } catch (Exception) {
             return null;
