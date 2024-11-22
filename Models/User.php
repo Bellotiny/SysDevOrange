@@ -74,14 +74,14 @@ final class User extends Model {
         }
     }
 
-    public function createDiscount($firstName, $birthDate){
+    public function applyDiscount($firstName, $birthDate){
         $birthDateTime = new DateTime($birthDate);
         $birthDateTimeStart = clone $birthDateTime;
         $birthDateTimeStart->setTime(8, 0, 0);
 
         $birthDateTimeEnd = clone $birthDateTime;
         $birthDateTimeEnd->setTime(16, 0, 0);
-        //Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
+        Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
     }
 
     /**

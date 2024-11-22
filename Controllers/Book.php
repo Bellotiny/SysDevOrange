@@ -4,7 +4,6 @@ include_once "Models/Booking.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Discount.php";
-include_once "Models/Payment.php";
 include_once "Models/User.php";
 include_once "Models/Availability.php";
 
@@ -14,11 +13,11 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list()]);
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list()]);
             break;
             case "add":
                 $services = $_POST['selectedServices'] ?? null;
-                $location = ($_POST['servicePlace'] == 'home') ? $_POST['destination'] : $_POST['servicePlace'] ;
+                $location = ($_POST['servicePlace'] == 'home') ? null : $_POST['servicePlace'] ;
                 $colors = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null,
@@ -26,16 +25,14 @@ final class Book extends Controller {
                 ]));
                 $date_time = $_POST['selected_date_time'] ?? null;
                 if($this->user != null){
-                    $userID = $this->user->id;
+                    $userID = $this->user;
                 } else{
-                    // if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
-                    //     $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username'], $_POST['password'] ?? null, $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null);
-                    //     $userID = $newUser->id;
-                    // }
+                    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
+                        $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                    }
                 }
-                $userID = (($this->user == null) && (isset($_POST['personalInfo']))) ? $_POST['personalInfo'] : $this->user->id;
                 if($services != null||$colors != null||$date_time != null){
-                    // $booking = Booking::new($services, $location, $colors, $date, $time, $userID);
+                    $booking = Booking::new($newUser, $services, $location, $colors, $date, $time, $newUser);
                     // if($booking === null){
                     //     $this->error('booking','There was a mistake in the booking');
                     //     break;

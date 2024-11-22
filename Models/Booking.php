@@ -65,7 +65,7 @@ final class Booking extends Model {
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new self([
+            $booking = new self([
                 self::id => $id,
                 ...$user->toAssoc(),
                 self::price => $price,
@@ -74,6 +74,8 @@ final class Booking extends Model {
                 self::location => $location,
                 ...($discount ? $discount->toAssoc() : []),
             ]);
+            UserGroup::new($user, Group::getFromName("registeredUsers"));
+            return $booking;
         } catch (Exception) {
             return null;
         }
