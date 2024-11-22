@@ -4,6 +4,11 @@ const LOGIN = "Se Connecter";
 const LOGIN_HERE = "Se connecter ici";
 const REGISTER = "Registre";
 const HOME = "Accueil";
+const ABOUT = "À Propos";
+const SERVICE = "Services";
+const GALLERY = "Galerie";
+const CONTACT = "Contact";
+const BOOK = "Réserver";
 const EMAIL = "Adresse de courriel";
 const PASSWORD = "Mot de passe";
 const FORGOT_PASS = "Vous avez oublié votre mot de passe?";
@@ -41,3 +46,12 @@ const MUST_READ = "Doit Lire";
 const VIEW_DETAILS = "Voir les Détails »";
 const IMPORTANCE_PROFESSIONAL_CARE = "Importance des Soins Professionnels";
 const BENEFIT_REG_MANICURE = "Avantage d’une Manucure Régulière";
+
+// About Us
+const ABOUT_US = "Découvrez-Nous";
+const IMPORTANT_NOTICE = "Avis Important";
+const CAT_NOTICE = "Veuillez noter que nous avons un précieux bébé en fourrure. 
+        notre maison ! En tant que maman chat aimante, je veux vous faire savoir que 
+        mon petit compagnon est un explorateur plutôt curieux. Rassurez-vous, ils sont sympathiques et pleins d’amour !";
+const LOCATION = "Emplacement";
+const PARKING_REMINDER = "Rappel de Stationnement :";
