@@ -5,7 +5,6 @@ include_once "Home.php";
 
 abstract class Controller {
     protected ?User $user;
-    protected string $lang;
 
     public function __construct() {
         $this->user = User::getFromCookie();

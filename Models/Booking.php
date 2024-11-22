@@ -22,10 +22,6 @@ final class Booking extends Model {
     public ?string $location;
     public ?Discount $discount;
 
-    public ?array $images = null;
-    public ?array $colors = null;
-    public ?array $services = null;
-
     public function __construct(array $fields) {
         $this->id = $fields[self::id];
         $this->user = new User($fields);
