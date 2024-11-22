@@ -3,8 +3,10 @@
 include_once "Mail/Mail.php";
 
 final class Contact extends Controller {
+    final public const CONFIRMATION = "confirmation";
+
     public function route(): void {
-        if (isset($_GET['action']) && strtolower($_GET['action']) === "confirmation") {
+        if (isset($_GET['action']) && strtolower($_GET['action']) === self::CONFIRMATION) {
             $this->render("Contact", "confirmation");
             return;
         }

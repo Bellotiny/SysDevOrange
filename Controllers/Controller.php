@@ -9,8 +9,6 @@ abstract class Controller {
 
     public function __construct() {
         $this->user = User::getFromCookie();
-        $this->lang = $_COOKIE['lang'] ?? "en";
-        setcookie("lang", $this->lang, time() + 34560000, "/");  // Reset lang cookie duration to 400 days
     }
 
     public abstract function route(): void;
@@ -22,7 +20,7 @@ abstract class Controller {
 
     protected final function verifyRights(string $action): bool {
         if ($this->user === null) {
-            Account::redirect("login");
+            Account::redirect(Account::LOGIN);
             return false;
         }
         if (!$this->user->hasRights(static::class, $action)) {

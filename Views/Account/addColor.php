@@ -25,7 +25,7 @@ include_once 'Views/head.php';
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="<?= BASE_PATH ?>/account/createColor"> 
+    <form method="POST" action="<?= BASE_PATH ?>/account/addColor">
         <input type="hidden" name="inventory" value="color">
         
         <div class="form-group my-3">

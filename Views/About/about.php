@@ -13,7 +13,7 @@ include_once 'Views/bookingModal.php';
 
   <div class="green-background text-secondary  container slide-up">
     <div class="">
-      <h1 class="display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up">About us</h1>
+      <h1 class="display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up"><?= ABOUT_US ?></h1>
       <div class=" mx-auto slide-up">
         <p class="fs-6 m-3 py-5 px-4 slide-up ">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
@@ -38,17 +38,15 @@ include_once 'Views/bookingModal.php';
     <div id="item-1"></div>
     <div id="item-2" class="slide-up"></div>
     <div id="item-3" class="slide-up overflow-auto">
-      <h4 class="notice-title dmSans-fontstyle slide-up">Important Notice</h4>
+      <h4 class="notice-title dmSans-fontstyle slide-up"><?= IMPORTANT_NOTICE ?></h4>
       <p class="notice-p dmSans-fontstyle slide-up">
-        Please be aware that we have a precious fur baby in 
-        our home! As a loving cat mom, I want to let you know that 
-        my little companion is quite the curious explorer. Rest assured, they’re friendly and full of love!
+          <?= CAT_NOTICE ?>
       </p>
     </div>
   </div>
 
 <div class="container">
-  <h1 class="display-5 text-green amsterdamThree-fontstyle text-shadow-pink slide-up p-4">Location</h1>
+  <h1 class="display-5 text-green amsterdamThree-fontstyle text-shadow-pink slide-up p-4"><?= LOCATION ?></h1>
 </div>
 
 
@@ -64,7 +62,7 @@ include_once 'Views/bookingModal.php';
 
         <!-- Parking Item -->
         <div class="col-md-6 p-5 slide-up overflow-auto">
-            <h4 class="notice-title slide-up">Parking reminder:</h4>
+            <h4 class="notice-title slide-up"><?= PARKING_REMINDER ?></h4>
             <p class="notice-p slide-up overflow-auto">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
                 vitae tristique tincidunt. orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante,

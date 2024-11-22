@@ -61,7 +61,6 @@ final class Service extends Model {
                 self::price => $price,
                 self::duration => $duration,
                 self::visibility => $visibility,
-                
             ]);
         } catch (Exception) {
             return null;

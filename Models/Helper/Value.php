@@ -6,6 +6,7 @@ class Value {
     private string $marker;
 
     public function __construct(string $column, mixed $arg, bool $hash = false) {
+        if (is_bool($arg)) $arg = (int) $arg;
         $this->column = $column;
         if ($hash) {
             $this->arg = $arg . "Sg3y03TCNltqaxNP";  // Add randomly generated salt
