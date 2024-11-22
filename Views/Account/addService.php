@@ -28,7 +28,7 @@ include_once 'Views/head.php';
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="<?= BASE_PATH ?>/account/createService">
+    <form method="POST" action="<?= BASE_PATH ?>/account/addService">
 
       <!-- Service Name -->
       <div class="form-group my-3">
@@ -75,8 +75,8 @@ include_once 'Views/head.php';
           <label for="visibility" class="col-form-label canvaSans-fontstyle">Visibility:</label><br>
           <div class="col-sm-10 border bg-light p-1">
               <select name="visibility" id="visibility" class="form-control">
-                  <option value="1">Visible</option>
-                  <option value="0">Not Visible</option>
+                  <option value="true">Visible</option>
+                  <option value="false">Not Visible</option>
               </select>
           </div>
       </div>

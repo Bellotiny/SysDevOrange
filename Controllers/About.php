@@ -1,12 +1,6 @@
 <?php
 
-include_once "Controllers/Controller.php";
-
-class About extends Controller {
-    public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/about/" . $action);
-    }
-
+final class About extends Controller {
     public function route(): void {
         $this->render("About", "about");
     }

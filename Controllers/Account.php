@@ -5,312 +5,316 @@ use Random\RandomException;
 include_once "Models/User.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
-include_once "Controllers/Controller.php";
-include_once "Controllers/Home.php";
+include_once "Home.php";
 
-class Account extends Controller {
-    public static function redirect(string $action = "personalInformation"): void {
-        header('Location: ' . BASE_PATH . "/account/" . $action);
-    }
+final class Account extends Controller {
+    final public const LOGIN = "login";
+    final public const TWO_FACTOR_AUTHENTICATION = "2fa";
+    final public const REGISTER = "register";
+    final public const FORGOT = "forgot";
+    final public const LOGOUT = "logout";
+    final public const DELETE = "delete";
+    final public const EDIT = "edit";
+    final public const INVENTORY = "inventory";
+    final public const ADD_COLOR = "addcolor";
+    final public const ADD_SERVICE = "addservice";
+    final public const EDIT_COLOR = "editcolor";
+    final public const EDIT_SERVICE = "editservice";
+    final public const DELETE_COLOR = "deletecolor";
+    final public const DELETE_SERVICE = "deleteservice";
+    final public const PERSONAL_INFORMATION = "personalInformation";
 
     public function route(): void {
-        $action = strtolower($_GET['action'] ?? "personalInformation");
-       var_dump($action);
+        $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
+
         switch ($action) {
-           
-            case "login":
-                if (!isset($_POST['email']) || !isset($_POST['password'])) {
-                    $this->render("Account", "login");
+            case self::LOGIN:
+                if (!isset($_POST["email"]) || !isset($_POST["password"])) {
+                    $this->render("Account", $action);
                     break;
                 }
-                $user = User::getFromEmailPassword($_POST['email'], $_POST['password']);
+                $user = User::getFromEmailPassword($_POST["email"], $_POST["password"]);
                 if ($user === null) {
-                    $this->render("Account", "login", ["error" => "Invalid Email or Password", "email" => $_POST['email']]);
+                    $this->render("Account", $action, ["error" => "Invalid Email or Password", "email" => $_POST["email"]]);
                     break;
                 }
                 try {
                     $code = random_int(100000, 999999);
                 } catch (Exception) {
-                    $this->render("Account", "login", ["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST['email']]);
+                    $this->render("Account", $action, ["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST["email"]]);
                 }
                 session_start();
                 $_SESSION["user"] = $user;
                 $_SESSION["code"] = $code;
                 $_SESSION["time"] = time();
                 $_SESSION["tries"] = 0;
-                self::redirect("2fa");
+                self::redirect(self::TWO_FACTOR_AUTHENTICATION);
                 flush();
-                Mailer::send(
+                Mail::send(
                     "2FA Code for Snook's Nail Nook",
                     "Your 2FA Code is: $code",
                     $user->email, "$user->firstName $user->lastName",
                     $user->email, "$user->firstName $user->lastName"
                 );
                 break;
-            case "2fa":
+            case self::TWO_FACTOR_AUTHENTICATION:
                 if (!isset($_POST["code"])) {
-                    $this->render("Account", "2fa");
+                    $this->render("Account", $action);
                     break;
                 }
                 session_start();
                 if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
-                    self::redirect("login");
+                    self::redirect(self::LOGIN);
                     break;
                 }
-                var_dump($_SESSION["code"]);
                 if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
-                    $this->render("Account", "2fa", ["error" => "Timer expired, login again to get a new code"]);
+                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
                     session_destroy();
                     break;
                 }
                 if ($_SESSION["code"] != $_POST["code"]) {
                     $_SESSION["tries"]++;
                     if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
-                        $this->render("Account", "2fa", ["error" => "Too many tries, login again to get a new code"]);
+                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
                         session_destroy();
                     } else {
-                        $this->render("Account", "2fa", ["error" => "Invalid Code"]);
+                        $this->render("Account", $action, ["error" => "Invalid Code"]);
                     }
                     break;
                 }
                 try {
-                    self::login($_SESSION["user"]);
+                    self::setToken($_SESSION["user"]);
                 } catch (Exception) {
-                    $this->render("Account", "2fa", ["error" => "Error While Generating Token. Try Again Later", "email" => $_POST['email']]);
+                    $this->render("Account", $action, ["error" => "Error While Generating Token. Try Again Later", "email" => $_POST["email"]]);
                 }
                 session_destroy();
                 break;
-            case "register":
-                if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['confirmPassword'])) {
-                    $this->render("Account", "register");
+            case self::REGISTER:
+                if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["confirmPassword"])) {
+                    $this->render("Account", $action);
                     break;
                 }
-                if ($_POST['password'] != $_POST['confirmPassword']) {
-                    $this->error("register", "Passwords do not match");
+                if ($_POST["password"] != $_POST["confirmPassword"]) {
+                    $this->formError($action, "Passwords do not match");
                     break;
                 }
-                $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-                if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                    $this->error("register", "Invalid Email format");  // TODO Improve this error message
+                $_POST["email"] = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+                if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                    $this->formError($action, "Invalid Email format");  // TODO Improve this error message
                     break;
                 }
-                if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{6,}$/", $_POST['password'])) {
-                    $this->error("register", "The password must be at least 6 characters long and include at least one number, one symbol, one lowercase letter, and one uppercase letter");
+                if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{6,}$/", $_POST["password"])) {
+                    $this->formError($action, "The password must be at least 6 characters long and include at least one number, one symbol, one lowercase letter, and one uppercase letter");
                     break;
                 }
-                if ($_POST['phoneNumber']) {
-                    $_POST['phoneNumber'] = filter_var($_POST['phoneNumber'], FILTER_SANITIZE_NUMBER_INT);
+                if ($_POST["phoneNumber"]) {
+                    $_POST["phoneNumber"] = filter_var($_POST["phoneNumber"], FILTER_SANITIZE_NUMBER_INT);
                 }
-                if ($_POST['birthDate']) {
-                    if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $_POST['birthDate'])) {
-                        $this->error("register", "Invalid Birth Date format");
+                if ($_POST["birthDate"]) {
+                    if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $_POST["birthDate"])) {
+                        $this->formError($action, "Invalid Birth Date format");
                         break;
                     }
                 }
-                $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['phoneNumber'] ?? null, $_POST['birthDate'] ?? null);
+                $user = User::new($_POST["firstName"], $_POST["lastName"], $_POST["email"], $_POST["password"], $_POST["phoneNumber"] ?? null, $_POST["birthDate"] ?? null);
                 if ($user === null) {
-                    $this->error("register", "Email already in use");
+                    $this->formError($action, "Email already in use");
                     break;
                 }
                 try {
-                    self::login($user);
+                    self::setToken($user);
                 } catch (Exception) {
-                    $this->error("register", "Unable to generate token. Try Again Later");
+                    $this->formError($action, "Unable to generate token. Try Again Later");
                 }
                 break;
-            case "forgot":
-                $this->render("Account", "forgot");
+            case self::FORGOT:
+                $this->render("Account", $action);
                 break;
-            case "logout":
-                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
+            case self::LOGOUT:
+                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
                 Home::redirect();
                 break;
-                // Wrote this to render forgot.php for forgetting password
-            case "forgot":
-                $this->render("Account", $action);
-                 break;
-            case "inventory":
-                $services = Service::list();
-                $colors = Color::list();
-                    
-                $this->render("Account", $action, data: ["services" => $services, "colors" => $colors, "user" => $this->user]);
-        
-                break;
-            case "createColor"://create new color
-              
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    // Check if required fields are filled
-                    //var_dump(empty($_POST['name']) || empty($_POST['code'])   || empty($_POST['visibility']));
-                    if (empty($_POST['name']) || empty($_POST['code'])   || empty($_POST['visibility'])) {
-                        $data['error'] = 'Name and Code are required.';
-                        $colors = Color::list();
-                        $services = Service::list();
-                        $this->render("Account", "inventory", data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
-                        break;
-                    }
-                     
-                         // Create the new service
-                         $color = Color::new(
-                             $_POST['name'],
-                             $_POST['code'], 
-                             (int)$_POST['visibility']
-                         );
-                     
-                         $this->redirect("inventory");
-                         break;
-                     
-                     }
-     
-                     $this->render("Account", $action);
-                 
-                     break;
-            case "createService"://create new service
-              
-               if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Check if required fields are filled
-                    if (empty($_POST['name']) || empty($_POST['type']) || empty($_POST['price']) || empty($_POST['description']) || empty($_POST['duration']) || empty($_POST['visibility'])) {
-                        $data['error'] = 'Complete the inputs';
-                        $colors = Color::list();
-                        $services = Service::list();
-                        $this->render("Account", "inventory", data:["services" => $services, "colors" => $colors,"user" => $this->user,  "data" => $data]);
-                        break;
-                    }
-                
-                    // Create the new service
-                    $service = Service::new(
-                        $_POST['name'],
-                        (float)$_POST['price'],
-                        $_POST['description'],
-                        (int)$_POST['duration'],
-                        $_POST['type'], 
-                        (int)$_POST['visibility']
-                    );
-                
-                    $this->redirect("inventory");
+            case self::DELETE:
+                if (!$this->verifyRights($action)) {
                     break;
-                
                 }
-
-                $this->render("Account", $action);
-            
+                if (!isset($_POST["confirm"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $this->user->delete();
+                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
+                Home::redirect();
                 break;
-            case "editColor"://edit color l
-                $color = Color::getFromId((int)$_GET['id']);
-
+            case self::EDIT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (isset($_POST["password"]) && isset($_POST["confirmPassword"])) {
+                    if ($_POST["password"] != $_POST["confirmPassword"]) {
+                        $this->render("Account", $action, ["passwordError" => "Passwords do not match"]);
+                        break;
+                    }
+                    if (!preg_match("/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{6,}$/", $_POST["password"])) {
+                        $this->render("Account", $action, ["passwordError" => "Password must be at least 6 characters long and include at least one number, one symbol, one lowercase letter, and one uppercase letter"]);
+                        break;
+                    }
+                    if (!$this->user->updatePassword($_POST["password"])) {
+                        $this->render("Account", $action, ["passwordError" => "Failed to update password"]);
+                        break;
+                    }
+                    $this->render("Account", $action, ["passwordMessage" => "Password saved"]);
+                } else if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["phoneNumber"]) && isset($_POST["birthDate"])) {
+                    $_POST["email"] = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+                    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                        $this->formError($action, "Invalid Email format");
+                        break;
+                    }
+                    if ($_POST["phoneNumber"]) {
+                        $_POST["phoneNumber"] = filter_var($_POST["phoneNumber"], FILTER_SANITIZE_NUMBER_INT);
+                    } else {
+                        $_POST["phoneNumber"] = null;
+                    }
+                    if ($_POST["birthDate"]) {
+                        if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $_POST["birthDate"])) {
+                            $this->formError($action, "Invalid Birth Date format");
+                            break;
+                        }
+                    } else {
+                        $_POST["birthDate"] = null;
+                    }
+                    $this->user->firstName = $_POST["firstName"];
+                    $this->user->lastName = $_POST["lastName"];
+                    $this->user->email = $_POST["email"];
+                    $this->user->phoneNumber = $_POST["phoneNumber"];
+                    $this->user->birthDate = $_POST["birthDate"];
+                    if (!$this->user->save()) {
+                        $this->formError($action, "Email already in use");
+                        break;
+                    }
+                    $this->render("Account", $action, ["message" => "Changes saved"]);
+                } else {
+                    $this->render("Account", $action);
+                }
+                break;
+            case self::INVENTORY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, [
+                    "services" => Service::list(),
+                    "colors" => Color::list(),
+                ]);
+                break;
+            case self::ADD_COLOR:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $color = Color::new(
+                    $_POST["name"],
+                    $_POST["code"],
+                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
+                );
+                if ($color === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::ADD_SERVICE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $service = Service::new(
+                    $_POST["name"],
+                    $_POST["description"],
+                    $_POST["type"],
+                    filter_var($_POST["price"], FILTER_VALIDATE_FLOAT),
+                    filter_var($_POST["duration"], FILTER_VALIDATE_INT),
+                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
+                );
+                if ($service === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::EDIT_COLOR:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $color = Color::getFromId((int)$_GET["id"]);
                 if (is_null($color)) {
-                    $data['error'] = 'Color not found';
-                    $colors = Color::list();
-                    $services = Service::list();
-                    $this->render("Account", "inventory", data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
+                    $this->redirect(self::INVENTORY);
                     break;
                 }
-
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    //service 
-                   
-                    if (!isset($_POST['name']) && !isset($_POST['code']) &&
-                        !isset($_POST['visibility'])) {
-    
-                        $data['error'] = 'Every inputs must filled';
-                        $colors = Color::list();
-                        $services = Service::list();
-                        $this->render("Account", "inventory", data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
-                        break;
-                    }
-
-                        $visibility = isset($_POST['visibility']) ? 1 : 0;
-
-                        $color->name = $_POST['name'];
-                        $color->code = $_POST['code'];
-                        $color->visibility =  $visibility ;
-
-                        $color->save();
-                        $this->redirect("inventory");     
-
+                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
+                    $this->render("Account", $action, ["color" => $color]);
+                    break;
                 }
-             
-                    $this->render("Account", $action, ['color'=> $color]);
-               
+                $color->name = $_POST["name"];
+                $color->code = $_POST["code"];
+                $color->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
+                $color->save();
+                $this->redirect(self::INVENTORY);
                 break;
-            case "editService"://edit service
-                $service = Service::getFromId((int)$_GET['id']);
-    
+            case self::EDIT_SERVICE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $service = Service::getFromId((int)$_GET["id"]);
                 if (is_null($service)) {
-                    $data['error'] = 'Service not found';
-                    $colors = Color::list();
-                    $services = Service::list();
-                    $this->render("Account", "inventory", data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
+                    $this->redirect(self::INVENTORY);
                     break;
                 }
-    
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        //service 
-                       
-                    if (!isset($_POST['name']) && !isset($_POST['type']) &&
-                        !isset($_POST['price']) && !isset($_POST['description']) &&
-                        !isset($_POST['duration']) && !isset($_POST['visibility'])) {
-        
-                        $data['error'] = 'Every inputs must filled';
-                        $colors = Color::list();
-                        $services = Service::list();
-                        $this->render("Account", "inventory", 
-                        data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
-                        break;
-                    }
-
-
-                       $visibility = isset($_POST['visibility']) ? 1 : 0;
-    
-                        $service->name = $_POST['name'];
-                        $service->type = $_POST['type'];
-                        $service->price = $_POST['price'];
-                        $service->description = $_POST['description'];
-                        $service->duration = $_POST['duration'];
-                        $service->visibility =  $visibility ;
-    
-                        $service->save();
-                        $this->redirect("inventory");     
-    
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                    $this->render("Account", $action, ["service" => $service]);
+                    break;
                 }
-                 
-                    $this->render("Account", $action, ['service'=> $service]);
-                   
+                $service->name = $_POST["name"];
+                $service->description = $_POST["description"];
+                $service->type = $_POST["type"];
+                $service->price = filter_var($_POST["price"], FILTER_VALIDATE_FLOAT);
+                $service->duration = filter_var($_POST["duration"], FILTER_VALIDATE_INT);
+                $service->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
+                $service->save();
+                $this->redirect(self::INVENTORY);
                 break;
-            case "deleteColor"://dekete color
-                $color = Color::getfromId((int)$_GET['id']);
-                
+            case self::DELETE_COLOR:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $color = Color::getfromId((int)$_GET["id"]);
                 if (is_null($color)) {
-                    $data['error'] = 'Color is not found';
-                    $colors = Color::list();
-                    $services = Service::list();
-                    $this->render("Account", "inventory", 
-                    data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
+                    $this->redirect(self::INVENTORY);
                     break;
                 }
                 $color->delete();
-                $this->redirect("inventory");
-
-                
+                $this->redirect(self::INVENTORY);
                 break;
-            case "deleteService"://delete service
-                $service = Service::getfromId((int)$_GET['id']);
-                    
+            case self::DELETE_SERVICE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $service = Service::getfromId((int)$_GET["id"]);
                 if (is_null($service)) {
-                    $data['error'] = 'Service not found';
-                    $colors = Color::list();
-                    $services = Service::list();
-                    $this->render("Account", "inventory", 
-                    data:["services" => $services, "colors" => $colors, "user" => $this->user, "data" => $data]);
+                    $this->redirect(self::INVENTORY);
                     break;
                 }
                 $service->delete();
-                $this->redirect("inventory");
-    
-                    
+                $this->redirect(self::INVENTORY);
                 break;
             default:
                 if ($this->verifyRights($action)) {
-                    $this->render("Account", $action, [$this->user]);
+                    $this->render("Account", $action);
                 }
                 break;
         }
@@ -319,21 +323,21 @@ class Account extends Controller {
     /**
      * @throws RandomException
      */
-    private static function login(User $user): void {
+    private static function setToken(User $user): void {
         $token = hash("sha256", $user->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16)));
         setcookie("token", $token, time() + 34560000, "/");
         $user->setToken($token);
         self::redirect();
     }
 
-    private function error($action, $error): void {
+    private function formError($action, $error): void {
         $this->render("Account", $action, [
                 "error" => $error,
-                "firstName" => $_POST['firstName'],
-                "lastName" => $_POST['lastName'],
-                "email" => $_POST['email'],
-                "phoneNumber" => $_POST['phoneNumber'],
-                "birthDate" => $_POST['birthDate'],
+                "firstName" => $_POST["firstName"],
+                "lastName" => $_POST["lastName"],
+                "email" => $_POST["email"],
+                "phoneNumber" => $_POST["phoneNumber"],
+                "birthDate" => $_POST["birthDate"],
             ]
         );
     }

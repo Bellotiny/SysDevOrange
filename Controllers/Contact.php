@@ -1,17 +1,12 @@
 <?php
 
-include_once "Controllers/Controller.php";
-include_once "Controllers/Mail/Mailer.php";
+include_once "Mail/Mail.php";
 
-class Contact extends Controller {
-    private const INSTAGRAM_ACCESS_TOKEN = 'IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD';
-
-    public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/contact/" . $action);
-    }
+final class Contact extends Controller {
+    final public const CONFIRMATION = "confirmation";
 
     public function route(): void {
-        if (isset($_GET['action']) && strtolower($_GET['action']) === "confirmation") {
+        if (isset($_GET['action']) && strtolower($_GET['action']) === self::CONFIRMATION) {
             $this->render("Contact", "confirmation");
             return;
         }
@@ -26,7 +21,7 @@ class Contact extends Controller {
         }
         self::redirect("confirmation");
         flush();
-        Mailer::send(
+        Mail::send(
             "Website Contact-Us Form",
             $_POST['message'] . "\n\nFrom: " . $_POST['firstName'] . " " . $_POST['lastName'] . " <" . $_POST['email'] . ">",
             "snooknail@gmail.com", "Snook's Nail Salon",

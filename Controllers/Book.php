@@ -1,28 +1,20 @@
 <?php
 
-include_once "Controllers/Controller.php";
 include_once "Models/Booking.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Discount.php";
-include_once "Models/Payment.php";
 include_once "Models/User.php";
 
-class Book extends Controller {
-    public static function redirect(string $action = ""): void {
-        header('Location: ' . BASE_PATH . "/bookOne/" . $action);
-    }
-
+final class Book extends Controller {
     public function route(): void {
         $action = strtolower($_GET['action'] ?? "list");
 
         switch ($action) {
             case "list":
                 //If current user is loggedin
-                
-                $services = Service::list();
-                $colors = Color::list();
-                $this->render("Book", "bookOne", ["services" => $services, "colors" => $colors]);
+
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list()]);
             break;
             case "add":
                 if(!isset($_POST['selectedService'])||!isset($_POST['selectedColor'])||!isset($_POST['selected_date'])

@@ -742,4 +742,31 @@ a.nav-link.active {
     #nav-extra a {
         margin: 0 5px; /* Reduce margin on the 'Book' link so it does not overlap contact link */
     }
+
+/*Gallery*/
+#instagram-pic {
+    justify-content: center;
+}
+/*Account*/ 
+header {
+    z-index: 10001;
+}
+#sidebar {
+    position: absolute;
+    left: -280px; /* Initially hidden off-screen */
+    width: 280px;
+    z-index: 1000;
+    transition: left 0.3s ease; /* Smooth sliding effect */
+}
+
+#content {
+    flex-grow: 1;
+    margin-left: 0; /* Default with sidebar hidden */
+    transition: margin-left 0.3s ease; /* Smooth margin adjustment */
+}
+#menuButton {
+    display: block !important;
+    margin-bottom: 2%;
+}
+
 }

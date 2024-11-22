@@ -14,16 +14,16 @@ include_once 'head.php';
 
         <!-- Navigation Links in the center -->
         <div id="nav-main" class="d-flex justify-content-center">
-            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
-            <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about">About</a>
-            <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services">Services</a>
-            <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery">Gallery</a>
-            <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact">Contact</a>
+            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/"><?= HOME ?></a>
+            <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about"><?= ABOUT ?></a>
+            <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
+            <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
+            <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
         </div>
 
         <!-- Book and Account Icon on the far right -->
         <div id="nav-extra" class="d-flex align-items-center">
-            <a class="Nav-Split" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#">Book</a>
+            <a class="Nav-Split" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#"><?= BOOK ?></a>
             <a href="<?=BASE_PATH?>/account">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="" class="bi bi-person-fill account-image" viewBox="0 0 16 16" >
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
@@ -50,18 +50,17 @@ include_once 'head.php';
             </div>
         </div>
     </nav>
-    <div id="nav-wrapper">
     <div class="full-screen-overlay" id="navbarMenu">
         <div class="menu-content">
-            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/">Home</a>
-            <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about">About</a>
-            <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services">Services</a>
-            <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery">Gallery</a>
-            <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact">Contact</a>
+            <a class="nav-item <?= ($currentPage == 'home') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/"><?= HOME ?></a>
+            <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about"><?= ABOUT ?></a>
+            <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
+            <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
+            <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
             
             <!-- Row container for the "Book" and Account icon links -->
             <div class="nav-row">
-                <a class="Nav-Split" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#">Book</a>
+                <a class="Nav-Split" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#"><?= BOOK ?></a>
                 <a href="<?=BASE_PATH?>/account">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="" class="bi bi-person-fill account-image" viewBox="0 0 16 16" >
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
@@ -70,7 +69,6 @@ include_once 'head.php';
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
