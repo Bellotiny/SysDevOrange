@@ -29,6 +29,15 @@ abstract class Controller {
         }
         return true;
     }
+    protected final function checkAuthorization(string $action): bool {
+        if ($this->user === null) {
+            return false;
+        }
+        if (!$this->user->hasRights(static::class, $action)) {
+            return false;
+        }
+        return true;
+    }
 
     final public static function redirect(string $action = "", ?string $id = null): void {
         if (self::class === static::class) {

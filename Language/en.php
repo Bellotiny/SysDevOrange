@@ -21,7 +21,7 @@ const ALREADY_HAVE_ACCOUNT = "Already have an account?";
 // Register Form 
 const FIRST_NAME = "First Name";
 const LAST_NAME = "Last Name";
-const BIRHTDAY = "Birthday";
+const BIRTHDAY = "Birthday";
 const PHONE_NUMBER = "Phone Number";
 const CONFIRM_PASSWORD = "Confirm Password";
 

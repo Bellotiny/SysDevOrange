@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+
   console.log('Home Script');
   const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
   const slideElements = document.querySelectorAll('.slide-up');
@@ -136,4 +136,3 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
 
-})
