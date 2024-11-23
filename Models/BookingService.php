@@ -43,8 +43,8 @@ final class BookingService extends Model {
             $id = self::getConnection()->insert_id;
             return new self([
                 self::id => $id,
-                self::bookingID => $booking->id,
-                self::serviceID => $service->id,
+                ...$booking->toAssoc(),
+                ...$service->toAssoc(),
             ]);
         } catch (Exception) {
             return null;

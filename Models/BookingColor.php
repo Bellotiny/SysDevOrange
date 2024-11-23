@@ -43,8 +43,8 @@ final class BookingColor extends Model {
             $id = self::getConnection()->insert_id;
             return new self([
                 self::id => $id,
-                self::bookingID => $booking->id,
-                self::colorID => $color->id,
+                ...$booking->toAssoc(),
+                ...$color->toAssoc(),
             ]);
         } catch (Exception) {
             return null;
