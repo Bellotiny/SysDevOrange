@@ -45,13 +45,13 @@ const NAIL_CARE_DONT = "Nail Care (Don'ts)";
 const MUST_READ = "Must Read";
 const VIEW_DETAILS = "View details »";
 const IMPORTANCE_PROFESSIONAL_CARE = "Importance of Professional Care";
-const BENEFIT_REG_MANICURE = "Benefit of Regular Manicure";
+const BENEFIT_REG_MANICURE = "Benefits of a Basic Manicure 💅✨";
 
 // About Us
-const ABOUT_US = "About Us";
+const ABOUT_US = "About Me";
 const IMPORTANT_NOTICE = "Important Notice";
 const CAT_NOTICE = "Please be aware that we have a precious fur baby in 
         our home! As a loving cat mom, I want to let you know that 
         my little companion is quite the curious explorer. Rest assured, they’re friendly and full of love!";
 const LOCATION = "Location";
-const PARKING_REMINDER = "Parking Reminder:";
+const PARKING_REMINDER = "Parking Made Easy! 🚗✨";

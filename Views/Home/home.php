@@ -75,10 +75,9 @@ include_once 'Views/bookingModal.php';
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
         <h1 class="display-2 pb-5 mb-5 fw-bold amsterdamThree-fontstyle text-green text-shadow-pink slide-up"><?= WELCOME ?></h1>
         <p class="lead slide-up"> 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique 
-          tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in 
-          faucibus orci luctus et ultrices posuere cubilia curae; 
-
+        You’ve just stepped into a cozy corner of affordable nail care, sprinkled with a whole lot of cute flair! 🌸 <br><br>
+        I can’t wait to get you scheduled for your next self-care day—because you deserve to feel fabulous! ✨<br><br>
+        Specialized in GelX manicures.<br>
         </p>
       
       </div>
@@ -202,146 +201,42 @@ include_once 'Views/bookingModal.php';
         </div>
       
     </div>
+    <!-- fourth offcanvas Section -->
+    <div class="col-lg-3 canvaDiv m-3 p-3 ">
+        <img src="<?=BASE_PATH?>/Views/Images/about3.png"
+          class="img-fluid my-4 rounded  slide-up" 
+          alt="Description of the image" 
+          width="250" height="200" 
+          style="object-fit: cover; width: 300px; height: 200px;">
+
+        <p class=" slide-up"><?= BENEFIT_REG_MANICURE ?></p>
+        <strong class="d-block mb-2 text-pink  slide-up "><?= MUST_READ ?></strong>
+        <p>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBenefit" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body smalls">
+            <p class="text-large-offcanvas">
+            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
+            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
+            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
+            </p>
+          </div>
+        </div>
+      
+    </div>
    
 </div>
 
 </div>
 
-<script>
-  const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-  const slideElements = document.querySelectorAll('.slide-up');
 
-  window.onload = function () {
-    // Check if user is logged in (token present in localStorage or session)
-    const isLoggedIn = localStorage.getItem('token') !== null; // Adjust as needed for your auth system
-    const hasSeenModal = localStorage.getItem('hasSeenModal') === 'true'; // Check if user has seen the modal
 
-    // Check if it's the first time visiting the site
-    const isFirstTime = localStorage.getItem('firstTime') !== 'false';
 
-    // Show modal if not logged in and it's the first time visiting
-    if (!isLoggedIn && isFirstTime && !hasSeenModal) {
-        // Only show modal if user hasn't logged in and hasn't seen the modal before
-        $('#welcomeModal').modal('show');
-        localStorage.setItem('hasSeenModal', 'true'); // Mark that the user has seen the modal
-        document.getElementById('showLogin').style.display = 'inline-block';
-        document.getElementById('showRegister').style.display = 'inline-block';
-    } else {
-        // If logged in, hide login and register buttons
-        document.getElementById('showLogin').style.display = 'none';
-        document.getElementById('showRegister').style.display = 'none';
-    }
-  };
-  
-  const checkSlide = () => {
-    slideElements.forEach((element) => {
-      const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom >= 0) {
-        element.classList.add('active'); // Add active class when in viewport
-      } else {
-        element.classList.remove('active'); // Remove active class if out of viewport
-      }
-    });
-  };
-
-  // JavaScript to toggle between login, register forms, and welcome message
-  document.addEventListener("DOMContentLoaded", function() {
-    const welcomeMessage = document.getElementById("welcomeMessage");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
-    const forgotForm = document.getElementById("forgotForm");
-    const authModalTitle = document.getElementById("authModalTitle");
-
-    // Scroll event listener to handle sliding elements
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); 
-
-    // Show login form
-    document.getElementById("showLogin").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-
-    // Show register form
-    document.getElementById("showRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show register form from within login form
-    document.getElementById("showRegisterForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show login form from within register form
-    document.getElementById("showLoginFormRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show login form from within forgot form
-    document.getElementById("showLoginForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form from within login form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-
-    // Go back to welcome message from login form
-    document.getElementById("goBackFromLogin").addEventListener("click", function() {
-      loginForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-
-    // Go back to welcome message from register form
-    document.getElementById("goBackFromRegister").addEventListener("click", function() {
-      registerForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-
-    // Go back to login form from forgot form
-    document.getElementById("goBackFromForgot").addEventListener("click", function() {
-      forgotForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "Login";
-    });  
-  </script>
   
   <?php include_once 'Views/footer.php'; ?>
 
