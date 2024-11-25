@@ -115,22 +115,22 @@ include_once 'Views/bookingModal.php';
           </div>
           <div class="offcanvas-body small text-start mx-5 row">
             <div class="col">
-              <h3 class=""><?= NAIL_CARE_DO ?></h3>
+
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Keep Nails Clean:</strong> Wash hands regularly and dry thoroughly.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Moisturize:</strong> Apply hand cream or cuticle oil to keep nails hydrated.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Trime Regulary:</strong>  Use sharp tools to maintain a manageable length.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">File gently</strong>  Smooth edges by filing in one direction.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Use a Glass Nail File:</strong> Glass files are your best friend! They gently remove length while smoothing your edges to prevent splits and breaks. Be sure to file in the same direction to keep your nails strong and snag-free.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Hydrate with Cuticle Oil:</strong> After a shower or during your daily skincare routine, make sure to apply cuticle oil to your nail beds. This helps replenish moisture that’s lost from natural oils being washed away, keeping your nails nourished and hydrated.</li>
+                
               </ul>
             </div>
 
             <div class="col">
-              <h3 class=""> <?= NAIL_CARE_DONT ?></h3>
+          
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Use Nails as Tools:</strong> Avoid using nails for opening packages.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Ignore Issues:</strong> Consult a professional for nail problems.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Avoid Harsh Products:</strong>  Limit the use of acetone removers.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Overdo Polish:</strong>  Too many layers can weaken nails.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Base & Top Coat Protection: </strong> Whenever possible, use a good-quality base and top coat on your natural nails. This extra layer of protection helps your nails stay strong and shielded from everyday bumps and bangs. After applying the base and top coat to clean nails, be sure to follow up with cuticle oil to keep everything moisturized and healthy.</li>
+                <br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Taking these steps will keep your nails in tip-top shape—ready for anything! 🌸</strong></h5>
+                
+                
               </ul>
             </div>
           </div>
@@ -156,16 +156,27 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasImportance" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel"><?= IMPORTANCE_PROFESSIONAL_CARE ?></h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">While at-home care is great, nothing beats the benefits of professional nail care! Here’s why:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body small mx-5 ">
-            <p class="text-large-offcanvas">
-            Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
-            health, prevent infections, and address underlying issues that might not be visible to the 
-            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
-            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Expert Attention: </strong>  A professional can assess the health of your nails and provide the right treatments tailored to your needs. Whether it’s a manicure, or a restorative treatment, experts know how to keep your nails in their best shape!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "> Long-Lasting Results:</strong>Professional-grade products and techniques ensure your nails stay strong, shiny, and stunning longer than DIY methods.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Prevention & Care:</strong>Nail techs can spot potential issues early, like nail damage, and provide solutions before they become bigger problems.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "> Relaxation & Self-Care: </strong> Nail appointments aren’t just about nails—they’re a time to relax, unwind, and give yourself the pampering you deserve.</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Professional nail care gives your nails the strength, protection, and attention they need to thrive, all while you enjoy a little self-care moment! 🌸</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       
@@ -188,19 +199,31 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body smalls">
-            <p class="text-large-offcanvas">
-            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
-            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
-            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Nail Bed Care:</strong> Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Break from Harsh Treatments:</strong> If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Promote Healthy Growth:</strong> A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Treat your nails to a little TLC—they’ll thank you later! 💖</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       
     </div>
+
     <!-- fourth offcanvas Section -->
     <div class="col-lg-3 canvaDiv m-3 p-3 ">
         <img src="<?=BASE_PATH?>/Views/Images/about3.png"
@@ -209,22 +232,34 @@ include_once 'Views/bookingModal.php';
           width="250" height="200" 
           style="object-fit: cover; width: 300px; height: 200px;">
 
-        <p class=" slide-up"><?= BENEFIT_REG_MANICURE ?></p>
+        <p class=" slide-up">The Importance of Regular Manicures 💅✨</p>
         <strong class="d-block mb-2 text-pink  slide-up "><?= MUST_READ ?></strong>
         <p>
-            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBenefit" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasReg" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
         </p>
-        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasReg" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body smalls">
-            <p class="text-large-offcanvas">
-            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
-            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
-            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Healthy Nail Growth:  </strong>  Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Damage Prevention: </strong>Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Hydration & Nourishment:</strong>Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Polished Look, Polished Feel:  </strong>Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       
