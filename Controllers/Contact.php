@@ -7,7 +7,7 @@ final class Contact extends Controller {
 
     public function route(): void {
         if (isset($_GET['action']) && strtolower($_GET['action']) === self::CONFIRMATION) {
-            $this->render("Contact", "confirmation");
+            $this->render("Contact", self::CONFIRMATION);
             return;
         }
         if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['message'])) {
