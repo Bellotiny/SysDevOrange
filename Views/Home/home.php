@@ -75,10 +75,9 @@ include_once 'Views/bookingModal.php';
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
         <h1 class="display-2 pb-5 mb-5 fw-bold amsterdamThree-fontstyle text-green text-shadow-pink slide-up"><?= WELCOME ?></h1>
         <p class="lead slide-up"> 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique 
-          tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in 
-          faucibus orci luctus et ultrices posuere cubilia curae; 
-
+        You’ve just stepped into a cozy corner of affordable nail care, sprinkled with a whole lot of cute flair! 🌸 <br><br>
+        I can’t wait to get you scheduled for your next self-care day—because you deserve to feel fabulous! ✨<br><br>
+        Specialized in GelX manicures.<br>
         </p>
       
       </div>
@@ -116,22 +115,22 @@ include_once 'Views/bookingModal.php';
           </div>
           <div class="offcanvas-body small text-start mx-5 row">
             <div class="col">
-              <h3 class=""><?= NAIL_CARE_DO ?></h3>
+
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Keep Nails Clean:</strong> Wash hands regularly and dry thoroughly.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Moisturize:</strong> Apply hand cream or cuticle oil to keep nails hydrated.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Trime Regulary:</strong>  Use sharp tools to maintain a manageable length.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">File gently</strong>  Smooth edges by filing in one direction.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Use a Glass Nail File:</strong> Glass files are your best friend! They gently remove length while smoothing your edges to prevent splits and breaks. Be sure to file in the same direction to keep your nails strong and snag-free.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Hydrate with Cuticle Oil:</strong> After a shower or during your daily skincare routine, make sure to apply cuticle oil to your nail beds. This helps replenish moisture that’s lost from natural oils being washed away, keeping your nails nourished and hydrated.</li>
+                
               </ul>
             </div>
 
             <div class="col">
-              <h3 class=""> <?= NAIL_CARE_DONT ?></h3>
+          
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Use Nails as Tools:</strong> Avoid using nails for opening packages.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Ignore Issues:</strong> Consult a professional for nail problems.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Avoid Harsh Products:</strong>  Limit the use of acetone removers.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Overdo Polish:</strong>  Too many layers can weaken nails.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Base & Top Coat Protection: </strong> Whenever possible, use a good-quality base and top coat on your natural nails. This extra layer of protection helps your nails stay strong and shielded from everyday bumps and bangs. After applying the base and top coat to clean nails, be sure to follow up with cuticle oil to keep everything moisturized and healthy.</li>
+                <br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Taking these steps will keep your nails in tip-top shape—ready for anything! 🌸</strong></h5>
+                
+                
               </ul>
             </div>
           </div>
@@ -157,16 +156,27 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasImportance" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel"><?= IMPORTANCE_PROFESSIONAL_CARE ?></h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">While at-home care is great, nothing beats the benefits of professional nail care! Here’s why:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body small mx-5 ">
-            <p class="text-large-offcanvas">
-            Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
-            health, prevent infections, and address underlying issues that might not be visible to the 
-            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
-            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Expert Attention: </strong>  A professional can assess the health of your nails and provide the right treatments tailored to your needs. Whether it’s a manicure, or a restorative treatment, experts know how to keep your nails in their best shape!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "> Long-Lasting Results:</strong>Professional-grade products and techniques ensure your nails stay strong, shiny, and stunning longer than DIY methods.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Prevention & Care:</strong>Nail techs can spot potential issues early, like nail damage, and provide solutions before they become bigger problems.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "> Relaxation & Self-Care: </strong> Nail appointments aren’t just about nails—they’re a time to relax, unwind, and give yourself the pampering you deserve.</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Professional nail care gives your nails the strength, protection, and attention they need to thrive, all while you enjoy a little self-care moment! 🌸</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       
@@ -189,15 +199,67 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body smalls">
-            <p class="text-large-offcanvas">
-            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
-            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
-            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Nail Bed Care:</strong> Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Break from Harsh Treatments:</strong> If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Promote Healthy Growth:</strong> A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Treat your nails to a little TLC—they’ll thank you later! 💖</strong></h5>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+
+    <!-- fourth offcanvas Section -->
+    <div class="col-lg-3 canvaDiv m-3 p-3 ">
+        <img src="<?=BASE_PATH?>/Views/Images/about3.png"
+          class="img-fluid my-4 rounded  slide-up" 
+          alt="Description of the image" 
+          width="250" height="200" 
+          style="object-fit: cover; width: 300px; height: 200px;">
+
+        <p class=" slide-up">The Importance of Regular Manicures 💅✨</p>
+        <strong class="d-block mb-2 text-pink  slide-up "><?= MUST_READ ?></strong>
+        <p>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasReg" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasReg" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters:</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Healthy Nail Growth:  </strong>  Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Damage Prevention: </strong>Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Hydration & Nourishment:</strong>Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Polished Look, Polished Feel:  </strong>Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       
@@ -207,126 +269,9 @@ include_once 'Views/bookingModal.php';
 
 </div>
 
-<script>
-    const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-    const slideElements = document.querySelectorAll('.slide-up');
 
-  // Show the modal only once per session
-  if (!sessionStorage.getItem('modalShown')) {
-    modal.show();
-    sessionStorage.setItem('modalShown', 'true');
-  }
 
-  const checkSlide = () => {
-        slideElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                element.classList.add('active'); // Add active class when in viewport
-            } else {
-                element.classList.remove('active'); // Remove active class if out of viewport
-            }
-        });
-    };
 
-  // JavaScript to toggle between login, register forms, and welcome message
-  document.addEventListener("DOMContentLoaded", function() {
-    const welcomeMessage = document.getElementById("welcomeMessage");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
-    const forgotForm = document.getElementById("forgotForm");
-    const authModalTitle = document.getElementById("authModalTitle");
-
-    //
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); 
-
-    
-
-    // Show login form
-    document.getElementById("showLogin").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-    // Show register form
-    document.getElementById("showRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show register form from within login form
-    document.getElementById("showRegisterForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show login form from within register form
-    document.getElementById("showLoginFormRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-        // Show login form from within forgot form
-        document.getElementById("showLoginForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form from within login form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-
-    // Go back to welcome message from login form
-    document.getElementById("goBackFromLogin").addEventListener("click", function() {
-      loginForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-
-    // Go back to welcome message from register form
-    document.getElementById("goBackFromRegister").addEventListener("click", function() {
-      registerForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-  });
-    // Go back to login form from forgot form
-    document.getElementById("goBackFromForgot").addEventListener("click", function() {
-      forgotForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });  
-  </script>
   
   <?php include_once 'Views/footer.php'; ?>
 
