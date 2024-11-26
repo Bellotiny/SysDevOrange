@@ -97,11 +97,11 @@ final class User extends Model {
         }
     }
 
-    public function getToken(): string {
+    public function getToken(): ?string {
         return $this->token;
     }
 
-    public function setToken(string $token): bool {
+    public function setToken(?string $token): bool {
         $values = new Values();
         $values->add(new Value(self::token, $token));
         $where = new Where();

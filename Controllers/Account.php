@@ -1,10 +1,9 @@
 <?php
 
-use Random\RandomException;
-
 include_once "Models/User.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
+include_once "Models/Booking.php";
 include_once "Home.php";
 include_once "Mail/Mail.php";
 
@@ -24,6 +23,9 @@ final class Account extends Controller {
     final public const DELETE_COLOR = "deletecolor";
     final public const DELETE_SERVICE = "deleteservice";
     final public const PERSONAL_INFORMATION = "personalInformation";
+    final public const BOOKING_LIST = "bookinglist";
+    final public const BOOKING_DELETE = "deletebooking";
+    final public const BOOKING_EDIT = "deleteedit";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -49,45 +51,51 @@ final class Account extends Controller {
                 $_SESSION["code"] = $code;
                 $_SESSION["time"] = time();
                 $_SESSION["tries"] = 0;
-                self::redirect(self::TWO_FACTOR_AUTHENTICATION);
-                flush();
-                Mail::send(
-                    "2FA Code for Snook's Nail Nook",
-                    "Your 2FA Code is: $code",
-                    $user->email, "$user->firstName $user->lastName",
-                    $user->email, "$user->firstName $user->lastName"
-                );
-                break;
-            case self::TWO_FACTOR_AUTHENTICATION:
-                if (!isset($_POST["code"])) {
-                    $this->render("Account", $action);
-                    break;
-                }
-                session_start();
-                if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
-                    self::redirect(self::LOGIN);
-                    break;
-                }
-                if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
-                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
-                    session_destroy();
-                    break;
-                }
-                if ($_SESSION["code"] != $_POST["code"]) {
-                    $_SESSION["tries"]++;
-                    if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
-                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
-                        session_destroy();
-                    } else {
-                        $this->render("Account", $action, ["error" => "Invalid Code"]);
+//                self::redirect(self::TWO_FACTOR_AUTHENTICATION);
+//                flush();
+//                Mail::send(
+//                    "2FA Code for Snook's Nail Nook",
+//                    "Your 2FA Code is: $code",
+//                    $user->email, "$user->firstName $user->lastName",
+//                    $user->email, "$user->firstName $user->lastName"
+//                );
+//                break;
+//            case self::TWO_FACTOR_AUTHENTICATION:
+//                if (!isset($_POST["code"])) {
+//                    $this->render("Account", $action);
+//                    break;
+//                }
+//                session_start();
+//                if (!isset($_SESSION["user"]) && !isset($_SESSION["code"]) && !isset($_SESSION["time"]) && !isset($_SESSION["tries"])) {
+//                    self::redirect(self::LOGIN);
+//                    break;
+//                }
+//                if ($_SESSION["time"] + 300 <= time()) {  // Cannot take more than 5 minutes to enter the code
+//                    $this->render("Account", $action, ["error" => "Timer expired, login again to get a new code"]);
+//                    session_destroy();
+//                    break;
+//                }
+//                if ($_SESSION["code"] != $_POST["code"]) {
+//                    $_SESSION["tries"]++;
+//                    if ($_SESSION["tries"] > 3) {  // Cannot try more than 3 times to enter the code
+//                        $this->render("Account", $action, ["error" => "Too many tries, login again to get a new code"]);
+//                        session_destroy();
+//                    } else {
+//                        $this->render("Account", $action, ["error" => "Invalid Code"]);
+//                    }
+//                    break;
+//                }
+                $token = $user->getToken();
+                if ($token === null) {
+                    try {
+                        $token = hash("sha256", $user->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16)));
+                        $user->setToken($token);
+                    } catch (Exception) {
+                        $this->render("Account", $action, ["error" => "Error While Generating Token. Try Again Later", "email" => $_POST["email"]]);
                     }
-                    break;
                 }
-                try {
-                    self::setToken($_SESSION["user"]);
-                } catch (Exception) {
-                    $this->render("Account", $action, ["error" => "Error While Generating Token. Try Again Later", "email" => $_POST["email"]]);
-                }
+                setcookie("token", $token, time() + 34560000, "/");
+                self::redirect();
                 session_destroy();
                 break;
             case self::REGISTER:
@@ -123,7 +131,10 @@ final class Account extends Controller {
                     break;
                 }
                 try {
-                    self::setToken($user);
+                    $token = hash("sha256", $user->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16)));
+                    setcookie("token", $token, time() + 34560000, "/");
+                    $user->setToken($token);
+                    self::redirect();
                 } catch (Exception) {
                     $this->formError($action, "Unable to generate token. Try Again Later");
                 }
@@ -132,7 +143,10 @@ final class Account extends Controller {
                 $this->render("Account", $action);
                 break;
             case self::LOGOUT:
-                setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
+                if ($this->user !== null) {
+                    setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
+                    $this->user->setToken(null);
+                }
                 Home::redirect();
                 break;
             case self::DELETE:
@@ -313,22 +327,18 @@ final class Account extends Controller {
                 $service->delete();
                 $this->redirect(self::INVENTORY);
                 break;
+            case self::BOOKING_LIST:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["bookings" => Booking::list()]);
+                break;
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action);
                 }
                 break;
         }
-    }
-
-    /**
-     * @throws RandomException
-     */
-    private static function setToken(User $user): void {
-        $token = hash("sha256", $user->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16)));
-        setcookie("token", $token, time() + 34560000, "/");
-        $user->setToken($token);
-        self::redirect();
     }
 
     private function formError($action, $error): void {

@@ -9,14 +9,16 @@ final class Booking extends Model {
 
     final public const id = self::TABLE . ".id";
     final public const userID = self::TABLE . ".userID";
+    final public const price = self::TABLE . ".price";
+    final public const message = self::TABLE . ".message";
+    final public const payedOn = self::TABLE . ".payedOn";
     final public const bookedOn = self::TABLE . ".bookedOn";
     final public const location = self::TABLE . ".location";
-    final public const price = self::TABLE . ".price";
-    final public const payedOn = self::TABLE . ".payedOn";
     final public const discountID = self::TABLE . ".discountID";
 
     public User $user;
     public float $price;
+    public ?string $message;
     public ?string $payedOn;
     public ?string $bookedOn;
     public ?string $location;
@@ -26,6 +28,7 @@ final class Booking extends Model {
         $this->id = $fields[self::id];
         $this->user = new User($fields);
         $this->price = $fields[self::price];
+        $this->message = $fields[self::message];
         $this->payedOn = $fields[self::payedOn];
         $this->bookedOn = $fields[self::bookedOn];
         $this->location = $fields[self::location];
@@ -37,6 +40,7 @@ final class Booking extends Model {
             self::id => $this->id,
             self::userID => $this->user->id,
             self::price => $this->price,
+            self::message => $this->message,
             self::payedOn => $this->payedOn,
             self::bookedOn => $this->bookedOn,
             self::location => $this->location,
@@ -50,10 +54,11 @@ final class Booking extends Model {
             ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID);
     }
 
-    public static function new(User $user, float $price, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
+    public static function new(User $user, float $price, string $message, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
         $values = new Values();
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::price, $price));
+        $values->add(new Value(self::message, $message));
         $values->add(new Value(self::payedOn, $payedOn));
         $values->add(new Value(self::bookedOn, $bookedOn));
         $values->add(new Value(self::location, $location));
@@ -65,6 +70,7 @@ final class Booking extends Model {
                 self::id => $id,
                 ...$user->toAssoc(),
                 self::price => $price,
+                self::message => $message,
                 self::payedOn => $payedOn,
                 self::bookedOn => $bookedOn,
                 self::location => $location,
@@ -105,6 +111,12 @@ final class Booking extends Model {
         $join = (new Join())->addInner(BookingColor::getFields(), BookingColor::TABLE, BookingColor::colorID, Color::id);
         $where = (new Where())->addEquals(new Value(BookingColor::bookingID, $this->id));
         return Color::list($where, $join);
+    }
+
+    public function getAvailabilities(): array {
+        $where = new Where();
+        $where->addEquals(new Value(Availability::bookingID, $this->id));
+        return Availability::list($where);
     }
 
     public function getFinalPrice(): float {
