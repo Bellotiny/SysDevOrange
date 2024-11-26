@@ -56,7 +56,7 @@ final class User extends Model {
         $values->add(new Value(self::birthDate, $birthDate));
         $values->add(new Value(self::password, $password, true));
         try {
-            self::insert($values, false);
+            self::insert($values, true);
             $id = self::getConnection()->insert_id;
             $user = new self([
                 self::id => $id,
@@ -85,13 +85,29 @@ final class User extends Model {
     }
 
     /**
+     * Get user based on the email only
+     */
+    public static function getFromEmail(string $email): ?self {
+        $where = new Where();
+        $where->addEquals(new Value(self::email, $email));
+        return self::get($where);
+    }
+
+    /**
+     * Retrieve a User object based on a token
+     */
+    public static function getFromToken(string $token): ?self {
+        $where = new Where();
+        $where->addEquals(new Value(self::token, $token));
+        return self::get($where);
+    }
+
+    /**
      * Retrieve a User object based on a token stored in a cookie.
      */
     public static function getFromCookie(): ?self {
-        if (isset($_COOKIE['token'])) {
-            $where = new Where();
-            $where->addEquals(new Value(self::token, $_COOKIE['token']));
-            return self::get($where);
+        if (isset($_COOKIE["token"])) {
+            return self::getFromToken($_COOKIE["token"]);
         } else {
             return null;
         }
@@ -107,6 +123,12 @@ final class User extends Model {
         $where = new Where();
         $where->addEquals(new Value(self::id, $this->id));
         return self::update($values, $where);
+    }
+
+    public function hasPassword(): bool {
+        $where = new Where();
+        $where->addNotEquals(new Value(self::password, null));
+        return (bool) self::select($where);
     }
 
     public function updatePassword(string $password): bool {
