@@ -83,20 +83,12 @@ final class Booking extends Model {
         }
     }
 
-    public static function setColors(array $colors): void {
-        foreach ($colors as $color) {
-            BookingColor::new($this->$booking, $color);
+    public static function setGroups(Booking $booking, array $group, string $className): void {
+        foreach ($group as $element) {
+            $className::new($booking, $element);
         }
     }
-    public static function setServices(array $services): void {
-        foreach ($services as $service) {
-            BookingColor::new($this->$booking, $service);
-        }
-    }public static function setImages(array $images): void {
-        foreach ($images as $image) {
-            BookingColor::new($booking, $color);
-        }
-    }
+    
 
     /**
      * @throws DateMalformedStringException

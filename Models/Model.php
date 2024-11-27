@@ -110,4 +110,14 @@ abstract class Model {
         $where->addEquals(new Value(static::id, $id));
         return self::get($where);
     }
+
+    public final static function getManyFromIds(string $column, array $ids): array {
+        $values = new Values();
+        foreach ($ids as $id) {
+            $values->add(new Value($column, $id));
+        }
+        $where = new Where();
+        $where->addIN($column, $values);
+        return self::list($where);
+    }
 }

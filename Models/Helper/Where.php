@@ -61,6 +61,12 @@ class Where {
         return $this;
     }
 
+    public function addIN(string $column, array|Values $values): self {
+        $this->conditions[] = $column . " IN (" . implode(", ", $values->getMarkers()) . ")";
+        $this->args = array_merge($this->args, $values->getArgs());
+        return $this;
+    }
+
     public function getArgs(): array {
         return $this->args;
     }
