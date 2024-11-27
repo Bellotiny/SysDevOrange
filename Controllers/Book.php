@@ -13,7 +13,7 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list()]);
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list(), "discount" =>Discount::list()]);
             break;
             case "add":
                 $services = $_POST['selectedServices'] ?? null;
@@ -25,18 +25,15 @@ final class Book extends Controller {
                 ]));
                 $date_time = $_POST['selected_date_time'] ?? null;
                 if($this->user != null){
-                    $userID = $this->user;
+                    $user = $this->user;
                 } else{
                     if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
-                        $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                        $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     }
                 }
                 if($services != null||$colors != null||$date_time != null){
-                    $booking = Booking::new($newUser, $services, $location, $colors, $date, $time, $newUser);
-                    // if($booking === null){
-                    //     $this->error('booking','There was a mistake in the booking');
-                    //     break;
-                    // }
+                    $booking = Booking::new($user, $location, $colors, $date_time);
+                    
                 }
             break;
             case "delete":
