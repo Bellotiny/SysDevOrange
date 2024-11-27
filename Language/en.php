@@ -39,19 +39,19 @@ const WELCOME_TO = "Welcome to our nook!";
 const WELCOME_MESSAGE = "Hello and welcome! I am excited to have you here. Whether you’re a new or returning guest, we invite you to explore our services and enjoy a relaxing experience.";
 const WELCOME_MESSAGE_2 = "Register now to experience exclusive features!";
 const NAIL_CARE_101 = "Nail Care 101: Tips, Benefits, and Professional Insight";
-const NAIL_CARE_DO_DONT = "Nail Care Tips & Dos and Don'ts";
+const NAIL_CARE_DO_DONT = "Nail Care Tips You Can Do at Home 💅✨";
 const NAIL_CARE_DO = "Nail Care (Dos)";
 const NAIL_CARE_DONT = "Nail Care (Don'ts)";
 const MUST_READ = "Must Read";
 const VIEW_DETAILS = "View details »";
-const IMPORTANCE_PROFESSIONAL_CARE = "Importance of Professional Care";
-const BENEFIT_REG_MANICURE = "Benefit of Regular Manicure";
+const IMPORTANCE_PROFESSIONAL_CARE = "The Importance of Professional Nail Care 💅✨";
+const BENEFIT_REG_MANICURE = "Benefits of a Basic Manicure 💅✨";
 
 // About Us
-const ABOUT_US = "About Us";
+const ABOUT_US = "About Me";
 const IMPORTANT_NOTICE = "Important Notice";
 const CAT_NOTICE = "Please be aware that we have a precious fur baby in 
         our home! As a loving cat mom, I want to let you know that 
         my little companion is quite the curious explorer. Rest assured, they’re friendly and full of love!";
 const LOCATION = "Location";
-const PARKING_REMINDER = "Parking Reminder:";
+const PARKING_REMINDER = "Parking Made Easy! 🚗✨";

@@ -87,16 +87,20 @@ abstract class Model {
     public final static function list(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): array {
         $list = [];
         $result = self::select($where, $join, $limit, $offset);
-        while ($fields = $result->fetch_assoc()) {
-            $list[] = new static($fields);
+        if ($result) {
+            while ($fields = $result->fetch_assoc()) {
+                $list[] = new static($fields);
+            }
         }
         return $list;
     }
 
     public final static function get(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): ?static {
-        $fields = self::select($where, $join, $limit, $offset);
-        if ($fields) {
-            return new static($fields->fetch_assoc());
+        $result = self::select($where, $join, $limit, $offset);
+        if ($result) {
+            if ($fields = $result->fetch_assoc()) {
+                return new static($fields);
+            }
         }
         return null;
     }

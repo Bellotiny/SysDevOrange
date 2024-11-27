@@ -5,7 +5,6 @@ include_once "Home.php";
 
 abstract class Controller {
     protected ?User $user;
-    protected string $lang;
 
     public function __construct() {
         $this->user = User::getFromCookie();
@@ -25,6 +24,15 @@ abstract class Controller {
         }
         if (!$this->user->hasRights(static::class, $action)) {
             $this::back();
+            return false;
+        }
+        return true;
+    }
+    protected final function checkAuthorization(string $action): bool {
+        if ($this->user === null) {
+            return false;
+        }
+        if (!$this->user->hasRights(static::class, $action)) {
             return false;
         }
         return true;

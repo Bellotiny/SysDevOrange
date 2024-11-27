@@ -16,14 +16,9 @@ include_once 'Views/bookingModal.php';
       <h1 class="display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up"><?= ABOUT_US ?></h1>
       <div class=" mx-auto slide-up">
         <p class="fs-6 m-3 py-5 px-4 slide-up ">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
-        vitae tristique tincidunt. Nam a condimentum urna, vitae interdum urna. Donec
-        dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in faucibus 
-        orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante,
-        id congue sapien imperdiet sit amet. Praesent ac neque rutrum velit lobortis 
-        iaculis iaculis sed lacus. Praesent dictum sagittis ultrices. Nullam vitae dui mattis, 
-        mollis tortor id, euismod ligula. Integer a ligula magna. In hac habitasse platea dictumst.
-        Aliquam erat volutpat. Donec scelerisque metus est.
+        Hey there! I’m a 20-something nail enthusiast who recently made the move to Montreal with my three fur babies—Mr. Bean, Brooklyn, and Squirtle. 🐾
+        My nail journey began back in 2020 when the world slowed down and nail salons closed. Armed with poly gel and a creative spirit, I started doing my own nails. Soon, word got out, and my friends lined up for a fresh set!
+        That’s when I truly fell in love with nail care and art. I’ve always had a passion for creativity, and now I get to express it every day—one fabulous nail design at a time! 💅🏻✨
         </p>
       </div>
     </div>
@@ -64,9 +59,8 @@ include_once 'Views/bookingModal.php';
         <div class="col-md-6 p-5 slide-up overflow-auto">
             <h4 class="notice-title slide-up"><?= PARKING_REMINDER ?></h4>
             <p class="notice-p slide-up overflow-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl 
-                vitae tristique tincidunt. orci luctus et ultrices posuere cubilia curae; Morbi iaculis nunc ante,
-                id congue sapien imperdiet sit amet. Praesent ac neque rutrum velit lobortis iaculis.
+            When you arrive for your nail appointment, you’ll find free parking just behind the Ortho clinic, in the lot across the street from my building.
+            Need a hand with parking? No worries! Just reach out, and I’ll happily guide you. Once you’re parked, give me a quick message—I’ll come down to welcome you in!
             </p>
 
             <!--  Map Container -->
