@@ -172,6 +172,7 @@ include_once 'Views/bookingModal.php';
               </div>
             </div>
 
+            <div class="accordion-item" id="">
               <h3 class="accordion-header" id="headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
                   <h4>Discount</h4>
