@@ -16,16 +16,14 @@
 
                         </ul>
                         <hr>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="bookingCheckBox">
                         <label class="form-check-label" for="flexCheckDefault">
                             <strong>I read all the reminder</strong>
                         </label>
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
                       <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button">Cancel</a>
-                      <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/book/list" role="button">Confirm</a>
-
-                   
+                      <a class="btn btn-primary w-50 disabled" id="confirmButton" href="<?=BASE_PATH?>/book/list" role="button" >Confirm</a>
                     </div>
                 </div>
             </div>
