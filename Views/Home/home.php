@@ -269,10 +269,6 @@ include_once 'Views/bookingModal.php';
 
 </div>
 
-
-
-
-  
   <?php include_once 'Views/footer.php'; ?>
 
 </body>

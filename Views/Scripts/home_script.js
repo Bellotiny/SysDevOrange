@@ -1,30 +1,23 @@
-
-  console.log('Home Script');
-  const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("home");
   const slideElements = document.querySelectorAll('.slide-up');
+  const modal = document.getElementById('welcomeModal');
+  const tokenIsSet = document.cookie.indexOf('token=') !== -1;
+  const hasSeenModal = sessionStorage.getItem('hasSeenModal') === 'true';
 
-  window.onload = function () {
-    // Check if user is logged in (token present in localStorage or session)
-    const isLoggedIn = localStorage.getItem('token') !== null; // Adjust as needed for your auth system
-    const hasSeenModal = localStorage.getItem('hasSeenModal') === 'true'; // Check if user has seen the modal
+  if (!tokenIsSet && !hasSeenModal) {
+    // Show modal with login and register options
+    sessionStorage.setItem('hasSeenModal', 'true');
+    new bootstrap.Modal(modal).show();
+  } else if (tokenIsSet && !hasSeenModal) {
+    // Show modal with welcome back message
+    document.getElementById('showLogin').style.display = 'none';
+    document.getElementById('showRegister').style.display = 'none';
+    sessionStorage.setItem('hasSeenModal', 'true');
+    new bootstrap.Modal(modal).show();
+  }
 
-    // Check if it's the first time visiting the site
-    const isFirstTime = localStorage.getItem('firstTime') !== 'false';
-
-    // Show modal if not logged in and it's the first time visiting
-    if (!isLoggedIn && isFirstTime && !hasSeenModal) {
-        // Only show modal if user hasn't logged in and hasn't seen the modal before
-        $('#welcomeModal').modal('show');
-        localStorage.setItem('hasSeenModal', 'true'); // Mark that the user has seen the modal
-        document.getElementById('showLogin').style.display = 'inline-block';
-        document.getElementById('showRegister').style.display = 'inline-block';
-    } else {
-        // If logged in, hide login and register buttons
-        document.getElementById('showLogin').style.display = 'none';
-        document.getElementById('showRegister').style.display = 'none';
-    }
-  };
-  
+    
   const checkSlide = () => {
     slideElements.forEach((element) => {
       const rect = element.getBoundingClientRect();
@@ -37,7 +30,6 @@
   };
 
   // JavaScript to toggle between login, register forms, and welcome message
-  document.addEventListener("DOMContentLoaded", function() {
     const welcomeMessage = document.getElementById("welcomeMessage");
     const loginForm = document.getElementById("loginForm");
     const registerForm = document.getElementById("registerForm");
@@ -133,6 +125,7 @@
       loginForm.style.display = "block";
       authModalTitle.textContent = "Login";
     });
-  });
 
 
+
+});
