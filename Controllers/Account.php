@@ -5,7 +5,7 @@ include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Booking.php";
 include_once "Home.php";
-include_once "Mail/Mail.php";
+include_once "Controllers/Mail/Mail.php";
 
 final class Account extends Controller {
     final public const REGISTER = "register";
