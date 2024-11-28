@@ -35,7 +35,7 @@
       <!-- Include customize js in head.php -->
     <script src="<?=BASE_PATH?>/Views/Scripts/script.php"></script><!--general functions for each pages-->
     <script src="<?=BASE_PATH?>/Views/Scripts/nav_script.php"></script><!--script for the nav-->
-    <script src="<?=BASE_PATH?>/Views/Scripts/home_script.php"></script><!--script for the home-->
+    <script src="<?=BASE_PATH?>/Views/Scripts/home_script.js"></script><!--script for the home-->
     <script src="<?=BASE_PATH?>/Views/Scripts/about_script.js"></script><!--script for the about-->
     <script src="<?=BASE_PATH?>/Views/Scripts/book_script.js"></script><!--script for the book-->
 
