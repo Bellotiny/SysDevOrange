@@ -4,7 +4,7 @@ include_once "Models/User.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Booking.php";
-include_once "Home.php";
+include_once "Controllers/Home.php";
 include_once "Controllers/Mail/Mail.php";
 
 final class Account extends Controller {
