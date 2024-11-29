@@ -83,13 +83,6 @@ final class Booking extends Model {
         }
     }
 
-    public static function setGroups(Booking $booking, array $group, string $className): void {
-        foreach ($group as $element) {
-            $className::new($booking, $element);
-        }
-    }
-    
-
 /**
      * @throws DateMalformedStringException
      */
