@@ -13,7 +13,7 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list(), "discount" =>Discount::list()]);
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list()]);
             break;
             case "add":
                 $services = $_POST['selectedServices'] ?? null;
@@ -25,20 +25,19 @@ final class Book extends Controller {
                 ]));
                 $date_time = $_POST['selected_date_time'] ?? null;
                 if($this->user != null){
-                    $user = $this->user;
+                    $userID = $this->user;
                 } else{
                     if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
-                        $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                        $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     }
                 }
                 $images = $_POST[''] ?? null;
                 if($services != null||$colors != null||$date_time != null){
-                    $booking = Booking::new($user, $location, $colors, $date_time);
-                    if($booking != null){
-                        Booking::setGroups($booking, $colors, 'BookingColors');
-                        Booking::setGroups($booking, $services, 'BookingServices');
-                        Booking::setGroups($booking, $images, 'BookingImages');
-                    }
+                    $booking = Booking::new($newUser, $services, $location, $colors, $date, $time, $newUser);
+                    // if($booking === null){
+                    //     $this->error('booking','There was a mistake in the booking');
+                    //     break;
+                    // }
                 }
             break;
             case "delete":

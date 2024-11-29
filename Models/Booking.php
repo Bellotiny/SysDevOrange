@@ -90,7 +90,7 @@ final class Booking extends Model {
     }
     
 
-    /**
+/**
      * @throws DateMalformedStringException
      */
     public function getBookedDateTime(): DateTime {
