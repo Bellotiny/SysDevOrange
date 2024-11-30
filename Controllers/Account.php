@@ -40,11 +40,11 @@ final class Account extends Controller {
                 }
                 $_POST["email"] = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
                 if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                    $this->formError($action, "Invalid Email format");
+                    $this->formError($action, "Invalid Email format");  // TODO Improve this error message
                     break;
                 }
                 $user = User::getFromEmail($_POST["email"]);
-                if ($user && $user->hasPassword()) {
+                if ($user && $user->hasPassword()) {  // If a user doesn't have a password, let them "claim" this account with this email.
                     $this->formError($action, "Email already in use");
                     break;
                 }

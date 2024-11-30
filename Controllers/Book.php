@@ -31,114 +31,39 @@ final class Book extends Controller {
                         $newUser = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     }
                 }
-                $images = $_POST[''] ?? null;
                 if($services != null||$colors != null||$date_time != null){
-                    $booking = Booking::new($newUser, $services, $location, $colors, $date, $time, $newUser);
-                    // if($booking === null){
-                    //     $this->error('booking','There was a mistake in the booking');
-                    //     break;
-                    // }
+                    $booking = Booking::new($user, $location, $colors, $date_time);
+                    
                 }
             break;
             case "delete":
                 if($this->verifyRights($action)){
-                    $bookingID = $_POST['bookingID'] ?? null;
-                    if($bookingID != null){
-                        $booking = Booking::getFromId($bookingID);
-                        if ($booking && $booking->delete()) {
-                            $this->formError($action,'No booking was found');
-                            $this->render('Account','bookinglist');
-                        } else {
-                            $this->formError($action,'No booking was found');
-                        }
-                    }else {
-                        $this->formError($action,'No booking id was found');
-                    }
+
                 }
             break;
             case "view":
                 if($this->verifyRights($action)){
-                    $bookingID = $_POST['bookingID'] ?? null;
-                    if($bookingID != null){
-                        $booking = Booking::getFromId($bookingID);
-                        if ($booking != null) {
-                            $this->render('Account','view');
-                        } else {
-                            $this->formError($action,'No booking was found');
-                        }
-                    }else {
-                        $this->formError($action,'No booking id was found');
-                    }
+                    
                 }
             break;
             case "edit":
                 if($this->verifyRights($action)){
-                    $bookingID = $_POST['bookingID'] ?? null;
-                    if($bookingID != null){
-                        $booking = Booking::getFromId($bookingID);
-                        if ($booking != null) {
-                            $this->render('Account','edit');
-                        } else {
-                            $this->formError($action,'No booking was found');
-                        }
-                    }else {
-                        $this->formError($action,'No booking id was found');
-                    }
+
                 }
             break;
             case "deleteOthers":
                 if($this->verifyRights($action)){
-                    $bookingIDs = $_POST['bookingID'] ?? null;
-                    if($bookingIDs != null){
-                        $bookings = Booking::getManyFromIds('id' ,$bookingIDs);
-                        if ($bookings != null) {
-                            $errors = [];
-                            foreach ($bookings as $booking) {
-                                if (!$booking->delete()) {
-                                    $errors[] = $booking->id;
-                                }
-                            }
-                            if(empty($errors)) {
-                                $this->render('Account','bookinglist');
-                            } else{
-                                $this->formError($action,'Deleting was not possible for bookings with IDs: ' . implode(', ', $errors));
-                            }
-                        } else {
-                            $this->formError($action,'No bookings were found');
-                        }
-                    }else {
-                        $this->formError($action,'No booking ids were found');
-                    }
+
                 }
             break;
             case "viewOthers":
                 if($this->verifyRights($action)){
-                    $bookingID = $_POST['bookingID'] ?? null;
-                    if($bookingID != null){
-                        $booking = Booking::getFromId($bookingID);
-                        if ($booking != null) {
-                            $this->render('Account','view');
-                        } else {
-                            $this->formError($action,'No booking was found');
-                        }
-                    } else {
-                        $this->formError($action,'No booking id was found');
-                    }
+
                 }
             break;
             case "editOthers":
                 if($this->verifyRights($action)){
-                    $bookingID = $_POST['bookingID'] ?? null;
-                    if($bookingID != null){
-                        $booking = Booking::getFromId($bookingID);
-                        if ($booking != null) {
-                            $this->render('Account','edit');
-                        } else {
-                            $this->formError($action,'No booking was found');
-                        }
-                    }else {
-                        $this->formError($action,'No booking id was found');
-                    }
+
                 }
             break;
                 
