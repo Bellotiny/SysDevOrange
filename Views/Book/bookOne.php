@@ -13,34 +13,38 @@ ini_set('display_errors', 1);
 
        <!-- Section 1 Base Service -->
        <?php
-          $countType = 0;
-              $maxCount = array_count_values(array_map(function($service) {
-                  return $service->type;
-              }, $data['services']));
+          $servicesByType = [];
+          foreach ($data['services'] as $service) {
+              $servicesByType[$service->type][] = $service;
+          }
 
-          foreach($data['services'] as $service){
-                  if ($countType < $maxCount[$service->type]) {
-                      if ($countType == 0) {
-                          echo '<h3>' . $service->type . '</h3>';
-                      }
-                      $countType++;
-                  } else {
-                      $countType = 0;
-                      echo '<h3>' . $service->type . '</h3>';
-                      $countType++;
-                  }
+          $totalPrice = 0;
+
+          foreach ($servicesByType as $type => $services) {
+              echo '<h3>' . $type . '</h3>';
+
+              foreach ($services as $service) {
+                  $serviceJson = json_encode($service);
+
+                  $totalPrice += $service->price;
 
                   echo '<div class="list-group d-flex flex-row w-100 m-2">
                           <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
-                              <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked="">
-                              <span>
+                              <!-- Radio button allows the user to select only one service per type -->
+                              <input class="form-check-input flex-shrink-0" type="radio" name="serviceType[' . $type . ']" value="' . $serviceJson . '" id="service-' .$service->name . '" required>
+                              <span class="flex-grow-1">
                                   ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
-                              </span><br><br>
-                              <div class="mb-1 d-block text-success">' . $service->price . ' CAD</div>
+                              </span>
+                              <!-- Push the price to the right -->
+                              <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
+                                  ' . $service->price . ' CAD
+                              </div>
                           </label>
+                          <input type="hidden" name="totalPrice" value="' . $totalPrice . '">
                         </div>';
-              }
-      ?>
+          }
+          }
+        ?>
 
         <!-- Section 1 Location Service -->
         <h3>Service Location:</h3>
@@ -97,12 +101,12 @@ ini_set('display_errors', 1);
                 <div class="row text-center">
                     <!----here are the colors--->
                     <?php
-                        $selectedColor = false; // Use this flag if you need to mark a selected color
+                        $selectedColor = false;
                         foreach ($data['colors'] as $colors) {
-                            // Determine if the current color should be selected
+                            $colorJson = json_encode($colors);
                             $isSelected = $selectedColor ? 'selected' : '';
                             echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . addslashes($colors->name) . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . $colorJson . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                                         <title>Placeholder</title>
                                         <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
                                     </svg>
@@ -126,12 +130,11 @@ ini_set('display_errors', 1);
               <div class="row text-center">
                   <!----here are the colors--->
                   <?php
-                        $selectedColor = false; // Use this flag if you need to mark a selected color
+                        $selectedColor = false;
                         foreach ($data['colors'] as $colors) {
-                            // Determine if the current color should be selected
                             $isSelected = $selectedColor ? 'selected' : '';
                             echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . addslashes($colors->name) . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . $colorJson . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                                         <title>Placeholder</title>
                                         <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
                                     </svg>
@@ -336,7 +339,7 @@ ini_set('display_errors', 1);
 <script>
   
 //colors select
-function selectColor(colorGroup, colorName, groupId) {
+function selectColor(colorGroup, colorObject, groupId) {
     const groupContainer = document.getElementById(groupId);
 
     groupContainer.querySelectorAll('.color-item').forEach(el => {
@@ -344,13 +347,13 @@ function selectColor(colorGroup, colorName, groupId) {
     });
 
     const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
-        return item.querySelector('h5').textContent === colorName;
+        return item.querySelector('h5').textContent === colorObject.name;
     });
 
-    selectedItem.classList.add('selected'); // Add the 'selected' class to the clicked item
+    selectedItem.classList.add('selected');
 
     const selectedColorElement = document.getElementById(`selected${colorGroup}`);
-    selectedColorElement.textContent = colorName;
+    selectedColorElement.textContent = colorObject.name;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
