@@ -31,7 +31,7 @@ include_once 'Views/bookingModal.php';
                 <tbody>
                 <?php foreach ($data["availabilities"] as $availability): ?>
                     <tr>
-                        <td><?= $availability->timeSlot ?></td>
+                        <td><?= date("Y-m-d H:i", strtotime($availability->timeSlot)) ?></td>
                         <td><?= $availability->booking !== null ?></td>
                         <td>
                             <a href="<?=BASE_PATH?>/account/deleteAvailability/<?= $availability->id ?>">
