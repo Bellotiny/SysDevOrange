@@ -20,10 +20,13 @@ final class Account extends Controller {
     final public const INVENTORY = "inventory";
     final public const ADD_COLOR = "addcolor";
     final public const ADD_SERVICE = "addservice";
+    final public const ADD_DISCOUNT = "adddiscount";
     final public const EDIT_COLOR = "editcolor";
     final public const EDIT_SERVICE = "editservice";
+    final public const EDIT_DISCOUNT = "editdiscount";
     final public const DELETE_COLOR = "deletecolor";
     final public const DELETE_SERVICE = "deleteservice";
+    final public const DELETE_DISCOUNT = "deletediscount";
     final public const PERSONAL_INFORMATION = "personalInformation";
     final public const BOOKING_LIST = "bookinglist";
     final public const BOOKING_DELETE = "deletebooking";
@@ -291,6 +294,7 @@ final class Account extends Controller {
                 $this->render("Account", $action, [
                     "services" => Service::list(),
                     "colors" => Color::list(),
+                    "discounts" => Discount::list()
                 ]);
                 break;
             case self::ADD_COLOR:
@@ -329,6 +333,32 @@ final class Account extends Controller {
                     filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
                 );
                 if ($service === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::ADD_DISCOUNT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) || 
+                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
+                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+
+               
+                $discount = Discount::new(
+                    $_POST["name"],
+                    $_POST["type"],
+                    $_POST["start"],
+                    $_POST["end"],
+                    filter_var($_POST["percent"], FILTER_VALIDATE_INT),
+                    filter_var($_POST["amount"], FILTER_VALIDATE_FLOAT),
+                );
+                if ($discount === null) {
                     $this->render("Account", $action, ["error" => "Error while creating new color"]);
                     break;
                 }
@@ -375,6 +405,34 @@ final class Account extends Controller {
                 $service->save();
                 $this->redirect(self::INVENTORY);
                 break;
+            case self::EDIT_DISCOUNT:
+                //var_dump($_GET, $_POST); 
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $discount = Discount::getFromId((int)$_GET["id"]);
+                //var_dump($discount);
+                if (is_null($discount)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                //var_dump(isset($_POST["name"]) );
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) || 
+                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
+                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                    $this->render("Account", $action, ["discount" => $discount]);
+                    break;
+                }
+                $discount->name = $_POST["name"];
+                $discount->type = $_POST["type"];
+                $discount->start = $_POST["start"];
+                $discount->end = $_POST["end"];
+                $discount->percent = $_POST["percent"];
+                $discount->amount = $_POST["amount"];
+                $discount->save();
+                $this->redirect(self::INVENTORY);     
+               
+                break;
             case self::DELETE_COLOR:
                 if (!$this->verifyRights($action)) {
                     break;
@@ -397,6 +455,18 @@ final class Account extends Controller {
                     break;
                 }
                 $service->delete();
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::DELETE_DISCOUNT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $discount = Discount::getfromId((int)$_GET["id"]);
+                if (is_null($discount)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $discount->delete();
                 $this->redirect(self::INVENTORY);
                 break;
             case self::BOOKING_LIST:
