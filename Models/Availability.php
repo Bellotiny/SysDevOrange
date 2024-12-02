@@ -27,7 +27,7 @@ final class Availability extends Model {
         ];
     }
 
-    public static function new(string $timeSlot, ?Booking $booking): ?self {
+    public static function new(string $timeSlot, ?Booking $booking = null): ?self {
         $values = new Values();
         $values->add(new Value(self::timeSlot, $timeSlot));
         $values->add(new Value(self::bookingID, $booking?->id));
@@ -42,5 +42,9 @@ final class Availability extends Model {
         } catch (Exception) {
             return null;
         }
+    }
+
+    public static function listFuture(): array {
+        return self::list((new Where())->addGreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", strtotime('today midnight')))));
     }
 }

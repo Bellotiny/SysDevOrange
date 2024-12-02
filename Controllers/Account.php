@@ -4,6 +4,7 @@ include_once "Models/User.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Booking.php";
+include_once "Models/Availability.php";
 include_once "Controllers/Home.php";
 include_once "Controllers/Mail/Mail.php";
 
@@ -17,6 +18,9 @@ final class Account extends Controller {
     final public const CHANGE_PASSWORD = "change-password";
     final public const LOGOUT = "logout";
     final public const DELETE = "delete";
+
+    final public const PERSONAL_INFORMATION = "personalInformation";
+
     final public const INVENTORY = "inventory";
     final public const ADD_COLOR = "addcolor";
     final public const ADD_SERVICE = "addservice";
@@ -24,10 +28,15 @@ final class Account extends Controller {
     final public const EDIT_SERVICE = "editservice";
     final public const DELETE_COLOR = "deletecolor";
     final public const DELETE_SERVICE = "deleteservice";
-    final public const PERSONAL_INFORMATION = "personalInformation";
+
+
     final public const BOOKING_LIST = "bookinglist";
     final public const BOOKING_DELETE = "deletebooking";
-    final public const BOOKING_EDIT = "deleteedit";
+    final public const BOOKING_EDIT = "editbooking";
+
+    final public const SCHEDULE = "schedule";
+    final public const ADD_AVAILABILITY = "addavailability";
+    final public const DELETE_AVAILABILITY = "deleteavailability";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -136,6 +145,7 @@ final class Account extends Controller {
                 $_SESSION["time"] = time();
                 $_SESSION["2fa"] = $code;
                 $_SESSION["tries"] = 0;
+                session_write_close();
                 self::redirect(self::TWO_FACTOR_AUTHENTICATION);
                 flush();
                 Mail::send(
@@ -398,6 +408,57 @@ final class Account extends Controller {
                 }
                 $service->delete();
                 $this->redirect(self::INVENTORY);
+                break;
+            case self::SCHEDULE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => Availability::listFuture()]);
+                break;
+            case self::ADD_AVAILABILITY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["start"]) || !isset($_POST["end"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                // TODO Sanitize dates
+                $_POST["start"] = strtotime($_POST["start"]);
+                $_POST["end"] = strtotime($_POST["end"]);
+                if (!$_POST["start"] || !$_POST["end"]) {
+                    $this->render("Account", $action, ["error" => "Dates are wrong format"]);
+                    break;
+                }
+                if ($_POST["start"] > $_POST["end"]) {
+                    $this->render("Account", $action, ["error" => "End time must be before Start"]);
+                    break;
+                }
+                $time = $_POST["start"];
+                while ($time < $_POST["end"]) {
+                    var_dump(date("Y-m-d H:i:s", $time));
+                    $availability = Availability::new(
+                        date("Y-m-d H:i:s", $time),
+                    );
+                    if ($availability === null) {
+                        $this->render("Account", $action, ["error" => "Error while creating new availability"]);
+                        break;
+                    }
+                    $time += 30 * 60;
+                }
+                $this->redirect(self::SCHEDULE);
+                break;
+            case self::DELETE_AVAILABILITY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $availability = Availability::getfromId((int)$_GET["id"]);
+                if ($availability === null) {
+                    $this->redirect(self::SCHEDULE);
+                    break;
+                }
+                $availability->delete();
+                $this->redirect(self::SCHEDULE);
                 break;
             case self::BOOKING_LIST:
                 if (!$this->verifyRights($action)) {

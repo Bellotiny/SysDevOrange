@@ -22,7 +22,6 @@ const ALREADY_HAVE_ACCOUNT = "Already have an account?";
 const FIRST_NAME = "First Name";
 const LAST_NAME = "Last Name";
 const BIRTHDAY = "Birthday";
-const BIRTHDAY = "Birthday";
 const PHONE_NUMBER = "Phone Number";
 const CONFIRM_PASSWORD = "Confirm Password";
 
@@ -80,7 +79,7 @@ const CONTACT_US = "Contact Us";
 const SEND = "Send";
 
 // Contact Us Confrimation
-const CONFIRM_MESSAGE = "Thank you for contacting us! We will respond to your email as soon as possible."
+const CONFIRM_MESSAGE = "Thank you for contacting us! We will respond to your email as soon as possible.";
 const BACK_TO_HOME = "Back to Home";
 // Menu Button 
 const MENU = "Navigation";
