@@ -31,7 +31,6 @@ final class Account extends Controller {
     final public const DELETE_COLOR = "deletecolor";
     final public const DELETE_SERVICE = "deleteservice";
     final public const DELETE_DISCOUNT = "deletediscount";
-    final public const PERSONAL_INFORMATION = "personalInformation";
     final public const BOOKING_LIST = "bookinglist";
     final public const BOOKING_DELETE = "deletebooking";
     final public const BOOKING_EDIT = "editbooking";
