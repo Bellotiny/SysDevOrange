@@ -32,6 +32,7 @@ let currentSection = 1;
 
   // Handle the next button click for each section
   function next() {
+    console.log("dede");
       const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
       if (!selectedServiceRadio) {
         console.error("No service selected");
