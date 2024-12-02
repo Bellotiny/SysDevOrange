@@ -43,8 +43,8 @@ final class GroupAction extends Model {
             $id = self::getConnection()->insert_id;
             return new self([
                 self::id => $id,
-                self::groupID => $group->id,
-                self::actionID => $action->id,
+                ...$group->toAssoc(),
+                ...$action->toAssoc(),
             ]);
         } catch (Exception) {
             return null;

@@ -43,8 +43,8 @@ final class UserGroup extends Model {
             $id = self::getConnection()->insert_id;
             return new self([
                 self::id => $id,
-                self::userID => $user->id,
-                self::groupID => $group->id,
+                ...$user->toAssoc(),
+                ...$group->toAssoc(),
             ]);
         } catch (Exception) {
             return null;

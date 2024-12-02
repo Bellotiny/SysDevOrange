@@ -9,39 +9,50 @@ include_once 'Views/bookingModal.php';
 <body>
 <?php include_once 'Views/nav.php'; ?>
 
-<main class="d-flex max-vh-100" id="account-Main">
+<main class="d-flex" id="account-Main">
     <?php include_once 'Views/sidebar.php'; ?>
 
     <!---screen for sidebar--->
     <div class="sideScreen slide-up">
         <!---default content will be the Personal info-->
         <!--content is load here-->
-
+        <div class="container my-2">
+            <?php include_once 'Views/menuAccount.php'; ?>
+        </div>
         <div>
-            <div class="container my-2">
-                <?php include_once 'Views/menuAccount.php'; ?>
-            </div>
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Services</th>
+                    <th scope="col">Colors</th>
+                    <th scope="col">Message</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Aug 26</td>
-                        <td>10:10 am</td>
-                        <td>
-                            <a href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
+                <?php foreach ($data["bookings"] as $booking): ?>
+                <tr>
+                    <td>?</td>
+                    <td>?</td>
+                    <td><?= $booking->user->firstName ?></td>
+                    <td><?= implode(", ", array_map(fn($service) => $service->name, $booking->getServices())) ?></td>
+                    <td><?= implode(", ", array_map(fn($color) => $color->name, $booking->getColors())) ?></td>
+                    <td><?= count($booking->getImages) ?></td>
+                    <td><?= $booking->message ?></td>
+                    <td>
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
                 </tbody>
+
             </table>
 
             <a href="#">
@@ -59,12 +70,18 @@ include_once 'Views/bookingModal.php';
     </div>
 
 </main>
+
+<script>
+
+
+</script>
+
+
 <!-- Include scripts here -->
 <script src="<?= BASE_PATH ?>/Views/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <script src="<?= BASE_PATH ?>/Views/script.js"></script>
-
 </body>
 </html>

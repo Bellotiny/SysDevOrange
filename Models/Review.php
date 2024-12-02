@@ -60,8 +60,6 @@ final class Review extends Model {
                 self::title => $title,
                 self::message => $message,
                 self::date => $date,
-                self::userID => $user->id,
-                self::imageID => $image->id,
                 ...$user->toAssoc(),
                 ...($image ? $image->toAssoc() : [])
             ]);

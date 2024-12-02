@@ -189,15 +189,67 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Benefit of Regular Manicure</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body smalls">
-            <p class="text-large-offcanvas">
-            Regular manicures keep nails strong and healthy by preventing breakage, promoting circulation, and 
-            reducing the risk of infections. They also maintain cuticle health, enhance hand appearance, and 
-            provide a relaxing, rejuvenating experience, contributing to overall hand and nail wellness.
-            </p>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Nail Bed Care:</strong> Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Break from Harsh Treatments:</strong> If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Promote Healthy Growth:</strong> A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Treat your nails to a little TLC—they’ll thank you later! 💖</strong></h5>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+
+    <!-- fourth offcanvas Section -->
+    <div class="col-lg-3 canvaDiv m-3 p-3 ">
+        <img src="<?=BASE_PATH?>/Views/Images/about3.png"
+          class="img-fluid my-4 rounded  slide-up" 
+          alt="Description of the image" 
+          width="250" height="200" 
+          style="object-fit: cover; width: 300px; height: 200px;">
+
+        <p class=" slide-up">The Importance of Regular Manicures 💅✨</p>
+        <strong class="d-block mb-2 text-pink  slide-up "><?= MUST_READ ?></strong>
+        <p>
+            <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasReg" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
+        </p>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasReg" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters:</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body small text-start mx-5 row">
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Healthy Nail Growth:  </strong>  Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Damage Prevention: </strong>Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Hydration & Nourishment:</strong>Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.</li>
+                
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Polished Look, Polished Feel:  </strong>Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!</li>
+                <br><br>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟</strong></h5>
+                
+              </ul>
+            </div>
           </div>
         </div>
       

@@ -11,31 +11,39 @@
                 <?= PERSONAL_INFO ?>
               </a>
             </li>
-            <li>
+            
+            <li >
               <a href="<?=BASE_PATH?>/account/bookingHistory" class="nav-link link-dark" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 <?= BOOKING_HISTORY ?>
               </a>
-            </li>
-
+            </li> 
+            <?php if ($this->checkAuthorization("schedule") == 1): ?>
             <li>
-              <a href="<?=BASE_PATH?>/account/schedule" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                <?= SCHEDULE ?>
+              <a  href="<?= BASE_PATH ?>/account/schedule" class="nav-link link-dark">
+                  <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#table"></use>
+                  </svg>
+                <?=  Schedule ?> 
               </a>
             </li>
+            <?php endif; ?>
+            <?php if ($this->checkAuthorization("schedule") == 1): ?>
             <li>
               <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 <?= INVENTORY ?>
               </a>
             </li>
+            <?php endif; ?>
+            <?php if ($this->checkAuthorization("schedule") == 1): ?>
             <li>
               <a href="<?=BASE_PATH?>/account/bookingList" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                 <?= BOOKING_LIST ?>
               </a>
             </li>
+            <?php endif; ?>
           </ul>
           <hr>
           <div class="dropdown">
