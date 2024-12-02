@@ -18,10 +18,10 @@ const REGISTER_HERE = " Register here";
 const SEND_EMAIL = "Send Email";
 const ALREADY_HAVE_ACCOUNT = "Already have an account?";
 
-// Register Form 
+// Register and Login Form 
 const FIRST_NAME = "First Name";
 const LAST_NAME = "Last Name";
-const BIRHTDAY = "Birthday";
+const BIRTHDAY = "Birthday";
 const PHONE_NUMBER = "Phone Number";
 const CONFIRM_PASSWORD = "Confirm Password";
 
@@ -55,3 +55,37 @@ const CAT_NOTICE = "Please be aware that we have a precious fur baby in
         my little companion is quite the curious explorer. Rest assured, they’re friendly and full of love!";
 const LOCATION = "Location";
 const PARKING_REMINDER = "Parking Reminder:";
+
+// Account Sidebar
+const ACCOUNT = "Account";
+const PERSONAL_INFO = "Personal Information";
+const BOOKING_HISTORY = "Booking History";
+const SCHEDULE = "Schedule";
+const INVENTORY = "Inventory";
+const BOOKING_LIST = "Booking List";
+
+// Account Settings
+const EDIT_PROFILE = "Edit Profile";
+const DELETE_PROFILE = "Delete Profile";
+const SIGN_OUT = "Sign Out";
+
+// Acount -> Personal Information
+const HELLO = "Hello, ";
+const PERSONAL_INFO_1 = "We're so happy to see you.";
+const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
+
+// Contact Us 
+const CONTACT_US = "Contact Us";
+const SEND = "Send";
+
+// Contact Us Confrimation
+const CONFIRM_MESSAGE = "Thank you for contacting us! We will respond to your email as soon as possible."
+const BACK_TO_HOME = "Back to Home";
+// Menu Button 
+const MENU = "Navigation";
+
+// Pagination
+const PREVIOUS = "Previous";
+const NEXT = "Next";
+
+

@@ -327,7 +327,17 @@ include_once 'Views/bookingModal.php';
       authModalTitle.textContent = "<?= LOGIN ?>";
     });  
   </script>
-  
+    <script>
+   let modalElement = document.getElementById('modalBookingWarning');
+   let mobileNav =  document.getElementById('navbarMenu');
+   if (modalElement.classList.contains("open")) {
+               // Close the menu
+        mobileNav.style.opacity = "0";
+        mobileNav.style.visibility = "hidden";
+        mobileNav.classList.remove('show');
+        body.classList.remove('no-scroll');
+   }
+   </script>
   <?php include_once 'Views/footer.php'; ?>
 
 </body>

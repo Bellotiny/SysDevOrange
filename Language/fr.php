@@ -18,7 +18,7 @@ const REGISTER_HERE = " Créer un compte";
 const SEND_EMAIL = "Envoyer un e-mail";
 const ALREADY_HAVE_ACCOUNT = "Vous avez déjà un compte? ";
 
-// Register Form 
+// Register and Login Form 
 const FIRST_NAME = "Prénom";
 const LAST_NAME = "Nom de Famille";
 const BIRTHDAY = "Anniversaire";
@@ -55,3 +55,36 @@ const CAT_NOTICE = "Veuillez noter que nous avons un précieux bébé en fourrur
         mon petit compagnon est un explorateur plutôt curieux. Rassurez-vous, ils sont sympathiques et pleins d’amour !";
 const LOCATION = "Emplacement";
 const PARKING_REMINDER = "Rappel de Stationnement :";
+
+// Account Sidebar
+const ACCOUNT = "Compte";
+const PERSONAL_INFO = "Informations Personnelles";
+const BOOKING_HISTORY = "Historique des Réservations";
+const SCHEDULE = "Calendrier";
+const INVENTORY = "Inventaire";
+const BOOKING_LIST = "Liste de Réservation";
+
+// Account Settings
+const EDIT_PROFILE = "Modifier le Profil";
+const DELETE_PROFILE = "Supprimer le Profil";
+const SIGN_OUT = "Se Déconnecter";
+
+// Acount -> Personal Information
+const HELLO = "Bonjour, ";
+const PERSONAL_INFO_1 = "Nous sommes si heureux de vous voir.";
+const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
+
+// Contact Us 
+const CONTACT_US = "Contactez-Nous";
+const SEND = "Envoyer";
+
+// Contact Us Confrimation
+const CONFIRM_MESSAGE = "Merci de nous avoir contactés ! Nous répondrons à votre e-mail dans les plus brefs délais.";
+const BACK_TO_HOME = "Page d'accueil";
+
+// Menu Button 
+const MENU = "Navigation";
+
+// Pagination
+const PREVIOUS = "Précédente";
+const NEXT = "Suivante";

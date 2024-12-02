@@ -18,7 +18,7 @@ include_once 'Views/bookingModal.php';
           <!--content is load here-->
           <div class= "container my-2">
             <?php include_once 'Views/menuAccount.php'; ?>
-          </div>
+          
           <div >
         <table class="table table-hover">
           <thead>
@@ -95,7 +95,7 @@ include_once 'Views/bookingModal.php';
       </d>
     </div>
           
-
+    </div>
         </div>
         
       </main>
