@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-secondary" id="menuButton">Menu</button>
+<button type="button" class="btn btn-secondary" id="menuButton"><?= MENU ?></button>
 <script>
     
     $(document).ready(function () {

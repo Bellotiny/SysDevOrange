@@ -4,6 +4,7 @@ include_once "Models/User.php";
 include_once "Models/Service.php";
 include_once "Models/Color.php";
 include_once "Models/Booking.php";
+include_once "Models/Availability.php";
 include_once "Controllers/Home.php";
 include_once "Controllers/Mail/Mail.php";
 
@@ -17,6 +18,9 @@ final class Account extends Controller {
     final public const CHANGE_PASSWORD = "change-password";
     final public const LOGOUT = "logout";
     final public const DELETE = "delete";
+
+    final public const PERSONAL_INFORMATION = "personalInformation";
+
     final public const INVENTORY = "inventory";
     final public const ADD_COLOR = "addcolor";
     final public const ADD_SERVICE = "addservice";
@@ -30,7 +34,11 @@ final class Account extends Controller {
     final public const PERSONAL_INFORMATION = "personalInformation";
     final public const BOOKING_LIST = "bookinglist";
     final public const BOOKING_DELETE = "deletebooking";
-    final public const BOOKING_EDIT = "deleteedit";
+    final public const BOOKING_EDIT = "editbooking";
+
+    final public const SCHEDULE = "schedule";
+    final public const ADD_AVAILABILITY = "addavailability";
+    final public const DELETE_AVAILABILITY = "deleteavailability";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -139,6 +147,7 @@ final class Account extends Controller {
                 $_SESSION["time"] = time();
                 $_SESSION["2fa"] = $code;
                 $_SESSION["tries"] = 0;
+                session_write_close();
                 self::redirect(self::TWO_FACTOR_AUTHENTICATION);
                 flush();
                 Mail::send(
@@ -455,18 +464,6 @@ final class Account extends Controller {
                     break;
                 }
                 $service->delete();
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::DELETE_DISCOUNT:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $discount = Discount::getfromId((int)$_GET["id"]);
-                if (is_null($discount)) {
-                    $this->redirect(self::INVENTORY);
-                    break;
-                }
-                $discount->delete();
                 $this->redirect(self::INVENTORY);
                 break;
             case self::BOOKING_LIST:
