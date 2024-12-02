@@ -59,8 +59,8 @@ final class Booking extends Model {
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::price, $price));
         $values->add(new Value(self::message, $message));
-        $values->add(new Value(self::payedOn, $payedOn));
         $values->add(new Value(self::bookedOn, $bookedOn));
+        $values->add(new Value(self::payedOn, $payedOn));
         $values->add(new Value(self::location, $location));
         $values->add(new Value(self::discountID, $discount?->id));
         try {
@@ -71,8 +71,8 @@ final class Booking extends Model {
                 ...$user->toAssoc(),
                 self::price => $price,
                 self::message => $message,
-                self::payedOn => $payedOn,
                 self::bookedOn => $bookedOn,
+                self::payedOn => $payedOn,
                 self::location => $location,
                 ...($discount ? $discount->toAssoc() : []),
             ]);

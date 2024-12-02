@@ -132,7 +132,8 @@ ini_set('display_errors', 1);
                   <?php
                         $selectedColor = false;
                         foreach ($data['colors'] as $colors) {
-                            $isSelected = $selectedColor ? 'selected' : '';
+                          $colorJson = json_encode($colors);  
+                          $isSelected = $selectedColor ? 'selected' : '';
                             echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
                                     <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . $colorJson . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                                         <title>Placeholder</title>
@@ -210,36 +211,41 @@ ini_set('display_errors', 1);
       <!-- Section 3 -->
       <div class="form-section  container pt-5" id="section3">
 
-        <!-- Section 3 Personal Information -->
-        <h3>Personal Information:</h3>
-        <div class="row g-3 mt-5">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid first name is required.
-             </div>
-          </div>
+      <?php
+        include_once("Controllers/Controller");
+        if($this->user == null){
+          echo "<!-- Section 3 Personal Information -->
+                <h3>Personal Information:</h3>
+                <div class='row g-3 mt-5'>
+                  <div class='col-sm-6'>
+                    <label for='firstName' class='form-label'>First name</label>
+                    <input type='text' class='form-control' name='firstName' id='firstName' placeholder='' value='' required=''>
+                    <div class='invalid-feedback'>
+                      Valid first name is required.
+                    </div>
+                  </div>
 
-          <div class="col-sm-6">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
-          </div>
+                  <div class='col-sm-6'>
+                    <label for='lastName' class='form-label'>Last name</label>
+                    <input type='text' class='form-control' name='lastName' id='lastName' placeholder='' value='' required=''>
+                    <div class='invalid-feedback'>
+                      Valid last name is required.
+                    </div>
+                  </div>
 
-          <div class="col-12">
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group has-validation">
-              <span class="input-group-text">@</span>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
-            <div class="invalid-feedback">
-                Your username is required.
-              </div>
-            </div>
-          </div>
-        </div>
+                  <div class='col-12'>
+                    <label for='username' class='form-label'>Username</label>
+                    <div class='input-group has-validation'>
+                      <span class='input-group-text'>@</span>
+                      <input type='text' class='form-control' name='username' id='username' placeholder='Username' required=''>
+                      <div class='invalid-feedback'>
+                        Your username is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>";
+        }
+      ?>
        
 
         <!-- Section # cart -->
