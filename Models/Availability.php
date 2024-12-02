@@ -44,6 +44,22 @@ final class Availability extends Model {
         }
     }
 
+    public static function newMany(int $startTime, int $endTime): ?array {
+        $list = [];
+        $time = $startTime;
+        while ($time < $endTime) {
+            $values = new Values();
+            $values->add(new Value(self::timeSlot, date("Y-m-d H:i:s", $time)));
+            $time += 30 * 60;
+            $list[] = $values;
+        }
+        try {
+            return self::insertMany($list, false);
+        } catch (Exception) {
+            return null;
+        }
+    }
+
     public static function listFuture(): array {
         return self::list((new Where())->addGreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", strtotime('today midnight')))));
     }

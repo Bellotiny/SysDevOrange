@@ -434,17 +434,10 @@ final class Account extends Controller {
                     $this->render("Account", $action, ["error" => "End time must be before Start"]);
                     break;
                 }
-                $time = $_POST["start"];
-                while ($time < $_POST["end"]) {
-                    var_dump(date("Y-m-d H:i:s", $time));
-                    $availability = Availability::new(
-                        date("Y-m-d H:i:s", $time),
-                    );
-                    if ($availability === null) {
-                        $this->render("Account", $action, ["error" => "Error while creating new availability"]);
-                        break;
-                    }
-                    $time += 30 * 60;
+                $availabilities = Availability::newMany($_POST["start"], $_POST["end"]);
+                if ($availabilities === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new availability"]);
+                    break;
                 }
                 $this->redirect(self::SCHEDULE);
                 break;

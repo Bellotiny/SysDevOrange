@@ -68,6 +68,19 @@ abstract class Model {
         );
     }
 
+    /**
+     * @param Values[] $values
+     * @param bool $override
+     * @return bool[]
+     */
+    protected final static function insertMany(array $values, bool $override): array {
+        $list = [];
+        foreach ($values as $value) {
+            $list[] = self::insert($value, $override);
+        }
+        return $list;
+    }
+
     protected final static function select(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {
         if ($join === null) $join = static::getJoin();
         return self::executeQuery(
