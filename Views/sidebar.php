@@ -24,7 +24,7 @@
                   <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#table"></use>
                   </svg>
-                <?=  Schedule ?> 
+                <?=  SCHEDULE ?> 
               </a>
             </li>
             <?php endif; ?>

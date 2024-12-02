@@ -88,3 +88,4 @@ const MENU = "Navigation";
 // Pagination
 const PREVIOUS = "Précédente";
 const NEXT = "Suivante";
+
