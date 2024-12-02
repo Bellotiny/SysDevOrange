@@ -31,10 +31,7 @@ let currentSection = 1;
   }
 
   // Handle the next button click for each section
-  document.querySelectorAll('[id^="next-button-service"]').forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault();
-
+  function next() {
       const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
       if (!selectedServiceRadio) {
         console.error("No service selected");
@@ -60,14 +57,10 @@ let currentSection = 1;
       }
 
       showSection(currentSection);
-    });
-  });
+    }
 
   // Handle the back button click
-  document.querySelectorAll('[id^="back-button-service"]').forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default anchor behavior
-
+  function back() {
       // Handle going back depending on current section
       if (currentSection === 3) {
         currentSection = 2; 
@@ -78,8 +71,7 @@ let currentSection = 1;
       }
 
       showSection(currentSection); // Show the new section
-    });
-  });
+  }
 
   //google mapppp
   let map;

@@ -74,8 +74,8 @@ ini_set('display_errors', 1);
         </div>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" >Cancel</a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-1">Next</a>   
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()">Cancel</a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()">Next</a>
         </div>
 
         <div class="progress my-4  slide-up">
@@ -198,8 +198,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2">Cancel</a>
-          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2">Next</a>   
+          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()">Cancel</a>
+          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()">Next</a>
         </div>
 
         <div class="progress my-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -328,8 +328,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4">Back</a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4">Next</a>   
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()">Back</a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()">Next</a>
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -411,71 +411,6 @@ function selectedTime(){
 
     updateTimes(dateSelect.value);
   }
-
-//SECTION AREA
-let currentSection = 1; 
-    let serviceSelected = null;
-  
-    showSection(currentSection);
-  
-    // Function to show a specific section
-    function showSection(sectionNumber) {
-      document.querySelectorAll('.form-section').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.getElementById(`section${sectionNumber}`).classList.add('active');
-    }
-  
-    // Handle the next button click for each section
-    document.querySelectorAll('[id^="next-button-service"]').forEach(button => {
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-  
-        const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
-        if (!selectedServiceRadio) {
-          console.error("No service selected");
-          return;
-        }
-        serviceSelected = selectedServiceRadio.value;
-  
-        // Handle navigation based on the current section and selected service
-        if (serviceSelected === 'home') {
-          if (currentSection === 1) {
-            currentSection = 4; //special section
-          } else if (currentSection === 4) {
-            currentSection = 2; 
-          } else if (currentSection === 2) {
-            currentSection = 3; 
-          }
-        } else if (serviceSelected === 'owner') {
-          if (currentSection === 1) {
-            currentSection = 2; 
-          } else if (currentSection === 2) {
-            currentSection = 3;
-          }
-        }
-  
-        showSection(currentSection);
-      });
-    });
-  
-    // Handle the back button click
-    document.querySelectorAll('[id^="back-button-service"]').forEach(button => {
-      button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-  
-        // Handle going back depending on current section
-        if (currentSection === 3) {
-          currentSection = 2; 
-        } else if (currentSection === 2) {
-          currentSection = 1;
-        } else if (currentSection === 4) {
-          currentSection = 1;
-        }
-  
-        showSection(currentSection); // Show the new section
-      });
-    });
 
     //google mapppp
     let map;
