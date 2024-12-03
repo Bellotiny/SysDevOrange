@@ -69,8 +69,9 @@ ini_set('display_errors', 1);
         </div>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" ><?= CANCEL ?></a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-1"><?= NEXT ?></a>   
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()">Cancel</a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()">Next</a>
+
         </div>
 
         <div class="progress my-4  slide-up">
@@ -198,8 +199,9 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2"><?= CANCEL ?></a>
-          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2"> <?= NEXT ?></a>   
+          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()">Cancel</a>
+          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()">Next</a>
+
         </div>
 
         <div class="progress my-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -250,8 +252,8 @@ ini_set('display_errors', 1);
         <!-- Section # cart -->
         <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary "><?= YOUR_CART ?></span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="text-primary">Your Cart</span>
+          <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
         </h4>
         <ul id="cart-items" class="list-group mb-3"></ul>
         <div class="list-group-item d-flex justify-content-between">
@@ -259,40 +261,12 @@ ini_set('display_errors', 1);
           <strong id="cart-total">0</strong>
         </div>
       </div>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0"><?= BASE_PRICE ?></h6>
-              <small class="text-body-secondary"><?= NATURAL_NAIL_LENGTH ?></small>
-            </div>
-              <span class="text-body-secondary">$35</span>
-          </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0"><?= NAIL_ART ?></h6>
-                <small class="text-body-secondary"><?= TOTAL_FOUR_NAILS ?></small>
-              </div>
-              <span class="text-body-secondary">$20</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0"><?= NAIL_TAKE_OFF ?></h6>
-                <small class="text-body-secondary"><?= EXTRA_SERVICE ?></small>
-              </div>
-              <span class="text-body-secondary">$10</span>
-            </li>
-        
-            <li class="list-group-item d-flex justify-content-between">
-              <span><?= TOTAL_CAD ?></span>
-              <strong>$60</strong>
-            </li>
-        </ul>
-
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
           <input type="submit" class="btn btn-primary w-50" role="button" > 
+
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -333,8 +307,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4"><?= BACK ?></a>
-          <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4"><?= NEXT ?></a>   
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()">Back</a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()">Next</a>
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">

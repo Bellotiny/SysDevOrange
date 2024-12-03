@@ -37,7 +37,8 @@ final class Review extends Model {
             self::userID => $this->user->id,
             self::imageID => $this->image?->id,
             ...$this->user->toAssoc(),
-            ...$this->image?->toAssoc(),
+            ...($this->image ? $this->image->toAssoc() : []),
+            
         ];
     }
 

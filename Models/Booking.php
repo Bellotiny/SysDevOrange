@@ -49,7 +49,7 @@ final class Booking extends Model {
             self::location => $this->location,
             self::discountID => $this->discount?->id,
             ...$this->user->toAssoc(),
-            ...$this->discount?->toAssoc(),
+            ...($this->discount ? $this->discount->toAssoc() : []),
         ];
     }
 

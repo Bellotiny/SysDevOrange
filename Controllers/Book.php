@@ -57,7 +57,7 @@ final class Book extends Controller {
                     if($booking != null){
                         Booking::setGroups($booking, $colors, 'BookingColor');
                         Booking::setGroups($booking, $services, 'BookingService');
-                        Booking::setGroups($booking, $images, 'BookingImage');
+                        //Booking::setGroups($booking, $images, 'BookingImage');
                         Home::redirect();
                     }
                     //Home::redirect();
