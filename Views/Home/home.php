@@ -75,9 +75,7 @@ include_once 'Views/bookingModal.php';
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
         <h1 class="display-2 pb-5 mb-5 fw-bold amsterdamThree-fontstyle text-green text-shadow-pink slide-up"><?= WELCOME ?></h1>
         <p class="lead slide-up"> 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas nisl vitae tristique 
-          tincidunt. Nam a condimentum urna, vitae interdum urna. Donec dignissim tincidunt ipsum et semper. Vestibulum ante ipsum primis in 
-          faucibus orci luctus et ultrices posuere cubilia curae; 
+          <?= BUSINESS_INFO ?> 
 
         </p>
       
@@ -254,10 +252,10 @@ include_once 'Views/bookingModal.php';
         </div>
       
     </div>
-   
-</div>
 
-</div>
+
+<?php include_once 'Views/footer.php'; ?>
+
 
 <script>
     const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
@@ -390,7 +388,7 @@ include_once 'Views/bookingModal.php';
         body.classList.remove('no-scroll');
    }
    </script>
-  <?php include_once 'Views/footer.php'; ?>
+
 
 </body>
 </html>
