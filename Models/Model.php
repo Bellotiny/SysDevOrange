@@ -15,8 +15,11 @@ abstract class Model {
 
     public final function save(): bool {
         $values = new Values();
+        $fields = static::getFields();
         foreach(static::toAssoc() as $field => $value) {
-            $values->add(new Value($field, $value));
+            if (in_array($field, $fields)) {
+                $values->add(new Value($field, $value));
+            }
         }
         $where = new Where();
         $where->addEquals(new Value(static::id, $this->id));
@@ -44,7 +47,7 @@ abstract class Model {
         return array_values((new ReflectionClass(static::class))->getConstants(ReflectionClassConstant::IS_FINAL));
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return null;
     }
 

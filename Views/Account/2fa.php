@@ -28,8 +28,6 @@ include_once 'Views/bookingModal.php';
             </div>
           </form>
           </div>
-
-          <?=  $_SESSION['code'];?>
       </main>
 
       <script>

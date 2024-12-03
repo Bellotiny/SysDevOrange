@@ -36,13 +36,15 @@ final class Review extends Model {
             self::date => $this->date,
             self::userID => $this->user->id,
             self::imageID => $this->image?->id,
+            ...$this->user->toAssoc(),
+            ...$this->image?->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID)
-            ->addLeft(Image::getFields(), Image::TABLE, Image::id, self::imageID);
+            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addLeft(Image::getFields(), Image::TABLE, Image::id, self::imageID, Image::getJoin());
     }
 
     public static function new(User $user, string $title, string $message, string $date, ?Image $image = null): ?self {

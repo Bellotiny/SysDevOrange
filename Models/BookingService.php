@@ -25,13 +25,15 @@ final class BookingService extends Model {
             self::id => $this->id,
             self::bookingID => $this->booking->id,
             self::serviceID => $this->service->id,
+            ...$this->booking->toAssoc(),
+            ...$this->service->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID)
-            ->addInner(Service::getFields(), Service::TABLE, Service::id, self::serviceID);
+            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
+            ->addInner(Service::getFields(), Service::TABLE, Service::id, self::serviceID, Service::getJoin());
     }
 
     public static function new(Booking $booking, Service $service): ?self {

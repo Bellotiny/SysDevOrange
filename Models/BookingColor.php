@@ -25,13 +25,15 @@ final class BookingColor extends Model {
             self::id => $this->id,
             self::bookingID => $this->booking->id,
             self::colorID => $this->color->id,
+            ...$this->booking->toAssoc(),
+            ...$this->color->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID)
-            ->addInner(Color::getFields(), Color::TABLE, Color::id, self::colorID);
+            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
+            ->addInner(Color::getFields(), Color::TABLE, Color::id, self::colorID, Color::getJoin());
     }
 
     public static function new(Booking $booking, Color $color): ?self {
