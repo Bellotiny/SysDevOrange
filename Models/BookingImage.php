@@ -25,13 +25,15 @@ final class BookingImage extends Model {
             self::id => $this->id,
             self::bookingID => $this->booking->id,
             self::imageID => $this->image->id,
+            ...$this->booking->toAssoc(),
+            ...$this->image->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID)
-            ->addInner(Image::getFields(), Image::TABLE, Image::id, self::imageID);
+            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
+            ->addInner(Image::getFields(), Image::TABLE, Image::id, self::imageID, Image::getJoin());
     }
 
     public static function new(Booking $booking, Image $image): ?self {
