@@ -116,10 +116,10 @@ include_once 'Views/bookingModal.php';
             <div class="col">
               <h3 class=""><?= NAIL_CARE_DO ?></h3>
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Keep Nails Clean:</strong> Wash hands regularly and dry thoroughly.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Moisturize:</strong> Apply hand cream or cuticle oil to keep nails hydrated.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Trime Regulary:</strong>  Use sharp tools to maintain a manageable length.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">File gently</strong>  Smooth edges by filing in one direction.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= KEEP_NAILS_CLEAN ?></strong> <?= KEEP_NAILS_CLEAN_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= MOISTURIZE ?></strong><?= MOISTURIZE_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= TRIM_REG ?></strong>  <?= TRIM_REG_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= FILE_GENTLY ?></strong>  <?= FILE_GENTLY_2 ?></li>
               </ul>
             </div>
 
@@ -160,10 +160,7 @@ include_once 'Views/bookingModal.php';
           </div>
           <div class="offcanvas-body small mx-5 ">
             <p class="text-large-offcanvas">
-            Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
-            health, prevent infections, and address underlying issues that might not be visible to the 
-            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
-            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.
+            <?= PROFESSIONAL_NAIL_CARE ?>
             </p>
           </div>
         </div>
@@ -187,23 +184,23 @@ include_once 'Views/bookingModal.php';
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBenefit" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel"><?= BASIC_MANICURE ?></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body small text-start mx-5 row">
             <div class="col">
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Nail Bed Care:</strong> Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Break from Harsh Treatments:</strong> If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= NAIL_BED_CARE ?></strong> <?=  NAIL_BED_CARE_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= BREAK_HARSH_TREATMENTS ?></strong> <?= BREAK_HARSH_TREATMENTS_2 ?> </li>
                 
               </ul>
             </div>
 
             <div class="col">
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Promote Healthy Growth:</strong> A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= PROMOTE_HEALTHY_GROWTH ?></strong><?= PROMOTE_HEALTHY_GROWTH_2 ?></li>
                 <br><br>
-                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Treat your nails to a little TLC—they’ll thank you later! 💖</strong></h5>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis "><?= TLC ?></strong></h5>
                 
               </ul>
             </div>
@@ -220,31 +217,31 @@ include_once 'Views/bookingModal.php';
           width="250" height="200" 
           style="object-fit: cover; width: 300px; height: 200px;">
 
-        <p class=" slide-up">The Importance of Regular Manicures 💅✨</p>
+        <p class=" slide-up"><?= IMPORTANCE_REG_MANICURE ?></p>
         <strong class="d-block mb-2 text-pink  slide-up "><?= MUST_READ ?></strong>
         <p>
             <a class="btn btn-secondary  slide-up" data-bs-toggle="offcanvas" data-bs-target="#offcanvasReg" aria-controls="offcanvasBottom"><?= VIEW_DETAILS ?></a>
         </p>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasReg" aria-labelledby="offcanvasBottomLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters:</h5>
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel"><?= IMPORTANCE_REG_MANICURE_2 ?></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body small text-start mx-5 row">
             <div class="col">
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Healthy Nail Growth:  </strong>  Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Damage Prevention: </strong>Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">  Hydration & Nourishment:</strong>Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= HEALTHY_NAIL_GROWTH ?>  </strong>  <?= HEALTHY_NAIL_GROWTH_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= DAMAGE_PREV ?> </strong><?= DAMAGE_PREV_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "> <?= HYDRATION_NOURISHMENT ?></strong><?= HYDRATION_NOURISHMENT_2 ?></li>
                 
               </ul>
             </div>
 
             <div class="col">
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Polished Look, Polished Feel:  </strong>Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= POLISHED_LOOK_FEEL ?>  </strong><?= POLISHED_LOOK_FEEL_2 ?>  </li>
                 <br><br>
-                <h5><strong class="d-inline mb-2 text-primary-emphasis ">Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟</strong></h5>
+                <h5><strong class="d-inline mb-2 text-primary-emphasis "><?= REGULAR_MANICURES ?></strong></h5>
                 
               </ul>
             </div>

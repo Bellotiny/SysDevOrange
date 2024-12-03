@@ -51,8 +51,41 @@ const NAIL_CARE_DO = "Nail Care (Dos)";
 const NAIL_CARE_DONT = "Nail Care (Don'ts)";
 const MUST_READ = "Must Read";
 const VIEW_DETAILS = "View details »";
+const BASIC_MANICURE = "A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:";
+const NAIL_BED_CARE = "Nail Bed Care:";
+const NAIL_BED_CARE_2 = "Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.";
+const BREAK_HARSH_TREATMENTS = "Break from Harsh Treatments:";
+const BREAK_HARSH_TREATMENTS_2 = "If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.";
+const PROMOTE_HEALTHY_GROWTH = "Promote Healthy Growth:";
+const PROMOTE_HEALTHY_GROWTH_2 = "A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.";
+const TLC = "Give your nails some TLC – they’ll thank you later! 💖";
+const IMPORTANCE_REG_MANICURE = "The Importance of Regular Manicures 💅✨";
+const IMPORTANCE_REG_MANICURE_2 = "Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters";
 const IMPORTANCE_PROFESSIONAL_CARE = "The Importance of Professional Nail Care 💅✨";
+const HEALTHY_NAIL_GROWTH = "Healthy Nail Growth:";
+const HEALTHY_NAIL_GROWTH_2 = "Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.";
+const DAMAGE_PREV = "Damage Prevention:";
+const DAMAGE_PREV_2 = "Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!";
+const HYDRATION_NOURISHMENT = "Hydration & Nourishment:";
+const HYDRATION_NOURISHMENT_2 = "Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.";
+const POLISHED_LOOK_FEEL = "Polished Look, Polished Feel:";
+const POLISHED_LOOK_FEEL_2 = "Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!";
+const REGULAR_MANICURES = "Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟";
+const PROFESSIONAL_NAIL_CARE = "Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
+            health, prevent infections, and address underlying issues that might not be visible to the 
+            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
+            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.";
 const BENEFIT_REG_MANICURE = "Benefits of a Basic Manicure 💅✨";
+
+    // First Collapsible Section
+    const KEEP_NAILS_CLEAN = "Keep Nails Clean:";
+    const KEEP_NAILS_CLEAN_2 = "Wash hands regularly and dry thoroughly.";
+    const  MOISTURIZE = "Moisturize:";
+    const  MOISTURIZE_2 = "Apply hand cream or cuticle oil to keep nails hydrated.";
+    const TRIM_REG = "Trim Regulary:";
+    const TRIM_REG_2 = "Use sharp tools to maintain a manageable length.";
+    const FILE_GENTLY = "File gently";
+    const FILE_GENTLY_2 = "Smooth edges by filing in one direction.";
 
 // About Us
 const ABOUT_US_HEADER = "About Me";

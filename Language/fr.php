@@ -54,8 +54,42 @@ const NAIL_CARE_DO = "Conseils de Soin des Ongles (à Faire)";
 const NAIL_CARE_DONT = "Soins des Ongles (à ne pas Faire)";
 const MUST_READ = "Doit Lire";
 const VIEW_DETAILS = "Voir les Détails »";
+const BASIC_MANICURE = "Une manucure de base ne consiste pas seulement à être belle : elle est essentielle pour garder vos ongles en bonne santé ! Voici pourquoi :";
+const NAIL_BED_CARE = "Entretien du Lit des Ongles :";
+const NAIL_BED_CARE_2 = "Garder vos lits d’ongles exempts d’abrasion et hydratés aide à maintenir leur force naturelle.";
+const BREAK_HARSH_TREATMENTS = "Pause des Traitements Durs :";
+const BREAK_HARSH_TREATMENTS_2 = "Si vous utilisez de l’acrylique ou d’autres améliorations pour les ongles, il est important de donner une pause à vos ongles. Laissez-les respirer et récupérer pour éviter des dommages à long terme.";
+const PROMOTE_HEALTHY_GROWTH = "Promouvoir une Croissance Saine :";
+const PROMOTE_HEALTHY_GROWTH_2 = "Une zone de cuticules propre, ainsi que des huiles nourrissantes, garderont vos ongles hydratés et favoriseront une croissance forte et saine.";
+const IMPORTANCE_REG_MANICURE = "L'importance des Manucures Régulières 💅✨";
+const IMPORTANCE_REG_MANICURE_2 = "Les manucures régulières ne sont pas seulement un régal : elles sont un élément essentiel pour garder vos ongles sains et beaux ! Voici pourquoi il est important de rester cohérent";
+const TLC = "Donnez un peu d’attention à vos ongles – ils vous remercieront plus tard ! 💖";
 const IMPORTANCE_PROFESSIONAL_CARE = "Importance des Soins Professionnels";
+const HEALTHY_NAIL_GROWTH = "Croissance saine des ongles :";
+const HEALTHY_NAIL_GROWTH_2 = "Croissance saine des ongles :";
+const DAMAGE_PREV = "Prévention des Dommages :";
+const DAMAGE_PREV_2 = "Un entretien fréquent permet d’éviter des problèmes tels que les envies, les fentes et la casse. Détecter les petits problèmes tôt peut empêcher les plus gros de se développer !";
+const HYDRATION_NOURISHMENT = "Hydratation et Nutrition :";
+const HYDRATION_NOURISHMENT_2 = "Les manucures comprennent des traitements hydratants qui maintiennent le lit de vos ongles et vos cuticules hydratés, réduisant ainsi la fragilité et la sécheresse.";
+const POLISHED_LOOK_FEEL = "Aspect Poli, Sensation Polie :";
+const POLISHED_LOOK_FEEL_2 = "Des soins constants signifient que vos mains sont toujours superbes, parfaites pour renforcer la confiance et prendre soin de soi !";
+const REGULAR_MANICURES = "Des manucures régulières maintiennent vos ongles en pleine forme, garantissant qu'ils sont forts, sains et toujours prêts à briller ! 🌟";
+const PROFESSIONAL_NAIL_CARE = "Les soins professionnels des ongles offrent plus que de simples avantages esthétiques ; ça aide à maintenir l'ongle 
+            santé, prévenir les infections et résoudre les problèmes sous-jacents qui pourraient ne pas être visibles pour le 
+            œil non exercé. Les techniciens en ongles sont formés pour manipuler les outils en toute sécurité, reconnaître les ongles potentiels et 
+            problèmes de peau et recommander des soins adaptés aux besoins individuels, favorisant à la fois l'hygiène et le bien-être à long terme.";
 const BENEFIT_REG_MANICURE = "Avantage d’une Manucure Régulière";
+
+    // First Collapsible Section
+    const KEEP_NAILS_CLEAN = "Gardez les Ongles Propres :";
+    const KEEP_NAILS_CLEAN_2 = "Lavez-vous régulièrement les mains et séchez-les soigneusement.";
+    const  MOISTURIZE = "Hydrater:";
+    const  MOISTURIZE_2 = "Appliquez de la crème pour les mains ou de l'huile pour cuticules pour garder les ongles hydratés.";
+    const TRIM_REG = "Taillez régulièrement:";
+    const TRIM_REG_2 = "Utilisez des outils tranchants pour maintenir une longueur gérable.";
+    const FILE_GENTLY = "Limez délicatement";
+    const FILE_GENTLY_2 = "Lisser les bords en limant dans une seule direction.";
+
 
 // About Us
 const ABOUT_US_HEADER = "Découvrez-Nous";

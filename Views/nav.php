@@ -83,7 +83,6 @@ $toggleText = lang === "en" ? "FR" : "EN";
 <script>
     let lang = "<?= lang ?>";
 function changeLang() {
-    console.log("hELLO");
     if (lang == "en") {
         lang = "fr";
     } else {
