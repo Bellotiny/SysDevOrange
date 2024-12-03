@@ -154,18 +154,24 @@ header {
 
 
 
+#nav-main {
+    display: flex; /* Ensures all links stay on the same line */
+    flex-wrap: nowrap; /* Prevents wrapping to a new line */
+    gap: 10px; 
+}
+
 #nav-main a {
-    width: auto;
     text-decoration: none;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
     font-size: 15px;
     font-weight: bold;
     color: #1b613e;
-    padding: 2% 15%; /* Add padding for clickable area */
+    padding: 5px 15px; /* Adjust padding to ensure enough space */
     border-radius: 15px;
-  
+    white-space: nowrap; /* Prevents wrapping of individual link text */
 }
+
 #nav-main a:hover, #nav-extra a:hover, .account-image:hover {
     color: #f37a74;
     fill: #f37a74; /* Applies pink color on hover for SVG */
@@ -403,6 +409,7 @@ header {
     position: relative; /* Change to relative for proper positioning */
     margin: 0; /* Remove default margins */
     text-align: center; /* Center the text */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 /* Add a custom class to control the card position */
@@ -504,7 +511,7 @@ footer {
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
     /*position: relative;  Keep the footer static */
-    display: none;
+   
 }
 footer p{
     margin: 0;
@@ -629,9 +636,6 @@ a.nav-link.active {
 }
 /* Keep the hamburger icon fixed at the top-left */
 .navbar-toggler {
-    position: fixed;
-    top: 15px;
-    left: 15px;
     z-index: 1100; /* Higher than the overlay */
     background-color: transparent;
     border: none;
