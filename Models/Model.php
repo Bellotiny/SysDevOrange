@@ -15,8 +15,11 @@ abstract class Model {
 
     public final function save(): bool {
         $values = new Values();
+        $fields = static::getFields();
         foreach(static::toAssoc() as $field => $value) {
-            $values->add(new Value($field, $value));
+            if (in_array($field, $fields)) {
+                $values->add(new Value($field, $value));
+            }
         }
         $where = new Where();
         $where->addEquals(new Value(static::id, $this->id));
@@ -44,7 +47,7 @@ abstract class Model {
         return array_values((new ReflectionClass(static::class))->getConstants(ReflectionClassConstant::IS_FINAL));
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return null;
     }
 
@@ -66,6 +69,19 @@ abstract class Model {
             ";",
             $values->getArgs()
         );
+    }
+
+    /**
+     * @param Values[] $values
+     * @param bool $override
+     * @return bool[]
+     */
+    protected final static function insertMany(array $values, bool $override): array {
+        $list = [];
+        foreach ($values as $value) {
+            $list[] = self::insert($value, $override);
+        }
+        return $list;
     }
 
     protected final static function select(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {

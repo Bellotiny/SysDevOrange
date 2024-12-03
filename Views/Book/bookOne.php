@@ -42,7 +42,7 @@ ini_set('display_errors', 1);
         ?>
 
         <!-- Section 1 Location Service -->
-        <h3>Service Location:</h3>
+        <h3><?= SERVICE_LOCATION ?></h3>
 
         <div class="d-flex justify-content-around" style="width: 100%;"> 
           <div class="list-group d-flex flex-row w-100"> 
@@ -50,9 +50,9 @@ ini_set('display_errors', 1);
             <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans" > 
               <input class="form-check-input flex-shrink-0" type="radio" name="servicePlace" id="listGroupRadios1" value="owner" checked="">
               <span>
-                Owner's place<small class="text-body-secondary">
+                <?= OWNERS_PLACE ?><small class="text-body-secondary">
                   <a href="https://www.google.com/maps/place/Mon+Ami+Korean+BBQ+C%C3%B4te-des-Neiges/@45.4957199,-73.6227813,17z/" target="_blank" rel="noopener noreferrer">
-                    (View the Owner's place)
+                    <?= OWNERS_LOCATION ?>
                   </a></small>
               </span>
             </label>
@@ -60,17 +60,17 @@ ini_set('display_errors', 1);
             <label class="list-group-item d-flex gap-2 flex-fill booking-border-style  p-4 canvaSans" > 
               <input class="form-check-input flex-shrink-0" type="radio" name="servicePlace" id="listGroupRadios2" value="home">
               <span>
-                Home service 
+               <?= HOME_SERVICE ?> 
               </span>
-              <small class=" text-body-secondary">(The location must be 20km from the Owner's place)</small>
+              <small class=" text-body-secondary"><?= TWENTY_KM ?></small>
             </label>
             
           </div>
         </div>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()">Cancel</a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" ><?= CANCEL ?></a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-1"><?= NEXT ?></a>   
         </div>
 
         <div class="progress my-4  slide-up">
@@ -145,7 +145,7 @@ ini_set('display_errors', 1);
         </div>
 
         <!-- Section 2 Date and time -->
-        <h3>Pick your time and date:</h3>
+        <h3><?= PICK_TIME ?></h3>
         <div class="d-flex justify-content-around my-4 slide-up">
 
           <!-- Date Selection -->
@@ -180,7 +180,7 @@ ini_set('display_errors', 1);
 
           <!-- Time Selection -->
           <div class="form-group">
-            <label for="availableTimes">Available Times</label>
+            <label for="availableTimes"><?= AVAILABLE_TIMES ?></label>
             <select class="form-control" id="availableTimes" name="selected_time">
                 <?php
                 foreach ($available_dates_times[$dates] as $time) {
@@ -198,8 +198,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()">Cancel</a>
-          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2"><?= CANCEL ?></a>
+          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2"> <?= NEXT ?></a>   
         </div>
 
         <div class="progress my-4  slide-up " role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -250,8 +250,8 @@ ini_set('display_errors', 1);
         <!-- Section # cart -->
         <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your Cart</span>
-          <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
+          <span class="text-primary "><?= YOUR_CART ?></span>
+          <span class="badge bg-primary rounded-pill">3</span>
         </h4>
         <ul id="cart-items" class="list-group mb-3"></ul>
         <div class="list-group-item d-flex justify-content-between">
@@ -259,7 +259,34 @@ ini_set('display_errors', 1);
           <strong id="cart-total">0</strong>
         </div>
       </div>
-
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0"><?= BASE_PRICE ?></h6>
+              <small class="text-body-secondary"><?= NATURAL_NAIL_LENGTH ?></small>
+            </div>
+              <span class="text-body-secondary">$35</span>
+          </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0"><?= NAIL_ART ?></h6>
+                <small class="text-body-secondary"><?= TOTAL_FOUR_NAILS ?></small>
+              </div>
+              <span class="text-body-secondary">$20</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0"><?= NAIL_TAKE_OFF ?></h6>
+                <small class="text-body-secondary"><?= EXTRA_SERVICE ?></small>
+              </div>
+              <span class="text-body-secondary">$10</span>
+            </li>
+        
+            <li class="list-group-item d-flex justify-content-between">
+              <span><?= TOTAL_CAD ?></span>
+              <strong>$60</strong>
+            </li>
+        </ul>
 
 
 
@@ -279,9 +306,9 @@ ini_set('display_errors', 1);
 
         <div class="container my-3">
           <div class="p-5 text-center green-background rounded-3">
-            <h1 class="text-body-emphasis">Enter your address to verfiy</h1>
+            <h1 class="text-body-emphasis"><?= ADDRESS_TO_VERIFY ?></h1>
             <p class="lead">
-              Take note: Home service is only available  <code>20 km </code> from the owner's place.
+              <?= HOME_SERVICE_ONLY_AVAIL_1 ?>  <code>20 km </code> <?= HOME_SERVICE_ONLY_AVAIL_2 ?>
               
               <div class="row">
                 <div class=" col-4  " id=""></div>
@@ -298,7 +325,7 @@ ini_set('display_errors', 1);
           <input type="text" class="form-control" placeholder="Destination Location" id="destination">
         </div>
         <br>
-       <button type="button" onclick="calcRoute()" class="btn btn-primary"  >Verify Address</button>
+       <button type="button" onclick="calcRoute()" class="btn btn-primary"  ><?= VERIFY_ADDRESS ?></button>
        <hr>
        <div id="map" style="height: 250px; width: 100%;"></div>
         </div>
@@ -306,8 +333,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()">Back</a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" id="back-button-service-4"><?= BACK ?></a>
+          <a class="btn btn-primary w-50" onclick="nextSection()" role="button" id="next-button-service-4"><?= NEXT ?></a>   
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">

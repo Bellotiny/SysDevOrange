@@ -25,13 +25,15 @@ final class GroupAction extends Model {
             self::id => $this->id,
             self::groupID => $this->group->id,
             self::actionID => $this->action->id,
+            ...$this->group->toAssoc(),
+            ...$this->action->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID)
-            ->addInner(Action::getFields(), Action::TABLE, Action::id, self::actionID);
+            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin())
+            ->addInner(Action::getFields(), Action::TABLE, Action::id, self::actionID, Action::getJoin());
     }
 
     public static function new(Group $group, Action $action): ?self {

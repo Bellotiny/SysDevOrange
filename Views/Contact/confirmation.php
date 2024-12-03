@@ -17,14 +17,16 @@ include_once 'Views/bookingModal.php';
             <div class="card shadow-lg border-0">
                 <!-- Card Header -->
                 <div class="card-header">
-                    <h1 class="custom-header display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up">Contact Us</h1>
+                    <h1 class="custom-header display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up"><?= CONTACT_US ?></h1>
                 </div>
 
                 <!-- Card Body -->
                 <div class="card-body p-4">
-                    Thank you for contacting us! We will respond to your email as soon as possible.
+                    <?= CONFIRM_MESSAGE ?>
                 </div>
-                <a href="<?=BASE_PATH?>" class="btn bttn-green slide-up">Back to Home</a>
+                <div class="d-grid">
+                    <a href="<?=BASE_PATH?>" class="btn bttn-green slide-up"><?= BACK_TO_HOME ?></a>
+                </div>
             </div>
         </div>
     </div>

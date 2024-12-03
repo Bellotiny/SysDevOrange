@@ -12,6 +12,7 @@ include_once 'Views/bookingModal.php';
           <!--content is load here-->
          
           <div class="container">
+            
           <h1>2FA</h1>
           <form action="<?=BASE_PATH?>/account/2fa" method="POST">
             <div class="form-group">
@@ -23,12 +24,10 @@ include_once 'Views/bookingModal.php';
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Login">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/login" role="button">Go Back</a>
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/login" role="button"><?= GO_BACK ?></a>
             </div>
           </form>
           </div>
-
-        
       </main>
 
       <script>
