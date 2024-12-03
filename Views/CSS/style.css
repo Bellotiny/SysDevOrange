@@ -511,7 +511,7 @@ footer {
     font-family: "Canvas Sans", sans-serif;
     background-color:rgb(255, 255, 255, 0.5);
     /*position: relative;  Keep the footer static */
-    display: none;
+   
 }
 footer p{
     margin: 0;

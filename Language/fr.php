@@ -41,6 +41,13 @@ const WELCOME = "Bienvenue";
 const WELCOME_TO = "Bienvenue dans Notre Nook!";
 const WELCOME_MESSAGE = "Bonjour et bienvenue ! Je suis ravi de vous avoir ici. Que vous soyez un nouveau client ou un habitué, nous vous invitons à découvrir nos services et à vivre une expérience relaxante.";
 const WELCOME_MESSAGE_2 = "Inscrivez-vous maintenant pour découvrir des fonctionnalités exclusives!";
+const BUSINESS_INFO = "Bienvenue au Snook Nail Nook ! 💕
+
+Vous venez d’entrer dans un coin douillet de soins des ongles abordables, saupoudrés de beaucoup de style mignon ! 🌸
+
+J'ai hâte de planifier votre prochaine journée de soins personnels, car vous méritez de vous sentir fabuleuse ! ✨
+
+Spécialisée dans les manucures GelX.";
 const NAIL_CARE_101 = "Soins des ongles 101 : Conseils, Avantages et Avis Professionnel";
 const NAIL_CARE_DO_DONT = "Conseils Pour le Soin des Ongles, Choses à Faire et à ne pas Faire";
 const NAIL_CARE_DO = "Conseils de Soin des Ongles (à Faire)";

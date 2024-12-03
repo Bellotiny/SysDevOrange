@@ -41,6 +41,10 @@ const WELCOME = "Welcome";
 const WELCOME_TO = "Welcome to our nook!";
 const WELCOME_MESSAGE = "Hello and welcome! I am excited to have you here. Whether you’re a new or returning guest, we invite you to explore our services and enjoy a relaxing experience.";
 const WELCOME_MESSAGE_2 = "Register now to experience exclusive features!";
+const BUSINESS_INFO = "Welcome to the Snook Nail Nook! 💕
+                       You’ve just stepped into a cozy corner of affordable nail care, sprinkled with a whole lot of cute flair! 🌸
+                       I can’t wait to get you scheduled for your next self-care day—because you deserve to feel fabulous! ✨
+                       Specialized in GelX manicures.";
 const NAIL_CARE_101 = "Nail Care 101: Tips, Benefits, and Professional Insight";
 const NAIL_CARE_DO_DONT = "Nail Care Tips You Can Do at Home 💅✨";
 const NAIL_CARE_DO = "Nail Care (Dos)";
