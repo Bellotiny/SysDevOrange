@@ -19,9 +19,6 @@ include_once 'Views/head.php';
        
       </div>
     </div>
-      
-
- 
   
 <!-----button--->
     <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">

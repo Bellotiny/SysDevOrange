@@ -18,4 +18,18 @@ document.addEventListener("DOMContentLoaded", function() {
   window.addEventListener('scroll', checkSlide);
   checkSlide(); 
 
+  const checkbox = document.getElementById("bookingCheckBox");
+  const confirmButton = document.getElementById("confirmButton");
+
+  checkbox.addEventListener("change", function () {
+    if(checkbox.checked){
+      confirmButton.classList.remove("disabled");
+    }else{
+      confirmButton.classList.add("disabled");
+    }
+
+  });
+  
+
+
 });
