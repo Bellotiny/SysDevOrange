@@ -3,6 +3,9 @@
 include_once "Model.php";
 include_once "User.php";
 include_once "Discount.php";
+include_once "BookingService.php";
+include_once "BookingColor.php";
+include_once "BookingImage.php";
 
 final class Booking extends Model {
     public const TABLE = "bookings";
@@ -54,7 +57,7 @@ final class Booking extends Model {
             ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID);
     }
 
-    public static function new(User $user, float $price, string $message, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
+    public static function new(User $user, float $price, string $message = null, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
         $values = new Values();
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::price, $price));

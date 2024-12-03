@@ -6,6 +6,7 @@ include_once "Models/Color.php";
 include_once "Models/Discount.php";
 include_once "Models/User.php";
 include_once "Models/Availability.php";
+include_once "Controllers/Home.php";
 
 final class Book extends Controller {
     public function route(): void {
@@ -16,16 +17,21 @@ final class Book extends Controller {
                 $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list()]);
             break;
             case "add":
+                var_dump($_POST);
                 $services = [];
                 if (isset($_POST['serviceType'])) {
                     foreach ($_POST['serviceType'] as $type => $serviceJson) {
                         $selectedService = json_decode($serviceJson);
+                        $service = Service::getFromName($selectedService->name);
             
-                        $services[] = $selectedService;
+                        $services[] = $service;
                     }
                 }
-                $price = $_Post['totalPrice'] ?? null;
-                $location = ($_POST['servicePlace'] == 'home') ? null : $_POST['servicePlace'] ;
+                $price = 0;
+                foreach ($services as $service) {
+                    $price += $service->price;
+                }
+                $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
                 $colors = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null,
@@ -41,13 +47,20 @@ final class Book extends Controller {
                 }
                 //$message = $_POST['message'] ?? null;
                 //$images = $_POST[''] ?? null;
+                var_dump($user);
+                var_dump($user->id);
+                var_dump($price);
+                var_dump($date_time);
+                var_dump($location);
                 if($services != null||$colors != null||$date_time != null){
-                    $booking = Booking::new($user, $price, $message, $date_time, $location);
+                    $booking = Booking::new($user, $price, null, null, $date_time, $location);
                     if($booking != null){
-                        Booking::setGroups($booking, $colors, 'BookingColors');
-                        Booking::setGroups($booking, $services, 'BookingServices');
-                        Booking::setGroups($booking, $images, 'BookingImages');
+                        Booking::setGroups($booking, $colors, 'BookingColor');
+                        Booking::setGroups($booking, $services, 'BookingService');
+                        Booking::setGroups($booking, $images, 'BookingImage');
+                        Home::redirect();
                     }
+                    //Home::redirect();
                 }
             break;
             case "delete":

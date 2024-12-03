@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 <?php include_once 'Views/nav.php'; ?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
-  <form method="POST" novalidate="" class="needs-validation ">
+  <form action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
      <div class="form-section active container pt-5 "  id="section1">
 
@@ -24,24 +24,19 @@ ini_set('display_errors', 1);
               echo '<h3>' . $type . '</h3>';
 
               foreach ($services as $service) {
-                  $serviceJson = json_encode($service);
-
-                  $totalPrice += $service->price;
-
-                  echo '<div class="list-group d-flex flex-row w-100 m-2">
-                          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
-                              <!-- Radio button allows the user to select only one service per type -->
-                              <input class="form-check-input flex-shrink-0" type="radio" name="serviceType[' . $type . ']" value="' . $serviceJson . '" id="service-' .$service->name . '" required>
-                              <span class="flex-grow-1">
-                                  ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
-                              </span>
-                              <!-- Push the price to the right -->
-                              <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
-                                  ' . $service->price . ' CAD
-                              </div>
-                          </label>
-                          <input type="hidden" name="totalPrice" value="' . $totalPrice . '">
-                        </div>';
+              $totalPrice += $service->price;
+              $serviceJson = htmlspecialchars(json_encode($service), ENT_QUOTES, 'UTF-8');
+              echo '<div class="list-group d-flex flex-row w-100 m-2">
+                      <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
+                          <input onchange="return updateCart()" class="form-check-input flex-shrink-0" type="radio" name="serviceType[' . $type . ']" value="' . $serviceJson . '" id="service-' . $service->name . '" required>
+                          <span class="flex-grow-1">
+                              ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
+                          </span>
+                          <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
+                              ' . $service->price . ' CAD
+                          </div>
+                      </label>
+                    </div>';
           }
           }
         ?>
@@ -101,19 +96,19 @@ ini_set('display_errors', 1);
                 <div class="row text-center">
                     <!----here are the colors--->
                     <?php
-                        $selectedColor = false;
-                        foreach ($data['colors'] as $colors) {
-                            $colorJson = json_encode($colors);
-                            $isSelected = $selectedColor ? 'selected' : '';
-                            echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color1\', \'' . $colorJson . '\', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
-                                    </svg>
-                                    <h5 class="fw-normal">' . $colors->name . '</h5>
-                                  </div>';
-                        }
+                    $selectedColor = false;
+                    foreach ($data['colors'] as $colors) {
+                        $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
+                        $isSelected = $selectedColor ? 'selected' : '';
+                        echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color1\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
+                                    <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                </svg>
+                                <h5 class="fw-normal">' . $colors->name . '</h5>
+                              </div>';
+                    }
                     ?>
+                    
                 </div>
               </div>
             </div>
@@ -187,7 +182,12 @@ ini_set('display_errors', 1);
           <div class="form-group">
             <label for="availableTimes">Available Times</label>
             <select class="form-control" id="availableTimes" name="selected_time">
-                
+                <?php
+                foreach ($available_dates_times[$dates] as $time) {
+                  $formatted_time = date('h:i A', strtotime($time));
+                  echo "<option value=\"$time\">$formatted_time</option>";
+                }
+                ?>
             </select>
         </div>
 
@@ -212,7 +212,7 @@ ini_set('display_errors', 1);
       <div class="form-section  container pt-5" id="section3">
 
       <?php
-        include_once("Controllers/Controller");
+        include_once("Controllers/Controller.php");
         if($this->user == null){
           echo "<!-- Section 3 Personal Information -->
                 <h3>Personal Information:</h3>
@@ -247,47 +247,25 @@ ini_set('display_errors', 1);
         }
       ?>
        
-
         <!-- Section # cart -->
+        <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary ">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="text-primary">Your Cart</span>
+          <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
         </h4>
+        <ul id="cart-items" class="list-group mb-3"></ul>
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Total (CAD)</span>
+          <strong id="cart-total">0</strong>
+        </div>
+      </div>
 
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Base Price</h6>
-              <small class="text-body-secondary">This follows your natural nail shape and length</small>
-            </div>
-              <span class="text-body-secondary">$35</span>
-          </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Nail art</h6>
-                <small class="text-body-secondary">This is totaled for 4 nails.</small>
-              </div>
-              <span class="text-body-secondary">$20</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Nail Take off</h6>
-                <small class="text-body-secondary">Extra service</small>
-              </div>
-              <span class="text-body-secondary">$10</span>
-            </li>
-        
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (CAD)</span>
-              <strong>$60</strong>
-            </li>
-        </ul>
 
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
-          <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a>   
+          <input type="submit" class="btn btn-primary w-50" role="button" > 
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -343,24 +321,94 @@ ini_set('display_errors', 1);
 </div>
 
 <script>
-  
+    console.log("d");
+  let cart = [];
+  let totalPrice = 0;
+
+  function updateCart() {
+    console.log('mimi');
+    const cartContainer = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+
+    cartContainer.innerHTML = '';
+    cart.forEach((item, index) => {
+      const listItem = document.createElement('li');
+      listItem.className = 'list-group-item d-flex justify-content-between lh-sm';
+      listItem.innerHTML = `
+        <div>
+          <h6 class="my-0">${item.name}</h6>
+          <small class="text-body-secondary">${item.description}</small>
+        </div>
+        <span class="text-body-secondary">${item.price} CAD</span>
+        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+      `;
+      cartContainer.appendChild(listItem);
+    });
+
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = `${totalPrice.toFixed(2)} CAD`;
+  }
+
+  function addToCart(name, description, price) {
+    cart.push({ name, description, price });
+    totalPrice += price;
+    updateCart();
+  }
+
+  function removeFromCart(index) {
+    totalPrice -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
+  }
+
+  document.addEventListener('change', (event) => {
+    if (event.target.name && event.target.name.startsWith('serviceType')) {
+      console.log('Selected value:', event.target.value);
+      const service = JSON.parse(event.target.value);
+
+      const existingItemIndex = cart.findIndex(item => item.name === service.name);
+      if (existingItemIndex !== -1) {
+        removeFromCart(existingItemIndex);
+      }
+
+      addToCart(service.name, service.description, parseFloat(service.price));
+    }
+  });
+
 //colors select
 function selectColor(colorGroup, colorObject, groupId) {
     const groupContainer = document.getElementById(groupId);
-
+    if (!groupContainer) {
+        console.error(`Group container with ID "${groupId}" not found.`);
+        return;
+    }
     groupContainer.querySelectorAll('.color-item').forEach(el => {
         el.classList.remove('selected');
     });
 
     const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
-        return item.querySelector('h5').textContent === colorObject.name;
+        const itemName = item.querySelector('h5')?.textContent.trim();
+        return itemName === colorObject.name;
     });
+
+    if (!selectedItem) {
+        console.error(`No matching color item found for color name "${colorObject.name}".`);
+        return;
+    }
 
     selectedItem.classList.add('selected');
 
     const selectedColorElement = document.getElementById(`selected${colorGroup}`);
+    if (!selectedColorElement) {
+        console.error(`Selected color display element with ID "selected${colorGroup}" not found.`);
+        return;
+    }
     selectedColorElement.textContent = colorObject.name;
+
+    console.log(`Color "${colorObject.name}" selected successfully for group "${colorGroup}".`);
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
         selectedTime();
@@ -412,15 +460,73 @@ function selectedTime(){
     updateTimes(dateSelect.value);
   }
 
+  //SECTION AREA
+let currentSection = 1; 
+  let serviceSelected = null;
+
+  showSection(currentSection);
+
+  // Function to show a specific section
+  function showSection(sectionNumber) {
+    document.querySelectorAll('.form-section').forEach(section => {
+      section.classList.remove('active');
+    });
+    document.getElementById(`section${sectionNumber}`).classList.add('active');
+  }
+
+  // Handle the next button click for each section
+  function next() {
+    console.log("dede");
+      const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
+      if (!selectedServiceRadio) {
+        console.error("No service selected");
+        return;
+      }
+      serviceSelected = selectedServiceRadio.value;
+
+      // Handle navigation based on the current section and selected service
+      if (serviceSelected === 'home') {
+        if (currentSection === 1) {
+          currentSection = 4; //special section
+        } else if (currentSection === 4) {
+          currentSection = 2; 
+        } else if (currentSection === 2) {
+          currentSection = 3; 
+        }
+      } else if (serviceSelected === 'owner') {
+        if (currentSection === 1) {
+          currentSection = 2; 
+        } else if (currentSection === 2) {
+          currentSection = 3;
+        }
+      }
+
+      showSection(currentSection);
+    }
+
+  // Handle the back button click
+  function back() {
+      // Handle going back depending on current section
+      if (currentSection === 3) {
+        currentSection = 2; 
+      } else if (currentSection === 2) {
+        currentSection = 1;
+      } else if (currentSection === 4) {
+        currentSection = 1;
+      }
+
+      showSection(currentSection); // Show the new section
+  }
+
     //google mapppp
-    let map;
+    //let map;
 let directionsService;
 let directionsRenderer;
 let destinationAutoComplete;
 let sourceAddress = { lat: 45.435095, lng: -73.672204 };
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
+  let map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 45.5017, lng: -73.5673 },
     zoom: 13
   });
