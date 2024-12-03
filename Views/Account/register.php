@@ -23,16 +23,11 @@ include_once 'Views/bookingModal.php';
             <p class="mt-3">Already have an account? <a href="<?=BASE_PATH?>/account/login" id="showLoginForm">Login here</a></p>
           </form> 
          </div>
-          
-         
-
+ 
         
       </main>
 
       <script>
-
-  
-
 
       </script>
 

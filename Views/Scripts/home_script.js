@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("home");
+  console.log("home sep");
   const slideElements = document.querySelectorAll('.slide-up');
   const modal = document.getElementById('welcomeModal');
   const tokenIsSet = document.cookie.indexOf('token=') !== -1;
