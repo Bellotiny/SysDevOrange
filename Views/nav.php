@@ -81,9 +81,9 @@ $toggleText = lang === "en" ? "FR" : "EN";
 
 </header>
 <script>
+    //lang
     let lang = "<?= lang ?>";
 function changeLang() {
-    console.log("hELLO");
     if (lang == "en") {
         lang = "fr";
     } else {
@@ -92,6 +92,8 @@ function changeLang() {
  document.cookie = "lang=" + lang;
  location.reload();
 }
+
+//mobile version
 document.getElementById('menuToggle').addEventListener('click', function () {
     const navbarMenu = document.getElementById('navbarMenu');
     const body = document.body;
