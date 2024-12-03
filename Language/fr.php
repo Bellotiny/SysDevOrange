@@ -3,6 +3,8 @@
 const LOGIN = "Se Connecter";
 const LOGIN_HERE = "Se connecter ici";
 const REGISTER = "Registre";
+const CANCEL = "Annuler";
+const DONE = "Fini";
 const HOME = "Accueil";
 const ABOUT = "À Propos";
 const SERVICE = "Services";
@@ -12,6 +14,7 @@ const BOOK = "Réserver";
 const EMAIL = "Adresse de courriel";
 const PASSWORD = "Mot de passe";
 const FORGOT_PASS = "Vous avez oublié votre mot de passe?";
+const BACK = "Revenir";
 const GO_BACK = "Retour";
 const DONT_HAVE_ACCOUNT = "Vous n'avez pas encore de compte?";
 const REGISTER_HERE = " Créer un compte";
@@ -48,13 +51,20 @@ const IMPORTANCE_PROFESSIONAL_CARE = "Importance des Soins Professionnels";
 const BENEFIT_REG_MANICURE = "Avantage d’une Manucure Régulière";
 
 // About Us
-const ABOUT_US = "Découvrez-Nous";
+const ABOUT_US_HEADER = "Découvrez-Nous";
+const ABOUT_US_INFO = "Salut! Je suis une passionnée d'ongles d'une vingtaine d'années et j'ai récemment déménagé à Montréal avec mes trois bébés à fourrure - M. Bean, Brooklyn et Squirtle. 🐾 
+                      Mon parcours en matière d'ongles a commencé en 2020, lorsque le monde a ralenti et que les salons de manucure ont fermé. Armée de poly gel et d'un esprit créatif, j'ai commencé 
+                      à faire mes propres ongles. Bientôt, la nouvelle s'est répandue et mes amis ont fait la queue pour un nouveau set ! C’est à ce moment-là que je suis vraiment tombée amoureuse du 
+                      soin des ongles et de l’art. J’ai toujours eu une passion pour la créativité, et maintenant je peux l’exprimer tous les jours : un fabuleux design d’ongle à la fois ! 💅🏻✨";
 const IMPORTANT_NOTICE = "Avis Important";
 const CAT_NOTICE = "Veuillez noter que nous avons un précieux bébé en fourrure. 
         notre maison ! En tant que maman chat aimante, je veux vous faire savoir que 
         mon petit compagnon est un explorateur plutôt curieux. Rassurez-vous, ils sont sympathiques et pleins d’amour !";
 const LOCATION = "Emplacement";
-const PARKING_REMINDER = "Rappel de Stationnement :";
+const PARKING_REMINDER = "Le Stationnement Simplifié! 🚗✨";
+const PARKING_REMINDER_INFO = "À votre arrivée pour votre rendez-vous pour les ongles, vous trouverez un stationnement gratuit juste derrière la clinique Ortho, dans le parking en face de mon immeuble.
+                               Besoin d'un coup de main pour le stationnement ? Pas de soucis! Contactez-nous et je me ferai un plaisir de vous guider. Une fois garé, envoyez-moi un petit message : je 
+                               descendrai vous accueillir !";
 
 // Account Sidebar
 const ACCOUNT = "Compte";
@@ -89,3 +99,38 @@ const MENU = "Navigation";
 const PREVIOUS = "Précédente";
 const NEXT = "Suivante";
 
+
+
+// Booking 
+    // Section 1
+    const SERVICE_LOCATION = "Emplacement du Service:";
+    const OWNERS_PLACE = "Le Logement du Propriétaire";
+    const OWNERS_LOCATION = "(Voir le logement du Propriétaire)";
+    const HOME_SERVICE = " Service à domicile";
+    const TWENTY_KM = "(L'emplacement doit être à 20km du domicile du Propriétaire)";
+
+    // Section 2 
+    const PICK_TIME = "Choisissez votre heure et votre date :";
+    const AVAILABLE_DATES = "Dates Disponibles";
+    const AVAIALBLE_TIMES = "Horaires Disponibles";
+    
+    // Section 3
+    const VALID_FIRST_NAME_ERROR = "Un prénom valide est requis.";
+    const VALID_LAST_NAME_ERROR = "Un nom de famille valide est requis.";
+    const VALID_EMAIL_ERROR = "Votre adresse e-mail est requise.";
+    
+    // Cart 
+    const YOUR_CART = "Votre Panier";
+    const BASE_PRICE = "Prix ​​de Base";
+    const NATURAL_NAIL_LENGTH = "Cela suit la forme et la longueur naturelles de vos ongles";
+    const NAIL_ART = "Nail Art";
+    const TOTAL_FOUR_NAILS = "C'est un total pour 4 ongles.";
+    const NAIL_TAKE_OFF = "Enlever les Ongles";
+    const EXTRA_SERVICE = "Service Supplémentaire";
+    const TOTAL_CAD = "Total (CAD)";
+
+    // Home Service
+    const ADDRESS_TO_VERIFY = "Entrez votre adresse pour vérifier";
+    const HOME_SERVICE_ONLY_AVAIL_1 = "Attention : le service à domicile est uniquement disponible";
+    const HOME_SERVICE_ONLY_AVAIL_2 = "de chez le propriétaire.";
+    const VERIFY_ADDRESS = "Vérifier l'adresse";

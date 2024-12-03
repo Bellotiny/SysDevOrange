@@ -1,5 +1,8 @@
 <?php 
 include_once 'head.php';
+
+// Set the link text dynamically
+$toggleText = lang === "en" ? "FR" : "EN";
 ?>
 <header class="d-flex">
 <div class="container" id="desktop-nav">
@@ -19,7 +22,8 @@ include_once 'head.php';
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
-        </div>
+            <a class="nav-item" onclick = "return changeLang()"><?php echo $toggleText; ?></a>
+         </div>
 
         <!-- Book and Account Icon on the far right -->
         <div id="nav-extra" class="d-flex align-items-center">
@@ -57,6 +61,7 @@ include_once 'head.php';
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
+            <a class="nav-item" onclick = "return changeLang()"><?php echo $toggleText; ?></a>
             
             <!-- Row container for the "Book" and Account icon links -->
             <div class="nav-row">
@@ -76,6 +81,17 @@ include_once 'head.php';
 
 </header>
 <script>
+    let lang = "<?= lang ?>";
+function changeLang() {
+    console.log("hELLO");
+    if (lang == "en") {
+        lang = "fr";
+    } else {
+        lang = "en";
+    }
+ document.cookie = "lang=" + lang;
+ location.reload();
+}
 document.getElementById('menuToggle').addEventListener('click', function () {
     const navbarMenu = document.getElementById('navbarMenu');
     const body = document.body;
@@ -94,6 +110,5 @@ document.getElementById('menuToggle').addEventListener('click', function () {
         body.classList.add('no-scroll');
     }
 });
-
 </script>
 
