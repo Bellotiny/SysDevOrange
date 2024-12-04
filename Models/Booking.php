@@ -4,8 +4,11 @@ include_once "Model.php";
 include_once "User.php";
 include_once "Discount.php";
 include_once "BookingService.php";
+include_once "Service.php";
 include_once "BookingColor.php";
+include_once "Color.php";
 include_once "BookingImage.php";
+include_once "Image.php";
 
 final class Booking extends Model {
     public const TABLE = "bookings";
@@ -55,7 +58,7 @@ final class Booking extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addLeft(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
             ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID, User::getJoin());
     }
 
@@ -135,7 +138,7 @@ final class Booking extends Model {
     public function getFinalPrice(): float {
         $final = $this->price;
         if ($this->discount) {
-            $final = (($this->discount->percent / 100) * $final) - $this->discount->percent;
+            $final = max((($final - $this->discount->amount) * ($this->discount->percent / 100.0)), 0);
         }
         // TODO Apply birthday discount if it is their birthday
         return $final;

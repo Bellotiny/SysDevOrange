@@ -1,6 +1,7 @@
 <?php
 
 include_once "Helper/Join.php";
+include_once "Helper/Order.php";
 include_once "Helper/Value.php";
 include_once "Helper/Values.php";
 include_once "Helper/Where.php";
@@ -26,8 +27,10 @@ abstract class Model {
         return self::update($values, $where);
     }
 
-    public final function delete(): bool {
-        return self::executeQuery("DELETE FROM " . static::TABLE . " WHERE id = ?;", [$this->id]);
+    public final function remove(): bool {
+        $where = new Where();
+        $where->addEquals(new Value(static::id, $this->id));
+        return self::delete($where);
     }
 
     protected final static function getConnection(): mysqli {
@@ -49,6 +52,15 @@ abstract class Model {
 
     public static function getJoin(): ?Join {
         return null;
+    }
+
+    protected final static function delete(Where $where): bool {
+        return self::executeQuery(
+            "DELETE FROM `" . static::TABLE . "`" .
+            $where .
+            ";",
+            $where->getArgs()
+        );
     }
 
     protected final static function update(Values $values, ?Where $where = null): bool {
@@ -84,7 +96,7 @@ abstract class Model {
         return $list;
     }
 
-    protected final static function select(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): bool|mysqli_result {
+    protected final static function select(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null, ?Order $order = null): bool|mysqli_result {
         if ($join === null) $join = static::getJoin();
         return self::executeQuery(
             "SELECT " . implode(", ", array_map(fn($field) => $field . " as '" . $field . "'", array_merge(static::getFields(), ($join ? $join->getFields() : [])))) .
@@ -92,7 +104,9 @@ abstract class Model {
             ($join ?? "") .
             ($where ?? "") .
             ($limit ? " LIMIT " . $limit : "") .
-            ($offset ? " OFFSET " . $offset : ""),
+            ($offset ? " OFFSET " . $offset : "") .
+            ($order ?? "") .
+            ";",
             ($where ? $where->getArgs() : [])
         );
     }
@@ -100,9 +114,9 @@ abstract class Model {
     /**
      * @return static[]
      */
-    public final static function list(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): array {
+    public final static function list(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null, ?Order $order = null): array {
         $list = [];
-        $result = self::select($where, $join, $limit, $offset);
+        $result = self::select($where, $join, $limit, $offset, $order);
         if ($result) {
             while ($fields = $result->fetch_assoc()) {
                 $list[] = new static($fields);
@@ -111,8 +125,8 @@ abstract class Model {
         return $list;
     }
 
-    public final static function get(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null): ?static {
-        $result = self::select($where, $join, $limit, $offset);
+    public final static function get(?Where $where = null, ?Join $join = null, ?int $limit = null, ?int $offset = null, ?Order $order = null): ?static {
+        $result = self::select($where, $join, $limit, $offset, $order);
         if ($result) {
             if ($fields = $result->fetch_assoc()) {
                 return new static($fields);

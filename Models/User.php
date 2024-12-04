@@ -162,7 +162,6 @@ final class User extends Model {
     }
 
     /**
-     * Get Reviews
      * @return Review[]
      */
     public function getReviews(): array {
@@ -172,12 +171,21 @@ final class User extends Model {
     }
 
     /**
-     * Get Bookings
      * @return Booking[]
      */
     public function getBookings(): array {
         $where = new Where();
         $where->addEquals(new Value(Booking::userID, $this->id));
         return Booking::list($where);
+    }
+
+    /**
+     * @return Availability[]
+     */
+    public function getAvailabilities(): array {
+        $where = new Where();
+        $where->addEquals(new Value(Booking::userID, $this->id));
+        $order = new Order([Availability::timeSlot], true);
+        return Availability::list($where, null, null, null, $order);
     }
 }

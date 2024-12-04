@@ -44,7 +44,7 @@ final class Review extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addLeft(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
             ->addLeft(Image::getFields(), Image::TABLE, Image::id, self::imageID, Image::getJoin());
     }
 

@@ -32,8 +32,8 @@ final class UserGroup extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
-            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin());
+            ->addLeft(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addLeft(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin());
     }
 
     public static function new(User $user, Group $group): ?self {

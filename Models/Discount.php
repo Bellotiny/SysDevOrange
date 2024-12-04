@@ -14,8 +14,8 @@ final class Discount extends Model {
 
     public string $name;
     public string $type;
-    public DateTime $start;
-    public DateTime $end;
+    public string $start;
+    public string $end;
     public float $percent;
     public float $amount;
 
@@ -39,7 +39,7 @@ final class Discount extends Model {
         ];
     }
 
-    public static function new(string $name, int $start, int $end, float $percent, float $amount): ?self {
+    public static function new(string $name, string $start, string $end, float $percent, float $amount): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::start, $start));

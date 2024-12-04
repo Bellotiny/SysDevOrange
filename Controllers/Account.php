@@ -20,23 +20,22 @@ final class Account extends Controller {
     final public const DELETE = "delete";
 
     final public const PERSONAL_INFORMATION = "personalInformation";
-
-    final public const INVENTORY = "inventory";
-    final public const ADD_COLOR = "addcolor";
-    final public const ADD_SERVICE = "addservice";
-    final public const EDIT_COLOR = "editcolor";
-    final public const EDIT_SERVICE = "editservice";
-    final public const DELETE_COLOR = "deletecolor";
-    final public const DELETE_SERVICE = "deleteservice";
-
-
-    final public const BOOKING_LIST = "bookinglist";
-    final public const BOOKING_DELETE = "deletebooking";
-    final public const BOOKING_EDIT = "editbooking";
+    final public const HISTORY = "history";
 
     final public const SCHEDULE = "schedule";
-    final public const ADD_AVAILABILITY = "addavailability";
-    final public const DELETE_AVAILABILITY = "deleteavailability";
+    final public const AVAILABILITY_ADD = "addavailability";
+    final public const AVAILABILITY_DELETE = "deleteavailability";
+    final public const BOOKING_DELETE = "deletebooking";
+    final public const BOOKING_EDIT = "editbooking";
+    final public const BOOKING_VIEW = "viewbooking";
+
+    final public const INVENTORY = "inventory";
+    final public const COLOR_ADD = "addcolor";
+    final public const COLOR_EDIT = "editcolor";
+    final public const COLOR_DELETE = "deletecolor";
+    final public const SERVICE_ADD = "addservice";
+    final public const SERVICE_EDIT = "editservice";
+    final public const SERVICE_DELETE = "deleteservice";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -289,133 +288,19 @@ final class Account extends Controller {
                         $this->render("Account", $action);
                         break;
                     }
-                    $this->user->delete();
+                    $this->user->remove();
                     setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
                 }
                 Home::redirect();
                 break;
-            case self::INVENTORY:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $this->render("Account", $action, [
-                    "services" => Service::list(),
-                    "colors" => Color::list(),
-                ]);
-                break;
-            case self::ADD_COLOR:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
-                    $this->render("Account", $action);
-                    break;
-                }
-                $color = Color::new(
-                    $_POST["name"],
-                    $_POST["code"],
-                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
-                );
-                if ($color === null) {
-                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
-                    break;
-                }
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::ADD_SERVICE:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
-                    $this->render("Account", $action);
-                    break;
-                }
-                $service = Service::new(
-                    $_POST["name"],
-                    $_POST["description"],
-                    $_POST["type"],
-                    filter_var($_POST["price"], FILTER_VALIDATE_FLOAT),
-                    filter_var($_POST["duration"], FILTER_VALIDATE_INT),
-                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
-                );
-                if ($service === null) {
-                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
-                    break;
-                }
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::EDIT_COLOR:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $color = Color::getFromId((int)$_GET["id"]);
-                if (is_null($color)) {
-                    $this->redirect(self::INVENTORY);
-                    break;
-                }
-                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
-                    $this->render("Account", $action, ["color" => $color]);
-                    break;
-                }
-                $color->name = $_POST["name"];
-                $color->code = $_POST["code"];
-                $color->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
-                $color->save();
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::EDIT_SERVICE:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $service = Service::getFromId((int)$_GET["id"]);
-                if (is_null($service)) {
-                    $this->redirect(self::INVENTORY);
-                    break;
-                }
-                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
-                    $this->render("Account", $action, ["service" => $service]);
-                    break;
-                }
-                $service->name = $_POST["name"];
-                $service->description = $_POST["description"];
-                $service->type = $_POST["type"];
-                $service->price = filter_var($_POST["price"], FILTER_VALIDATE_FLOAT);
-                $service->duration = filter_var($_POST["duration"], FILTER_VALIDATE_INT);
-                $service->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
-                $service->save();
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::DELETE_COLOR:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $color = Color::getfromId((int)$_GET["id"]);
-                if (is_null($color)) {
-                    $this->redirect(self::INVENTORY);
-                    break;
-                }
-                $color->delete();
-                $this->redirect(self::INVENTORY);
-                break;
-            case self::DELETE_SERVICE:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $service = Service::getfromId((int)$_GET["id"]);
-                if (is_null($service)) {
-                    $this->redirect(self::INVENTORY);
-                    break;
-                }
-                $service->delete();
-                $this->redirect(self::INVENTORY);
-                break;
+
             case self::SCHEDULE:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
                 $this->render("Account", $action, ["availabilities" => Availability::listFuture()]);
                 break;
-            case self::ADD_AVAILABILITY:
+            case self::AVAILABILITY_ADD:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -441,24 +326,158 @@ final class Account extends Controller {
                 }
                 $this->redirect(self::SCHEDULE);
                 break;
-            case self::DELETE_AVAILABILITY:
+            case self::AVAILABILITY_DELETE:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                $availability = Availability::getfromId((int)$_GET["id"]);
-                if ($availability === null) {
+                if (!isset($_GET["id"])) {
                     $this->redirect(self::SCHEDULE);
                     break;
                 }
-                $availability->delete();
+                $times = explode("-", $_GET["id"]);
+                $availabilities = Availability::getBetween((int)$times[0], (int)$times[1]);
+                foreach ($availabilities as $availability) {
+                    if ($availability->booking !== null) {
+                        continue;
+                    }
+                    $availability->remove();
+                }
                 $this->redirect(self::SCHEDULE);
                 break;
-            case self::BOOKING_LIST:
+            case self::BOOKING_VIEW:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                $this->render("Account", $action, ["bookings" => Booking::list()]);
+                $booking = Booking::getFromId((int)$_GET["id"]);
+                if (is_null($booking)) {
+                    $this->redirect(self::SCHEDULE);
+                    break;
+                }
+                $this->render("Account", $action, ["booking" => $booking]);
                 break;
+            case self::HISTORY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => $this->user->getAvailabilities()]);
+                break;
+
+            case self::INVENTORY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, [
+                    "services" => Service::list(),
+                    "colors" => Color::list(),
+                ]);
+                break;
+            case self::COLOR_ADD:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $color = Color::new(
+                    $_POST["name"],
+                    $_POST["code"],
+                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
+                );
+                if ($color === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::SERVICE_ADD:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                $service = Service::new(
+                    $_POST["name"],
+                    $_POST["description"],
+                    $_POST["type"],
+                    filter_var($_POST["price"], FILTER_VALIDATE_FLOAT),
+                    filter_var($_POST["duration"], FILTER_VALIDATE_INT),
+                    filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
+                );
+                if ($service === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::COLOR_EDIT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $color = Color::getFromId((int)$_GET["id"]);
+                if (is_null($color)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["code"])) {
+                    $this->render("Account", $action, ["color" => $color]);
+                    break;
+                }
+                $color->name = $_POST["name"];
+                $color->code = $_POST["code"];
+                $color->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
+                $color->save();
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::SERVICE_EDIT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $service = Service::getFromId((int)$_GET["id"]);
+                if (is_null($service)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                    $this->render("Account", $action, ["service" => $service]);
+                    break;
+                }
+                $service->name = $_POST["name"];
+                $service->description = $_POST["description"];
+                $service->type = $_POST["type"];
+                $service->price = filter_var($_POST["price"], FILTER_VALIDATE_FLOAT);
+                $service->duration = filter_var($_POST["duration"], FILTER_VALIDATE_INT);
+                $service->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
+                $service->save();
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::COLOR_DELETE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $color = Color::getfromId((int)$_GET["id"]);
+                if (is_null($color)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $color->remove();
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::SERVICE_DELETE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $service = Service::getfromId((int)$_GET["id"]);
+                if (is_null($service)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $service->remove();
+                $this->redirect(self::INVENTORY);
+                break;
+
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action);
