@@ -25,13 +25,15 @@ final class UserGroup extends Model {
             self::id => $this->id,
             self::userID => $this->user->id,
             self::groupID => $this->group->id,
+            ...$this->user->toAssoc(),
+            ...$this->group->toAssoc(),
         ];
     }
 
-    protected static function getJoin(): ?Join {
+    public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID)
-            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID);
+            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin());
     }
 
     public static function new(User $user, Group $group): ?self {

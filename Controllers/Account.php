@@ -146,9 +146,9 @@ final class Account extends Controller {
                 $_SESSION["time"] = time();
                 $_SESSION["2fa"] = $code;
                 $_SESSION["tries"] = 0;
-                session_write_close();
                 self::redirect(self::TWO_FACTOR_AUTHENTICATION);
                 flush();
+                session_write_close();
                 Mail::send(
                     "2FA Code for Snook's Nail Nook",
                     "Your 2FA Code is: $code",
