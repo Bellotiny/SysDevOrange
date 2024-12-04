@@ -102,12 +102,12 @@ final class Gallery extends Controller {
                     break;
                 }
                 if ($review->image) {
-                    $review->image->delete();
+                    $review->image->remove();
                     if (file_exists($review->image->getPath())) {
                         unlink($review->image->getPath());
                     }
                 }
-                $review->delete();
+                $review->remove();
                 $this->redirect();
                 break;
             default:

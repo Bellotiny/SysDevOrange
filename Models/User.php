@@ -74,6 +74,16 @@ final class User extends Model {
         }
     }
 
+    public function applyDiscount($firstName, $birthDate){
+        $birthDateTime = new DateTime($birthDate);
+        $birthDateTimeStart = clone $birthDateTime;
+        $birthDateTimeStart->setTime(8, 0, 0);
+
+        $birthDateTimeEnd = clone $birthDateTime;
+        $birthDateTimeEnd->setTime(16, 0, 0);
+        Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
+    }
+
     /**
      * Get user based on the email and password
      */
@@ -152,7 +162,6 @@ final class User extends Model {
     }
 
     /**
-     * Get Reviews
      * @return Review[]
      */
     public function getReviews(): array {
@@ -162,12 +171,21 @@ final class User extends Model {
     }
 
     /**
-     * Get Bookings
      * @return Booking[]
      */
     public function getBookings(): array {
         $where = new Where();
         $where->addEquals(new Value(Booking::userID, $this->id));
         return Booking::list($where);
+    }
+
+    /**
+     * @return Availability[]
+     */
+    public function getAvailabilities(): array {
+        $where = new Where();
+        $where->addEquals(new Value(Booking::userID, $this->id));
+        $order = new Order([Availability::timeSlot], true);
+        return Availability::list($where, null, null, null, $order);
     }
 }

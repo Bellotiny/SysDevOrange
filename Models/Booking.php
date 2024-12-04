@@ -3,6 +3,12 @@
 include_once "Model.php";
 include_once "User.php";
 include_once "Discount.php";
+include_once "BookingService.php";
+include_once "Service.php";
+include_once "BookingColor.php";
+include_once "Color.php";
+include_once "BookingImage.php";
+include_once "Image.php";
 
 final class Booking extends Model {
     public const TABLE = "bookings";
@@ -46,40 +52,48 @@ final class Booking extends Model {
             self::location => $this->location,
             self::discountID => $this->discount?->id,
             ...$this->user->toAssoc(),
-            ...$this->discount?->toAssoc(),
+            ...($this->discount ? $this->discount->toAssoc() : []),
         ];
     }
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
+            ->addLeft(User::getFields(), User::TABLE, User::id, self::userID, User::getJoin())
             ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID, User::getJoin());
     }
 
-    public static function new(User $user, float $price, string $message, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
+    public static function new(User $user, float $price, string $message = null, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
         $values = new Values();
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::price, $price));
         $values->add(new Value(self::message, $message));
-        $values->add(new Value(self::payedOn, $payedOn));
         $values->add(new Value(self::bookedOn, $bookedOn));
+        $values->add(new Value(self::payedOn, $payedOn));
         $values->add(new Value(self::location, $location));
         $values->add(new Value(self::discountID, $discount?->id));
         try {
             self::insert($values, false);
             $id = self::getConnection()->insert_id;
-            return new self([
+            $booking = new self([
                 self::id => $id,
                 ...$user->toAssoc(),
                 self::price => $price,
                 self::message => $message,
-                self::payedOn => $payedOn,
                 self::bookedOn => $bookedOn,
+                self::payedOn => $payedOn,
                 self::location => $location,
                 ...($discount ? $discount->toAssoc() : []),
             ]);
+            UserGroup::new($user, Group::getFromName("registeredUsers"));
+            return $booking;
         } catch (Exception) {
             return null;
+        }
+    }
+
+    public static function setGroups(Booking $booking, array $group, string $className): void {
+        foreach ($group as $element) {
+            $className::new($booking, $element);
         }
     }
 
@@ -124,7 +138,7 @@ final class Booking extends Model {
     public function getFinalPrice(): float {
         $final = $this->price;
         if ($this->discount) {
-            $final = (($this->discount->percent / 100) * $final) - $this->discount->percent;
+            $final = max((($final - $this->discount->amount) * ($this->discount->percent / 100.0)), 0);
         }
         // TODO Apply birthday discount if it is their birthday
         return $final;
