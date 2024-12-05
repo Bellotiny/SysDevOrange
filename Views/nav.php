@@ -21,6 +21,7 @@ $toggleText = (lang === "en" ? "FR" : "EN");
             <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about"><?= ABOUT ?></a>
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
+            <a class="nav-item <?= ($currentPage == 'reviews') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/reviews"><?= REVIEWS ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
             <a class="nav-item" onclick = "return changeLang()"><?php echo $toggleText; ?></a>
          </div>
@@ -60,6 +61,7 @@ $toggleText = (lang === "en" ? "FR" : "EN");
             <a class="nav-item <?= ($currentPage == 'about') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/about"><?= ABOUT ?></a>
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
+            <a class="nav-item <?= ($currentPage == 'reviews') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/reviews"><?= REVIEWS ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
             <a class="nav-item" onclick = "return changeLang()"><?php echo $toggleText; ?></a>
             
