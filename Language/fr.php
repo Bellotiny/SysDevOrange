@@ -135,6 +135,9 @@ const ORIGINAL_PRICE = "Prix ​​d'Origine: $";
 const BOOKED_ON = "Réservé le:";
 const TOTAL_ACCOUNT_HISTORY = "Total: $";
 const DATE = "Date:";
+const NO_DISCOUNT = "Aucune remise disponible";
+const VIEW_MORE_DETAILS = "Voir pour plus de détails";
+const PAYED = "Payé: ";
 
 // Account -> Forgot Password
 const FORGOT_PASS_ACCOUNT = "Mot de Passe Oublié";

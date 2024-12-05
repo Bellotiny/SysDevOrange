@@ -128,6 +128,9 @@ const ORIGINAL_PRICE = "Original Price: $";
 const BOOKED_ON = "Booked on:";
 const TOTAL_ACCOUNT_HISTORY = "Total: $";
 const DATE = "Date:";
+const NO_DISCOUNT = "No discount available";
+const VIEW_MORE_DETAILS = "View for more details";
+const PAYED = "Payed: ";
 
 // Account -> Forgot Password
 const FORGOT_PASS_ACCOUNT = "Forgot Password";
