@@ -475,7 +475,7 @@ input[type="submit"] {
     color: #ffffff;
     background: #008060;
     background-color: #d2d8ce;
-    border-radius: 15px;
+    border-radius: 7px;
     font-weight: 500;
     font-size: clamp(1rem, 3vw, 1.3rem);
     width: 70%;
@@ -519,8 +519,8 @@ footer p{
 
 /* Change the active link color */
 a.nav-link.active {
-    color: #fadadd !important; /* Change to your desired color */
-    background-color: #1b613e !important; /* Optional: Change background color */
+    color: #fadadd !important;
+    background-color: #1b613e !important;
 }
 
 .sideScreen {
@@ -626,7 +626,7 @@ a.nav-link.active {
 
 #navbarLogo {
     width: auto;
-    height: 90px; /* Adjust the height of the logo */
+    height: 90px; 
 }
 #hamburger{
     display: contents;
