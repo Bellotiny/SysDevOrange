@@ -81,7 +81,7 @@ final class Availability extends Model {
     }
 
     public static function listAvailableTime(): ?array {
-        return self::list(new Where(new IsNull(self::booking)), null, null, null, null);
+        return self::list(new Where(new IsNull(self::bookingID)), null, null, null, null);
     }
 
     public static function getBetween(int $start, int $end): array {
