@@ -6,6 +6,7 @@ include_once "Models/Color.php";
 include_once "Models/Discount.php";
 include_once "Models/User.php";
 include_once "Models/Availability.php";
+include_once "Models/Image.php";
 include_once "Controllers/Home.php";
 
 final class Book extends Controller {
@@ -14,10 +15,10 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::list()]);
+                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::listAvailableTime()]);
             break;
             case "add":
-                var_dump($_POST);
+                //var_dump($_POST);
                 $services = [];
                 if (isset($_POST['serviceType'])) {
                     foreach ($_POST['serviceType'] as $type => $serviceJson) {
@@ -27,17 +28,34 @@ final class Book extends Controller {
                         $services[] = $service;
                     }
                 }
+
                 $price = 0;
                 foreach ($services as $service) {
                     $price += $service->price;
                 }
+
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-                $colors = array_values(array_filter([
+                
+                $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
-                    $_POST['colorGroupColor2'] ?? null,
-                    $_POST['colorGroupColor3'] ?? null
+                    $_POST['colorGroupColor2'] ?? null
                 ]));
-                $date_time = $_POST['selected_date_time'] ?? null;
+                
+                $colors = [];
+                foreach ($colorsJson as $colorJson) {
+                    $color = json_decode($colorJson);
+                    if (isset($color->name)) {
+                        $colors[] = Color::getFromName($color->name);
+                    }
+                }
+
+
+                if (!empty($_POST['selected_date_time'])) {
+                    $selectedDateTime = $_POST['selected_date_time'];
+                    $date_time = Availability::getFromDateTime($selectedDateTime);
+                }
+                
+                
                 if($this->user != null){
                     $user = $this->user;
                 } else{
@@ -45,22 +63,53 @@ final class Book extends Controller {
                         $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     }
                 }
-                //$message = $_POST['message'] ?? null;
-                //$images = $_POST[''] ?? null;
-                var_dump($user);
-                var_dump($user->id);
-                var_dump($price);
-                var_dump($date_time);
+
+                $message = $_POST['message'] ?? null;      
+                $images = [];
+                
+                if (isset($_FILES["image"]) && !empty($_FILES["image"]["name"][0])) {
+                    foreach ($_FILES["image"]["name"] as $key => $name) {
+                        if (!empty($name) && is_uploaded_file($_FILES["image"]["tmp_name"][$key])) {
+                            $extension = pathinfo($name, PATHINFO_EXTENSION);
+                            $filename = pathinfo($name, PATHINFO_FILENAME);
+                
+                            // Create a new image instance (assume Image::new handles image creation)
+                            $newImage = Image::new($filename, $extension);
+                
+                            // Move the uploaded file to the destination path
+                            if (move_uploaded_file($_FILES["image"]["tmp_name"][$key], $newImage->getPath())) {
+                                $images[] = $newImage; // Add to the images array
+                            } else {
+                                error_log("Failed to move uploaded file: $name");
+                            }
+                        }
+                    }
+                } else {
+                    error_log("No images were uploaded.");
+                }
+
+                echo '<pre>';
+                var_dump($services);
+                var_dump($colors);
+                var_dump($date_time->timeSlot);
                 var_dump($location);
-                if($services != null||$colors != null||$date_time != null){
-                    $booking = Booking::new($user, $price, null, null, $date_time, $location);
-                    if($booking != null){
+                echo '</pre>';
+                if ($services != null && $colors != null && $date_time != null && $location != null) {
+                    $message = $message ?? null;
+                    $booking = Booking::new($user, $price, $message, null, $date_time->timeSlot, $location);
+                
+                    var_dump($booking);
+                    if ($booking != null) {
                         Booking::setGroups($booking, $colors, 'BookingColor');
                         Booking::setGroups($booking, $services, 'BookingService');
-                        //Booking::setGroups($booking, $images, 'BookingImage');
+                        $date_time->booking = $booking;
+                        $date_time->save();
+                        if ($images != null) {
+                            Booking::setGroups($booking, $images, 'BookingImage');
+                        }
+                        
                         Home::redirect();
                     }
-                    //Home::redirect();
                 }
             break;
             case "delete":

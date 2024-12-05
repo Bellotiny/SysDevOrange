@@ -62,7 +62,7 @@ final class Booking extends Model {
             ->addLeft(Discount::getFields(), Discount::TABLE, Discount::id, self::discountID, User::getJoin());
     }
 
-    public static function new(User $user, float $price, string $message = null, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
+    public static function new(User $user, float $price, ?string $message = null, ?string $payedOn = null, ?string $bookedOn = null, ?string $location = null, ?Discount $discount = null): ?self {
         $values = new Values();
         $values->add(new Value(self::userID, $user->id));
         $values->add(new Value(self::price, $price));

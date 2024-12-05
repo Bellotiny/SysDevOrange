@@ -138,6 +138,8 @@ ini_set('display_errors', 1);
                                     <h5 class="fw-normal">' . $colors->name . '</h5>
                                   </div>';
                         }
+                        echo '<input type="hidden" id="colorGroupColor1" name="colorGroupColor1" value="">
+                              <input type="hidden" id="colorGroupColor2" name="colorGroupColor2" value="">';
                     ?>
               </div>
               </div>
@@ -248,9 +250,9 @@ ini_set('display_errors', 1);
                 </div>";
         }
       ?>
-       
-        <!-- Section # cart -->
-        <div id="cart-container" class="container my-5">
+
+      <!-- Section # cart -->
+      <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary"><?= YOUR_CART ?></span>
           <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
@@ -262,18 +264,39 @@ ini_set('display_errors', 1);
         </div>
       </div>
 
+      <br><br>
+
+
+<div class="green-background text-secondary  container slide-up ">
+              <div class=" pb-5" >
+                  <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Add Reference</h1>
+              </div>
+          </div>
+
+          <!-- Message and image -->
+              <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required></textarea>
+              </div>
+              <div class="mb-3">
+                  <label for="image" class="form-label">Upload Image</label>
+                  <input type="file" name="image" id="image" class="form-control" accept="image/*">
+              </div>
+              <?php if (isset($data['error'])): ?>
+                  <p><span style="color:red"><?php echo $data['error']; ?></span></p>
+              <?php endif; ?>
+
+        <br><br>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3"><?= BACK ?></a>
-          <input type="submit" class="btn btn-primary w-50" role="button" > 
-
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
+          <input type="submit" class="btn btn-primary w-50" value="Book" id="next-button-service-3">
+          <!-- <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a> -->
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 65%">65%</div>
         </div>
-    
-      </div>
 
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
@@ -339,10 +362,8 @@ ini_set('display_errors', 1);
       listItem.innerHTML = `
         <div>
           <h6 class="my-0">${item.name}</h6>
-          <small class="text-body-secondary">${item.description}</small>
         </div>
-        <span class="text-body-secondary">${item.price} CAD</span>
-        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+        <span class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">${item.price} CAD</span>
       `;
       cartContainer.appendChild(listItem);
     });
@@ -354,12 +375,6 @@ ini_set('display_errors', 1);
   function addToCart(name, description, price) {
     cart.push({ name, description, price });
     totalPrice += price;
-    updateCart();
-  }
-
-  function removeFromCart(index) {
-    totalPrice -= cart[index].price;
-    cart.splice(index, 1);
     updateCart();
   }
 
@@ -378,13 +393,14 @@ ini_set('display_errors', 1);
   });
 
 //colors select
-function selectColor(colorGroup, colorObject, groupId) {
+function selectColor(colorGroup, colorObject, groupId) { 
     const groupContainer = document.getElementById(groupId);
     if (!groupContainer) {
         console.error(`Group container with ID "${groupId}" not found.`);
         return;
     }
-    groupContainer.querySelectorAll('.color-item').forEach(el => {
+
+   groupContainer.querySelectorAll('.color-item').forEach(el => {
         el.classList.remove('selected');
     });
 
@@ -407,6 +423,11 @@ function selectColor(colorGroup, colorObject, groupId) {
     }
     selectedColorElement.textContent = colorObject.name;
 
+    const hiddenInput = document.getElementById(`colorGroup${colorGroup}`);
+    if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(colorObject);
+    }
+
     console.log(`Color "${colorObject.name}" selected successfully for group "${colorGroup}".`);
 }
 
@@ -415,8 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedTime();
     });
 
-function selectedTime(){
-  const availableDatesTimes = <?php echo json_encode($available_dates_times); ?>;
+  function selectedTime() { 
+    const availableDatesTimes = <?php echo json_encode($available_dates_times); ?>;
 
     const dateSelect = document.getElementById('availableDates');
     const timeSelect = document.getElementById('availableTimes');
@@ -424,13 +445,11 @@ function selectedTime(){
 
     function updateTimes(selectedDate) {
         timeSelect.innerHTML = '';
-
         const times = availableDatesTimes[selectedDate] || [];
         times.forEach(time => {
-          const formattedTime = formatTime(time);
             const option = document.createElement('option');
             option.value = time;
-            option.textContent = formattedTime;
+            option.textContent = formatTime(time);
             timeSelect.appendChild(option);
         });
 
@@ -452,14 +471,12 @@ function selectedTime(){
     });
 
     function formatTime(time) {
-        const dateObj = new Date(`1970-01-01T${time}`);
-        const hours = String(dateObj.getHours()).padStart(2, '0');
-        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-        return `${hours}:${minutes}`;
+        const [hour, minute] = time.split(':');
+        return `${hour}:${minute}`;
     }
 
     updateTimes(dateSelect.value);
-  }
+}
 
   //SECTION AREA
 let currentSection = 1; 
@@ -493,12 +510,16 @@ let currentSection = 1;
           currentSection = 2; 
         } else if (currentSection === 2) {
           currentSection = 3; 
+        }else if (currentSection === 3) {
+          currentSection = 5;
         }
       } else if (serviceSelected === 'owner') {
         if (currentSection === 1) {
           currentSection = 2; 
         } else if (currentSection === 2) {
           currentSection = 3;
+        }else if (currentSection === 3) {
+          currentSection = 5;
         }
       }
 
@@ -508,7 +529,9 @@ let currentSection = 1;
   // Handle the back button click
   function back() {
       // Handle going back depending on current section
-      if (currentSection === 3) {
+      if (currentSection === 5) {
+        currentSection = 3; 
+      } else if (currentSection === 3) {
         currentSection = 2; 
       } else if (currentSection === 2) {
         currentSection = 1;
