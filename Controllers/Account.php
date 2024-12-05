@@ -25,8 +25,8 @@ final class Account extends Controller {
     final public const SCHEDULE = "schedule";
     final public const AVAILABILITY_ADD = "addavailability";
     final public const AVAILABILITY_DELETE = "deleteavailability";
-    final public const BOOKING_DELETE = "deletebooking";
-    final public const BOOKING_EDIT = "editbooking";
+    final public const BOOKING_DELETE = "bookingdelete";
+    final public const BOOKING_EDIT = "bookingedit";
     final public const BOOKING_VIEW = "viewbooking";
     final public const BOOKING_LIST = "bookinglist";
 
@@ -159,6 +159,9 @@ final class Account extends Controller {
                 );
                 break;
             case self::TWO_FACTOR_AUTHENTICATION:
+
+                session_start();
+                var_dump($_SESSION["2fa"]);
                 if (!isset($_POST["code"])) {
                     $this->render("Account", $action);
                     break;
@@ -304,6 +307,12 @@ final class Account extends Controller {
                 }
                 $this->render("Account", $action, ["availabilities" => Availability::listFuture()]);
                 break;
+            case self::HISTORY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => $this->user->getAvailabilities()]);
+                break;
             case self::AVAILABILITY_ADD:
                 if (!$this->verifyRights($action)) {
                     break;
@@ -365,11 +374,22 @@ final class Account extends Controller {
                 }
                 $this->render("Account", $action, ["availabilities" => Availability::listWithBookings((int)($_GET["id"] ?? 0))]);
                 break;
-            case self::HISTORY:
-                if (!$this->verifyRights($action)) {
+            case self::BOOKING_DELETE:
+                if ($this->user === null) {
+                    Account::redirect(Account::LOGIN);
                     break;
                 }
-                $this->render("Account", $action, ["availabilities" => $this->user->getAvailabilities()]);
+                $booking = Booking::getFromId((int)$_GET["id"]);
+                if (is_null($booking)) {
+                    self::redirect(self::BOOKING_LIST, $_GET["id"]);
+                    break;
+                }
+                if (!$this->user->hasRights("Account", $action) && $booking->user->id !== $this->user->id) {
+                    $this::back();
+                    break;
+                }
+                $booking->remove();
+                self::redirect();
                 break;
 
             case self::INVENTORY:
