@@ -13,7 +13,7 @@ include_once 'Views/head.php';
     <div>
         <div class="green-background text-secondary  container slide-up ">
             <div class=" pb-5" >
-                <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Edit Review</h1>
+                <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= EDIT_REVIEW ?></h1>
             </div>
         </div>
 
@@ -28,7 +28,7 @@ include_once 'Views/head.php';
                 <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required><?= $data["review"]->message ?></textarea>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Upload Image</label>
+                <label for="image" class="form-label"><?= UPLOAD_IMAGE_REVIEW ?></label>
                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
             </div>
             <?php if (isset($data['error'])): ?>

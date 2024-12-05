@@ -125,6 +125,23 @@ const HELLO = "Bonjour, ";
 const PERSONAL_INFO_1 = "Nous sommes si heureux de vous voir.";
 const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
 
+// Gallery
+    // Add Review
+    const ADD_REVIEW = "Ajouter un Avis";
+    const TITLE_REVIEW = "Titre";
+    const MESSAGE_REVIEW = "Message";
+    const UPLOAD_IMAGE_REVIEW =  "Télécharger une Image";
+    
+    // Delete Review
+    const DELETE_REVIEW = "Supprimer L'avis";
+
+    // Edit Review
+    const EDIT_REVIEW = "Modifier L'avis";
+
+    // List Review
+    const REVIEWS= "Avis";
+    const WRITE_REVIEW = "Écrire un Avis";
+
 // Contact Us 
 const CONTACT_US = "Contactez-Nous";
 const SEND = "Envoyer";

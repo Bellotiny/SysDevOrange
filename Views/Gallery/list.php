@@ -12,7 +12,7 @@ include_once 'Views/head.php';
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >
-      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Gallery</h1>
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= GALLERY ?></h1>
     </div>
   </div>
 
@@ -36,13 +36,13 @@ include_once 'Views/head.php';
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >
-      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Reviews</h1>
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= REVIEWS ?></h1>
     </div>
   </div>
     
   <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
   <div class="d-grid gap-2">
-    <a href="<?=BASE_PATH?>/gallery/add" class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false" >Write Review</a>
+    <a href="<?=BASE_PATH?>/gallery/add" class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false" ><?= WRITE_REVIEW ?></a>
   </div>
   </div>
 
@@ -107,11 +107,11 @@ include_once 'Views/head.php';
      <div class="d-flex justify-content-center">
       <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#"><?= PREVIOUS ?></a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" href="#"><?= NEXT ?></a></li>
           </ul>
         </nav>
      </div>

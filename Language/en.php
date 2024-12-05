@@ -118,6 +118,23 @@ const HELLO = "Hello, ";
 const PERSONAL_INFO_1 = "We're so happy to see you.";
 const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
 
+// Gallery
+    // Add Review
+    const ADD_REVIEW = "Add Review";
+    const TITLE_REVIEW = "Title";
+    const MESSAGE_REVIEW = "Message";
+    const UPLOAD_IMAGE_REVIEW =  "Upload Image";
+    
+    // Delete Review
+    const DELETE_REVIEW = "Supprimer L'avis";
+
+    // Edit Review
+    const EDIT_REVIEW = "Edit Review";
+
+    // List Review
+    const REVIEWS= "Reviews"
+    const WRITE_REVIEW = "Write Review";
+
 // Contact Us 
 const CONTACT_US = "Contact Us";
 const SEND = "Send";
