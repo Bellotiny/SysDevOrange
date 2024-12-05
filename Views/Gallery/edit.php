@@ -21,11 +21,11 @@ include_once 'Views/head.php';
         <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/edit/<?= $data['review']->id ?>" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title" value="<?= $data["review"]->title ?>" required>
+                <input type="text" name="title" id="title" class="form-control" placeholder="<?= ENTER_REVIEW_TITLE ?>" value="<?= $data["review"]->title ?>" required>
             </div>
             <div class="mb-3">
-                <label for="message" class="form-label">Message</label>
-                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required><?= $data["review"]->message ?></textarea>
+                <label for="message" class="form-label"><? MESSAGE_REVIEW ?></label>
+                <textarea name="message" id="message" class="form-control" rows="3" placeholder="<?= ENTER_REVIEW_TEXT ?>" required><?= $data["review"]->message ?></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label"><?= UPLOAD_IMAGE_REVIEW ?></label>

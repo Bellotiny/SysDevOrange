@@ -12,27 +12,27 @@ include_once 'Views/bookingModal.php';
           <!--content is load here-->
          
           <div class="container">
-          <h1>Login</h1>
+          <h1><?= LOGIN ?></h1>
           <form action="<?=BASE_PATH?>/account/login" method="POST">
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="email"><?= EMAIL ?></label>
               <input type="email" class="form-control" id="email" name="email" value="<?= $data["email"] ?? "" ?>" required>
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
+              <label for="password"><?= PASSWORD ?></label>
               <input type="password" class="form-control" id="password" name="password" required>
-              <p class="mt-3"><a href="<?=BASE_PATH?>/account/forgot">Forgot Your Password?</a></p>
+              <p class="mt-3"><a href="<?=BASE_PATH?>/account/forgot"><?= FORGOT_PASS ?></a></p>
             </div>
             <?php if (isset($data["error"])): ?>
               <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Login">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/home" role="button">Go Back</a>
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/home" role="button"><?= GO_BACK ?></a>
             </div>
 
            
-            <p class="mt-3">Don't have an account? <a href="<?=BASE_PATH?>/account/register" id="showRegisterForm">Register here</a></p>
+            <p class="mt-3"><?= DONT_HAVE_ACCOUNT ?> <a href="<?=BASE_PATH?>/account/register" id="showRegisterForm"><?= REGISTER_HERE ?></a></p>
           </form>
           </div>
 

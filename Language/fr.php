@@ -4,6 +4,9 @@ const LOGIN = "Se Connecter";
 const LOGIN_HERE = "Se connecter ici";
 const REGISTER = "Registre";
 const CANCEL = "Annuler";
+const CONFIRM = "Confirmer";
+const CODE = "Code";
+const COLOR = "Couleur";
 const DONE = "Fini";
 const HOME = "Accueil";
 const ABOUT = "À Propos";
@@ -126,7 +129,30 @@ const HELLO = "Bonjour, ";
 const PERSONAL_INFO_1 = "Nous sommes si heureux de vous voir.";
 const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
 
+// Account -> Booking History
+const LOCATION= "Emplacement: ";
+const DISCOUNT_BREAKDOWN = "Répartition des remises:";
+const ORIGINAL_PRICE = "Prix ​​d'Origine: $";
+const BOOKED_ON = "Réservé le:";
+const TOTAL_ACCOUNT_HISTORY = "Total: $";
+const DATE = "Date:";
+
+// Account -> Forgot Password
+const FORGOT_PASS_ACCOUNT = "Forgot Password";
+
+// Account -> Recovery
+const RECOVERY = "Récupération";
+
+// Account -> View Booking 
+const  VIEW_BOOKING = "Voir la Réservation";
+const PRICE = "Prix";
+const PAYED_ON = "Payé Le";
+
 // Gallery
+    
+    // General Review
+    const ENTER_REVIEW_TITLE = "Entrez le titre de l'avis";
+    const ENTER_REVIEW_TEXT = "Écrivez votre avis ici";
     // Add Review
     const ADD_REVIEW = "Ajouter un Avis";
     const TITLE_REVIEW = "Titre";
@@ -134,15 +160,16 @@ const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
     const UPLOAD_IMAGE_REVIEW =  "Télécharger une Image";
     
     // Delete Review
-    const DELETE_REVIEW = "Supprimer L'avis";
+    const DELETE_REVIEW = "Supprimer l'Avis";
 
     // Edit Review
-    const EDIT_REVIEW = "Modifier L'avis";
+    const EDIT_REVIEW = "Modifier l'Avis";
 
     // List Review
     const REVIEWS= "Avis";
     const WRITE_REVIEW = "Écrire un Avis";
     const SEARCH = "Recherche:";
+    const SEARCH_FOR_REVIEWS = "Rechercher des avis";
 
 // Contact Us 
 const CONTACT_US = "Contactez-Nous";
@@ -173,6 +200,8 @@ const NEXT = "Suivante";
     const PICK_TIME = "Choisissez votre heure et votre date :";
     const AVAILABLE_DATES = "Dates Disponibles";
     const AVAILABLE_TIMES = "Horaires Disponibles";
+    const PICK_COLORS = "Choisissez votre(vos) couleur(s) :";
+    const NONE = "Aucune";
     
     // Section 3
     const VALID_FIRST_NAME_ERROR = "Un prénom valide est requis.";
@@ -188,6 +217,11 @@ const NEXT = "Suivante";
     const NAIL_TAKE_OFF = "Enlever les Ongles";
     const EXTRA_SERVICE = "Service Supplémentaire";
     const TOTAL_CAD = "Total (CAD)";
+
+    // Confirmation 
+    const THANKS_FOR_ORDER = "Merci pour votre commande!";
+    const BOOKING_SUCCESS = "Nous avons reçu votre réservation avec succès et nous sommes ravis de faire partie de votre prochaine expérience beauté.";
+    const CHECK_EMAIL = "Vérifiez votre courrier électronique pour plus de détails et confirmation";
 
     // Home Service
     const ADDRESS_TO_VERIFY = "Entrez votre adresse pour vérifier";

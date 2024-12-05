@@ -20,7 +20,7 @@ include_once 'Views/head.php';
         <!-- Initially hidden review form -->
         <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/delete/<?= $data['review']->id ?>" method="POST">
             <div class="mb-3">
-                <label for="confirm" class="form-label">Confirm</label>
+                <label for="confirm" class="form-label"><?= CONFIRM ?></label>
                 <input type="checkbox" name="confirm" id="confirm">
             </div>
             <div class="d-grid gap-2">

@@ -4,6 +4,9 @@ const LOGIN = "Login";
 const LOGIN_HERE = "Login here";
 const REGISTER = "Register";
 const CANCEL = "Cancel";
+const CONFIRM = "Confirm";
+const CODE = "Code";
+const COLOR = "Color";
 const DONE = "Done";
 const HOME = "Home";
 const ABOUT = "About";
@@ -28,7 +31,7 @@ const BIRTHDAY = "Birthday";
 const PHONE_NUMBER = "Phone Number";
 const CONFIRM_PASSWORD = "Confirm Password";
 
-// Register Requirements
+// Password Requirements
 const PASS_MUST_CONTAIN = "Password must contain";
 const UPPERCASE = "uppercase";
 const LOWERCASE = "lowercase";
@@ -111,7 +114,7 @@ const BOOKING_LIST = "Booking List";
 // Account Settings
 const EDIT_PROFILE = "Edit Profile";
 const CHANGE_PASSWORD = "Change Password";
-const DELETE_PROFILE = "Delete Profile";
+const DELETE_PROFILE = "Delete Account";
 const SIGN_OUT = "Sign Out";
 
 // Acount -> Personal Information
@@ -119,7 +122,30 @@ const HELLO = "Hello, ";
 const PERSONAL_INFO_1 = "We're so happy to see you.";
 const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
 
+// Account -> Booking History
+const LOCATION= "Location: ";
+const DISCOUNT_BREAKDOWN = "Discount breakdown:";
+const ORIGINAL_PRICE = "Original Price: $";
+const BOOKED_ON = "Booked on:";
+const TOTAL_ACCOUNT_HISTORY = "Total: $";
+const DATE = "Date:";
+
+// Account -> Forgot Password
+const FORGOT_PASS_ACCOUNT = "Forgot Password";
+
+// Account -> Recovery
+const RECOVERY = "Recovery";
+
+// Account -> View Booking 
+const  VIEW_BOOKING = "View Booking";
+const PRICE = "Price";
+const PAYED_ON = "Payed On";
+
 // Gallery
+
+    // General Review
+    const ENTER_REVIEW_TITLE = "Enter review title";
+    const ENTER_REVIEW_TEXT = "Write your review here";
     // Add Review
     const ADD_REVIEW = "Add Review";
     const TITLE_REVIEW = "Title";
@@ -136,6 +162,7 @@ const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
     const REVIEWS= "Reviews"
     const WRITE_REVIEW = "Write Review";
     const SEARCH = "Search:";
+    const SEARCH_FOR_REVIEWS = "Search for reviews";
 
 // Contact Us 
 const CONTACT_US = "Contact Us";
@@ -163,6 +190,8 @@ const NEXT = "Next";
     const PICK_TIME = "Pick your time and date:";
     const AVAILABLE_DATES = "Available Dates";
     const AVAILABLE_TIMES = "Available Times";
+    const PICK_COLORS = "Pick your color(s):";
+    const NONE = "None";
     
     // Section 3
     const VALID_FIRST_NAME_ERROR = "Valid first name is required.";
@@ -178,6 +207,11 @@ const NEXT = "Next";
     const NAIL_TAKE_OFF = "Nail Take off";
     const EXTRA_SERVICE = "Extra Service";
     const TOTAL_CAD = "Total (CAD)";
+
+    // Confirmation 
+    const THANKS_FOR_ORDER = "Thank you for your order!";
+    const BOOKING_SUCCESS = "We’ve successfully received your booking, and we’re thrilled to be a part of your next beauty experience.";
+    const CHECK_EMAIL = "Check you email for  more details and confirmation";
 
     // Home Service
     const ADDRESS_TO_VERIFY = "Enter your address to verfiy";

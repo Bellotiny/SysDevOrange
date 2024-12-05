@@ -13,14 +13,14 @@ include_once 'Views/bookingModal.php';
   
       
            <div class="container">
-           <h1>Register</h1>
+           <h1><?= REGISTER ?></h1>
            <?php include_once 'Views/registerForm.php'; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
                 <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/personalInformation" role="button">Go Back</a>
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/personalInformation" role="button"><?= GO_BACK ?></a>
             </div>
            
-            <p class="mt-3">Already have an account? <a href="<?=BASE_PATH?>/account/login" id="showLoginForm">Login here</a></p>
+            <p class="mt-3"><?= ALREADY_HAVE_ACCOUNT ?> <a href="<?=BASE_PATH?>/account/login" id="showLoginForm"><?= LOGIN_HERE ?></a></p>
           </form> 
          </div>
  
