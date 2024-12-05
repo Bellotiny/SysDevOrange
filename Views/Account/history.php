@@ -16,7 +16,9 @@ include_once 'Views/bookingModal.php';
     <div class="sideScreen slide-up">
         <!---default content will be the Personal info-->
         <!--content is load here-->
-        <div class="w-100 slide-up">
+        
+        <div class="container slide-up  my-2">
+        <?php include_once 'Views/menuAccount.php'; ?>
             <?php
             if ($data["availabilities"]) {
                 echo "<hr>";
