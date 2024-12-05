@@ -22,7 +22,7 @@ $toggleText = (lang === "en" ? "FR" : "EN");
             <a class="nav-item <?= ($currentPage == 'services') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/services"><?= SERVICE ?></a>
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
-            <a class="nav-item" onclick = "return changeLang()"><?php echo $toggleText; ?></a>
+            <a class="nav-item"  onclick = "return changeLang()" href=""><?php echo $toggleText; ?></a>
          </div>
 
         <!-- Book and Account Icon on the far right -->
