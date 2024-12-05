@@ -276,10 +276,10 @@ ini_set('display_errors', 1);
           <!-- Message and image -->
               <div class="mb-3">
                   <label for="message" class="form-label">Message</label>
-                  <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required></textarea>
+                  <textarea name="message" id="message" class="form-control" rows="3" placeholder="<?= DESCRIBE ?>" required></textarea>
               </div>
               <div class="mb-3">
-                  <label for="image" class="form-label">Upload Image</label>
+                  <label for="image" class="form-label"><?= UPLOAD_IMAGE_REVIEW ?></label>
                   <input type="file" name="image" id="image" class="form-control" accept="image/*">
               </div>
               <?php if (isset($data['error'])): ?>

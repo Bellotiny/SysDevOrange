@@ -213,6 +213,9 @@ const NEXT = "Next";
     const VALID_FIRST_NAME_ERROR = "Valid first name is required.";
     const VALID_LAST_NAME_ERROR = "Valid last name is required.";
     const VALID_EMAIL_ERROR = "Your e-mail address is required.";
+
+    // Reference 
+    const  DESCRIBE = "Describe your idea";
     
     // Cart 
     const YOUR_CART = "Your Cart";
