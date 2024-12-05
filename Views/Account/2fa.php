@@ -19,6 +19,7 @@ include_once 'Views/bookingModal.php';
               <label for="code">Code</label>
               <input type="number" class="form-control" id="code" name="code" required>
             </div>
+            <?= $_SESSION["2fa"] ?>
             <?php if (isset($data["error"])): ?>
               <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>

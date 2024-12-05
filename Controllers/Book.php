@@ -56,14 +56,25 @@ final class Book extends Controller {
                 }
                 
                 
-                if($this->user != null){
+                if ($this->user !== null) {
                     $user = $this->user;
-                } else{
-                    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
-                        $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                } else {
+                    //var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                    if (
+                        isset($_POST['firstName'], $_POST['lastName'], $_POST['username'])
+                    ) {
+                        $firstName = $_POST['firstName'];
+                        $lastName = $_POST['lastName'];
+                        $username = $_POST['username'];
+                
+                        $user = User::new($firstName, $lastName, $username, null, null, null);
+                        var_dump($user === null);
+                    } else {
+                        // Optional: Handle missing POST fields gracefully
+                        throw new Exception('Required fields are missing to create a new user.');
                     }
                 }
-
+                
                 $message = $_POST['message'] ?? null;      
                 $images = [];
                 
