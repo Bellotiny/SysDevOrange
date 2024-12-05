@@ -80,9 +80,17 @@ final class Availability extends Model {
         return self::list($where, null, null, null, $order);
     }
 
+    public static function listAvailableTime(): ?array {
+        return self::list(new Where(new IsNull(self::bookingID)), null, null, null, null);
+    }
+
     public static function getBetween(int $start, int $end): array {
         $where = (new Where(new GreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", $start)))))
             ->addAnd(new LessThan(new Value(self::timeSlot, date("Y-m-d H:i:s", $end))));
         return self::list($where);
+    }
+
+    public static function getFromDateTime(String $date_time): ?self {
+        return self::get(new Where(new Like(new Value(self::timeSlot, $date_time))));
     }
 }
