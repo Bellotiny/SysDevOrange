@@ -40,7 +40,7 @@ include_once 'Views/bookingModal.php';
                     
                                         <div class="card-body">
                                             <h5 class="card-title">Message:</h5>
-                                            <p class="card-text"> <?= $booking->message ? $booking->message : "" ?></p>
+                                            <p class="card-text"> <?= $booking->message ? $booking->message : "None" ?></p>
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title"><?= LOCATION ?> </h5>
