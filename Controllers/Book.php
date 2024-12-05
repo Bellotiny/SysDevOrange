@@ -35,7 +35,7 @@ final class Book extends Controller {
                 }
 
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-                var_dump($_POST['servicePlace']);
+     
                 $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null
@@ -68,7 +68,7 @@ final class Book extends Controller {
                         $username = $_POST['username'];
                 
                         $user = User::new($firstName, $lastName, $username, null, null, null);
-                        var_dump($user === null);
+                        //($user === null);
                     } else {
                         // Optional: Handle missing POST fields gracefully
                         throw new Exception('Required fields are missing to create a new user.');
@@ -105,11 +105,11 @@ final class Book extends Controller {
                 var_dump($date_time->timeSlot);
                 var_dump($location);
                 echo '</pre>';
-                if ($services != null && $colors != null && $date_time != null && $location != null) {
+                if ($services != null && $colors != null && $date_time != null) {
                     $message = $message ?? null;
                     $booking = Booking::new($user, $price, $message, null, $date_time->timeSlot, $location);
                 
-                    var_dump($booking);
+                  //  var_dump($booking);
                     if ($booking != null) {
                         Booking::setGroups($booking, $colors, 'BookingColor');
                         Booking::setGroups($booking, $services, 'BookingService');
