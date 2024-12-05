@@ -79,4 +79,8 @@ final class Availability extends Model {
             ->addAnd(new LessThan(new Value(self::timeSlot, date("Y-m-d H:i:s", $end))));
         return self::list($where);
     }
+
+    public static function getFromDateTime(String $date_time): ?self {
+        return self::get(new Where(new Like(new Value(self::timeSlot, $date_time))));
+    }
 }

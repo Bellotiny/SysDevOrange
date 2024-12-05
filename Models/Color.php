@@ -48,9 +48,7 @@ final class Color extends Model {
             return null;
         }
     }
-    public static function getFromName(string $name): ?self {
-        $where = new Where();
-        $where->addEquals(new Value(self::name, $name));
-        return self::get($where);
+    public static function getFromName(String $name): ?self {
+        return self::get(new Where(new Equals(new Value(self::name, $name))));
     }
 }
