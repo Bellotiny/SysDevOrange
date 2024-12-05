@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 <?php include_once 'Views/nav.php'; ?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
-  <form action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
+  < action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
      <div class="form-section active container pt-5 "  id="section1">
 
@@ -245,36 +245,11 @@ ini_set('display_errors', 1);
                       </div>
                     </div>
                   </div>
-                </div>";
+               </div> ";
         }
       ?>
+      </div>
        
-        <!-- Section # cart -->
-        <div id="cart-container" class="container my-5">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary"><?= YOUR_CART ?></span>
-          <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
-        </h4>
-        <ul id="cart-items" class="list-group mb-3"></ul>
-        <div class="list-group-item d-flex justify-content-between">
-          <span><?= TOTAL_CAD ?></span>
-          <strong id="cart-total">0</strong>
-        </div>
-      </div>
-
-
-        <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3"><?= BACK ?></a>
-          <input type="submit" class="btn btn-primary w-50" role="button" > 
-
-        </div>
-
-        <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar" style="width: 65%">65%</div>
-        </div>
-    
-      </div>
-
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
 
@@ -313,6 +288,66 @@ ini_set('display_errors', 1);
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 10%">10%</div>
+        </div>
+
+      </div>
+
+    <!--section 5-->
+      <div class="form-section  container pt-5" id="section5">
+        <!-- Section 5 Personal Information -->
+        <h3>Add a Reference(Optional):</h3>
+          <div class='row g-3 mt-5'>
+              <div class='col-sm-6'>
+                <label for='title' class='form-label'>Title</label>
+                <input type='text' class='form-control' name='title' id='title' placeholder='' value=''>
+              </div>
+
+              <div class='col-sm-6'>
+                <label for='message' class='form-label'>Message</label>
+                <input type='text' class='form-control' name='message' id='message' accept="image/">
+              </div>
+
+              <div class='col-12'>
+                <label for='image' class='form-label'>Upload Image</label>
+                <input type='file' class='form-control' name='image' id='image' accept="image/">
+            </div>
+            <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
+                  <a class="btn btn-primary w-50 "  role="button" id="back-button-service-3" onclick="back()">Cancel</a>
+                  <a class="btn btn-primary w-50"  role="button" id="next-button-service-3" onclick="next()">Next</a>
+            </div>
+
+            <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 55%">55%</div>
+            </div>
+        </div>
+      </div>  
+
+
+       <!-- Section 5 cart -->
+       <div class="form-section  container pt-5"  id="section6">
+        <div id="cart-container" class="container my-5">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary"><?= YOUR_CART ?></span>
+            <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
+          </h4>
+          <ul id="cart-items" class="list-group mb-3"></ul>
+          <div class="list-group-item d-flex justify-content-between">
+            <span><?= TOTAL_CAD ?></span>
+            <strong id="cart-total">0</strong>
+          </div>
+          
+
+
+          <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
+            <a class="btn btn-primary w-50 " role="button"  onclick="back()" id="back-button-service-3"><?= BACK ?></a>
+            <input type="submit" class="btn btn-primary w-50" role="button" > 
+
+          </div>
+
+          <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 65%">65%</div>
+          </div>
+        
         </div>
 
       </div>
@@ -464,6 +499,8 @@ function selectedTime(){
   //SECTION AREA
 let currentSection = 1; 
   let serviceSelected = null;
+  const tokenIsSet = document.cookie.indexOf('token=') !== -1;
+  console.log(tokenIsSet);
 
   showSection(currentSection);
 
@@ -484,21 +521,43 @@ let currentSection = 1;
         return;
       }
       serviceSelected = selectedServiceRadio.value;
-
+      
       // Handle navigation based on the current section and selected service
       if (serviceSelected === 'home') {
+        console.log(currentSection + " home");
         if (currentSection === 1) {
           currentSection = 4; //special section
+          console.log(currentSection + " now");
         } else if (currentSection === 4) {
           currentSection = 2; 
+          console.log(currentSection + " now");
         } else if (currentSection === 2) {
-          currentSection = 3; 
+        
+          if(tokenIsSet){
+            currentSection = 5;
+          }else{
+            currentSection = 3;
+          }
+          console.log(currentSection + " now");
+        }else if (currentSection === 3){
+          currentSection = 5; 
+          console.log(currentSection + " now");
+
+        }else if(currentSection === 5){
+          currentSection = 6; 
         }
+        
       } else if (serviceSelected === 'owner') {
         if (currentSection === 1) {
           currentSection = 2; 
         } else if (currentSection === 2) {
-          currentSection = 3;
+          if(tokenIsSet){
+            currentSection = 5;
+          }else{
+            currentSection = 3;
+          }
+        }else if (currentSection === 5){
+          currentSection = 6; 
         }
       }
 
