@@ -77,11 +77,13 @@ include_once 'Views/bookingModal.php';
               <!----here are the colors--->
               <?php
                 foreach($data['colors'] as $colors){
+                 if($colors->visibility == 1){
                     echo '<div class="col-lg-2 mb-3  " >
                             <svg class="bd-placeholder-img rounded-circle"  onclick="selectColor(\'Color3\', \'None\', \'colorGroup3\')" width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="'.$colors->code.'"></rect></svg>
                             <h5 class="fw-normal">'.$colors->name.'</h5>
                         </div>';
-                }
+                  }
+                } 
                 ?>
           </div>
     </div>
