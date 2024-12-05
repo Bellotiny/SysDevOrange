@@ -41,14 +41,22 @@ include_once 'Views/bookingModal.php';
                                             <h5 class="card-title">Message:</h5>
                                             <p class="card-text"> <?= $booking->message ? $booking->message : "" ?></p>
                                         </div>
-                                        <hr>
                                         <div class="card-body">
                                             <h5 class="card-title"><?= LOCATION ?> </h5>
                                             <p class="card-text"> <?= $booking->location ?? "Owner's place" ?></p>
                                         </div>
                                         <hr>
-                                        <div class="card-body">
-                                        <h5 class="card-title"><?= DISCOUNT_BREAKDOWN ?></h5>
+                                        <ul class="list-group list-group-flush ">
+                                            <li class="list-group-item"><?= TOTAL_ACCOUNT_HISTORY ?><?= $booking->getFinalPrice() ?></li>
+                                            <li class="list-group-item"><?= BOOKED_ON ?> <?= date("Y-m-d H:i", strtotime($booking->bookedOn)) ?></li>
+                                            <li class="list-group-item"><?= $booking->payedOn ? "Payed: " . date("Y-m-d H:i", strtotime($booking->payedOn)) : "" ?></li>
+                                            <li class="list-group-item"><?= DATE ?> <?= $date ?> <?= $start ?> - <?= $end ?></li>
+                                            
+                                        </ul>                                      
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#bookingDetails<?= $availability->booking->id ?>" aria-expanded="false" aria-controls="#bookingDetails<?= $availability->booking->id ?>">View for more details</button>
+                                       
+                                        <div class="card-body  collapse" id="bookingDetails<?= $availability->booking->id?>">
+                                            <h5 class="card-title"><?= DISCOUNT_BREAKDOWN ?></h5>
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
@@ -73,15 +81,6 @@ include_once 'Views/bookingModal.php';
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
-                                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#bookingDetails<?= $availability->booking->id ?>" aria-expanded="false" aria-controls="#bookingDetails<?= $availability->booking->id ?>">View for more details</button>
-                                        <ul class="list-group list-group-flush collapse" id="bookingDetails<?= $availability->booking->id?>">
-                                            <li class="list-group-item"><?= TOTAL_ACCOUNT_HISTORY ?><?= $booking->getFinalPrice() ?></li>
-                                            <li class="list-group-item"><?= BOOKED_ON ?> <?= date("Y-m-d H:i", strtotime($booking->bookedOn)) ?></li>
-                                            <li class="list-group-item"><?= $booking->payedOn ? "Payed: " . date("Y-m-d H:i", strtotime($booking->payedOn)) : "" ?></li>
-                                            <li class="list-group-item"><?= DATE ?> <?= $date ?> <?= $start ?> - <?= $end ?></li>
-                                            
-                                        </ul>
                                     
                                     </div>
                                 </div>
