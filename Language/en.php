@@ -161,7 +161,7 @@ const PAYED_ON = "Payed On";
     // List Review
     const REVIEWS= "Reviews";
     const WRITE_REVIEW = "Write Review";
-    const SEARCH = "Search:";
+    const SEARCH = "Search";
     const SEARCH_FOR_REVIEWS = "Search for reviews";
 
 // Contact Us 
