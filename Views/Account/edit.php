@@ -47,7 +47,7 @@ include_once 'Views/bookingModal.php';
                 <p><span style="color:green"><?php echo $data["message"]; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Save">
+                <input class="btn btn-primary mt-3" role="button" type="submit" value="<?= CONFIRM ?>">
             </div>
         </form>
 </main>

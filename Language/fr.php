@@ -130,7 +130,6 @@ const PERSONAL_INFO_1 = "Nous sommes si heureux de vous voir.";
 const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
 
 // Account -> Booking History
-const LOCATION= "Emplacement: ";
 const DISCOUNT_BREAKDOWN = "Répartition des remises:";
 const ORIGINAL_PRICE = "Prix ​​d'Origine: $";
 const BOOKED_ON = "Réservé le:";
@@ -138,7 +137,7 @@ const TOTAL_ACCOUNT_HISTORY = "Total: $";
 const DATE = "Date:";
 
 // Account -> Forgot Password
-const FORGOT_PASS_ACCOUNT = "Forgot Password";
+const FORGOT_PASS_ACCOUNT = "Mot de Passe Oublié";
 
 // Account -> Recovery
 const RECOVERY = "Récupération";
@@ -168,7 +167,7 @@ const PAYED_ON = "Payé Le";
     // List Review
     const REVIEWS= "Avis";
     const WRITE_REVIEW = "Écrire un Avis";
-    const SEARCH = "Recherche:";
+    const SEARCH = "Recherche";
     const SEARCH_FOR_REVIEWS = "Rechercher des avis";
 
 // Contact Us 
