@@ -58,7 +58,7 @@ include_once 'Views/head.php';
                     <?php if ($review->image): ?>
                     <img src="<?=BASE_PATH?>/<?= $review->image->getPath() ?>" alt="Image 1" class="rounded" style="width: 200px; height: auto;">
                     <?php else: ?>
-                    <div style="display: block; width: 200px;"></div>
+                      <img src="<?=BASE_PATH?>/Views/Images/logo.png" alt="Default Image" class="rounded" style="width: 200px; height: auto;">
                     <?php endif; ?>
                 </div>
 

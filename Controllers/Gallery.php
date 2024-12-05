@@ -9,7 +9,7 @@ final class Gallery extends Controller {
     final public const DELETE = "delete";
     final public const LIST = "list";
 
-    private const INSTAGRAM_ACCESS_TOKEN = "IGQWROU1d1QVlBWWVzeVRrTkdVQWI4UWozRnRGcUZAKVFctMmRWcFRyT1FPek1oSWtOM2tHQ2ZAVNWxHdlFkalpaY3ZATUkx0SXZAXOERscGRqeW9ZAaWFfWVc0QlJONEJGZAzNxRmR6YTJJcjJlQm10SUp0NWZAZAb2xjYkEZD";
+    private const INSTAGRAM_ACCESS_TOKEN = "IGQWRQWWpMWHlrS0cxRHAzdm5lTERjaGptQloyVUJYYVlEQVA5MXZA2OGgtLWYzTnphZA19MUTRsRlNqV3VDbGRjaEJPYU1GZA0RCamxTRmtsVk5OWWxWVWhrczMwYUVDSVdLZA21YNE1rUmN3bmNsUE1TNkVzZAjlZAM0kZD";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::LIST);
