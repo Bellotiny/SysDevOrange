@@ -123,7 +123,6 @@ const PERSONAL_INFO_1 = "We're so happy to see you.";
 const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
 
 // Account -> Booking History
-const LOCATION= "Location: ";
 const DISCOUNT_BREAKDOWN = "Discount breakdown:";
 const ORIGINAL_PRICE = "Original Price: $";
 const BOOKED_ON = "Booked on:";

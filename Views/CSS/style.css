@@ -152,15 +152,16 @@ header {
     padding: 0 20px;
 }
 
-
-
 #nav-main {
     display: flex; /* Ensures all links stay on the same line */
     flex-wrap: nowrap; /* Prevents wrapping to a new line */
     gap: 10px; 
 }
 
-#nav-main a {
+.lang {
+    color: #f37a74 !important;
+}
+#nav-main a  {
     text-decoration: none;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;

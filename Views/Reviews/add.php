@@ -17,7 +17,7 @@ include_once 'Views/head.php';
         </div>
 
         <!-- Initially hidden review form -->
-        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/add" method="POST" enctype="multipart/form-data">
+        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/reviews/add" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label"><?= TITLE_REVIEW ?></label>
                 <input type="text" name="title" id="title" class="form-control" placeholder="<?= ENTER_REVIEW_TITLE ?>" required>
@@ -34,7 +34,7 @@ include_once 'Views/head.php';
                 <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-grid gap-2">
-                <input type="submit" class="btn bttn-green" value="Post">
+                <input type="submit" class="btn bttn-green container" value="Post">
                 <!-- <button class="btn bttn-green" type="button">Post</button> -->
             </div>
         </form>
