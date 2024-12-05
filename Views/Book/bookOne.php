@@ -265,8 +265,8 @@ ini_set('display_errors', 1);
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
-          <input type="submit" class="btn btn-primary w-50" role="button" > 
-
+          <input type="submit" class="btn btn-primary w-50" value="Book" id="next-button-service-3">
+          <!-- <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a> -->
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -339,10 +339,8 @@ ini_set('display_errors', 1);
       listItem.innerHTML = `
         <div>
           <h6 class="my-0">${item.name}</h6>
-          <small class="text-body-secondary">${item.description}</small>
         </div>
-        <span class="text-body-secondary">${item.price} CAD</span>
-        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+        <span class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">${item.price} CAD</span>
       `;
       cartContainer.appendChild(listItem);
     });
@@ -354,12 +352,6 @@ ini_set('display_errors', 1);
   function addToCart(name, description, price) {
     cart.push({ name, description, price });
     totalPrice += price;
-    updateCart();
-  }
-
-  function removeFromCart(index) {
-    totalPrice -= cart[index].price;
-    cart.splice(index, 1);
     updateCart();
   }
 

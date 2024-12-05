@@ -32,11 +32,15 @@ final class Book extends Controller {
                     $price += $service->price;
                 }
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-                $colors = array_values(array_filter([
+                $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null,
                     $_POST['colorGroupColor3'] ?? null
                 ]));
+                $colors = [];
+                foreach ($colorsJson as $colorJson) {
+                    $colors[] = Color::getFromName($colorJson->name);
+                }
                 $date_time = $_POST['selected_date_time'] ?? null;
                 if($this->user != null){
                     $user = $this->user;
