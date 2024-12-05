@@ -295,8 +295,8 @@ ini_set('display_errors', 1);
         <br><br>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
-          <input type="submit" class="btn btn-primary w-50" value="Book" id="next-button-service-3">
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3"><?= BACK ?></a>
+          <input type="submit" class="btn btn-primary w-50" value="<?= BOOK ?>" id="next-button-service-3">
           <!-- <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a> -->
         </div>
 
