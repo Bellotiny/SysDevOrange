@@ -1,6 +1,6 @@
 <?php
 
-include_once "Mail/Mail.php";
+include_once "Controllers/Mail/Mail.php";
 
 final class Contact extends Controller {
     final public const CONTACT = "contact";

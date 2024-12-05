@@ -28,7 +28,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if ($this->checkAuthorization("schedule") === true): ?>
+            <?php if ($this->checkAuthorization("inventory") === true): ?>
             <li>
               <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
@@ -36,6 +36,16 @@
               </a>
             </li>
             <?php endif; ?>
+              <?php if ($this->checkAuthorization("bookinglist") === true): ?>
+                  <li>
+                      <a  href="<?= BASE_PATH ?>/account/bookingList" class="nav-link link-dark">
+                          <svg class="bi me-2" width="16" height="16">
+                              <use xlink:href="#table"></use>
+                          </svg>
+                          <?= BOOKING_LIST ?>
+                      </a>
+                  </li>
+              <?php endif; ?>
           </ul>
           <hr>
           <div class="dropdown">

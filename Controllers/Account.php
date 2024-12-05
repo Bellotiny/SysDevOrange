@@ -28,6 +28,7 @@ final class Account extends Controller {
     final public const BOOKING_DELETE = "deletebooking";
     final public const BOOKING_EDIT = "editbooking";
     final public const BOOKING_VIEW = "viewbooking";
+    final public const BOOKING_LIST = "bookinglist";
 
     final public const INVENTORY = "inventory";
     final public const COLOR_ADD = "addcolor";
@@ -357,6 +358,12 @@ final class Account extends Controller {
                     break;
                 }
                 $this->render("Account", $action, ["booking" => $booking]);
+                break;
+            case self::BOOKING_LIST:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => Availability::listWithBookings((int)($_GET["id"] ?? 0))]);
                 break;
             case self::HISTORY:
                 if (!$this->verifyRights($action)) {

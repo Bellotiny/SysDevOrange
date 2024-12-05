@@ -10,6 +10,15 @@ class Operator {
     }
 }
 
+class IsNull extends Operator {
+    public function __construct(string $column, bool $not = false) {
+        parent::__construct(
+            $column . " IS " . ($not ? "NOT " : "") . "NULL",
+            [],
+        );
+    }
+}
+
 class Equals extends Operator {
     public function __construct(Value $value, bool $not = false) {
         parent::__construct(
