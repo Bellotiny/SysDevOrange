@@ -135,6 +135,9 @@ const ORIGINAL_PRICE = "Prix ​​d'Origine: $";
 const BOOKED_ON = "Réservé le:";
 const TOTAL_ACCOUNT_HISTORY = "Total: $";
 const DATE = "Date:";
+const NO_DISCOUNT = "Aucune remise disponible";
+const VIEW_MORE_DETAILS = "Voir pour plus de détails";
+const PAYED = "Payé: ";
 
 // Account -> Forgot Password
 const FORGOT_PASS_ACCOUNT = "Mot de Passe Oublié";
@@ -156,7 +159,7 @@ const  BE_DEUCTED = ", qui seront déduits du paiement total.";
 const  YOU_MUST_AT_LEAST = "Vous devez choisir au moins";
 const ONE_COLOR = "une couleur";
 const HOME_CONDITION = "Le service à domicile est une option mais disponible uniquement";
-const  CERTAIN_RANGE = "dans un rayon de";
+const  CERTAIN_RANGE = " dans un rayon de";
 const  IN_MY_PLACE = " de chez moi.";
 const THERE_ARE = "Ce sont ";
 const CATS = "des chats";
@@ -231,6 +234,9 @@ const NEXT = "Suivante";
     const NAIL_TAKE_OFF = "Enlever les Ongles";
     const EXTRA_SERVICE = "Service Supplémentaire";
     const TOTAL_CAD = "Total (CAD)";
+
+    // Reference 
+    const  DESCRIBE = "Décrivez votre idée";
 
     // Confirmation 
     const THANKS_FOR_ORDER = "Merci pour votre commande!";

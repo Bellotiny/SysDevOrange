@@ -16,7 +16,8 @@ include_once 'Views/bookingModal.php';
     <div class="sideScreen slide-up">
         <!---default content will be the Personal info-->
         <!--content is load here-->
-        <div class="w-100 slide-up">
+        <div class="w-100 slide-up container  my-2">
+        <?php include_once 'Views/menuAccount.php'; ?>
             <div class="container mx-3">
                 <div class="row">
             
@@ -49,11 +50,11 @@ include_once 'Views/bookingModal.php';
                                         <ul class="list-group list-group-flush ">
                                             <li class="list-group-item"><?= TOTAL_ACCOUNT_HISTORY ?><?= $booking->getFinalPrice() ?></li>
                                             <li class="list-group-item"><?= BOOKED_ON ?> <?= date("Y-m-d H:i", strtotime($booking->bookedOn)) ?></li>
-                                            <li class="list-group-item"><?= $booking->payedOn ? "Payed: " . date("Y-m-d H:i", strtotime($booking->payedOn)) : "" ?></li>
+                                            <li class="list-group-item"><?= $booking->payedOn ? PAYED . date("Y-m-d H:i", strtotime($booking->payedOn)) : "" ?></li>
                                             <li class="list-group-item"><?= DATE ?> <?= $date ?> <?= $start ?> - <?= $end ?></li>
                                             
                                         </ul>                                      
-                                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#bookingDetails<?= $availability->booking->id ?>" aria-expanded="false" aria-controls="#bookingDetails<?= $availability->booking->id ?>">View for more details</button>
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#bookingDetails<?= $availability->booking->id ?>" aria-expanded="false" aria-controls="#bookingDetails<?= $availability->booking->id ?>"><?= VIEW_MORE_DETAILS  ?></button>
                                        
                                         <div class="card-body  collapse" id="bookingDetails<?= $availability->booking->id?>">
                                             <h5 class="card-title"><?= DISCOUNT_BREAKDOWN ?></h5>
@@ -65,8 +66,8 @@ include_once 'Views/bookingModal.php';
                                                             <th scope="col"><?= $booking->discount->amount ? $booking->discount->name : "No discount amount" ?></th>
                                                             <th scope="col"><?= $booking->discount->percent ? $booking->discount->name : "No discount percent" ?></th>
                                                         <?php else: ?>
-                                                            <th scope="col">No discount available</th>
-                                                            <th scope="col">No discount available</th>
+                                                            <th scope="col"><?= NO_DISCOUNT ?></th>
+                                                            <th scope="col"><?= NO_DISCOUNT ?></th>
                                                         <?php endif; ?>
                                                     </tr>
                                                 </thead>

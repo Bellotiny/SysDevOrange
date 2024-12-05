@@ -128,6 +128,9 @@ const ORIGINAL_PRICE = "Original Price: $";
 const BOOKED_ON = "Booked on:";
 const TOTAL_ACCOUNT_HISTORY = "Total: $";
 const DATE = "Date:";
+const NO_DISCOUNT = "No discount available";
+const VIEW_MORE_DETAILS = "View for more details";
+const PAYED = "Payed: ";
 
 // Account -> Forgot Password
 const FORGOT_PASS_ACCOUNT = "Forgot Password";
@@ -213,6 +216,9 @@ const NEXT = "Next";
     const VALID_FIRST_NAME_ERROR = "Valid first name is required.";
     const VALID_LAST_NAME_ERROR = "Valid last name is required.";
     const VALID_EMAIL_ERROR = "Your e-mail address is required.";
+
+    // Reference 
+    const  DESCRIBE = "Describe your idea";
     
     // Cart 
     const YOUR_CART = "Your Cart";
