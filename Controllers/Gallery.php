@@ -128,6 +128,7 @@ final class Gallery extends Controller {
                 }
 
                 $this->render("Gallery", "list", [
+                    "search" => $_POST["search"] ?? "",
                     "reviews" => $reviews,
                     "mediaItems" => array_map(fn($item) => [
                         "url" => $item["media_url"],
