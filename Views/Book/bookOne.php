@@ -226,7 +226,7 @@ ini_set('display_errors', 1);
                   </div>
 
                   <div class='col-sm-6'>
-                    <label for='lastName' class='form-label'>Last name</label>
+                    <label for='lastName' class='form-label'><?= LAST_NAME ?></label>
                     <input type='text' class='form-control' name='lastName' id='lastName' placeholder='' value='' required>
                     <div class='invalid-feedback'>
                     <?= VALID_LAST_NAME_ERROR ?>
