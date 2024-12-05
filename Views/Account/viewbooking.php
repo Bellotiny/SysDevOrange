@@ -80,6 +80,7 @@ include_once 'Views/head.php';
             <?php
             endforeach;
             ?>
+            <a href="<?=BASE_PATH?>/account/bookingdelete/<?=$data["booking"]->id?>">Delete</a>
         </div>
     </div>
 

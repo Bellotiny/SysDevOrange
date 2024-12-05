@@ -215,14 +215,13 @@ ini_set('display_errors', 1);
       <!-- Section 3 -->
       <div class="form-section  container pt-5" id="section3">
         <!-- Section 3 Personal Information -->
-        
-        <h3>Personal Information:</h3>
+        <h3><?= PERSONAL_INFO ?></h3>
                 <div class='row g-3 mt-5'>
                   <div class='col-sm-6'>
-                    <label for='firstName' class='form-label'>First name</label>
+                    <label for='firstName' class='form-label'><?= FIRST_NAME ?></label>
                     <input type='text' class='form-control' name='firstName' id='firstName' placeholder='' value='' required>
                     <div class='invalid-feedback'>
-                      Valid first name is required.
+                      <?= VALID_FIRST_NAME_ERROR ?>
                     </div>
                   </div>
 
@@ -230,24 +229,24 @@ ini_set('display_errors', 1);
                     <label for='lastName' class='form-label'>Last name</label>
                     <input type='text' class='form-control' name='lastName' id='lastName' placeholder='' value='' required>
                     <div class='invalid-feedback'>
-                      Valid last name is required.
+                    <?= VALID_LAST_NAME_ERROR ?>
                     </div>
                   </div>
 
                   <div class='col-12'>
-                    <label for='username' class='form-label'>Username</label>
+                    <label for='username' class='form-label'><?= EMAIL ?></label>
                     <div class='input-group has-validation'>
                       <span class='input-group-text'>@</span>
                       <input type='text' class='form-control' name='username' id='username' placeholder='Username' required>
                       <div class='invalid-feedback'>
-                        Your username is required.
+                        <?= VALID_EMAIL_ERROR ?>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class='d-flex justify-content-center gap-4 my-5' style='width: 100%;'>
-                  <a class='btn btn-primary w-50' role='button' id='back-button-service-2' onclick='back()'>CANCEL </a>
-                  <a class='btn btn-primary w-50' role='button' id='next-button-service-2' onclick='next()'>NEXT </a>
+                  <a class='btn btn-primary w-50' role='button' id='back-button-service-2' onclick='back()'><?= CANCEL ?> </a>
+                  <a class='btn btn-primary w-50' role='button' id='next-button-service-2' onclick='next()'><?= NEXT ?> </a>
                 </div>
 
                 <div class='progress my-4 slide-up' role='progressbar' aria-label='Example with label' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
@@ -276,7 +275,7 @@ ini_set('display_errors', 1);
         <br><br>
         <div class="green-background text-secondary  container slide-up ">
               <div class=" pb-5" >
-                  <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Add Reference</h1>
+                  <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= ADD_REFERENCE ?></h1>
               </div>
           </div>
 

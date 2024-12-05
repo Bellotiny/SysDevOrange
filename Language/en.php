@@ -219,6 +219,7 @@ const NEXT = "Next";
 
     // Reference 
     const  DESCRIBE = "Describe your idea";
+    const ADD_REFERENCE = "Add Reference";
     
     // Cart 
     const YOUR_CART = "Your Cart";
