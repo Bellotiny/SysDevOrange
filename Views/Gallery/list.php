@@ -31,6 +31,13 @@ include_once 'Views/head.php';
   ?>
 
   </div>
+
+
+  
+
+  </div>
+
+  
   </main>
 
   <?php include_once 'Views/footer.php'; ?>

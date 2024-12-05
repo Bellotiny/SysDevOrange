@@ -16,7 +16,7 @@ include_once 'Views/bookingModal.php';
            <h1><?= REGISTER ?></h1>
            <?php include_once 'Views/registerForm.php'; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Register">
+                <input class="btn bttn-green mt-3" role="button" type="submit" value="Register">
               <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/personalInformation" role="button"><?= GO_BACK ?></a>
             </div>
            

@@ -23,7 +23,7 @@ include_once 'Views/bookingModal.php';
               <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Login">
+                <input class="btn bttn-green  mt-3" role="button" type="submit" value="Login">
               <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account/login" role="button"><?= GO_BACK ?></a>
             </div>
           </form>
