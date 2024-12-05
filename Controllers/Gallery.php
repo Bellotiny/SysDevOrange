@@ -1,8 +1,5 @@
 <?php
 
-include_once "Models/Review.php";
-include_once "Models/Booking.php";
-
 final class Gallery extends Controller {
     final public const LIST = "list";
 

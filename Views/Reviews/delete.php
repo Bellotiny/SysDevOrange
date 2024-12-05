@@ -18,7 +18,7 @@ include_once 'Views/head.php';
         </div>
 
         <!-- Initially hidden review form -->
-        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/delete/<?= $data['review']->id ?>" method="POST">
+        <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/reviews/delete/<?= $data['review']->id ?>" method="POST">
             <div class="mb-3">
                 <label for="confirm" class="form-label"><?= CONFIRM ?></label>
                 <input type="checkbox" name="confirm" id="confirm">
