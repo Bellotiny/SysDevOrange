@@ -4,6 +4,9 @@ const LOGIN = "Login";
 const LOGIN_HERE = "Login here";
 const REGISTER = "Register";
 const CANCEL = "Cancel";
+const CONFIRM = "Confirm";
+const CODE = "Code";
+const COLOR = "Color";
 const DONE = "Done";
 const HOME = "Home";
 const ABOUT = "About";
@@ -28,7 +31,7 @@ const BIRTHDAY = "Birthday";
 const PHONE_NUMBER = "Phone Number";
 const CONFIRM_PASSWORD = "Confirm Password";
 
-// Register Requirements
+// Password Requirements
 const PASS_MUST_CONTAIN = "Password must contain";
 const UPPERCASE = "uppercase";
 const LOWERCASE = "lowercase";
@@ -51,8 +54,41 @@ const NAIL_CARE_DO = "Nail Care (Dos)";
 const NAIL_CARE_DONT = "Nail Care (Don'ts)";
 const MUST_READ = "Must Read";
 const VIEW_DETAILS = "View details »";
+const BASIC_MANICURE = "A basic manicure  isn’t just about looking good—it’s essential for keeping your nails healthy! Here’s why:";
+const NAIL_BED_CARE = "Nail Bed Care:";
+const NAIL_BED_CARE_2 = "Keeping your nail beds abrasion-free and hydrated helps maintain their natural strength.";
+const BREAK_HARSH_TREATMENTS = "Break from Harsh Treatments:";
+const BREAK_HARSH_TREATMENTS_2 = "If you’ve been using acrylics or other nail enhancements, it’s important to give your nails a break. Let them breathe and recover to avoid long-term damage.";
+const PROMOTE_HEALTHY_GROWTH = "Promote Healthy Growth:";
+const PROMOTE_HEALTHY_GROWTH_2 = "A clean cuticle area, along with nourishing oils, will keep your nails hydrated and encourage strong, healthy growth.";
+const TLC = "Give your nails some TLC – they’ll thank you later! 💖";
+const IMPORTANCE_REG_MANICURE = "The Importance of Regular Manicures 💅✨";
+const IMPORTANCE_REG_MANICURE_2 = "Regular manicures aren’t just a treat—they’re an essential part of keeping your nails healthy and beautiful! Here’s why staying consistent matters";
 const IMPORTANCE_PROFESSIONAL_CARE = "The Importance of Professional Nail Care 💅✨";
+const HEALTHY_NAIL_GROWTH = "Healthy Nail Growth:";
+const HEALTHY_NAIL_GROWTH_2 = "Regular manicures keep your cuticles clean and your nails trimmed, promoting strong and healthy growth.";
+const DAMAGE_PREV = "Damage Prevention:";
+const DAMAGE_PREV_2 = "Frequent upkeep helps prevent issues like hangnails, splitting, and breakage. Catching small problems early can stop bigger ones from developing!";
+const HYDRATION_NOURISHMENT = "Hydration & Nourishment:";
+const HYDRATION_NOURISHMENT_2 = "Manicures include moisturizing treatments that keep your nail beds and cuticles hydrated, reducing brittleness and dryness.";
+const POLISHED_LOOK_FEEL = "Polished Look, Polished Feel:";
+const POLISHED_LOOK_FEEL_2 = "Consistent care means your hands always look and feel amazing—perfect for boosting confidence and self-care!";
+const REGULAR_MANICURES = "Regular manicures keep your nails in top shape, ensuring they’re strong, healthy, and always ready to shine! 🌟";
+const PROFESSIONAL_NAIL_CARE = "Professional nail care provides more than just aesthetic benefits; it helps maintain nail 
+            health, prevent infections, and address underlying issues that might not be visible to the 
+            untrained eye. Nail technicians are trained to safely handle tools, recognize potential nail and 
+            skin issues, and recommend treatments tailored to individual needs, promoting both hygiene and long-term wellness.";
 const BENEFIT_REG_MANICURE = "Benefits of a Basic Manicure 💅✨";
+
+    // First Collapsible Section
+    const KEEP_NAILS_CLEAN = "Keep Nails Clean:";
+    const KEEP_NAILS_CLEAN_2 = "Wash hands regularly and dry thoroughly.";
+    const  MOISTURIZE = "Moisturize:";
+    const  MOISTURIZE_2 = "Apply hand cream or cuticle oil to keep nails hydrated.";
+    const TRIM_REG = "Trim Regulary:";
+    const TRIM_REG_2 = "Use sharp tools to maintain a manageable length.";
+    const FILE_GENTLY = "File gently";
+    const FILE_GENTLY_2 = "Smooth edges by filing in one direction.";
 
 // About Us
 const ABOUT_US_HEADER = "About Me";
@@ -77,13 +113,56 @@ const BOOKING_LIST = "Booking List";
 
 // Account Settings
 const EDIT_PROFILE = "Edit Profile";
-const DELETE_PROFILE = "Delete Profile";
+const CHANGE_PASSWORD = "Change Password";
+const DELETE_PROFILE = "Delete Account";
 const SIGN_OUT = "Sign Out";
 
 // Acount -> Personal Information
 const HELLO = "Hello, ";
 const PERSONAL_INFO_1 = "We're so happy to see you.";
 const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
+
+// Account -> Booking History
+const LOCATION= "Location: ";
+const DISCOUNT_BREAKDOWN = "Discount breakdown:";
+const ORIGINAL_PRICE = "Original Price: $";
+const BOOKED_ON = "Booked on:";
+const TOTAL_ACCOUNT_HISTORY = "Total: $";
+const DATE = "Date:";
+
+// Account -> Forgot Password
+const FORGOT_PASS_ACCOUNT = "Forgot Password";
+
+// Account -> Recovery
+const RECOVERY = "Recovery";
+
+// Account -> View Booking 
+const  VIEW_BOOKING = "View Booking";
+const PRICE = "Price";
+const PAYED_ON = "Payed On";
+
+// Gallery
+
+    // General Review
+    const ENTER_REVIEW_TITLE = "Enter review title";
+    const ENTER_REVIEW_TEXT = "Write your review here";
+    // Add Review
+    const ADD_REVIEW = "Add Review";
+    const TITLE_REVIEW = "Title";
+    const MESSAGE_REVIEW = "Message";
+    const UPLOAD_IMAGE_REVIEW =  "Upload Image";
+    
+    // Delete Review
+    const DELETE_REVIEW = "Supprimer L'avis";
+
+    // Edit Review
+    const EDIT_REVIEW = "Edit Review";
+
+    // List Review
+    const REVIEWS= "Reviews";
+    const WRITE_REVIEW = "Write Review";
+    const SEARCH = "Search:";
+    const SEARCH_FOR_REVIEWS = "Search for reviews";
 
 // Contact Us 
 const CONTACT_US = "Contact Us";
@@ -110,7 +189,9 @@ const NEXT = "Next";
     // Section 2 
     const PICK_TIME = "Pick your time and date:";
     const AVAILABLE_DATES = "Available Dates";
-    const AVAIALBLE_TIMES = "Available Times";
+    const AVAILABLE_TIMES = "Available Times";
+    const PICK_COLORS = "Pick your color(s):";
+    const NONE = "None";
     
     // Section 3
     const VALID_FIRST_NAME_ERROR = "Valid first name is required.";
@@ -126,6 +207,11 @@ const NEXT = "Next";
     const NAIL_TAKE_OFF = "Nail Take off";
     const EXTRA_SERVICE = "Extra Service";
     const TOTAL_CAD = "Total (CAD)";
+
+    // Confirmation 
+    const THANKS_FOR_ORDER = "Thank you for your order!";
+    const BOOKING_SUCCESS = "We’ve successfully received your booking, and we’re thrilled to be a part of your next beauty experience.";
+    const CHECK_EMAIL = "Check you email for  more details and confirmation";
 
     // Home Service
     const ADDRESS_TO_VERIFY = "Enter your address to verfiy";

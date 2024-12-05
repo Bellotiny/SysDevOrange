@@ -20,24 +20,25 @@ final class Account extends Controller {
     final public const DELETE = "delete";
 
     final public const PERSONAL_INFORMATION = "personalInformation";
-
-    final public const INVENTORY = "inventory";
-    final public const ADD_COLOR = "addcolor";
-    final public const ADD_SERVICE = "addservice";
-    final public const ADD_DISCOUNT = "adddiscount";
-    final public const EDIT_COLOR = "editcolor";
-    final public const EDIT_SERVICE = "editservice";
-    final public const EDIT_DISCOUNT = "editdiscount";
-    final public const DELETE_COLOR = "deletecolor";
-    final public const DELETE_SERVICE = "deleteservice";
-    final public const DELETE_DISCOUNT = "deletediscount";
-    final public const BOOKING_LIST = "bookinglist";
-    final public const BOOKING_DELETE = "deletebooking";
-    final public const BOOKING_EDIT = "editbooking";
+    final public const HISTORY = "history";
 
     final public const SCHEDULE = "schedule";
-    final public const ADD_AVAILABILITY = "addavailability";
-    final public const DELETE_AVAILABILITY = "deleteavailability";
+    final public const AVAILABILITY_ADD = "addavailability";
+    final public const AVAILABILITY_DELETE = "deleteavailability";
+    final public const BOOKING_DELETE = "deletebooking";
+    final public const BOOKING_EDIT = "editbooking";
+    final public const BOOKING_VIEW = "viewbooking";
+
+    final public const INVENTORY = "inventory";
+    final public const COLOR_ADD = "addcolor";
+    final public const COLOR_EDIT = "editcolor";
+    final public const COLOR_DELETE = "deletecolor";
+    final public const SERVICE_ADD = "addservice";
+    final public const SERVICE_EDIT = "editservice";
+    final public const SERVICE_DELETE = "deleteservice";
+    final public const ADD_DISCOUNT = "adddiscount";
+    final public const EDIT_DISCOUNT = "editdiscount";
+    final public const DELETE_DISCOUNT = "deletediscount";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -290,11 +291,80 @@ final class Account extends Controller {
                         $this->render("Account", $action);
                         break;
                     }
-                    $this->user->delete();
+                    $this->user->remove();
                     setcookie("token", "", -1, "/");  // Remove cookie "token" from the user"s browser
                 }
                 Home::redirect();
                 break;
+
+            case self::SCHEDULE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => Availability::listFuture()]);
+                break;
+            case self::AVAILABILITY_ADD:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["start"]) || !isset($_POST["end"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+                // TODO Sanitize dates
+                $_POST["start"] = strtotime($_POST["start"]);
+                $_POST["end"] = strtotime($_POST["end"]);
+                if (!$_POST["start"] || !$_POST["end"]) {
+                    $this->render("Account", $action, ["error" => "Dates are wrong format"]);
+                    break;
+                }
+                if ($_POST["start"] > $_POST["end"]) {
+                    $this->render("Account", $action, ["error" => "End time must be before Start"]);
+                    break;
+                }
+                $availabilities = Availability::newMany($_POST["start"], $_POST["end"]);
+                if ($availabilities === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new availability"]);
+                    break;
+                }
+                $this->redirect(self::SCHEDULE);
+                break;
+            case self::AVAILABILITY_DELETE:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_GET["id"])) {
+                    $this->redirect(self::SCHEDULE);
+                    break;
+                }
+                $times = explode("-", $_GET["id"]);
+                $availabilities = Availability::getBetween((int)$times[0], (int)$times[1]);
+                foreach ($availabilities as $availability) {
+                    if ($availability->booking !== null) {
+                        continue;
+                    }
+                    $availability->remove();
+                }
+                $this->redirect(self::SCHEDULE);
+                break;
+            case self::BOOKING_VIEW:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $booking = Booking::getFromId((int)$_GET["id"]);
+                if (is_null($booking)) {
+                    $this->redirect(self::SCHEDULE);
+                    break;
+                }
+                $this->render("Account", $action, ["booking" => $booking]);
+                break;
+            case self::HISTORY:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $this->render("Account", $action, ["availabilities" => $this->user->getAvailabilities()]);
+                break;
+
             case self::INVENTORY:
                 if (!$this->verifyRights($action)) {
                     break;
@@ -305,7 +375,7 @@ final class Account extends Controller {
                     "discounts" => Discount::list()
                 ]);
                 break;
-            case self::ADD_COLOR:
+            case self::COLOR_ADD:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -324,7 +394,7 @@ final class Account extends Controller {
                 }
                 $this->redirect(self::INVENTORY);
                 break;
-            case self::ADD_SERVICE:
+            case self::SERVICE_ADD:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -350,14 +420,14 @@ final class Account extends Controller {
                 if (!$this->verifyRights($action)) {
                     break;
                 }
-                if (!isset($_POST["name"]) || !isset($_POST["type"]) || 
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
                     !isset($_POST["start"]) || !isset($_POST["end"]) ||
                     !isset($_POST["percent"]) || !isset($_POST["amount"])) {
                     $this->render("Account", $action);
                     break;
                 }
 
-               
+
                 $discount = Discount::new(
                     $_POST["name"],
                     $_POST["type"],
@@ -372,7 +442,7 @@ final class Account extends Controller {
                 }
                 $this->redirect(self::INVENTORY);
                 break;
-            case self::EDIT_COLOR:
+            case self::COLOR_EDIT:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -391,7 +461,7 @@ final class Account extends Controller {
                 $color->save();
                 $this->redirect(self::INVENTORY);
                 break;
-            case self::EDIT_SERVICE:
+            case self::SERVICE_EDIT:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -414,7 +484,7 @@ final class Account extends Controller {
                 $this->redirect(self::INVENTORY);
                 break;
             case self::EDIT_DISCOUNT:
-                //var_dump($_GET, $_POST); 
+                //var_dump($_GET, $_POST);
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -425,7 +495,7 @@ final class Account extends Controller {
                     break;
                 }
                 //var_dump(isset($_POST["name"]) );
-                if (!isset($_POST["name"]) || !isset($_POST["type"]) || 
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
                     !isset($_POST["start"]) || !isset($_POST["end"]) ||
                     !isset($_POST["percent"]) || !isset($_POST["amount"])) {
                     $this->render("Account", $action, ["discount" => $discount]);
@@ -438,10 +508,10 @@ final class Account extends Controller {
                 $discount->percent = $_POST["percent"];
                 $discount->amount = $_POST["amount"];
                 $discount->save();
-                $this->redirect(self::INVENTORY);     
-               
+                $this->redirect(self::INVENTORY);
+
                 break;
-            case self::DELETE_COLOR:
+            case self::COLOR_DELETE:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -450,10 +520,10 @@ final class Account extends Controller {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
-                $color->delete();
+                $color->remove();
                 $this->redirect(self::INVENTORY);
                 break;
-            case self::DELETE_SERVICE:
+            case self::SERVICE_DELETE:
                 if (!$this->verifyRights($action)) {
                     break;
                 }
@@ -462,15 +532,10 @@ final class Account extends Controller {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
-                $service->delete();
+                $service->remove();
                 $this->redirect(self::INVENTORY);
                 break;
-            case self::BOOKING_LIST:
-                if (!$this->verifyRights($action)) {
-                    break;
-                }
-                $this->render("Account", $action, ["bookings" => Booking::list()]);
-                break;
+
             default:
                 if ($this->verifyRights($action)) {
                     $this->render("Account", $action);

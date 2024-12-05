@@ -66,4 +66,7 @@ final class Service extends Model {
             return null;
         }
     }
+    public static function getFromName(string $name): ?self {
+        return self::get(new Where(new Equals(new Value(self::name, $name))));
+    }
 }

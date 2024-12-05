@@ -1,11 +1,11 @@
 <div class=" slide-up">
   <footer class="mt-3 py-3 ">
     <ul class="nav justify-content-center border-bottom pb-3">
-      <li class="nav-item"><a href="<?=BASE_PATH?>/home" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="<?=BASE_PATH?>/gallery" class="nav-link px-2 text-body-secondary">Gallery</a></li>
-      <li class="nav-item"><a href="<?=BASE_PATH?>/services" class="nav-link px-2 text-body-secondary">Services</a></li>
-      <li class="nav-item"><a href="<?=BASE_PATH?>/about" class="nav-link px-2 text-body-secondary">Location</a></li>
-      <li class="nav-item"><a href="<?=BASE_PATH?>/contact" class="nav-link px-2 text-body-secondary">Contact Us</a></li>
+      <li class="nav-item"><a href="<?=BASE_PATH?>/home" class="nav-link px-2 text-body-secondary"><?= HOME ?></a></li>
+      <li class="nav-item"><a href="<?=BASE_PATH?>/about" class="nav-link px-2 text-body-secondary"><?= ABOUT ?></a></li>
+      <li class="nav-item"><a href="<?=BASE_PATH?>/services" class="nav-link px-2 text-body-secondary"><?= SERVICE ?></a></li>
+      <li class="nav-item"><a href="<?=BASE_PATH?>/gallery" class="nav-link px-2 text-body-secondary"><?= GALLERY ?></a></li>
+      <li class="nav-item"><a href="<?=BASE_PATH?>/contact" class="nav-link px-2 text-body-secondary"><?= CONTACT ?></a></li>
     </ul>
     <p class="text-center text-body-secondary">© 2024 Madeleine Snook, Inc</p>
   </footer>

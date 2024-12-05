@@ -525,6 +525,12 @@ a.nav-link.active {
 .sideScreen {
     width: -webkit-fill-available;
 }
+#sidebar {
+    height: 100vh !important;
+}
+#sidebar  ul {
+    white-space: nowrap;
+}
 
 #divAccount{
     background-image: url('../Images/logo_bg.png');
@@ -761,6 +767,8 @@ header {
     z-index: 1000;
     transition: left 0.3s ease; /* Smooth sliding effect */
 }
+
+
 
 #content {
     flex-grow: 1;

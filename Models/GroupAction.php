@@ -32,8 +32,8 @@ final class GroupAction extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin())
-            ->addInner(Action::getFields(), Action::TABLE, Action::id, self::actionID, Action::getJoin());
+            ->addLeft(Group::getFields(), Group::TABLE, Group::id, self::groupID, Group::getJoin())
+            ->addLeft(Action::getFields(), Action::TABLE, Action::id, self::actionID, Action::getJoin());
     }
 
     public static function new(Group $group, Action $action): ?self {

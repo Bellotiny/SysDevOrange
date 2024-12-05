@@ -12,10 +12,10 @@ include_once 'Views/bookingModal.php';
           <!--content is load here-->
          
           <div class="container">
-          <h1>Delete Account</h1>
+          <h1><?= DELETE_PROFILE ?></h1>
           <form action="<?=BASE_PATH?>/account/delete" method="POST">
             <div class="form-group">
-              <label for="confirm">Confirm</label>
+              <label for="confirm"><?= CONFIRM ?></label>
               <input type="checkbox" id="confirm" name="confirm">
             </div>
             <?php if (isset($data["error"])): ?>
@@ -23,7 +23,7 @@ include_once 'Views/bookingModal.php';
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
               <input class="btn btn-primary mt-3" role="button" type="submit" value="Delete">
-              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account" role="button">Go Back</a>
+              <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account" role="button"><?= GO_BACK ?></a>
             </div>
           </form>
           </div>

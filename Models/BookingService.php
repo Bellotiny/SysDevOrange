@@ -32,8 +32,8 @@ final class BookingService extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
-            ->addInner(Service::getFields(), Service::TABLE, Service::id, self::serviceID, Service::getJoin());
+            ->addLeft(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
+            ->addLeft(Service::getFields(), Service::TABLE, Service::id, self::serviceID, Service::getJoin());
     }
 
     public static function new(Booking $booking, Service $service): ?self {

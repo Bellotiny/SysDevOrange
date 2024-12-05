@@ -42,7 +42,7 @@ final class Discount extends Model {
         ];
     }
 
-    public static function new(string $name,string $type, string $start, string $end, float $percent, float $amount): ?self {
+    public static function new(string $name, string $type, string $start, string $end, float $percent, float $amount): ?self {
         $values = new Values();
         $values->add(new Value(self::name, $name));
         $values->add(new Value(self::type, $type));

@@ -74,13 +74,22 @@ final class User extends Model {
         }
     }
 
+//    public function applyDiscount($firstName, $birthDate){
+//        $birthDateTime = new DateTime($birthDate);
+//        $birthDateTimeStart = clone $birthDateTime;
+//        $birthDateTimeStart->setTime(8, 0, 0);
+//
+//        $birthDateTimeEnd = clone $birthDateTime;
+//        $birthDateTimeEnd->setTime(16, 0, 0);
+//        Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
+//    }
+
     /**
      * Get user based on the email and password
      */
     public static function getFromEmailPassword(string $email, string $password): ?self {
-        $where = new Where();
-        $where->addEquals(new Value(self::email, $email));
-        $where->addEquals(new Value(self::password, $password, true));
+        $where = (new Where(new Equals(new Value(self::email, $email))))
+            ->addAnd(new Equals(new Value(self::password, $password, true)));
         return self::get($where);
     }
 
@@ -88,18 +97,14 @@ final class User extends Model {
      * Get user based on the email only
      */
     public static function getFromEmail(string $email): ?self {
-        $where = new Where();
-        $where->addEquals(new Value(self::email, $email));
-        return self::get($where);
+        return self::get(new Where(new Equals(new Value(self::email, $email))));
     }
 
     /**
      * Retrieve a User object based on a token
      */
     public static function getFromToken(string $token): ?self {
-        $where = new Where();
-        $where->addEquals(new Value(self::token, $token));
-        return self::get($where);
+        return self::get(new Where(new Equals(new Value(self::token, $token))));
     }
 
     /**
@@ -118,25 +123,21 @@ final class User extends Model {
     }
 
     public function setToken(?string $token): bool {
-        $values = new Values();
-        $values->add(new Value(self::token, $token));
-        $where = new Where();
-        $where->addEquals(new Value(self::id, $this->id));
-        return self::update($values, $where);
+        return self::update(
+            (new Values())->add(new Value(self::token, $token)),
+            new Where(new Equals(new Value(self::id, $this->id)))
+        );
     }
 
     public function hasPassword(): bool {
-        $where = new Where();
-        $where->addNotEquals(new Value(self::password, null));
-        return (bool) self::select($where);
+        return (bool) self::select(new Where(new Equals(new Value(self::id, $this->id), true)));
     }
 
     public function updatePassword(string $password): bool {
-        $values = new Values();
-        $values->add(new Value(self::password, $password, true));
-        $where = new Where();
-        $where->addEquals(new Value(self::id, $this->id));
-        return self::update($values, $where);
+        return self::update(
+            (new Values())->add(new Value(self::password, $password, true)),
+            new Where(new Equals(new Value(self::id, $this->id)))
+        );
     }
 
     public function hasRights(string $controller, string $action): bool {
@@ -144,30 +145,32 @@ final class User extends Model {
             ->addInner(UserGroup::getFields(), UserGroup::TABLE, UserGroup::userID, self::id)
             ->addInner(GroupAction::getFields(), GroupAction::TABLE, GroupAction::groupID, UserGroup::groupID)
             ->addInner(Action::getFields(), Action::TABLE, Action::id, GroupAction::actionID);
-        $where = (new Where())
-            ->addEquals(new Value(self::id, $this->id))
-            ->addEquals(new Value(Action::controller, $controller))
-            ->addEquals(new Value(Action::action, $action));
+        $where = (new Where(new Equals(new Value(self::id, $this->id))))
+            ->addAnd(new Equals(new Value(Action::controller, $controller)))
+            ->addAnd(new Equals(new Value(Action::action, $action)));
         return is_array(self::select($where, $join)->fetch_assoc());
     }
 
     /**
-     * Get Reviews
      * @return Review[]
      */
     public function getReviews(): array {
-        $where = new Where();
-        $where->addEquals(new Value(Review::userID, $this->id));
-        return Review::list($where);
+        return Review::list(new Where(new Equals(new Value(Review::userID, $this->id))));
     }
 
     /**
-     * Get Bookings
      * @return Booking[]
      */
     public function getBookings(): array {
-        $where = new Where();
-        $where->addEquals(new Value(Booking::userID, $this->id));
-        return Booking::list($where);
+        return Booking::list(new Where(new Equals(new Value(Booking::userID, $this->id))));
+    }
+
+    /**
+     * @return Availability[]
+     */
+    public function getAvailabilities(): array {
+        $where = new Where(new Equals(new Value(Booking::userID, $this->id)));
+        $order = new Order([Availability::timeSlot], true);
+        return Availability::list($where, null, null, null, $order);
     }
 }
