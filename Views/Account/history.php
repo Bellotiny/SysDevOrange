@@ -35,7 +35,7 @@ include_once 'Views/bookingModal.php';
                                 $start = date("H:i", strtotime($availability->timeSlot));
                                 ?>
                                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-                                    <div class="card" style="width: 18rem;">
+                                    <div class="card p-2" style="width: 18rem;">
                     
                                         <div class="card-body">
                                             <h5 class="card-title">Message:</h5>
