@@ -59,7 +59,7 @@ final class Book extends Controller {
                 if ($this->user !== null) {
                     $user = $this->user;
                 } else {
-                    //var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                    var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     if (
                         isset($_POST['firstName'], $_POST['lastName'], $_POST['username'])
                     ) {
@@ -67,8 +67,8 @@ final class Book extends Controller {
                         $lastName = $_POST['lastName'];
                         $username = $_POST['username'];
                 
-                        $user = User::new($firstName, $lastName, $username, null, null, null);
-                        //($user === null);
+                        $user = User::new($firstName, $lastName, $username);
+                        var_dump($user);
                     } else {
                         // Optional: Handle missing POST fields gracefully
                         throw new Exception('Required fields are missing to create a new user.');

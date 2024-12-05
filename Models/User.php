@@ -56,7 +56,7 @@ final class User extends Model {
         $values->add(new Value(self::birthDate, $birthDate));
         $values->add(new Value(self::password, $password, true));
         try {
-            self::insert($values, true);
+            self::insert($values, false);
             $id = self::getConnection()->insert_id;
             $user = new self([
                 self::id => $id,
@@ -69,7 +69,8 @@ final class User extends Model {
             ]);
             UserGroup::new($user, Group::getFromName("registeredUsers"));
             return $user;
-        } catch (Exception) {
+        } catch (Exception $e) {
+            echo($e);
             return null;
         }
     }
