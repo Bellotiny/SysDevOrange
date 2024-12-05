@@ -112,27 +112,28 @@ final class Booking extends Model {
     }
 
     public function getImages(): array {
-        $join = (new Join())->addInner(BookingImage::getFields(), BookingImage::TABLE, BookingImage::imageID, Image::id);
-        $where = (new Where())->addEquals(new Value(BookingImage::bookingID, $this->id));
-        return Image::list($where, $join);
+        return Image::list(
+            new Where(new Equals(new Value(BookingImage::bookingID, $this->id))),
+            (new Join())->addInner(BookingImage::getFields(), BookingImage::TABLE, BookingImage::imageID, Image::id),
+        );
     }
 
     public function getServices(): array {
-        $join = (new Join())->addInner(BookingService::getFields(), BookingService::TABLE, BookingService::serviceID, Service::id);
-        $where = (new Where())->addEquals(new Value(BookingService::bookingID, $this->id));
-        return Service::list($where, $join);
+        return Service::list(
+            new Where(new Equals(new Value(BookingService::bookingID, $this->id))),
+            (new Join())->addInner(BookingService::getFields(), BookingService::TABLE, BookingService::serviceID, Service::id),
+        );
     }
 
     public function getColors(): array {
-        $join = (new Join())->addInner(BookingColor::getFields(), BookingColor::TABLE, BookingColor::colorID, Color::id);
-        $where = (new Where())->addEquals(new Value(BookingColor::bookingID, $this->id));
-        return Color::list($where, $join);
+        return Color::list(
+            new Where(new Equals(new Value(BookingColor::bookingID, $this->id))),
+            (new Join())->addInner(BookingColor::getFields(), BookingColor::TABLE, BookingColor::colorID, Color::id),
+        );
     }
 
     public function getAvailabilities(): array {
-        $where = new Where();
-        $where->addEquals(new Value(Availability::bookingID, $this->id));
-        return Availability::list($where);
+        return Availability::list(new Where(new Equals(new Value(Availability::bookingID, $this->id))));
     }
 
     public function getFinalPrice(): float {

@@ -22,9 +22,13 @@ include_once 'Views/bookingModal.php';
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center w-100 px-0 container py-4 " id="image-container">
+  <div class="d-md-flex flex-md-equal justify-content-center align-items-center w-100 my-md-3 container " id="image-container">
+   <div>
     <img src="<?=BASE_PATH?>/Views/Images/about1.png" alt="Image 1" class="mx-2 slide-up" id="image1">
+   </div>
+   <div>
     <img src="<?=BASE_PATH?>/Views/Images/about2.png" alt="Image 2" class="mx-2 slide-up" id="image2">
+   </div>
   </div>
 
   <div id="cat-warning-container">
@@ -45,29 +49,22 @@ include_once 'Views/bookingModal.php';
 
   <div class=" my-5 green-background" id="location-parking-container">
    
-    <div class="row h-100">
+    <div class="d-md-flex flex-md-equal justify-content-center align-items-center w-100 my-md-3 slide-up " id="">
         <!-- Location Item -->
-        <div class="col-md-6 d-flex justify-content-center align-items-center slide-up">
+       <div class="col-md-6 " id="location-div">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2799.722524292248!2d-73.67220439999998!3d45.4350945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc916eaa06448d1%3A0x67b6e59d74aadb8d!2s980%20Rue%20Notre%20Dame%2C%20Lachine%2C%20QC%20H8S%202B9!5e0!3m2!1sen!2sca!4v1731001751030!5m2!1sen!2sca"
-                class="w-100 h-100" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+                   style="border: 0; " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+       </div>
 
-        <!-- Parking Item -->
-        <div class="col-md-6 p-5 slide-up overflow-auto">
-            <h4 class="notice-title slide-up"><?= PARKING_REMINDER ?></h4>
-            <p class="notice-p slide-up overflow-auto">
-                <?=  PARKING_REMINDER_INFO ?>
-            </p>
-
-            <!--  Map Container -->
-            <div class=" mx-auto slide-up" id="parking-div">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d341.64767448886255!2d-73.6735138755337!3d45.43439545676149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc9171879484665%3A0x26561a85b5a50684!2sStationnement%20municipal!5e0!3m2!1sen!2sca!4v1731002594499!5m2!1sen!2sca"
-                    class="position-absolute top-0 start-0 w-100 h-100" style="border: none;">
-                </iframe>
-            </div>
-        </div>
-    </div>
+       <div class="col-md-6 p-3 " id="parking-div">
+        <h4 class="notice-title slide-up"><?= PARKING_REMINDER ?></h4> 
+        <p class="notice-p slide-up ">
+          <?=  PARKING_REMINDER_INFO ?>
+        </p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d341.64767448886255!2d-73.6735138755337!3d45.43439545676149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc9171879484665%3A0x26561a85b5a50684!2sStationnement%20municipal!5e0!3m2!1sen!2sca!4v1731002594499!5m2!1sen!2sca" >
+        </iframe>
+       </div>
   </div>
 
 </main>

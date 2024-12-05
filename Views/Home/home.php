@@ -65,8 +65,9 @@ include_once 'Views/bookingModal.php';
 
   <!-- Home Section -->
   <div id="homeImage" class=" slide-up">
-    <div id="overlay-text">Snook's</div>
-    <div id="overlay-text2">Nail Nook</div>
+    <div class="jimmyScript-fontstyle" id="overlay-text">Snook's  </div>
+    <div class="silverFake-fontstyle" id="overlay-text2">Nail Nook</div>
+  
   </div>
 
 <!----welcome--->
@@ -255,140 +256,6 @@ include_once 'Views/bookingModal.php';
 
 
 <?php include_once 'Views/footer.php'; ?>
-
-
-<script>
-    const modal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-    const slideElements = document.querySelectorAll('.slide-up');
-
-  // Show the modal only once per session
-  if (!sessionStorage.getItem('modalShown')) {
-    modal.show();
-    sessionStorage.setItem('modalShown', 'true');
-  }
-
-  const checkSlide = () => {
-        slideElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                element.classList.add('active'); // Add active class when in viewport
-            } else {
-                element.classList.remove('active'); // Remove active class if out of viewport
-            }
-        });
-    };
-
-  // JavaScript to toggle between login, register forms, and welcome message
-  document.addEventListener("DOMContentLoaded", function() {
-    const welcomeMessage = document.getElementById("welcomeMessage");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
-    const forgotForm = document.getElementById("forgotForm");
-    const authModalTitle = document.getElementById("authModalTitle");
-
-    //
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); 
-
-    
-
-    // Show login form
-    document.getElementById("showLogin").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-    // Show register form
-    document.getElementById("showRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      welcomeMessage.style.display = "none";
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show register form from within login form
-    document.getElementById("showRegisterForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= REGISTER ?>";
-    });
-
-    // Show login form from within register form
-    document.getElementById("showLoginFormRegister").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-        // Show login form from within forgot form
-        document.getElementById("showLoginForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-      forgotForm.style.display = "none";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });
-
-    // Show forgot form from within login form
-    document.getElementById("showForgotForm").addEventListener("click", function(event) {
-      event.preventDefault();
-      registerForm.style.display = "none";
-      loginForm.style.display = "none";
-      forgotForm.style.display = "block";
-      authModalTitle.textContent = "<?= FORGOT_PASS ?>";
-    });
-
-    // Go back to welcome message from login form
-    document.getElementById("goBackFromLogin").addEventListener("click", function() {
-      loginForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-
-    // Go back to welcome message from register form
-    document.getElementById("goBackFromRegister").addEventListener("click", function() {
-      registerForm.style.display = "none";
-      welcomeMessage.style.display = "block";
-      authModalTitle.textContent = "<?= WELCOME_TO ?>";
-    });
-  });
-    // Go back to login form from forgot form
-    document.getElementById("goBackFromForgot").addEventListener("click", function() {
-      forgotForm.style.display = "none";
-      loginForm.style.display = "block";
-      authModalTitle.textContent = "<?= LOGIN ?>";
-    });  
-  </script>
-    <script>
-   let modalElement = document.getElementById('modalBookingWarning');
-   let mobileNav =  document.getElementById('navbarMenu');
-   if (modalElement.classList.contains("open")) {
-               // Close the menu
-        mobileNav.style.opacity = "0";
-        mobileNav.style.visibility = "hidden";
-        mobileNav.classList.remove('show');
-        body.classList.remove('no-scroll');
-   }
-   </script>
-
 
 </body>
 </html>

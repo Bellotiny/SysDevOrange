@@ -2,15 +2,15 @@
 
 class Order {
     private array $columns;
-    private bool $ascend;
+    private bool $descend;
 
     /**
      * @param string[] $columns
      * @param bool $ascend
      */
-    public function __construct(array $columns = [], bool $ascend = false) {
+    public function __construct(array $columns = [], bool $descend = false) {
         $this->columns = $columns;
-        $this->ascend = $ascend;
+        $this->descend = $descend;
     }
     
     public function add(string $column): self {
@@ -19,16 +19,16 @@ class Order {
     }
 
     public function ascend(): self {
-        $this->ascend = true;
+        $this->descend = false;
         return $this;
     }
     
     public function descend(): self {
-        $this->ascend = false;
+        $this->descend = true;
         return $this;
     }
 
     public function __toString(): string {
-        return " ORDER BY " . implode(", ", $this->columns) . ($this->ascend ? " DESC" : "");
+        return " ORDER BY " . implode(", ", $this->columns) . ($this->descend ? " DESC" : "");
     }
 }

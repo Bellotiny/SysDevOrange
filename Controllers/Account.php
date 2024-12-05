@@ -36,6 +36,9 @@ final class Account extends Controller {
     final public const SERVICE_ADD = "addservice";
     final public const SERVICE_EDIT = "editservice";
     final public const SERVICE_DELETE = "deleteservice";
+    final public const ADD_DISCOUNT = "adddiscount";
+    final public const EDIT_DISCOUNT = "editdiscount";
+    final public const DELETE_DISCOUNT = "deletediscount";
 
     public function route(): void {
         $action = strtolower($_GET["action"] ?? self::PERSONAL_INFORMATION);
@@ -369,6 +372,7 @@ final class Account extends Controller {
                 $this->render("Account", $action, [
                     "services" => Service::list(),
                     "colors" => Color::list(),
+                    "discounts" => Discount::list()
                 ]);
                 break;
             case self::COLOR_ADD:
@@ -407,6 +411,32 @@ final class Account extends Controller {
                     filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
                 );
                 if ($service === null) {
+                    $this->render("Account", $action, ["error" => "Error while creating new color"]);
+                    break;
+                }
+                $this->redirect(self::INVENTORY);
+                break;
+            case self::ADD_DISCOUNT:
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
+                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
+                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                    $this->render("Account", $action);
+                    break;
+                }
+
+
+                $discount = Discount::new(
+                    $_POST["name"],
+                    $_POST["type"],
+                    $_POST["start"],
+                    $_POST["end"],
+                    filter_var($_POST["percent"], FILTER_VALIDATE_INT),
+                    filter_var($_POST["amount"], FILTER_VALIDATE_FLOAT),
+                );
+                if ($discount === null) {
                     $this->render("Account", $action, ["error" => "Error while creating new color"]);
                     break;
                 }
@@ -452,6 +482,34 @@ final class Account extends Controller {
                 $service->visibility = filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN);
                 $service->save();
                 $this->redirect(self::INVENTORY);
+                break;
+            case self::EDIT_DISCOUNT:
+                //var_dump($_GET, $_POST);
+                if (!$this->verifyRights($action)) {
+                    break;
+                }
+                $discount = Discount::getFromId((int)$_GET["id"]);
+                //var_dump($discount);
+                if (is_null($discount)) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                //var_dump(isset($_POST["name"]) );
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
+                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
+                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                    $this->render("Account", $action, ["discount" => $discount]);
+                    break;
+                }
+                $discount->name = $_POST["name"];
+                $discount->type = $_POST["type"];
+                $discount->start = $_POST["start"];
+                $discount->end = $_POST["end"];
+                $discount->percent = $_POST["percent"];
+                $discount->amount = $_POST["amount"];
+                $discount->save();
+                $this->redirect(self::INVENTORY);
+
                 break;
             case self::COLOR_DELETE:
                 if (!$this->verifyRights($action)) {

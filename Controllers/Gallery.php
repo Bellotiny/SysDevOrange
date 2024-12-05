@@ -121,8 +121,14 @@ final class Gallery extends Controller {
                 curl_close($ch);
                 $data = json_decode($response, true);
 
+                if (isset($_POST["search"])) {
+                    $reviews = Review::search((int)($_GET["id"] ?? 0), $_POST["search"]);
+                } else {
+                    $reviews = Review::listByDate((int)($_GET["id"] ?? 0));
+                }
+
                 $this->render("Gallery", "list", [
-                    "reviews" => Review::list(null, null, 10, (10 * (int)($_GET["id"] ?? 0))),
+                    "reviews" => $reviews,
                     "mediaItems" => array_map(fn($item) => [
                         "url" => $item["media_url"],
                         "type" => $item["media_type"],

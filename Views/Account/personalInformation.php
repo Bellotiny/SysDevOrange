@@ -63,9 +63,6 @@ include_once 'Views/bookingModal.php';
 
     </main>
 
-      <!-- Include scripts here -->
-
-
       </div>
   
         <!-- Include scripts here -->

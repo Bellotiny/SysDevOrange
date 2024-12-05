@@ -39,7 +39,11 @@ include_once 'Views/head.php';
       <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Reviews</h1>
     </div>
   </div>
-    
+    <form method="POST">
+        <label>Search: <input type="text" name="search" class="form-control" placeholder="Search for reviews"></label>
+        <br>
+        <input type="submit" value="Search">
+    </form>
   <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
   <div class="d-grid gap-2">
     <a href="<?=BASE_PATH?>/gallery/add" class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false" >Write Review</a>
@@ -102,19 +106,6 @@ include_once 'Views/head.php';
                 </div>
             </div>
         <?php } ?>
-
-      <!---pagination--->
-     <div class="d-flex justify-content-center">
-      <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
-     </div>
 
     </div>
 

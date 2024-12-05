@@ -2,7 +2,6 @@
 
 include_once "Helper/Join.php";
 include_once "Helper/Order.php";
-include_once "Helper/Value.php";
 include_once "Helper/Values.php";
 include_once "Helper/Where.php";
 
@@ -22,15 +21,12 @@ abstract class Model {
                 $values->add(new Value($field, $value));
             }
         }
-        $where = new Where();
-        $where->addEquals(new Value(static::id, $this->id));
+        $where = new Where(new Equals(new Value(static::id, $this->id)));
         return self::update($values, $where);
     }
 
     public final function remove(): bool {
-        $where = new Where();
-        $where->addEquals(new Value(static::id, $this->id));
-        return self::delete($where);
+        return self::delete(new Where(new Equals(new Value(static::id, $this->id))));
     }
 
     protected final static function getConnection(): mysqli {
@@ -103,9 +99,9 @@ abstract class Model {
             " FROM `" . static::TABLE . "`" .
             ($join ?? "") .
             ($where ?? "") .
+            ($order ?? "") .
             ($limit ? " LIMIT " . $limit : "") .
             ($offset ? " OFFSET " . $offset : "") .
-            ($order ?? "") .
             ";",
             ($where ? $where->getArgs() : [])
         );
@@ -136,9 +132,7 @@ abstract class Model {
     }
 
     public final static function getFromId(int $id): ?static {
-        $where = new Where();
-        $where->addEquals(new Value(static::id, $id));
-        return self::get($where);
+        return self::get(new Where(new Equals(new Value(static::id, $id))));
     }
 
     public final static function getManyFromIds(string $column, array $ids): array {
@@ -146,8 +140,6 @@ abstract class Model {
         foreach ($ids as $id) {
             $values->add(new Value($column, $id));
         }
-        $where = new Where();
-        $where->addIN($column, $values);
-        return self::list($where);
+        return self::list(new Where(new In($values)));
     }
 }

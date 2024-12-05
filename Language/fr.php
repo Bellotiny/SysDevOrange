@@ -83,6 +83,7 @@ const BOOKING_LIST = "Liste de Réservation";
 
 // Account Settings
 const EDIT_PROFILE = "Modifier le Profil";
+const CHANGE_PASSWORD = "Changer le mot de passe";
 const DELETE_PROFILE = "Supprimer le Profil";
 const SIGN_OUT = "Se Déconnecter";
 
