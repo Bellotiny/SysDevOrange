@@ -35,7 +35,7 @@ final class Book extends Controller {
                 }
 
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-                var_dump($_POST['servicePlace']);
+     
                 $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null
@@ -56,14 +56,25 @@ final class Book extends Controller {
                 }
                 
                 
-                if($this->user != null){
+                if ($this->user !== null) {
                     $user = $this->user;
-                } else{
-                    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['username'])){
-                        $user = User::new($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                } else {
+                    //var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                    if (
+                        isset($_POST['firstName'], $_POST['lastName'], $_POST['username'])
+                    ) {
+                        $firstName = $_POST['firstName'];
+                        $lastName = $_POST['lastName'];
+                        $username = $_POST['username'];
+                
+                        $user = User::new($firstName, $lastName, $username, null, null, null);
+                        //($user === null);
+                    } else {
+                        // Optional: Handle missing POST fields gracefully
+                        throw new Exception('Required fields are missing to create a new user.');
                     }
                 }
-
+                
                 $message = $_POST['message'] ?? null;      
                 $images = [];
                 
@@ -94,11 +105,11 @@ final class Book extends Controller {
                 var_dump($date_time->timeSlot);
                 var_dump($location);
                 echo '</pre>';
-                if ($services != null && $colors != null && $date_time != null && $location != null) {
+                if ($services != null && $colors != null && $date_time != null) {
                     $message = $message ?? null;
                     $booking = Booking::new($user, $price, $message, null, $date_time->timeSlot, $location);
                 
-                    var_dump($booking);
+                  //  var_dump($booking);
                     if ($booking != null) {
                         Booking::setGroups($booking, $colors, 'BookingColor');
                         Booking::setGroups($booking, $services, 'BookingService');

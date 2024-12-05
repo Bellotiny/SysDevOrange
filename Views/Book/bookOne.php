@@ -256,6 +256,8 @@ ini_set('display_errors', 1);
 
         
 </div>
+        
+
       <!-- Section # cart -->
       <div  class="form-section  container pt-5" id="section5">
       <div id="cart-container" class="container my-5">
@@ -356,7 +358,9 @@ ini_set('display_errors', 1);
 </div>
 
 <script>
+  const tokenIsSet = document.cookie.indexOf('token=') !== -1;
     console.log("d");
+    console.log(tokenIsSet);
   let cart = [];
   let totalPrice = 0;
 
@@ -502,8 +506,9 @@ let currentSection = 1;
     });
     document.getElementById(`section${sectionNumber}`).classList.add('active');
   }
-  const tokenIsSet = document.cookie.indexOf('token=') !== -1;
+  
   // Handle the next button click for each section
+  console.log(tokenIsSet);
   function next() {
     console.log("dede");
       const selectedServiceRadio = document.querySelector('input[name="servicePlace"]:checked');
@@ -521,6 +526,7 @@ let currentSection = 1;
         } else if (currentSection === 4) {
           currentSection = 2; 
         } else if (currentSection === 2) {
+          alert(tokenIsSet);
           if(tokenIsSet){
             currentSection = 5;
           }else{
@@ -534,7 +540,11 @@ let currentSection = 1;
         if (currentSection === 1) {
           currentSection = 2; 
         } else if (currentSection === 2) {
-          currentSection = 3;
+          if(tokenIsSet){
+            currentSection = 5;
+          }else{
+            currentSection = 3; 
+          }
         }else if (currentSection === 3) {
           currentSection = 5;
         }
