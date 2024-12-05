@@ -147,6 +147,21 @@ const  VIEW_BOOKING = "Voir la Réservation";
 const PRICE = "Prix";
 const PAYED_ON = "Payé Le";
 
+// Booking Modal
+const BOOKING_INFO = "Informations de Réservation";
+const BOOKING_RULES = "Règles de Réservation :";
+const CLIENT_MUST_PAY = "Vous devez payer";
+const UPON_BOOKING = " à la réservation";
+const  BE_DEUCTED = ", qui seront déduits du paiement total.";
+const  YOU_MUST_AT_LEAST = "Vous devez choisir au moins";
+const ONE_COLOR = "une couleur";
+const HOME_CONDITION = "Le service à domicile est une option mais disponible uniquement";
+const  CERTAIN_RANGE = "dans un rayon de";
+const  IN_MY_PLACE = " de chez moi.";
+const THERE_ARE = "Ce sont ";
+const CATS = "des chats";
+const READ_REMINDERS = "J'ai lu tous les rappels";
+
 // Gallery
     
     // General Review

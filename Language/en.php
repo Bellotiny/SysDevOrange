@@ -140,6 +140,23 @@ const  VIEW_BOOKING = "View Booking";
 const PRICE = "Price";
 const PAYED_ON = "Payed On";
 
+// Booking Modal
+const BOOKING_INFO = "Booking Information";
+const BOOKING_RULES = "Booking Rules:";
+const CLIENT_MUST_PAY = "You must pay";
+const UPON_BOOKING = " upon booking";
+const  BE_DEUCTED = ", which will be deducted from the total payment.";
+const  YOU_MUST_AT_LEAST = "You must choose at least ";
+const ONE_COLOR = "one color";
+const HOME_CONDITION = "Home service is an option but available only";
+const  CERTAIN_RANGE = "within 20km";
+const  IN_MY_PLACE = " range to my place.";
+const THERE_ARE = "There are ";
+const CATS = "cats";
+const READ_REMINDERS = "I read all the reminders";
+
+
+
 // Gallery
 
     // General Review
