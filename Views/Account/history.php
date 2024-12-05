@@ -34,20 +34,20 @@ include_once 'Views/bookingModal.php';
                         <div class="d-flex align-items-center py-2">
                             <div class="w-100 ">
                                 <p class="card-text mb-auto"><?= $booking->message ? "Message: " . $booking->message : "" ?></p>
-                                <p class="card-text mb-auto">Location: <?= $booking->location ?? "Owner's place" ?></p>
+                                <p class="card-text mb-auto"><?= LOCATION ?> <?= $booking->location ?? "Owner's place" ?></p>
                                 <div>
                                     <?php if ($booking->discount) : ?>
-                                        <h5 class="mb-0">Discount breakdown:</h5>
-                                        <p class="card-text mb-auto">Original Price: $<?= $booking->price ?></p>
+                                        <h5 class="mb-0"><?= DISCOUNT_BREAKDOWN ?></h5>
+                                        <p class="card-text mb-auto"><?= ORIGINAL_PRICE ?><?= $booking->price ?></p>
                                         <p class="card-text mb-auto"><?= $booking->discount->amount ? $booking->discount->name . ": -" . $booking->discount->amount . "$" : "" ?></p>
                                         <p class="card-text mb-auto"><?= $booking->discount->percent ? $booking->discount->name . ": -" . $booking->discount->percent . "%" : "" ?></p>
                                     <?php endif; ?>
-                                    <h3 class="mb-0">Total: $<?= $booking->getFinalPrice() ?></h3>
+                                    <h3 class="mb-0"><?= TOTAL_ACCOUNT_HISTORY ?><?= $booking->getFinalPrice() ?></h3>
                                 </div>
-                                <p class="card-text mb-auto">Booked on: <?= date("Y-m-d H:i", strtotime($booking->bookedOn)) ?></p>
+                                <p class="card-text mb-auto"><?= BOOKED_ON ?> <?= date("Y-m-d H:i", strtotime($booking->bookedOn)) ?></p>
                                 <p class="card-text mb-auto"><?= $booking->payedOn ? "Payed: " . date("Y-m-d H:i", strtotime($booking->payedOn)) : "" ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="d-inline-block mb-2 text-primary-emphasis ">Date: <?= $date ?> <?= $start ?> - <?= $end ?></strong>
+                                    <strong class="d-inline-block mb-2 text-primary-emphasis "><?= DATE ?> <?= $date ?> <?= $start ?> - <?= $end ?></strong>
                                 </div>
                                 <hr>
                             </div>

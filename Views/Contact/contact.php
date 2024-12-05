@@ -39,7 +39,7 @@ ini_set('display_errors', 1);
                             </div>
                             <!-- Message -->
                             <div class="form-group mb-4">
-                                <label for="message" class="form-label">Message</label>
+                                <label for="message" class="form-label"><?= MESSAGE_REVIEW ?></label>
                                 <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                             </div>
                             <!-- Submit Button -->

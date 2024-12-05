@@ -69,8 +69,8 @@ ini_set('display_errors', 1);
         </div>
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()">Cancel</a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()"><?= CANCEL ?></a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()"><?= NEXT ?></a>
 
         </div>
 
@@ -84,12 +84,12 @@ ini_set('display_errors', 1);
       <div class="form-section  container pt-5"  id="section2">
 
         <!-- Section 2 Color -->
-        <h3>Pick your color(s):</h3>
+        <h3><?= PICK_COLORS ?></h3>
         <div class="accordion" id="accordionExample" >
           <div class="accordion-item" id="colorGroup1">
             <h3 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Color 1:<span id="selectedColor1">Classic Red</span>
+                <?= COLOR ?> 1:<span id="selectedColor1">Classic Red</span>
               </button>
             </h3>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -118,7 +118,7 @@ ini_set('display_errors', 1);
           <div class="accordion-item" id="colorGroup2">
             <h3 class="accordion-header" id="headingTwo">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Color 2:<span id="selectedColor2">None</span>
+                <?= COLOR ?> 2:<span id="selectedColor2"><?= NONE ?></span>
               </button>
             </h3>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -151,7 +151,7 @@ ini_set('display_errors', 1);
 
           <!-- Date Selection -->
           <div class="form-group">
-          <label for="availableDates">Available Dates</label>
+          <label for="availableDates"><?= AVAILABLE_DATES ?></label>
           <select class="form-control" id="availableDates" name="selected_date">
           <?php
               $available_dates_times = [];
@@ -199,8 +199,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()">Cancel</a>
-          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()"><?= CANCEL ?></a>
+          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()"><?= NEXT ?> </a>
 
         </div>
 
@@ -252,19 +252,19 @@ ini_set('display_errors', 1);
         <!-- Section # cart -->
         <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your Cart</span>
+          <span class="text-primary"><?= YOUR_CART ?></span>
           <span id="cart-count" class="badge bg-primary rounded-pill">0</span>
         </h4>
         <ul id="cart-items" class="list-group mb-3"></ul>
         <div class="list-group-item d-flex justify-content-between">
-          <span>Total (CAD)</span>
+          <span><?= TOTAL_CAD ?></span>
           <strong id="cart-total">0</strong>
         </div>
       </div>
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3">Back</a>
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-3"><?= BACK ?></a>
           <input type="submit" class="btn btn-primary w-50" role="button" > 
 
         </div>
@@ -307,8 +307,8 @@ ini_set('display_errors', 1);
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()">Back</a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()">Next</a>
+          <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()"><?= BACK ?></a>
+          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()"><?= NEXT ?></a>
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">

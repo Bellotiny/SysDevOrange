@@ -40,7 +40,7 @@ include_once 'Views/head.php';
     </div>
   </div>
     <form method="POST">
-        <label><?= SEARCH ?> <input type="text" name="search" class="form-control" placeholder="Search for reviews"></label>
+        <label><?= SEARCH ?> <input type="text" name="search" class="form-control" placeholder="<?= SEARCH_FOR_REVIEWS ?>"></label>
         <br>
         <input type="submit" value="Search">
     </form>

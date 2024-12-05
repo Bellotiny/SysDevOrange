@@ -20,11 +20,11 @@ include_once 'Views/head.php';
         <form id="review-form-input" class="pb-3" action="<?=BASE_PATH?>/gallery/add" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label"><?= TITLE_REVIEW ?></label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title" required>
+                <input type="text" name="title" id="title" class="form-control" placeholder="<?= ENTER_REVIEW_TITLE ?>" required>
             </div>
             <div class="mb-3">
                 <label for="message" class="form-label"><?= MESSAGE_REVIEW ?></label>
-                <textarea name="message" id="message" class="form-control" rows="3" placeholder="Write your review here" required></textarea>
+                <textarea name="message" id="message" class="form-control" rows="3" placeholder="<?= ENTER_REVIEW_TEXT ?>" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label"><?= UPLOAD_IMAGE_REVIEW ?></label>
