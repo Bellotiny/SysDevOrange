@@ -68,6 +68,12 @@ final class Availability extends Model {
         }
     }
 
+    public static function listWithBookings(int $page): array {
+        $where = new Where(new IsNull(self::bookingID, true));
+        $order = new Order([self::timeSlot], true);
+        return self::list($where, null, 25, (25 * $page), $order);
+    }
+
     public static function listFuture(): array {
         $where = new Where(new GreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", strtotime('today midnight')))));
         $order = new Order([self::timeSlot], true);

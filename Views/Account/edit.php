@@ -16,27 +16,27 @@ include_once 'Views/bookingModal.php';
     <div class="sideScreen container" style="margin-top: 4%;">
         <form method="POST" action="<?= BASE_PATH ?>/account/edit">
             <div class="form-group py-2">
-                <label for="firstName">First Name</label>
+                <label for="firstName"><?= FIRST_NAME ?></label>
                 <input type="text" class="form-control" id="firstName" name="firstName"
                        value="<?= $this->user->firstName ?>" required>
             </div>
             <div class="form-group py-2">
-                <label for="lastName">Last Name</label>
+                <label for="lastName"><?= LAST_NAME ?></label>
                 <input type="text" class="form-control" id="lastName" name="lastName"
                        value="<?= $this->user->lastName ?>" required>
             </div>
             <div class="form-group py-2">
-                <label for="email">Email</label>
+                <label for="email"><?= EMAIL ?></label>
                 <input type="email" class="form-control" id="email" name="email" value="<?= $this->user->email ?>"
                        required>
             </div>
             <div class="form-group py-2">
-                <label for="birthDate">Birthday:</label>
+                <label for="birthDate"><?= BIRTHDAY ?></label>
                 <input type="date" class="form-control" id="birthDate" name="birthDate"
                        value="<?= $this->user->birthDate ?? "" ?>">
             </div>
             <div class="form-group py-2">
-                <label for="phoneNumber">Phone Number</label>
+                <label for="phoneNumber"><?= PHONE_NUMBER ?></label>
                 <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
                        value="<?= $this->user->phoneNumber ?? "" ?>">
             </div>
@@ -47,7 +47,7 @@ include_once 'Views/bookingModal.php';
                 <p><span style="color:green"><?php echo $data["message"]; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Save">
+                <input class="btn btn-primary mt-3" role="button" type="submit" value="<?= CONFIRM ?>">
             </div>
         </form>
 </main>

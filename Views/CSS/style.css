@@ -152,15 +152,16 @@ header {
     padding: 0 20px;
 }
 
-
-
 #nav-main {
     display: flex; /* Ensures all links stay on the same line */
     flex-wrap: nowrap; /* Prevents wrapping to a new line */
     gap: 10px; 
 }
 
-#nav-main a {
+.lang {
+    color: #f37a74 !important;
+}
+#nav-main a  {
     text-decoration: none;
     text-align: center;
     font-family: "Canvas Sans", sans-serif;
@@ -293,7 +294,7 @@ header {
     
 }
 #item-2{
-    background-image: url('../Images/cat1.jpg');
+    background-image: url('../Images/cat3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -524,6 +525,12 @@ a.nav-link.active {
 
 .sideScreen {
     width: -webkit-fill-available;
+}
+#sidebar {
+    height: 100vh !important;
+}
+#sidebar  ul {
+    white-space: nowrap;
 }
 
 #divAccount{
@@ -761,6 +768,8 @@ header {
     z-index: 1000;
     transition: left 0.3s ease; /* Smooth sliding effect */
 }
+
+
 
 #content {
     flex-grow: 1;
