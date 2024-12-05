@@ -46,7 +46,7 @@ include_once 'Views/bookingModal.php';
 
     <div class="row py-2  ">
     <?php  foreach($data['services'] as $services){?>
-      <?php  if($services->type == "Additional"){?>
+      <?php  if($services->type == "Additional" && $services->visibility == 1){?>
             
                   <div class="col-md-6 slide-up ">
                       <div class="services-card row g-0 border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-white">
