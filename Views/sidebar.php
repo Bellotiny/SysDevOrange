@@ -13,12 +13,12 @@
             </li>
             
             <li >
-              <a href="<?=BASE_PATH?>/account/bookingHistory" class="nav-link link-dark" id="loadBookingHistory">
+              <a href="<?=BASE_PATH?>/account/history" class="nav-link link-dark" id="loadBookingHistory">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                 <?= BOOKING_HISTORY ?>
               </a>
             </li> 
-            <?php if ($this->checkAuthorization("schedule") == 1): ?>
+            <?php if ($this->checkAuthorization("schedule") === true): ?>
             <li>
               <a  href="<?= BASE_PATH ?>/account/schedule" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16">
@@ -28,19 +28,11 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if ($this->checkAuthorization("schedule") == 1): ?>
+            <?php if ($this->checkAuthorization("schedule") === true): ?>
             <li>
               <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                 <?= INVENTORY ?>
-              </a>
-            </li>
-            <?php endif; ?>
-            <?php if ($this->checkAuthorization("schedule") == 1): ?>
-            <li>
-              <a href="<?=BASE_PATH?>/account/bookingList" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                <?= BOOKING_LIST ?>
               </a>
             </li>
             <?php endif; ?>
@@ -53,6 +45,7 @@
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/edit"><?= EDIT_PROFILE ?></a></li>
+              <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/change-password"><?= CHANGE_PASSWORD ?></a></li>
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/delete"><?= DELETE_PROFILE ?></a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/logout"><?= SIGN_OUT ?></a></li>

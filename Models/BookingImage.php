@@ -9,7 +9,7 @@ final class BookingImage extends Model {
 
     final public const id = self::TABLE . ".id";
     final public const bookingID = self::TABLE . ".bookingID";
-    final public const imageID = self::TABLE . ".imagesID";
+    final public const imageID = self::TABLE . ".imageID";
 
     public Booking $booking;
     public Image $image;
@@ -32,8 +32,8 @@ final class BookingImage extends Model {
 
     public static function getJoin(): ?Join {
         return (new Join())
-            ->addInner(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
-            ->addInner(Image::getFields(), Image::TABLE, Image::id, self::imageID, Image::getJoin());
+            ->addLeft(Booking::getFields(), Booking::TABLE, Booking::id, self::bookingID, Booking::getJoin())
+            ->addLeft(Image::getFields(), Image::TABLE, Image::id, self::imageID, Image::getJoin());
     }
 
     public static function new(Booking $booking, Image $image): ?self {

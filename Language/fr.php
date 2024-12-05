@@ -117,6 +117,7 @@ const BOOKING_LIST = "Liste de Réservation";
 
 // Account Settings
 const EDIT_PROFILE = "Modifier le Profil";
+const CHANGE_PASSWORD = "Changer le mot de passe";
 const DELETE_PROFILE = "Supprimer le Profil";
 const SIGN_OUT = "Se Déconnecter";
 
@@ -170,7 +171,7 @@ const NEXT = "Suivante";
     // Section 2 
     const PICK_TIME = "Choisissez votre heure et votre date :";
     const AVAILABLE_DATES = "Dates Disponibles";
-    const AVAIALBLE_TIMES = "Horaires Disponibles";
+    const AVAILABLE_TIMES = "Horaires Disponibles";
     
     // Section 3
     const VALID_FIRST_NAME_ERROR = "Un prénom valide est requis.";

@@ -110,6 +110,7 @@ const BOOKING_LIST = "Booking List";
 
 // Account Settings
 const EDIT_PROFILE = "Edit Profile";
+const CHANGE_PASSWORD = "Change Password";
 const DELETE_PROFILE = "Delete Profile";
 const SIGN_OUT = "Sign Out";
 
@@ -160,7 +161,7 @@ const NEXT = "Next";
     // Section 2 
     const PICK_TIME = "Pick your time and date:";
     const AVAILABLE_DATES = "Available Dates";
-    const AVAIALBLE_TIMES = "Available Times";
+    const AVAILABLE_TIMES = "Available Times";
     
     // Section 3
     const VALID_FIRST_NAME_ERROR = "Valid first name is required.";

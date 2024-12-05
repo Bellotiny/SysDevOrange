@@ -1,5 +1,7 @@
 <?php
 
+include_once "Value.php";
+
 class Values {
     /**
      * @var Value[]
