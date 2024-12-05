@@ -2,7 +2,7 @@
 include_once 'head.php';
 
 // Set the link text dynamically
-$toggleText = lang === "en" ? "FR" : "EN";
+$toggleText = (lang === "en" ? "FR" : "EN");
 ?>
 <header class="d-flex">
 <div class="container" id="desktop-nav">

@@ -77,6 +77,7 @@ const BOOKING_LIST = "Booking List";
 
 // Account Settings
 const EDIT_PROFILE = "Edit Profile";
+const CHANGE_PASSWORD = "Change Password";
 const DELETE_PROFILE = "Delete Profile";
 const SIGN_OUT = "Sign Out";
 

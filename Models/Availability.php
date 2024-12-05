@@ -69,16 +69,14 @@ final class Availability extends Model {
     }
 
     public static function listFuture(): array {
-        $where = new Where();
-        $where->addGreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", strtotime('today midnight'))));
+        $where = new Where(new GreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", strtotime('today midnight')))));
         $order = new Order([self::timeSlot], true);
         return self::list($where, null, null, null, $order);
     }
 
     public static function getBetween(int $start, int $end): array {
-        $where = new Where();
-        $where->addGreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", $start)));
-        $where->addLessThan(new Value(self::timeSlot, date("Y-m-d H:i:s", $end)));
+        $where = (new Where(new GreaterThanOrEquals(new Value(self::timeSlot, date("Y-m-d H:i:s", $start)))))
+            ->addAnd(new LessThan(new Value(self::timeSlot, date("Y-m-d H:i:s", $end))));
         return self::list($where);
     }
 }

@@ -45,6 +45,7 @@
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/edit"><?= EDIT_PROFILE ?></a></li>
+              <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/change-password"><?= CHANGE_PASSWORD ?></a></li>
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/delete"><?= DELETE_PROFILE ?></a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<?=BASE_PATH?>/account/logout"><?= SIGN_OUT ?></a></li>

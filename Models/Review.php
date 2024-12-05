@@ -70,4 +70,15 @@ final class Review extends Model {
             return null;
         }
     }
+
+    public static function search(int $page, string $search): array {
+        $where = (new Where(new Like(new Value(self::title, "%" . $search . "%"))))
+            ->addOr(new Like(new Value(self::message, "%" . $search . "%")));
+        return self::listByDate($page, $where);
+    }
+
+    public static function listByDate(int $page, ?Where $where = null): array {
+        $order = new Order([self::date], true);
+        return self::list($where, null, 10, (10 * $page), $order);
+    }
 }

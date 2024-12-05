@@ -69,7 +69,7 @@ final class Book extends Controller {
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){
                         $booking = Booking::getFromId($bookingID);
-                        if ($booking && $booking->delete()) {
+                        if ($booking && $booking->remove()) {
                             $this->formError($action,'No booking was found');
                             $this->render('Account','bookinglist');
                         } else {
@@ -121,7 +121,7 @@ final class Book extends Controller {
                         if ($bookings != null) {
                             $errors = [];
                             foreach ($bookings as $booking) {
-                                if (!$booking->delete()) {
+                                if (!$booking->remove()) {
                                     $errors[] = $booking->id;
                                 }
                             }

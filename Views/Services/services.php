@@ -26,7 +26,7 @@ include_once 'Views/bookingModal.php';
                         <div class="col p-4 d-flex flex-column position-static">
                         <strong class="d-inline-block mb-2 text-primary-emphasis"><?= $services->type ?></strong>
                         <h3 class="mb-0"><?= $services->name  ?></h3>
-                        <div class="mb-1  text-success"><?= $services->price ?></div>
+                        <div class="mb-1  text-success">$<?= $services->price ?></div>
                         <p class="card-text mb-auto "><?= $services->description ?></p>
                         </div>
                         <div class="col-auto d-none d-lg-block">
@@ -53,7 +53,7 @@ include_once 'Views/bookingModal.php';
                           <div class="col p-4 d-flex flex-column position-static">
                           <strong class="d-inline-block mb-2 text-primary-emphasis"><?= $services->type ?></strong>
                           <h3 class="mb-0"><?= $services->name  ?></h3>
-                          <div class="mb-1  text-success"><?= $services->price ?></div>
+                          <div class="mb-1  text-success">$<?= $services->price ?></div>
                           <p class="card-text mb-auto "><?= $services->description ?></p>
                           </div>
                           <div class="col-auto d-none d-lg-block">
