@@ -237,6 +237,7 @@ const NEXT = "Suivante";
 
     // Reference 
     const  DESCRIBE = "Décrivez votre idée";
+    const ADD_REFERENCE = "Ajouter une référence";
 
     // Confirmation 
     const THANKS_FOR_ORDER = "Merci pour votre commande!";
