@@ -133,7 +133,7 @@ const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
     const EDIT_REVIEW = "Edit Review";
 
     // List Review
-    const REVIEWS= "Reviews"
+    const REVIEWS= "Reviews";
     const WRITE_REVIEW = "Write Review";
     const SEARCH = "Search:";
 
