@@ -214,16 +214,12 @@ ini_set('display_errors', 1);
 
       <!-- Section 3 -->
       <div class="form-section  container pt-5" id="section3">
-
-      <?php
-        include_once("Controllers/Controller.php");
-        if($this->user == null){
-          echo "<!-- Section 3 Personal Information -->
-                <h3>Personal Information:</h3>
+        <!-- Section 3 Personal Information -->
+        <h3>Personal Information:</h3>
                 <div class='row g-3 mt-5'>
                   <div class='col-sm-6'>
                     <label for='firstName' class='form-label'>First name</label>
-                    <input type='text' class='form-control' name='firstName' id='firstName' placeholder='' value='' required=''>
+                    <input type='text' class='form-control' name='firstName' id='firstName' placeholder='' value='' required>
                     <div class='invalid-feedback'>
                       Valid first name is required.
                     </div>
@@ -231,7 +227,7 @@ ini_set('display_errors', 1);
 
                   <div class='col-sm-6'>
                     <label for='lastName' class='form-label'>Last name</label>
-                    <input type='text' class='form-control' name='lastName' id='lastName' placeholder='' value='' required=''>
+                    <input type='text' class='form-control' name='lastName' id='lastName' placeholder='' value='' required>
                     <div class='invalid-feedback'>
                       Valid last name is required.
                     </div>
@@ -241,17 +237,27 @@ ini_set('display_errors', 1);
                     <label for='username' class='form-label'>Username</label>
                     <div class='input-group has-validation'>
                       <span class='input-group-text'>@</span>
-                      <input type='text' class='form-control' name='username' id='username' placeholder='Username' required=''>
+                      <input type='text' class='form-control' name='username' id='username' placeholder='Username' required>
                       <div class='invalid-feedback'>
                         Your username is required.
                       </div>
                     </div>
                   </div>
-                </div>";
-        }
-      ?>
+                </div>
+                <div class='d-flex justify-content-center gap-4 my-5' style='width: 100%;'>
+                  <a class='btn btn-primary w-50' role='button' id='back-button-service-2' onclick='back()'>CANCEL </a>
+                  <a class='btn btn-primary w-50' role='button' id='next-button-service-2' onclick='next()'>NEXT </a>
+                </div>
 
+                <div class='progress my-4 slide-up' role='progressbar' aria-label='Example with label' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
+                  <div class='progress-bar' style='width: 25%'>25%</div>
+                </div>
+
+
+        
+</div>
       <!-- Section # cart -->
+      <div  class="form-section  container pt-5" id="section5">
       <div id="cart-container" class="container my-5">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary"><?= YOUR_CART ?></span>
@@ -262,12 +268,10 @@ ini_set('display_errors', 1);
           <span><?= TOTAL_CAD ?></span>
           <strong id="cart-total">0</strong>
         </div>
-      </div>
-
-      <br><br>
 
 
-<div class="green-background text-secondary  container slide-up ">
+        <br><br>
+        <div class="green-background text-secondary  container slide-up ">
               <div class=" pb-5" >
                   <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Add Reference</h1>
               </div>
@@ -297,6 +301,13 @@ ini_set('display_errors', 1);
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 65%">65%</div>
         </div>
+      </div>
+      </div>
+
+     
+
+
+
 
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
@@ -319,7 +330,7 @@ ini_set('display_errors', 1);
 
         <div class="container">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Destination Location" id="destination">
+          <input type="text" class="form-control" placeholder="Destination Location" id="destination" name="servicePlace">
         </div>
         <br>
        <button type="button" onclick="calcRoute()" class="btn btn-primary"  ><?= VERIFY_ADDRESS ?></button>
@@ -331,7 +342,7 @@ ini_set('display_errors', 1);
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()"><?= BACK ?></a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-4" onclick="next()"><?= NEXT ?></a>
+          <a class="btn btn-primary w-50 " role="button" id="next-button-service-4" onclick="next()"><?= NEXT ?></a>
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -491,7 +502,7 @@ let currentSection = 1;
     });
     document.getElementById(`section${sectionNumber}`).classList.add('active');
   }
-
+  const tokenIsSet = document.cookie.indexOf('token=') !== -1;
   // Handle the next button click for each section
   function next() {
     console.log("dede");
@@ -501,6 +512,7 @@ let currentSection = 1;
         return;
       }
       serviceSelected = selectedServiceRadio.value;
+      console.log(serviceSelected);
 
       // Handle navigation based on the current section and selected service
       if (serviceSelected === 'home') {
@@ -509,7 +521,12 @@ let currentSection = 1;
         } else if (currentSection === 4) {
           currentSection = 2; 
         } else if (currentSection === 2) {
-          currentSection = 3; 
+          if(tokenIsSet){
+            currentSection = 5;
+          }else{
+            currentSection = 3; 
+          }
+          
         }else if (currentSection === 3) {
           currentSection = 5;
         }
@@ -528,19 +545,29 @@ let currentSection = 1;
 
   // Handle the back button click
   function back() {
-      // Handle going back depending on current section
-      if (currentSection === 5) {
-        currentSection = 3; 
-      } else if (currentSection === 3) {
-        currentSection = 2; 
-      } else if (currentSection === 2) {
-        currentSection = 1;
-      } else if (currentSection === 4) {
-        currentSection = 1;
-      }
-
-      showSection(currentSection); // Show the new section
+  if (serviceSelected === 'home') {
+    if (currentSection === 5) {
+      currentSection = tokenIsSet ? 2 : 3;
+    } else if (currentSection === 3) {
+      currentSection = 2;
+    } else if (currentSection === 2) {
+      currentSection = 4; // special section
+    } else if (currentSection === 4) {
+      currentSection = 1;
+    }
+  } else if (serviceSelected === 'owner') {
+    if (currentSection === 5) {
+      currentSection = 3;
+    } else if (currentSection === 3) {
+      currentSection = 2;
+    } else if (currentSection === 2) {
+      currentSection = 1;
+    }
   }
+
+  showSection(currentSection);
+}
+
 
     //google mapppp
     //let map;

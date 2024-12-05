@@ -35,7 +35,7 @@ final class Book extends Controller {
                 }
 
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-                
+                var_dump($_POST['servicePlace']);
                 $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
                     $_POST['colorGroupColor2'] ?? null
