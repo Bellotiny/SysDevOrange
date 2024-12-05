@@ -142,6 +142,7 @@ const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
     // List Review
     const REVIEWS= "Avis";
     const WRITE_REVIEW = "Écrire un Avis";
+    const SEARCH = "Recherche:";
 
 // Contact Us 
 const CONTACT_US = "Contactez-Nous";

@@ -135,6 +135,7 @@ const PERSONAL_INFO_2 = "Your little nook of joy is ready and waiting for you.";
     // List Review
     const REVIEWS= "Reviews"
     const WRITE_REVIEW = "Write Review";
+    const SEARCH = "Search:";
 
 // Contact Us 
 const CONTACT_US = "Contact Us";

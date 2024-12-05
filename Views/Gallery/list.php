@@ -12,7 +12,7 @@ include_once 'Views/head.php';
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >
-      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Gallery</h1>
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= GALLERY ?></h1>
     </div>
   </div>
 
@@ -36,17 +36,17 @@ include_once 'Views/head.php';
 
   <div class="green-background text-secondary  container slide-up ">
     <div class=" pb-5" >
-      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center">Reviews</h1>
+      <h1 class="mt-5 display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up text-center"><?= REVIEWS ?></h1>
     </div>
   </div>
     <form method="POST">
-        <label>Search: <input type="text" name="search" class="form-control" placeholder="Search for reviews"></label>
+        <label><?= SEARCH ?> <input type="text" name="search" class="form-control" placeholder="Search for reviews"></label>
         <br>
         <input type="submit" value="Search">
     </form>
   <div class="col-lg-6 col-xxl-4 my-5 mx-auto">
   <div class="d-grid gap-2">
-    <a href="<?=BASE_PATH?>/gallery/add" class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false" >Write Review</a>
+    <a href="<?=BASE_PATH?>/gallery/add" class="btn bttn-green slide-up " type="button" id="toggleReviewFormButton" aria-expanded="false" ><?= WRITE_REVIEW ?></a>
   </div>
   </div>
 
