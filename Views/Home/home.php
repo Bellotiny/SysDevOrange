@@ -81,7 +81,7 @@ include_once 'Views/bookingModal.php';
         </p>
       
       </div>
-      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+      <div class="col-lg-5 p-3 p-lg-5 pt-lg-3 overflow-hidden">
         <img src="<?=BASE_PATH?>/Views/Images/about1.png" class="img-fluid rounded-lg-3 slide-up" alt="Welcome image" height="500" width="720"  >
       </div>
     </div>
