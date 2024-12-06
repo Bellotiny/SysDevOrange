@@ -516,6 +516,22 @@ footer p{
 #account-Main{
     height: fit-content;
 }
+.btn {
+    display: flex;
+    align-items: center; /* Vertical centering */
+    text-align: center;
+}
+#deleteButtons {
+
+    width: 100%;
+    margin-top: 2rem !important;
+}
+#deleteCheckBox {
+    margin-top: 2rem !important;
+}
+#confirmDelete{
+    margin-top: 2rem !important;
+}
 
 /* Change the active link color */
 a.nav-link.active {

@@ -63,11 +63,11 @@ $toggleText = (lang === "en" ? "FR" : "EN");
             <a class="nav-item <?= ($currentPage == 'gallery') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/gallery"><?= GALLERY ?></a>
             <a class="nav-item <?= ($currentPage == 'reviews') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/reviews"><?= REVIEWS ?></a>
             <a class="nav-item <?= ($currentPage == 'contact') ? 'active' : ''; ?>" href="<?=BASE_PATH?>/contact"><?= CONTACT ?></a>
-            <a class="nav-item lang" onclick = "return changeLang()" href=""><?php echo $toggleText; ?></a>
+            <a class="nav-item lang"  onclick = "return changeLang()" href=""><?php echo $toggleText; ?></a>
             
             <!-- Row container for the "Book" and Account icon links -->
             <div class="nav-row">
-                <a class="Nav-Split" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#"><?= BOOK ?></a>
+                <a class="Nav-Split" id="book" data-bs-toggle="modal" data-bs-target="#modalBookingWarning" href="#"><?= BOOK ?></a>
                 <a href="<?=BASE_PATH?>/account">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="" class="bi bi-person-fill account-image" viewBox="0 0 16 16" >
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
@@ -85,14 +85,26 @@ $toggleText = (lang === "en" ? "FR" : "EN");
 <script>
     //lang
     let lang = "<?= lang ?>";
+
+
+    function clearLangCookies() {
+    const paths = ['/', '/SysDevOrange/account','/SysDevOrange/book' ,'/subpath']; // List all possible paths
+    paths.forEach(path => {
+        document.cookie = `lang=;path=${path};expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+    });
+}
+
 function changeLang() {
-    if (lang == "en") {
-        lang = "fr";
-    } else {
-        lang = "en";
-    }
- document.cookie = "lang=" + lang;
- location.reload();
+    clearLangCookies(); // Ensure old cookies are removed
+
+    let lang = "<?= lang ?>"; // Get current language from PHP
+    lang = lang === "en" ? "fr" : "en"; // Toggle language
+
+    // Set the new cookie for the root path
+    document.cookie = `lang=${lang};path=/;`;
+
+    console.log("New lang cookie set:", document.cookie); // Debugging log
+    location.reload(); // Reload to apply changes
 }
 
 //mobile version
@@ -113,6 +125,13 @@ document.getElementById('menuToggle').addEventListener('click', function () {
         navbarMenu.classList.add('show');
         body.classList.add('no-scroll');
     }
+});
+document.getElementById('book').addEventListener('click', function () {
+        // Close the menu after pressing book
+        navbarMenu.style.opacity = "0";
+        navbarMenu.style.visibility = "hidden";
+        navbarMenu.classList.remove('show');
+        body.classList.remove('no-scroll');
 });
 </script>
 

@@ -143,6 +143,10 @@ const  VIEW_BOOKING = "View Booking";
 const PRICE = "Price";
 const PAYED_ON = "Payed On";
 
+// Account -> Delete
+const CONFIRM_DELETE = "We are sorry to see you go. Are you sure you want to delete you account?";
+const DELETE = "Delete";
+
 // Booking Modal
 const BOOKING_INFO = "Booking Information";
 const BOOKING_RULES = "Booking Rules:";

@@ -150,6 +150,10 @@ const  VIEW_BOOKING = "Voir la Réservation";
 const PRICE = "Prix";
 const PAYED_ON = "Payé Le";
 
+// Account -> Delete
+const CONFIRM_DELETE = "Nous sommes désolés de vous voir partir. Êtes-vous sûr de vouloir supprimer votre compte?";
+const DELETE = "Supprimer";
+
 // Booking Modal
 const BOOKING_INFO = "Informations de Réservation";
 const BOOKING_RULES = "Règles de Réservation :";

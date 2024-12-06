@@ -22,8 +22,8 @@ include_once 'Views/bookingModal.php';
             <?php if (isset($data["error"])): ?>
                 <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
-            <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn bttn-green mt-3" id="deleteConfirmButton" role="button" type="submit" value="Delete" disabled>
+            <div class="d-flex justify-content-center gap-4" id="deleteButtons">
+                <input class="btn bttn-green mt-3 " id="deleteConfirmButton" role="button" type="submit" value="<?= DELETE ?>" disabled>
                 <a class="btn btn-secondary mt-3" href="<?=BASE_PATH?>/account" role="button"><?= GO_BACK ?></a>
             </div>
         </form>
