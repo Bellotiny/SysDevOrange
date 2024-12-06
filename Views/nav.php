@@ -127,11 +127,16 @@ document.getElementById('menuToggle').addEventListener('click', function () {
     }
 });
 document.getElementById('book').addEventListener('click', function () {
-        // Close the menu after pressing book
+    const navbarMenu = document.getElementById('navbarMenu');
+    const body = document.body;    
+    
+    // Close the menu after pressing book
+        if (navbarMenu.classList.contains('show')) {
         navbarMenu.style.opacity = "0";
         navbarMenu.style.visibility = "hidden";
         navbarMenu.classList.remove('show');
         body.classList.remove('no-scroll');
+    }
 });
 </script>
 
