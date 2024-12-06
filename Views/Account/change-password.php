@@ -8,7 +8,10 @@ include_once 'Views/bookingModal.php';
 
 <main class="d-flex" id="account-Main">
     <div class="container">
-        <h1><?= FORGOT_PASS_ACCOUNT ?></h1>
+    <div class= "container my-2">
+            <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-20" id="divAccount">
+                <h1 class="text-body-emphasis mt-5" style="display: contents"><?= CHANGE_PASSWORD ?></h1>
+          </div>
         <form action="<?=BASE_PATH?>/account/resetPassword" method="POST">
             <div class="form-group py-2">
                 <label for="password"><?= PASSWORD ?></label>
@@ -33,7 +36,7 @@ include_once 'Views/bookingModal.php';
                 <li><?= MIN_SIX_CHAR ?></li>
             </ul>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Update Password">
+                <input class="btn bttn-green" role="button" type="submit" value="<?= UPDATE_PASSWORD ?>">
             </div>
         </form>
     </div>

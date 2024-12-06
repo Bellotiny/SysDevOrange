@@ -147,6 +147,9 @@ const PAYED_ON = "Payed On";
 const CONFIRM_DELETE = "We are sorry to see you go. Are you sure you want to delete you account?";
 const DELETE = "Delete";
 
+// Account -> Update Password
+const UPDATE_PASSWORD = "Update Password";
+
 // Booking Modal
 const BOOKING_INFO = "Booking Information";
 const BOOKING_RULES = "Booking Rules:";
