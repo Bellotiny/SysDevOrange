@@ -22,7 +22,7 @@ include_once 'Views/head.php';
             <h3><label for="confirm" class="form-label text-lg-start"><?= CONFIRM ?></label></h3>
             
             <div class="d-flex align-items-center">
-                <input type="checkbox" name="confirm" id="confirm" class="form-check-input me-2">
+                <input type="checkbox" name="confirm" id="confirm" class="form-check-input me-2" onclick="toggleSubmitButton()">
                 <span class=" text-danger"><?= "I confirm I want to delete this review" ?></span>
             </div>
         </div>
@@ -35,7 +35,7 @@ include_once 'Views/head.php';
             </a>
 
             <!-- Save Button -->
-            <input type="submit" class="btn bttn-green w-50" value="Save">
+            <input type="submit" class="btn bttn-green w-50 disabled" id="saveButton" value="Save">
         </div>
     </form>
 </div>
@@ -43,6 +43,19 @@ include_once 'Views/head.php';
 
 
 </main>
+<script>
+    // Function to toggle the disabled state of the submit button
+    function toggleSubmitButton() {
+        const checkbox = document.getElementById('confirm');
+        const submitButton = document.getElementById('saveButton');
+        
+        if (checkbox.checked) {
+            submitButton.classList.remove('disabled');
+        } else {
+            submitButton.classList.add('disabled');
+        }
+    }
+</script>
 
 
 

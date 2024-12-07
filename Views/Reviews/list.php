@@ -43,7 +43,7 @@ include_once 'Views/head.php';
             <?php if ($review->image): ?>
                 <img src="<?= BASE_PATH ?>/<?= $review->image->getPath() ?>" alt="Review Image" class="rounded" style="width: 200px; height: 200px;">
             <?php else: ?>
-                <img src="<?= BASE_PATH ?>/Views/Images/background2.png" alt="Default Image" class="rounded" style="width: 100px; height: 200px;  object-fit: cover;">
+                <img src="<?= BASE_PATH ?>/Views/Images/background2.png" alt="Default Image" class="rounded" style="width: 200px; height: 200px;  object-fit: cover;">
             <?php endif; ?>
         </div>
 

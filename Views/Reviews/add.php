@@ -34,6 +34,7 @@ include_once 'Views/head.php';
                 <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-grid gap-2">
+                
                 <input type="submit" class="btn bttn-green container" value="Post">
                 <!-- <button class="btn bttn-green" type="button">Post</button> -->
             </div>
