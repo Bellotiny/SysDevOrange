@@ -13,33 +13,44 @@ ini_set('display_errors', 1);
 
        <!-- Section 1 Base Service -->
        <?php
-          $servicesByType = [];
-          foreach ($data['services'] as $service) {
-              $servicesByType[$service->type][] = $service;
-          }
+        $servicesByType = [];
+        foreach ($data['services'] as $service) {
+            $servicesByType[$service->type][] = $service;
+        }
 
-          $totalPrice = 0;
+        $totalPrice = 0;
 
-          foreach ($servicesByType as $type => $services) {
-              echo '<h3>' . $type . '</h3>';
+        foreach ($servicesByType as $type => $services) {
+            echo '<h3>' . $type . '</h3>';
 
-              foreach ($services as $service) {
-              $totalPrice += $service->price;
-              $serviceJson = htmlspecialchars(json_encode($service), ENT_QUOTES, 'UTF-8');
-              echo '<div class="list-group d-flex flex-row w-100 m-2">
-                      <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
-                          <input onchange="return updateCart()" class="form-check-input flex-shrink-0" type="radio" name="serviceType[' . $type . ']" value="' . $serviceJson . '" id="service-' . $service->name . '" required>
-                          <span class="flex-grow-1">
-                              ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
-                          </span>
-                          <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
-                              ' . $service->price . ' CAD
-                          </div>
-                      </label>
-                    </div>';
-          }
-          }
+            // Determine input type based on the type of service
+            $inputType = $type === 'Base' ? 'radio' : 'checkbox';
+
+            foreach ($services as $service) {
+                if($service->visibility == 1){
+                  $totalPrice += $service->price;
+                $serviceJson = htmlspecialchars(json_encode($service), ENT_QUOTES, 'UTF-8');
+
+                echo '<div class="list-group d-flex flex-row w-100 m-2">
+                        <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
+                            <input onchange="return updateCart()" class="form-check-input flex-shrink-0" 
+                                type="' . $inputType . '" 
+                                name="serviceType[' . $type . ']' . ($inputType === 'checkbox' ? '[]' : '') . '" 
+                                value="' . $serviceJson . '" 
+                                id="service-' . $service->name . '" required>
+                            <span class="flex-grow-1">
+                                ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
+                            </span>
+                            <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
+                                ' . $service->price . ' CAD
+                            </div>
+                        </label>
+                      </div>';
+                }
+            }
+        }
         ?>
+
 
         <!-- Section 1 Location Service -->
         <h3><?= SERVICE_LOCATION ?></h3>
@@ -70,7 +81,7 @@ ini_set('display_errors', 1);
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " href="<?=BASE_PATH?>/home" role="button" onclick="back()"><?= CANCEL ?></a>
-          <a class="btn btn-primary w-50" role="button" id="next-button-service-1" onclick="next()"><?= NEXT ?></a>
+          <a class="btn btn-primary w-50 disabled" role="button" id="next-button-service-1" onclick="next()"><?= NEXT ?></a>
 
         </div>
 
@@ -86,10 +97,11 @@ ini_set('display_errors', 1);
         <!-- Section 2 Color -->
         <h3><?= PICK_COLORS ?></h3>
         <div class="accordion" id="accordionExample" >
+
           <div class="accordion-item" id="colorGroup1">
             <h3 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <?= COLOR ?> 1: <span id="selectedColor1">Classic Red</span>
+                <?= COLOR ?> 1: <span id="selectedColor1"><?= NONE ?></span>
               </button>
             </h3>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -97,17 +109,19 @@ ini_set('display_errors', 1);
                 <div class="row text-center">
                     <!----here are the colors--->
                     <?php
-$selectedColor = false;
-foreach ($data['colors'] as $colors) {
-    $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
-    $isSelected = $selectedColor ? 'selected' : '';
-    echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
-            <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color1\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
-                <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
-            </svg>
-            <h5 class="fw-normal text-center">' . $colors->name . '</h5>
-          </div>';
-}
+                      $selectedColor = false;
+                      foreach ($data['colors'] as $colors) {
+                         if($colors->visibility == 1){
+                          $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
+                          $isSelected = $selectedColor ? 'selected' : '';
+                          echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                  <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color1\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
+                                      <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                  </svg>
+                                  <h5 class="fw-normal text-center">' . $colors->name . '</h5>
+                                </div>';
+                         }
+                      }
 
                     ?>
                     
@@ -127,20 +141,51 @@ foreach ($data['colors'] as $colors) {
               <div class="row text-center">
                   <!----here are the colors--->
                   <?php
-                        $selectedColor = false;
-                        foreach ($data['colors'] as $colors) {
-                          $colorJson = json_encode($colors);  
-                          $isSelected = $selectedColor ? 'selected' : '';
-                            echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . $colorJson . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
-                                    </svg>
-                                    <h5 class="fw-normal">' . $colors->name . '</h5>
-                                  </div>';
-                        }
-                        echo '<input type="hidden" id="colorGroupColor1" name="colorGroupColor1" value="">
-                              <input type="hidden" id="colorGroupColor2" name="colorGroupColor2" value="">';
+                    $selectedColor = false;
+                    foreach ($data['colors'] as $colors) {
+                       if($colors->visibility){
+                         // Use json_encode() and escape quotes for HTML safety
+                         $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8');
+                         $isSelected = $selectedColor ? 'selected' : '';
+                         echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                   <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color2\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
+                                       <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                   </svg>
+                                   <h5 class="fw-normal text-center">' . $colors->name . '</h5>
+                                 </div>';
+                       }
+                    }
+                    ?>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="colorGroup3">
+            <h3 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                <?= COLOR ?> 3: <span id="selectedColor3"><?= NONE ?></span>
+              </button>
+            </h3>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body slide-up">
+              <div class="row text-center">
+                  <!----here are the colors--->
+                  <?php
+                    $selectedColor = false;
+                    foreach ($data['colors'] as $colors) {
+                       if($colors->visibility == 1){
+                         // Use json_encode() and escape quotes for HTML safety
+                         $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8');
+                         $isSelected = $selectedColor ? 'selected' : '';
+                         echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
+                                   <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color3\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
+                                       <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+                                   </svg>
+                                   <h5 class="fw-normal text-center">' . $colors->name . '</h5>
+                                 </div>';
+                       }
+                    }
                     ?>
               </div>
               </div>
@@ -202,8 +247,8 @@ foreach ($data['colors'] as $colors) {
 
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-          <a class="btn btn-primary w-50 "  role="button" id="back-button-service-2" onclick="back()"><?= CANCEL ?></a>
-          <a class="btn btn-primary w-50"  role="button" id="next-button-service-2" onclick="next()"><?= NEXT ?> </a>
+          <a class="btn btn-primary w-50  "  role="button" id="back-button-service-2" onclick="back()"><?= CANCEL ?></a>
+          <a class="btn btn-primary w-50 disabled"  role="button" id="next-button-service-2" onclick="next()"><?= NEXT ?> </a>
 
         </div>
 
@@ -247,7 +292,7 @@ foreach ($data['colors'] as $colors) {
                 </div>
                 <div class='d-flex justify-content-center gap-4 my-5' style='width: 100%;'>
                   <a class='btn btn-primary w-50' role='button' id='back-button-service-2' onclick='back()'><?= CANCEL ?> </a>
-                  <a class='btn btn-primary w-50' role='button' id='next-button-service-2' onclick='next()'><?= NEXT ?> </a>
+                  <a class='btn btn-primary w-50 disabled' role='button' id='next-button-service-2' onclick='next()'><?= NEXT ?> </a>
                 </div>
 
                 <div class='progress my-4 slide-up' role='progressbar' aria-label='Example with label' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
@@ -256,7 +301,7 @@ foreach ($data['colors'] as $colors) {
 
 
         
-</div>
+      </div>
         
 
       <!-- Section # cart -->
@@ -297,7 +342,7 @@ foreach ($data['colors'] as $colors) {
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
         <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()"><?= BACK ?></a>
-          <input type="submit" class="btn btn-primary w-50" value="Book" id="next-button-service-3">
+          <input type="submit" class="btn btn-primary w-50 disabled" value="Book" id="next-button-service-5">
           <!-- <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button" >Done</a> -->
         </div>
 
@@ -308,10 +353,6 @@ foreach ($data['colors'] as $colors) {
       </div>
 
      
-
-
-
-
        <!----- Home service Section ----->
       <div class="form-section  container pt-5" id="section4">
 
@@ -345,7 +386,7 @@ foreach ($data['colors'] as $colors) {
 
         <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
           <a class="btn btn-primary w-50 " role="button" id="back-button-service-4" onclick="back()"><?= BACK ?></a>
-          <a class="btn btn-primary w-50 " role="button" id="next-button-service-4" onclick="next()"><?= NEXT ?></a>
+          <a class="btn btn-primary w-50 disabled" role="button" id="next-button-service-4" onclick="next()"><?= NEXT ?></a>
         </div>
 
         <div class="progress  slide-up" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -360,53 +401,93 @@ foreach ($data['colors'] as $colors) {
 
 <script>
   const tokenIsSet = document.cookie.indexOf('token=') !== -1;
-    console.log("d");
-    console.log(tokenIsSet);
-  let cart = [];
-  let totalPrice = 0;
+console.log("Token check:");
+console.log(tokenIsSet);
 
-  function updateCart() {
-    console.log('mimi');
-    const cartContainer = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cart-total');
+let cart = [];
+let totalPrice = 0;
 
-    cartContainer.innerHTML = '';
-    cart.forEach((item, index) => {
-      const listItem = document.createElement('li');
-      listItem.className = 'list-group-item d-flex justify-content-between lh-sm';
-      listItem.innerHTML = `
-        <div>
-          <h6 class="my-0">${item.name}</h6>
-        </div>
-        <span class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">${item.price} CAD</span>
-      `;
-      cartContainer.appendChild(listItem);
-    });
+function updateCart() {
+  console.log("Cart Updated:", cart);
+  const cartContainer = document.getElementById('cart-items');
+  const cartCount = document.getElementById('cart-count');
+  const cartTotal = document.getElementById('cart-total');
+  const nextButton1 = document.getElementById('next-button-service-1');
+  const nextButtonCart = document.getElementById('next-button-service-5');
 
-    cartCount.textContent = cart.length;
-    cartTotal.textContent = `${totalPrice.toFixed(2)} CAD`;
-  }
-
-  function addToCart(name, description, price) {
-    cart.push({ name, description, price });
-    totalPrice += price;
-    updateCart();
-  }
-
-  document.addEventListener('change', (event) => {
-    if (event.target.name && event.target.name.startsWith('serviceType')) {
-      console.log('Selected value:', event.target.value);
-      const service = JSON.parse(event.target.value);
-
-      const existingItemIndex = cart.findIndex(item => item.name === service.name);
-      if (existingItemIndex !== -1) {
-        removeFromCart(existingItemIndex);
-      }
-
-      addToCart(service.name, service.description, parseFloat(service.price));
-    }
+  cartContainer.innerHTML = '';
+  cart.forEach((item, index) => {
+    const listItem = document.createElement('li');
+    listItem.className = 'list-group-item d-flex justify-content-between lh-sm';
+    listItem.innerHTML = `
+      <div>
+        <h6 class="my-0">${item.name}</h6>
+      </div>
+      <span class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">${item.price} CAD</span>
+      <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+    `;
+    cartContainer.appendChild(listItem);
   });
+
+  // Enable/Disable Next Button
+  if (cart.length > 0) {
+    nextButton1.classList.remove('disabled');
+    nextButtonCart.classList.remove('disabled');
+  } else {
+    nextButton1.classList.add('disabled');
+    nextButtonCart.classList.add('disabled');
+  }
+
+  // Update Cart Count and Total Price
+  cartCount.textContent = cart.length;
+  cartTotal.textContent = `${totalPrice.toFixed(2)} CAD`;
+}
+
+function addToCart(name, description, price, type) {
+  cart.push({ name, description, price, type });
+  totalPrice += price;
+  updateCart();
+}
+
+function removeFromCart(index) {
+  totalPrice -= cart[index].price;
+  cart.splice(index, 1);
+  updateCart();
+}
+
+// Event Listener to Handle Change on Service Selection
+document.addEventListener('change', (event) => {
+  if (event.target.name && event.target.name.startsWith('serviceType')) {
+    const service = JSON.parse(event.target.value); 
+    const inputType = event.target.type; // Determine if radio or checkbox
+
+    // If it's a radio button, replace the current selection for that type
+    if (inputType === 'radio') {
+      // Remove all items of the same type (if the service has a type attribute)
+      const sameTypeItems = cart.filter(item => item.type === service.type);
+      sameTypeItems.forEach(item => {
+        const index = cart.findIndex(cartItem => cartItem.name === item.name);
+        if (index !== -1) removeFromCart(index);
+      });
+
+      // Add the new selection
+      addToCart(service.name, service.description, parseFloat(service.price), service.type);
+    } 
+
+    // If it's a checkbox, toggle the item in the cart
+    else if (inputType === 'checkbox') {
+      const existingItemIndex = cart.findIndex(item => item.name === service.name);
+
+      if (existingItemIndex !== -1) {
+        // If item exists, remove it
+        removeFromCart(existingItemIndex);
+      } else {
+        // If not, add it
+        addToCart(service.name, service.description, parseFloat(service.price), service.type);
+      }
+    }
+  }
+});
 
 //colors select
 function selectColor(colorGroup, colorObject, groupId) { 
@@ -443,13 +524,30 @@ function selectColor(colorGroup, colorObject, groupId) {
     if (hiddenInput) {
         hiddenInput.value = JSON.stringify(colorObject);
     }
+    toggleNextButtonColorTime();
 
     console.log(`Color "${colorObject.name}" selected successfully for group "${colorGroup}".`);
+}
+
+function toggleNextButtonColorTime() {
+    const nextButton2 = document.getElementById('next-button-service-2');
+    const selectedColor1 = document.getElementById("selectedColor1").innerText !== 'None';
+   // const colorSelected = document.querySelectorAll('.color-item.selected').length > 0;
+    const timeSelected = document.getElementById('availableTimes').value !== '';
+    console.log("colorSelected len: " + selectedColor1);
+    console.log()
+console.log("has color and time: " + (selectedColor1 && timeSelected))
+    if (selectedColor1 && timeSelected) {
+        nextButton2.classList.remove('disabled');
+    } else {
+        nextButton2.classList.add('disabled');
+    }
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
         selectedTime();
+        toggleNextButtonColorTime();
     });
 
   function selectedTime() { 
@@ -474,6 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             dateTimeInput.value = '';
         }
+        toggleNextButtonColorTime();
     }
 
     dateSelect.addEventListener('change', (event) => {
@@ -484,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDate = dateSelect.value;
         const selectedTime = event.target.value;
         dateTimeInput.value = `${selectedDate} ${selectedTime}`;
+        toggleNextButtonColorTime();
     });
 
     function formatTime(time) {
@@ -522,7 +622,7 @@ let currentSection = 1;
       
 
       // Handle navigation based on the current section and selected service
-      if (serviceSelected === 'home') {
+      if (serviceSelected === 'home' ) {
         if (currentSection === 1) {
           currentSection = 4; //special section
         } else if (currentSection === 4) {
@@ -559,7 +659,7 @@ let currentSection = 1;
   // Handle the back button click
   function back() {
     console.log( tokenIsSet);
-    console.log( currentSection);
+    console.log( "Now:" + currentSection);
   if (serviceSelected === 'home') {
     if (currentSection === 5) {
       currentSection = tokenIsSet ? 2 : 3;
@@ -573,7 +673,7 @@ let currentSection = 1;
     }
   } else if (serviceSelected === 'owner') {
     if (currentSection === 5) {
-      currentSection = 3;
+      currentSection = tokenIsSet ? 2 : 3;
     } else if (currentSection === 3) {
       currentSection = 2;
     } else if (currentSection === 2) {
@@ -583,6 +683,10 @@ let currentSection = 1;
 
   showSection(currentSection);
 }
+
+//undisabled and disabled 
+
+  
 
 
     //google mapppp
@@ -614,6 +718,7 @@ function initMap() {
 function calcRoute() {
   let destination = document.getElementById('destination').value;
   var output =  document.getElementById('output');
+  let nextButton4 = document.getElementById('next-button-service-4');
 
   let request = {
     origin: sourceAddress,
@@ -635,9 +740,11 @@ function calcRoute() {
       if (distanceInKm <= 20) {
         output.innerHTML = `<p>Within 20 km range for home service.</p>`;
         output.style.color = "#667744";
+        nextButton4.classList.remove('disabled');
       } else {
         output.innerHTML = `<p>Outside the 20 km range for home service.</p>`;
         output.style.color = "#D9534F";
+        nextButton4.classList.add('disabled');
       }
 
     } else {

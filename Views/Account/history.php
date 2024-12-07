@@ -37,7 +37,16 @@ include_once 'Views/bookingModal.php';
                                 ?>
                                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
                                     <div class="card p-2" style="width: 18rem;">
-                    
+
+                                        <div class="card-body">
+                                            <?= $availability->booking->id  ?>
+                                            <a  href="<?=BASE_PATH?>/account/deleteavailability/<?= $availability->booking->id ?>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                </svg>
+                                            </a>
+                                            <hr>
+                                        </div>
                                         <div class="card-body">
                                             <h5 class="card-title">Message:</h5>
                                             <p class="card-text"> <?= $booking->message ? $booking->message : "None" ?></p>
@@ -58,29 +67,28 @@ include_once 'Views/bookingModal.php';
                                        
                                         <div class="card-body  collapse" id="bookingDetails<?= $availability->booking->id?>">
                                             <h5 class="card-title"><?= DISCOUNT_BREAKDOWN ?></h5>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col"><?= ORIGINAL_PRICE ?></th>
-                                                        <?php if (isset($booking->discount) && $booking->discount !== null): ?>
-                                                            <th scope="col"><?= $booking->discount->amount ? $booking->discount->name : "No discount amount" ?></th>
-                                                            <th scope="col"><?= $booking->discount->percent ? $booking->discount->name : "No discount percent" ?></th>
-                                                        <?php else: ?>
-                                                            <th scope="col"><?= NO_DISCOUNT ?></th>
-                                                            <th scope="col"><?= NO_DISCOUNT ?></th>
-                                                        <?php endif; ?>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row"><?= $booking->price ?></th>
-                                                        <td><?= isset($booking->discount) && $booking->discount !== null ? $booking->discount->amount . "$" : "" ?></td>
-                                                        <td><?= isset($booking->discount) && $booking->discount !== null ? $booking->discount->percent . "%" : "" ?></td>
-                                                    
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
+                                            <div class="list-group">
+                                                <div class="list-group-item">
+                                                    <strong><?= ORIGINAL_PRICE ?>:</strong> <?= $booking->price ?>
+                                                </div>
+
+                                                <?php if (isset($booking->discount) && $booking->discount !== null): ?>
+                                                    <div class="list-group-item">
+                                                        <strong><?= $booking->discount->amount ? $booking->discount->name : "No discount amount" ?>:</strong> <?= $booking->discount->amount ? $booking->discount->amount . "$" : "" ?>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <strong><?= $booking->discount->percent ? $booking->discount->name : "No discount percent" ?>:</strong> <?= $booking->discount->percent ? $booking->discount->percent . "%" : "" ?>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="list-group-item">
+                                                        <strong><?= NO_DISCOUNT ?>:</strong> <?= NO_DISCOUNT ?>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <strong><?= NO_DISCOUNT ?>:</strong> <?= NO_DISCOUNT ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+
                                         </div>
                                     
                                     </div>

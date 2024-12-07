@@ -18,7 +18,7 @@ include_once 'Views/bookingModal.php';
                 <p><span style="color:red"><?php echo $data['error']; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="Recover Account">
+                <input class="btn btn-green mt-3" role="button" type="submit" value="Recover Account">
                 <a class="btn btn-secondary mt-3" href="<?= BASE_PATH ?>/account/forgot" role="button"><?= GO_BACK ?></a>
             </div>
         </form>
