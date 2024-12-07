@@ -14,7 +14,7 @@ const SERVICE = "Services";
 const GALLERY = "Galerie";
 const CONTACT = "Contact";
 const BOOK = "Réserver";
-const EMAIL = "Adresse de courriel";
+const EMAIL = "Adresse de Courriel";
 const PASSWORD = "Mot de passe";
 const FORGOT_PASS = "Vous avez oublié votre mot de passe?";
 const BACK = "Revenir";
@@ -120,7 +120,7 @@ const BOOKING_LIST = "Liste de Réservation";
 
 // Account Settings
 const EDIT_PROFILE = "Modifier le Profil";
-const CHANGE_PASSWORD = "Changer le mot de passe";
+const CHANGE_PASSWORD = "Changer le Mot de Passe";
 const DELETE_PROFILE = "Supprimer le Profil";
 const SIGN_OUT = "Se Déconnecter";
 
@@ -149,6 +149,13 @@ const RECOVERY = "Récupération";
 const  VIEW_BOOKING = "Voir la Réservation";
 const PRICE = "Prix";
 const PAYED_ON = "Payé Le";
+
+// Account -> Delete
+const CONFIRM_DELETE = "Nous sommes désolés de vous voir partir. Êtes-vous sûr de vouloir supprimer votre compte?";
+const DELETE = "Supprimer";
+
+// Account -> Update Password
+const UPDATE_PASSWORD = "Mise à Jour";
 
 // Booking Modal
 const BOOKING_INFO = "Informations de Réservation";

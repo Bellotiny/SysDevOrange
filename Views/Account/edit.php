@@ -14,6 +14,11 @@ include_once 'Views/bookingModal.php';
     <?php include_once 'Views/sidebar.php'; ?>
     <!-- Added inline style so navbar does not clip the text -->
     <div class="sideScreen container" style="margin-top: 4%;">
+    <div class= "container my-2">
+            <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-20" id="divAccount">
+                <h1 class="text-body-emphasis mt-5" style="display: contents"><?= EDIT_PROFILE ?></h1>
+          </div>
+        </div>
         <form method="POST" action="<?= BASE_PATH ?>/account/edit">
             <div class="form-group py-2">
                 <label for="firstName"><?= FIRST_NAME ?></label>
@@ -47,7 +52,7 @@ include_once 'Views/bookingModal.php';
                 <p><span style="color:green"><?php echo $data["message"]; ?></span></p>
             <?php endif; ?>
             <div class="d-flex justify-content-center gap-4 my-5" style="width: 100%;">
-                <input class="btn btn-primary mt-3" role="button" type="submit" value="<?= CONFIRM ?>">
+                <input class="btn bttn-green" role="button" type="submit" value="<?= CONFIRM ?>">
             </div>
         </form>
 </main>

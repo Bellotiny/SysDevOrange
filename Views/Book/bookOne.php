@@ -89,7 +89,7 @@ ini_set('display_errors', 1);
           <div class="accordion-item" id="colorGroup1">
             <h3 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <?= COLOR ?> 1:<span id="selectedColor1">Classic Red</span>
+                <?= COLOR ?> 1: <span id="selectedColor1">Classic Red</span>
               </button>
             </h3>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -97,17 +97,18 @@ ini_set('display_errors', 1);
                 <div class="row text-center">
                     <!----here are the colors--->
                     <?php
-                    $selectedColor = false;
-                    foreach ($data['colors'] as $colors) {
-                        $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
-                        $isSelected = $selectedColor ? 'selected' : '';
-                        echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color1\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
-                                    <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
-                                </svg>
-                                <h5 class="fw-normal">' . $colors->name . '</h5>
-                              </div>';
-                    }
+$selectedColor = false;
+foreach ($data['colors'] as $colors) {
+    $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
+    $isSelected = $selectedColor ? 'selected' : '';
+    echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
+            <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color1\', ' . $colorJson . ', \'colorGroup1\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
+                <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
+            </svg>
+            <h5 class="fw-normal text-center">' . $colors->name . '</h5>
+          </div>';
+}
+
                     ?>
                     
                 </div>
@@ -118,7 +119,7 @@ ini_set('display_errors', 1);
           <div class="accordion-item" id="colorGroup2">
             <h3 class="accordion-header" id="headingTwo">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <?= COLOR ?> 2:<span id="selectedColor2"><?= NONE ?></span>
+                <?= COLOR ?> 2: <span id="selectedColor2"><?= NONE ?></span>
               </button>
             </h3>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -130,7 +131,7 @@ ini_set('display_errors', 1);
                         foreach ($data['colors'] as $colors) {
                           $colorJson = json_encode($colors);  
                           $isSelected = $selectedColor ? 'selected' : '';
-                            echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
+                            echo '<div class="col-6 col-sm-4 col-lg-2 mb-3 color-item ' . $isSelected . '">
                                     <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . $colorJson . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                                         <title>Placeholder</title>
                                         <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
