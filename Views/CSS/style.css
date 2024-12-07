@@ -561,13 +561,14 @@ a.nav-link.active {
     border:  1px solid #e0e0e0; 
     border-radius: 5px;
 }
-
+/*
 .selected {
-    border: 3px solid #333; /* Adjust color as needed */
+    border: 3px solid #333; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 3px; /* Adjust padding if needed */
+    padding: 3px; 
     border-radius: 50%;
-}
+}***/
+
 
 .form-section {
     display: none; /* Hide all sections by default */

@@ -154,6 +154,7 @@ ini_set('display_errors', 1);
                                    <h5 class="fw-normal text-center">' . $colors->name . '</h5>
                                  </div>';
                        }
+                       
                     }
                     ?>
               </div>
@@ -191,6 +192,10 @@ ini_set('display_errors', 1);
               </div>
             </div>
           </div>
+
+          <?= '<input type="hidden" id="colorGroupColor1" name="colorGroupColor1" value="">'; ?>
+          <?= '<input type="hidden" id="colorGroupColor2" name="colorGroupColor2" value="">'; ?>
+          <?= '<input type="hidden" id="colorGroupColor3" name="colorGroupColor3" value="">'; ?>
         </div>
 
         <!-- Section 2 Date and time -->
@@ -496,11 +501,11 @@ function selectColor(colorGroup, colorObject, groupId) {
         console.error(`Group container with ID "${groupId}" not found.`);
         return;
     }
-
+    // Remove 'selected' class from all color items in the group
    groupContainer.querySelectorAll('.color-item').forEach(el => {
         el.classList.remove('selected');
     });
-
+    // Find the clicked color item and add 'selected' class
     const selectedItem = Array.from(groupContainer.querySelectorAll('.color-item')).find(item => {
         const itemName = item.querySelector('h5')?.textContent.trim();
         return itemName === colorObject.name;
@@ -512,17 +517,17 @@ function selectColor(colorGroup, colorObject, groupId) {
     }
 
     selectedItem.classList.add('selected');
-
+// Update the displayed selected color name
     const selectedColorElement = document.getElementById(`selected${colorGroup}`);
     if (!selectedColorElement) {
         console.error(`Selected color display element with ID "selected${colorGroup}" not found.`);
         return;
     }
     selectedColorElement.textContent = colorObject.name;
-
-    const hiddenInput = document.getElementById(`colorGroup${colorGroup}`);
+ // Update the hidden input with the selected color's JSON data
+ const hiddenInput = document.getElementById(`colorGroupColor${colorGroup.charAt(colorGroup.length - 1)}`);
     if (hiddenInput) {
-        hiddenInput.value = JSON.stringify(colorObject);
+        hiddenInput.value = JSON.stringify(colorObject);  // Store the selected color as a JSON string
     }
     toggleNextButtonColorTime();
 
@@ -532,12 +537,14 @@ function selectColor(colorGroup, colorObject, groupId) {
 function toggleNextButtonColorTime() {
     const nextButton2 = document.getElementById('next-button-service-2');
     const selectedColor1 = document.getElementById("selectedColor1").innerText !== 'None';
+    const selectedColor2 = document.getElementById("selectedColor2").innerText !== 'None';
+    const selectedColor3 = document.getElementById("selectedColor3").innerText !== 'None';
    // const colorSelected = document.querySelectorAll('.color-item.selected').length > 0;
     const timeSelected = document.getElementById('availableTimes').value !== '';
     console.log("colorSelected len: " + selectedColor1);
-    console.log()
+    console.log(timeSelected);
 console.log("has color and time: " + (selectedColor1 && timeSelected))
-    if (selectedColor1 && timeSelected) {
+    if ((selectedColor1 ||selectedColor2 ||selectedColor3) && timeSelected) {
         nextButton2.classList.remove('disabled');
     } else {
         nextButton2.classList.add('disabled');
@@ -628,7 +635,7 @@ let currentSection = 1;
         } else if (currentSection === 4) {
           currentSection = 2; 
         } else if (currentSection === 2) {
-          alert(tokenIsSet);
+         
           if(tokenIsSet){
             currentSection = 5;
           }else{
@@ -683,11 +690,6 @@ let currentSection = 1;
 
   showSection(currentSection);
 }
-
-//undisabled and disabled 
-
-  
-
 
     //google mapppp
     //let map;
