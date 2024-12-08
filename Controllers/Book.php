@@ -7,7 +7,7 @@ include_once "Models/Discount.php";
 include_once "Models/User.php";
 include_once "Models/Availability.php";
 include_once "Models/Image.php";
-include_once "Models/Payment.php";
+//include_once "Models/Payment.php";
 include_once "Controllers/Home.php";
 
 final class Book extends Controller {
@@ -21,44 +21,82 @@ final class Book extends Controller {
             case "add":
                 //var_dump($_POST);
                 $services = [];
-                if (isset($_POST['serviceType'])) {
+                
+                if (isset($_POST['serviceType']) && is_array($_POST['serviceType'])) {
+                    //var_dump($_POST['serviceType']);
+                    
                     foreach ($_POST['serviceType'] as $type => $serviceJson) {
-                        $selectedService = json_decode($serviceJson);
-                        $service = Service::getFromName($selectedService->name);
+                        if(is_string($serviceJson)){
+                           // var_dump( $serviceJson );
+                            $selectedService = json_decode($serviceJson);
+                            if ($selectedService) {
+                                $service = Service::getFromName($selectedService->name);
+                                $services[] = $service;
+                                var_dump($service);
+                            } else {
+                                echo "Invalid JSON string for type '$type'.";
+                            }
+
+
+                        }else if(is_array($serviceJson)){
+                            echo "array";
+                            foreach($serviceJson as $json){
+                                var_dump($json);
+                                $selectedService = json_decode($json);
+                                var_dump("jaosn");
+                                var_dump($selectedService);
+                                if ($selectedService) {
+                                    $service = Service::getFromName($selectedService->name);
+                                    var_dump("servicessssss");
+                                    var_dump($service);
+                                    $services[] = $service;
+
+                            }
+
+                        }
+                        
+                        //$selectedService = json_decode($serviceJson);
+                        //$service = Service::getFromName($selectedService->name);
             
-                        $services[] = $service;
+                        //$services[] = $service;
                     }
+                }
                 }
 
                 $price = 0;
                 foreach ($services as $service) {
                     $price += $service->price;
                 }
-
+               
                 $location = isset($_POST['servicePlace']) && $_POST['servicePlace'] == 'home' ? null : ($_POST['servicePlace'] ?? null);
-     
+                var_dump($location);
                 $colorsJson = array_values(array_filter([
                     $_POST['colorGroupColor1'] ?? null,
-                    $_POST['colorGroupColor2'] ?? null
+                    $_POST['colorGroupColor2'] ?? null,
+                    $_POST['colorGroupColor3'] ?? null
                 ]));
                 
                 $colors = [];
+                
                 foreach ($colorsJson as $colorJson) {
+                    
                     $color = json_decode($colorJson);
                     if (isset($color->name)) {
                         $colors[] = Color::getFromName($color->name);
                     }
                 }
-
+                var_dump($colors);
+                
 
                 if (!empty($_POST['selected_date_time'])) {
                     $selectedDateTime = $_POST['selected_date_time'];
                     $date_time = Availability::getFromDateTime($selectedDateTime);
                 }
                 
-                
+                var_dump($this->user !== null);
                 if ($this->user !== null) {
                     $user = $this->user;
+                    var_dump($user );
                 } else {
                     var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
                     if (
@@ -109,8 +147,7 @@ final class Book extends Controller {
                 if ($services != null && $colors != null && $date_time != null) {
                     $message = $message ?? null;
                     $booking = Booking::new($user, $price, $message, null, $date_time->timeSlot, $location);
-                
-                  //  var_dump($booking);
+               
                     if ($booking != null) {
                         Booking::setGroups($booking, $colors, 'BookingColor');
                         Booking::setGroups($booking, $services, 'BookingService');
@@ -119,14 +156,14 @@ final class Book extends Controller {
                         if ($images != null) {
                             Booking::setGroups($booking, $images, 'BookingImage');
                         }
-                        $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
+                        // $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
 
-                        if ($customerResponse->isSuccess()) {
-                            $this->render('Book','payment');
-                        } else {
-                            error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
-                        }
-                        //Home::redirect();
+                        // if ($customerResponse->isSuccess()) {
+                        //     $this->render('Book','payment');
+                        // } else {
+                        //     error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
+                        // }
+                        Home::redirect();
                     }
                 }
             break;
