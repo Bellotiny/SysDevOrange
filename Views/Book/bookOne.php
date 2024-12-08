@@ -4,7 +4,9 @@ ini_set('display_errors', 1);
 
 ?>
 
-<?php include_once 'Views/nav.php'; ?>
+<?php 
+include_once 'Views/nav.php'; 
+?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
   <form action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
@@ -285,10 +287,10 @@ ini_set('display_errors', 1);
                   </div>
 
                   <div class='col-12'>
-                    <label for='username' class='form-label'><?= EMAIL ?></label>
+                    <label for='email' class='form-label'><?= EMAIL ?></label>
                     <div class='input-group has-validation'>
                       <span class='input-group-text'>@</span>
-                      <input type='text' class='form-control' name='username' id='username' placeholder='Username' required>
+                      <input type='text' class='form-control' name='email' id='email' placeholder='email' required>
                       <div class='invalid-feedback'>
                         <?= VALID_EMAIL_ERROR ?>
                       </div>
