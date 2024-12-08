@@ -298,8 +298,8 @@ include_once 'Views/nav.php';
                   </div>
                 </div>
                 <div class='d-flex justify-content-center gap-4 my-5' style='width: 100%;'>
-                  <a class='btn btn-primary w-50' role='button' id='back-button-service-2' onclick='back()'><?= CANCEL ?> </a>
-                  <a class='btn btn-primary w-50 disabled' role='button' id='next-button-service-2' onclick='next()'><?= NEXT ?> </a>
+                  <a class='btn btn-primary w-50' role='button' id='back-button-service-3' onclick='back()'><?= CANCEL ?> </a>
+                  <a class='btn btn-primary w-50 disabled' role='button' id='next-button-service-3' onclick='next()'><?= NEXT ?> </a>
                 </div>
 
                 <div class='progress my-4 slide-up' role='progressbar' aria-label='Example with label' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
@@ -692,6 +692,34 @@ let currentSection = 1;
 
   showSection(currentSection);
 }
+
+
+
+// input personal
+// Select the necessary elements
+const firstNameInput = document.getElementById('firstName');
+const lastNameInput = document.getElementById('lastName');
+const emailInput = document.getElementById('email');
+const nextButton = document.getElementById('next-button-service-3');
+
+// Function to check if all fields are filled
+function validateInputs() {
+    if (
+        firstNameInput.value.trim() !== '' &&
+        lastNameInput.value.trim() !== '' &&
+        emailInput.value.trim() !== ''
+    ) {
+        nextButton.classList.remove('disabled'); // Enable the button
+    } else {
+        nextButton.classList.add('disabled'); // Keep the button disabled
+    }
+}
+
+// Attach event listeners to the inputs to check on each change
+[firstNameInput, lastNameInput, emailInput].forEach(input => {
+    input.addEventListener('input', validateInputs);
+});
+
 
     //google mapppp
     //let map;
