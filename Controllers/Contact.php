@@ -6,18 +6,20 @@ final class Contact extends Controller {
     final public const CONTACT = "contact";
     final public const CONFIRMATION = "confirmation";
 
-    public function route(): void {
-        $action = strtolower($_GET["action"] ?? self::CONTACT);
+    public function __construct(?string $action = null) {
+        parent::__construct($action ?? self::CONTACT);
+    }
 
-        switch ($action) {
+    public function route(): void {
+        switch ($this->action) {
             case self::CONTACT:
                 if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) || !isset($_POST["message"])) {
-                    $this->render("Contact", $action);
+                    $this->render();
                     return;
                 }
                 $_POST["email"] = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
                 if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                    $this->render("Contact", $action, ["error" => "Invalid Email format"]);
+                    $this->render(["error" => "Invalid Email format"]);
                     return;
                 }
                 self::redirect(self::CONFIRMATION);
@@ -29,8 +31,11 @@ final class Contact extends Controller {
                     $_POST['email'], $_POST['firstName'] . " " . $_POST['lastName'],
                 );
                 break;
+            case self::CONFIRMATION:
+                $this->render();
+                break;
             default:
-                $this->render("Contact", $action);
+                self::redirect();
                 break;
         }
     }

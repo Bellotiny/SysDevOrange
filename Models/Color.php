@@ -1,6 +1,6 @@
 <?php
 
-include_once "Model.php";
+include_once "Models/Model.php";
 
 final class Color extends Model {
     public const TABLE = "colors";

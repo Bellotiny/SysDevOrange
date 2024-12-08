@@ -1,7 +1,7 @@
 <?php
 
-include_once "Model.php";
-include_once "Booking.php";
+include_once "Models/Model.php";
+include_once "Models/Booking.php";
 
 final class Availability extends Model {
     public const TABLE = "availabilities";

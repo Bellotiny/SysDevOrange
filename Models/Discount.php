@@ -1,6 +1,6 @@
 <?php
 
-include_once "Model.php";
+include_once "Models/Model.php";
 
 final class Discount extends Model {
     public const TABLE = "discounts";
