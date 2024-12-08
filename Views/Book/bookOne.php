@@ -4,7 +4,9 @@ ini_set('display_errors', 1);
 
 ?>
 
-<?php include_once 'Views/nav.php'; ?>
+<?php 
+include_once 'Views/nav.php'; 
+?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
   <form action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
@@ -128,11 +130,10 @@ ini_set('display_errors', 1);
                   <?php
                         $selectedColor = false;
                         foreach ($data['colors'] as $colors) {
-                          $colorJson = json_encode($colors);  
-                          $isSelected = $selectedColor ? 'selected' : '';
+                            $colorJson = htmlspecialchars(json_encode($colors), ENT_QUOTES, 'UTF-8'); // Escape JSON for HTML attributes
+                            $isSelected = $selectedColor ? 'selected' : '';
                             echo '<div class="col-lg-2 mb-3 color-item ' . $isSelected . '">
-                                    <svg class="bd-placeholder-img rounded-circle" onclick="selectColor(\'Color2\', \'' . $colorJson . '\', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                        <title>Placeholder</title>
+                                    <svg class="bd-placeholder-img rounded-circle" tabindex="0" onclick="selectColor(\'Color2\', ' . $colorJson . ', \'colorGroup2\')" width="30" height="30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' . $colors->name . '" preserveAspectRatio="xMidYMid slice" style="cursor: pointer;">
                                         <rect width="100%" height="100%" fill="' . $colors->code . '"></rect>
                                     </svg>
                                     <h5 class="fw-normal">' . $colors->name . '</h5>
@@ -234,10 +235,10 @@ ini_set('display_errors', 1);
                   </div>
 
                   <div class='col-12'>
-                    <label for='username' class='form-label'><?= EMAIL ?></label>
+                    <label for='email' class='form-label'><?= EMAIL ?></label>
                     <div class='input-group has-validation'>
                       <span class='input-group-text'>@</span>
-                      <input type='text' class='form-control' name='username' id='username' placeholder='Username' required>
+                      <input type='text' class='form-control' name='email' id='email' placeholder='email' required>
                       <div class='invalid-feedback'>
                         <?= VALID_EMAIL_ERROR ?>
                       </div>
