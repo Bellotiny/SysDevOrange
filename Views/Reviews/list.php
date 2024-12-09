@@ -92,7 +92,7 @@ include_once 'Views/head.php';
                             <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
                             <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
-                        <div class="mb-1 text-body-secondary"><?= htmlspecialchars($review->user->firstName) ?> <?= htmlspecialchars($review->user->lastName) ?></div>
+                        <div class="mb-1 text-body-secondary"><?= htmlspecialchars($review->user->firstName) ?></div>
                     </div>
                 </div>
             </div>

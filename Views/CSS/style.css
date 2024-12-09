@@ -226,7 +226,7 @@ header {
 
 #overlay-text {
     position: fixed;
-    top: 12%;
+    top: 1%;
     color: rgb(217, 95, 117); 
     padding: 10px 20px; 
     font-size: 160px; 
@@ -236,13 +236,14 @@ header {
 #overlay-text2 {
     position: fixed;
   
-    top: 35%;
+    top: 25%;
     color: #ffffff; 
     font-size: 35px;
     width: 100%;
     text-align: center;
 }
 #homeImage {
+    margin-top: 6%;
     background-image: url("../Images/homepageTwo.jpg");
     width: 100%;
     height: 95vh;
@@ -740,7 +741,7 @@ a.nav-link.active {
 }
 /* Home */
     #overlay-text {
-        
+        top: 12%;
         font-size: 85px;
     }
     #overlay-text2 {

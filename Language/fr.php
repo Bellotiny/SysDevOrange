@@ -55,6 +55,14 @@ const NAIL_CARE_101 = "Soins des ongles 101 : Conseils, Avantages et Avis Profe
 const NAIL_CARE_DO_DONT = "Conseils Pour le Soin des Ongles, Choses à Faire et à ne pas Faire";
 const NAIL_CARE_DO = "Conseils de Soin des Ongles (à Faire)";
 const NAIL_CARE_DONT = "Soins des Ongles (à ne pas Faire)";
+const NAILS_ARE_NOT_TOOLS = "N'utilisez pas les Ongles Comme Outils :";
+const NAILS_ARE_NOT_TOOLS_2 = "Évitez d'utiliser des clous pour ouvrir les colis.";
+const DONT_IGNORE_ISSUES = "N'ignorez Pas les Problèmes :";
+const DONT_IGNORE_ISSUES_2 = "Consultez un professionnel pour les problèmes d'ongles.";
+const AVOID_HARSH_PRODUCTS = "Évitez les Produits Agressifs :";
+const AVOID_HARSH_PRODUCTS_2 = "Limitez l’utilisation de dissolvants à l’acétone.";
+const DONT_OVER_POLISH = "N'exagérez Pas le Polissage :";
+const DONT_OVER_POLISH_2 = "Trop de couches peuvent fragiliser les ongles.";
 const MUST_READ = "Doit Lire";
 const VIEW_DETAILS = "Voir les Détails »";
 const BASIC_MANICURE = "Une manucure de base ne consiste pas seulement à être belle : elle est essentielle pour garder vos ongles en bonne santé ! Voici pourquoi :";
@@ -63,7 +71,7 @@ const NAIL_BED_CARE_2 = "Garder vos lits d’ongles exempts d’abrasion et hydr
 const BREAK_HARSH_TREATMENTS = "Pause des Traitements Durs :";
 const BREAK_HARSH_TREATMENTS_2 = "Si vous utilisez de l’acrylique ou d’autres améliorations pour les ongles, il est important de donner une pause à vos ongles. Laissez-les respirer et récupérer pour éviter des dommages à long terme.";
 const PROMOTE_HEALTHY_GROWTH = "Promouvoir une Croissance Saine :";
-const PROMOTE_HEALTHY_GROWTH_2 = "Une zone de cuticules propre, ainsi que des huiles nourrissantes, garderont vos ongles hydratés et favoriseront une croissance forte et saine.";
+const PROMOTE_HEALTHY_GROWTH_2 = " Une zone de cuticules propre, ainsi que des huiles nourrissantes, garderont vos ongles hydratés et favoriseront une croissance forte et saine.";
 const IMPORTANCE_REG_MANICURE = "L'importance des Manucures Régulières 💅✨";
 const IMPORTANCE_REG_MANICURE_2 = "Les manucures régulières ne sont pas seulement un régal : elles sont un élément essentiel pour garder vos ongles sains et beaux ! Voici pourquoi il est important de rester cohérent";
 const TLC = "Donnez un peu d’attention à vos ongles – ils vous remercieront plus tard ! 💖";
@@ -86,11 +94,11 @@ const BENEFIT_REG_MANICURE = "Avantage d’une Manucure Régulière";
     // First Collapsible Section
     const KEEP_NAILS_CLEAN = "Gardez les Ongles Propres :";
     const KEEP_NAILS_CLEAN_2 = "Lavez-vous régulièrement les mains et séchez-les soigneusement.";
-    const  MOISTURIZE = "Hydrater:";
-    const  MOISTURIZE_2 = "Appliquez de la crème pour les mains ou de l'huile pour cuticules pour garder les ongles hydratés.";
-    const TRIM_REG = "Taillez régulièrement:";
+    const  MOISTURIZE = "Hydrater :";
+    const  MOISTURIZE_2 = " Appliquez de la crème pour les mains ou de l'huile pour cuticules pour garder les ongles hydratés.";
+    const TRIM_REG = "Taillez régulièrement :";
     const TRIM_REG_2 = "Utilisez des outils tranchants pour maintenir une longueur gérable.";
-    const FILE_GENTLY = "Limez délicatement";
+    const FILE_GENTLY = "Limez délicatement :";
     const FILE_GENTLY_2 = "Lisser les bords en limant dans une seule direction.";
 
 
@@ -130,14 +138,14 @@ const PERSONAL_INFO_1 = "Nous sommes si heureux de vous voir.";
 const PERSONAL_INFO_2 = "Votre petit nook de joie est prêt et vous attend.";
 
 // Account -> Booking History
-const DISCOUNT_BREAKDOWN = "Répartition des remises:";
-const ORIGINAL_PRICE = "Prix ​​d'Origine: $";
-const BOOKED_ON = "Réservé le:";
-const TOTAL_ACCOUNT_HISTORY = "Total: $";
-const DATE = "Date:";
+const DISCOUNT_BREAKDOWN = "Répartition des remises :";
+const ORIGINAL_PRICE = "Prix ​​d'Origine : $";
+const BOOKED_ON = "Réservé le :";
+const TOTAL_ACCOUNT_HISTORY = "Total : $";
+const DATE = "Date :";
 const NO_DISCOUNT = "Aucune remise disponible";
 const VIEW_MORE_DETAILS = "Voir pour plus de détails";
-const PAYED = "Payé: ";
+const PAYED = "Payé : ";
 
 // Account -> Forgot Password
 const FORGOT_PASS_ACCOUNT = "Mot de Passe Oublié";
@@ -214,7 +222,7 @@ const NEXT = "Suivante";
 
 // Booking 
     // Section 1
-    const SERVICE_LOCATION = "Emplacement du Service:";
+    const SERVICE_LOCATION = "Emplacement du Service :";
     const OWNERS_PLACE = "Le Logement du Propriétaire";
     const OWNERS_LOCATION = "(Voir le logement du Propriétaire)";
     const HOME_SERVICE = " Service à domicile";

@@ -127,10 +127,10 @@ include_once 'Views/bookingModal.php';
             <div class="col">
               <h3 class=""> <?= NAIL_CARE_DONT ?></h3>
               <ul>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Use Nails as Tools:</strong> Avoid using nails for opening packages.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Ignore Issues:</strong> Consult a professional for nail problems.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Avoid Harsh Products:</strong>  Limit the use of acetone removers.</li>
-                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis ">Don’t Overdo Polish:</strong>  Too many layers can weaken nails.</li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= NAILS_ARE_NOT_TOOLS ?></strong> <?= NAILS_ARE_NOT_TOOLS_2 ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= DONT_IGNORE_ISSUES ?></strong> <?= DONT_IGNORE_ISSUES ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= AVOID_HARSH_PRODUCTS ?></strong>  <?= AVOID_HARSH_PRODUCTS ?></li>
+                <li class="text-large-offcanvas"><strong class="d-inline mb-2 text-primary-emphasis "><?= DONT_OVER_POLISH ?></strong>  <?= DONT_OVER_POLISH_2 ?></li>
               </ul>
             </div>
           </div>

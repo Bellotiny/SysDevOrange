@@ -13,7 +13,7 @@ include_once 'Views/bookingModal.php';
 
   <div class="green-background text-secondary  container slide-up">
     <div class="">
-      <h1 class="display-3 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up"><?= ABOUT_US_HEADER ?></h1>
+      <h1 class="display-3 mt-4 fw-bold text-green amsterdamThree-fontstyle text-shadow-pink slide-up"><?= ABOUT_US_HEADER ?></h1>
       <div class=" mx-auto slide-up">
         <p class="fs-6 m-3 py-5 px-4 slide-up ">
         <?= ABOUT_US_INFO?>
