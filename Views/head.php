@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <?php
-        $page = basename($_SERVER['PHP_SELF']); // Get the file name
+        $controller = ucfirst($_GET['controller'] ?? "home");
+        $page = basename($controller); // Get the file name
         $page = pathinfo($page, PATHINFO_FILENAME); // Remove the file extension
-        $page = ucfirst($page);
-        if ($page == "home") { 
-            $page = "Home";
-            echo "home";
+        // Use switch to change languages of the tab
+        switch ($controller) {
+          case "Home":
+            $page = HOME;
+            break;
+          case "About":
+            $page = ABOUT;
+            break;
+          case "Services":
+            $page = SERVICE;
+            break;
+          case "Account":
+            $page = ACCOUNT;
+            break;
+          case "Book":
+            $page = BOOK;
+            break;
+          case "Gallery":
+            $page = GALLERY;
+            break;
+          case "Reviews":
+            $page = REVIEWS;
+            break;
+          case "Contact":
+            $page = CONTACT;
+            break;
         }
         echo "<title>{$page}</title>"; 
        
