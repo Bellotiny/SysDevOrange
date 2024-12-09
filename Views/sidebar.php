@@ -18,7 +18,7 @@
                 <?= BOOKING_HISTORY ?>
               </a>
             </li> 
-            <?php if ($this->checkAuthorization("schedule") === true): ?>
+            <?php if ($this->verifyRights("schedule") === true): ?>
             <li>
               <a  href="<?= BASE_PATH ?>/account/schedule" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16">
@@ -28,7 +28,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if ($this->checkAuthorization("inventory") === true): ?>
+            <?php if ($this->verifyRights("inventory") === true): ?>
             <li>
               <a href="<?=BASE_PATH?>/account/inventory" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
@@ -36,7 +36,7 @@
               </a>
             </li>
             <?php endif; ?>
-              <?php if ($this->checkAuthorization("bookinglist") === true): ?>
+              <?php if ($this->verifyRights("bookinglist") === true): ?>
                   <li>
                       <a  href="<?= BASE_PATH ?>/account/bookingList" class="nav-link link-dark">
                           <svg class="bi me-2" width="16" height="16">

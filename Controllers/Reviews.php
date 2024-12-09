@@ -16,7 +16,7 @@ final class Reviews extends Controller {
     public function route(): void {
         switch ($this->action) {
             case self::ADD:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
@@ -47,7 +47,7 @@ final class Reviews extends Controller {
                 $this->redirect();
                 break;
             case self::EDIT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if ($this->id === null) {
@@ -101,7 +101,7 @@ final class Reviews extends Controller {
                 $this->redirect();
                 break;
             case self::DELETE:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if ($this->id === null) {
@@ -123,13 +123,10 @@ final class Reviews extends Controller {
                 $this->redirect();
                 break;
             case self::LIST:
-                if ($this->id === null) {
-                    $this->id = 0;
-                }
                 if (isset($_POST["search"])) {
-                    $reviews = Review::search($this->id, $_POST["search"]);
+                    $reviews = Review::search($this->id ?? 0, $_POST["search"]);
                 } else {
-                    $reviews = Review::listByDate($this->id);
+                    $reviews = Review::listByDate($this->id ?? 0);
                 }
                 $this->render(["search" => $_POST["search"] ?? "", "reviews" => $reviews]);
                 break;

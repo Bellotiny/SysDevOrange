@@ -20,38 +20,44 @@ abstract class Controller {
         include "Views/" . static::class . "/" . $this->action . ".php";
     }
 
-    protected final function verifyRights(?string $action = null): bool {
+    final protected function ensureAuthenticated(): bool {
         if ($this->user === null) {
             include_once "Controllers/Account.php";
             Account::redirect(Account::LOGIN);
             return false;
         }
-        if (!$this->user->hasRights(static::class, $action ?? $this->action)) {
-            self::back();
+        return true;
+    }
+
+    final protected function verifyRights(?string $right = null): bool {
+        return $this->user !== null && $this->user->hasRights(static::class, $right ?? $this->action);
+    }
+
+    final protected function ensureRights(?string $right = null, ?string $action = null, ?string $id = null): bool {
+        if (!$this->ensureAuthenticated()) {
+            return false;
+        }
+        if (!$this->verifyRights($right)) {
+            self::back($action, $id);
             return false;
         }
         return true;
     }
 
-    protected final function checkAuthorization(?string $action = null): bool {
-        if ($this->user === null) {
-            return false;
-        }
-        if (!$this->user->hasRights(static::class, $action ?? $this->action)) {
-            return false;
-        }
-        return true;
-    }
-
-    final public static function redirect(?string $action = null, ?string $id = null): void {
-        if (self::class === static::class) {
+    final protected static function redirect(?string $action = null, ?string $id = null): void {
+        if (self::class === static::class) {  // If Controller::redirect() is called, redirect to home
             include_once "Controllers/Home.php";
             Home::redirect();
+        } else {  // Otherwise, redirect to the controller it was called from
+            header("Location: " . BASE_PATH . "/" . strtolower(static::class) . ($action ? "/$action" : "") . ($id ? "/$id" : ""));
         }
-        header("Location: " . BASE_PATH . "/" . strtolower(static::class) . ($action ? "/$action" : "") . ($id ? "/$id" : ""));
     }
 
-    protected final static function back(): void {
-        header("Location: " . ($_SERVER['HTTP_REFERER'] ?? dirname($_SERVER['PHP_SELF'])));
+    final protected static function back(?string $action = null, ?string $id = null): void {
+        if (isset($_SERVER['HTTP_REFERER'])) {  // Try to redirect to the previous page
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+        } else {  // If there is no previous page, redirect using parameters
+            static::redirect($action, $id);
+        }
     }
 }

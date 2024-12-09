@@ -124,7 +124,7 @@ final class Book extends Controller {
                 }
             break;
             case "delete":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
 
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){
@@ -141,7 +141,7 @@ final class Book extends Controller {
                 }
             break;
             case "view":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
                     
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){
@@ -157,7 +157,7 @@ final class Book extends Controller {
                 }
             break;
             case "edit":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
 
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){
@@ -173,7 +173,7 @@ final class Book extends Controller {
                 }
             break;
             case "deleteOthers":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
 
                     $bookingIDs = $_POST['bookingID'] ?? null;
                     if($bookingIDs != null){
@@ -199,7 +199,7 @@ final class Book extends Controller {
                 }
             break;
             case "viewOthers":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
 
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){
@@ -215,7 +215,7 @@ final class Book extends Controller {
                 }
             break;
             case "editOthers":
-                if($this->verifyRights($action)){
+                if($this->ensureRights($action)){
 
                     $bookingID = $_POST['bookingID'] ?? null;
                     if($bookingID != null){

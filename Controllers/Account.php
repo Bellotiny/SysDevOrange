@@ -49,7 +49,8 @@ final class Account extends Controller {
     public function route(): void {
         switch ($this->action) {
             case self::REGISTER:
-                if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["confirmPassword"])) {
+                if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) ||
+                    !isset($_POST["password"]) || !isset($_POST["confirmPassword"])) {
                     $this->render();
                     break;
                 }
@@ -75,13 +76,13 @@ final class Account extends Controller {
                         break;
                     }
                 }
-                $user = User::getFromEmail($_SESSION["email"]);
+                $user = User::getFromEmail($_POST["email"]);
                 if ($user !== null && $user->hasPassword()) {
                     $this->render(["error" => "Email already in use"]);
                     break;
                 }
                 try {
-                    $code = random_int(1000, 9999);
+                    $code = random_int(100000, 999999);
                 } catch (Exception) {
                     $this->render(["error" => "Error While Generating 2FA Code. Try Again Later", "email" => $_POST["email"]]);
                 }
@@ -95,25 +96,25 @@ final class Account extends Controller {
                 $_SESSION["password"] = $_POST["password"];
                 $_SESSION["phoneNumber"] = $_POST["phoneNumber"] ?? null;
                 $_SESSION["birthDate"] = $_POST["birthDate"] ?? null;
-                self::redirect(self::TWO_FACTOR_AUTHENTICATION);
+                self::redirect(self::REGISTER_CONFIRMATION);
                 flush();
                 session_write_close();
                 Mail::send(
-                    "2FA Code for Snook's Nail Nook",
-                    "Your 2FA Code is: $code",
-                    $user->email, "$user->firstName $user->lastName",
-                    $user->email, "$user->firstName $user->lastName"
+                    "Registration Code for Snook's Nail Nook",
+                    "Your Registration Confirmation Code is: $code",
+                    $_POST["email"], $_POST["firstName"] . " " . $_POST["lastName"],
+                    $_POST["email"], $_POST["firstName"] . " " . $_POST["lastName"]
                 );
                 break;
             case self::REGISTER_CONFIRMATION:
-//                session_start();
-//                var_dump($_SESSION["2fa"]);
                 if (!isset($_POST["code"])) {
                     $this->render();
                     break;
                 }
                 session_start();
-                if (!isset($_SESSION["time"]) || !isset($_SESSION["2fa"]) || !isset($_SESSION["tries"]) || !isset($_SESSION["firstName"]) || !isset($_SESSION["lastName"]) || !isset($_SESSION["email"]) || !isset($_SESSION["password"])) {
+                if (!isset($_SESSION["time"]) || !isset($_SESSION["2fa"]) || !isset($_SESSION["tries"]) ||
+                    !isset($_SESSION["firstName"]) || !isset($_SESSION["lastName"]) ||
+                    !isset($_SESSION["email"]) || !isset($_SESSION["password"])) {
                     self::redirect(self::LOGIN);
                     break;
                 }
@@ -134,7 +135,14 @@ final class Account extends Controller {
                 }
                 $user = User::getFromEmail($_SESSION["email"]);
                 if ($user === null) {
-                    $user = User::new($_SESSION["firstName"], $_SESSION["lastName"], $_SESSION["email"], $_SESSION["password"], $_SESSION["phoneNumber"] ?? null, $_SESSION["birthDate"] ?? null);
+                    $user = User::new(
+                        $_SESSION["firstName"],
+                        $_SESSION["lastName"],
+                        $_SESSION["email"],
+                        $_SESSION["password"],
+                        $_SESSION["phoneNumber"] ?? null,
+                        $_SESSION["birthDate"] ?? null
+                    );
                     if ($user === null) {
                         $this->render(["error" => "Error creating user"]);
                         break;
@@ -158,10 +166,11 @@ final class Account extends Controller {
                 session_destroy();
                 break;
             case self::EDIT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) || !isset($_POST["phoneNumber"]) || !isset($_POST["birthDate"])) {
+                if (!isset($_POST["firstName"]) || !isset($_POST["lastName"]) || !isset($_POST["email"]) ||
+                    !isset($_POST["phoneNumber"]) || !isset($_POST["birthDate"])) {
                     $this->render();
                     break;
                 }
@@ -188,7 +197,9 @@ final class Account extends Controller {
                 $this->user->email = $_POST["email"];
                 $this->user->phoneNumber = $_POST["phoneNumber"];
                 $this->user->birthDate = $_POST["birthDate"];
-                if (!$this->user->save()) {
+                try {
+                    $this->user->save();
+                } catch (Exception) {
                     $this->formError("Email already in use");
                     break;
                 }
@@ -257,7 +268,7 @@ final class Account extends Controller {
                     $this->render(["error" => "Error While Generating Token. Try Again Later"]);
                     break;
                 }
-                //self::redirect();
+                self::redirect();
                 session_destroy();
                 break;
             case self::FORGOT:
@@ -317,7 +328,7 @@ final class Account extends Controller {
                 session_destroy();
                 break;
             case self::CHANGE_PASSWORD:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if (!isset($_POST["password"]) || !isset($_POST["confirmPassword"])) {
@@ -341,10 +352,12 @@ final class Account extends Controller {
             case self::LOGOUT:
                 if ($this->user === null) {
                     Home::redirect();
+                    break;
                 }
                 $token = Token::getFromCookie();
                 if ($token === null) {
                     Home::redirect();
+                    break;
                 }
                 $token->remove();
                 Home::redirect();
@@ -362,90 +375,87 @@ final class Account extends Controller {
                 break;
 
             case self::SCHEDULE:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 $this->render(["availabilities" => Availability::listFuture()]);
                 break;
             case self::HISTORY:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 $this->render(["availabilities" => $this->user->getAvailabilities()]);
                 break;
             case self::AVAILABILITY_ADD:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if (!isset($_POST["start"]) || !isset($_POST["end"])) {
                     $this->render();
                     break;
                 }
-                // TODO Sanitize dates
-                $_POST["start"] = strtotime($_POST["start"]);
-                $_POST["end"] = strtotime($_POST["end"]);
-                if (!$_POST["start"] || !$_POST["end"]) {
+                $start = strtotime($_POST["start"]);
+                $end = strtotime($_POST["end"]);
+                if (!$start || !$end) {
                     $this->render(["error" => "Dates are wrong format"]);
                     break;
                 }
-                if ($_POST["start"] > $_POST["end"]) {
+                if ($start > $end) {
                     $this->render(["error" => "End time must be before Start"]);
                     break;
                 }
-                $availabilities = Availability::newMany($_POST["start"], $_POST["end"]);
-                if ($availabilities === null) {
-                    $this->render(["error" => "Error while creating new availability"]);
-                    break;
-                }
+                $start = $start - ($start % (30 * 60));
+                $end = $end - ($end % (30 * 60));
+                Availability::newMany($start, $end);
                 $this->redirect(self::SCHEDULE);
                 break;
             case self::AVAILABILITY_DELETE:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                if (!isset($_GET["id"])) {
+                if (!isset($_GET["start"]) || !isset($_GET["end"])) {
                     $this->redirect(self::SCHEDULE);
                     break;
                 }
-                $times = explode("-", $_GET["id"]);
-                $availabilities = Availability::getBetween((int)$times[0], (int)$times[1]);
-                foreach ($availabilities as $availability) {
-                    if ($availability->booking !== null) {
-                        continue;
-                    }
-                    $availability->remove();
-                }
+                Availability::deleteAvailableBetween((int)($_GET["start"]), (int)($_GET["end"]));
                 $this->redirect(self::SCHEDULE);
                 break;
             case self::BOOKING_VIEW:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $booking = Booking::getFromId((int)$_GET["id"]);
-                if (is_null($booking)) {
-                    $this->redirect(self::SCHEDULE);
+                if ($this->id === null) {
+                    $this::back(self::SCHEDULE);
+                    break;
+                }
+                $booking = Booking::getFromId($this->id);
+                if ($booking === null) {
+                    $this->back(self::SCHEDULE);
                     break;
                 }
                 $this->render(["booking" => $booking]);
                 break;
             case self::BOOKING_LIST:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $this->render(["availabilities" => Availability::listWithBookings((int)($_GET["id"] ?? 0))]);
+                $this->render(["availabilities" => Availability::listUnavailable($this->id ?? 0)]);
                 break;
             case self::BOOKING_DELETE:
-                if ($this->user === null) {
-                    Account::redirect(Account::LOGIN);
+                if (!$this->ensureAuthenticated()) {
                     break;
                 }
-                $booking = Booking::getFromId((int)$_GET["id"]);
-                if (is_null($booking)) {
-                    self::redirect(self::BOOKING_LIST, $_GET["id"]);
+                if ($this->id === null) {
+                    $this::back(self::SCHEDULE);
                     break;
                 }
-                if (!$this->user->hasRights(self::class, $this->action) && $booking->user->id !== $this->user->id) {
-                    $this::back();
+                $booking = Booking::getFromId($this->id);
+                if ($booking === null) {
+                    self::back(self::SCHEDULE);
+                    break;
+                }
+                if (!$this->verifyRights() && $this->user->id !== $booking->user->id) {  // If the user is not an admin and the booking does not belong to the user
+                    $this::back(self::HISTORY);
                     break;
                 }
                 $booking->remove();
@@ -453,7 +463,7 @@ final class Account extends Controller {
                 break;
 
             case self::INVENTORY:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 $this->render([
@@ -463,7 +473,7 @@ final class Account extends Controller {
                 ]);
                 break;
             case self::COLOR_ADD:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
                 if (!isset($_POST["name"]) || !isset($_POST["code"])) {
@@ -482,10 +492,11 @@ final class Account extends Controller {
                 $this->redirect(self::INVENTORY);
                 break;
             case self::SERVICE_ADD:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) ||
+                    !isset($_POST["price"]) || !isset($_POST["duration"])) {
                     $this->render();
                     break;
                 }
@@ -498,23 +509,20 @@ final class Account extends Controller {
                     filter_var($_POST["visibility"] ?? false, FILTER_VALIDATE_BOOLEAN),
                 );
                 if ($service === null) {
-                    $this->render(["error" => "Error while creating new color"]);
+                    $this->render(["error" => "Error while creating new service"]);
                     break;
                 }
                 $this->redirect(self::INVENTORY);
                 break;
             case self::ADD_DISCOUNT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
-                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
-                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) || !isset($_POST["start"]) ||
+                    !isset($_POST["end"]) || !isset($_POST["percent"]) || !isset($_POST["amount"])) {
                     $this->render();
                     break;
                 }
-
-
                 $discount = Discount::new(
                     $_POST["name"],
                     $_POST["type"],
@@ -524,17 +532,21 @@ final class Account extends Controller {
                     filter_var($_POST["amount"], FILTER_VALIDATE_FLOAT),
                 );
                 if ($discount === null) {
-                    $this->render(["error" => "Error while creating new color"]);
+                    $this->render(["error" => "Error while creating new discount"]);
                     break;
                 }
                 $this->redirect(self::INVENTORY);
                 break;
             case self::COLOR_EDIT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $color = Color::getFromId((int)$_GET["id"]);
-                if (is_null($color)) {
+                if ($this->id === null) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $color = Color::getFromId($this->id);
+                if ($color === null) {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
@@ -549,15 +561,20 @@ final class Account extends Controller {
                 $this->redirect(self::INVENTORY);
                 break;
             case self::SERVICE_EDIT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $service = Service::getFromId((int)$_GET["id"]);
-                if (is_null($service)) {
+                if ($this->id === null) {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
-                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) || !isset($_POST["price"]) || !isset($_POST["duration"])) {
+                $service = Service::getFromId($this->id);
+                if ($service === null) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"]) ||
+                    !isset($_POST["price"]) || !isset($_POST["duration"])) {
                     $this->render(["service" => $service]);
                     break;
                 }
@@ -571,17 +588,20 @@ final class Account extends Controller {
                 $this->redirect(self::INVENTORY);
                 break;
             case self::EDIT_DISCOUNT:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $discount = Discount::getFromId((int)$_GET["id"]);
-                if (is_null($discount)) {
+                if ($this->id === null) {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
-                if (!isset($_POST["name"]) || !isset($_POST["type"]) ||
-                    !isset($_POST["start"]) || !isset($_POST["end"]) ||
-                    !isset($_POST["percent"]) || !isset($_POST["amount"])) {
+                $discount = Discount::getFromId($this->id);
+                if ($discount === null) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                if (!isset($_POST["name"]) || !isset($_POST["type"]) || !isset($_POST["start"]) ||
+                    !isset($_POST["end"]) || !isset($_POST["percent"]) || !isset($_POST["amount"])) {
                     $this->render(["discount" => $discount]);
                     break;
                 }
@@ -593,14 +613,17 @@ final class Account extends Controller {
                 $discount->amount = $_POST["amount"];
                 $discount->save();
                 $this->redirect(self::INVENTORY);
-
                 break;
             case self::COLOR_DELETE:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $color = Color::getfromId((int)$_GET["id"]);
-                if (is_null($color)) {
+                if ($this->id === null) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $color = Color::getfromId($this->id);
+                if ($color === null) {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
@@ -608,11 +631,15 @@ final class Account extends Controller {
                 $this->redirect(self::INVENTORY);
                 break;
             case self::SERVICE_DELETE:
-                if (!$this->verifyRights()) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $service = Service::getfromId((int)$_GET["id"]);
-                if (is_null($service)) {
+                if ($this->id === null) {
+                    $this->redirect(self::INVENTORY);
+                    break;
+                }
+                $service = Service::getfromId($this->id);
+                if ($service === null) {
                     $this->redirect(self::INVENTORY);
                     break;
                 }
@@ -621,7 +648,7 @@ final class Account extends Controller {
                 break;
 
             default:
-                if ($this->verifyRights()) {
+                if ($this->ensureRights()) {
                     $this->render();
                 }
                 break;
