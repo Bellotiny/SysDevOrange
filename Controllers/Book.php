@@ -25,42 +25,26 @@ final class Book extends Controller {
                 if (isset($_POST['serviceType']) && is_array($_POST['serviceType'])) {
                     //var_dump($_POST['serviceType']);
                     
-                    foreach ($_POST['serviceType'] as $type => $serviceJson) {
-                        if(is_string($serviceJson)){
-                           // var_dump( $serviceJson );
-                            $selectedService = json_decode($serviceJson);
-                            if ($selectedService) {
-                                $service = Service::getFromName($selectedService->name);
-                                $services[] = $service;
-                                var_dump($service);
-                            } else {
-                                echo "Invalid JSON string for type '$type'.";
-                            }
-
-
-                        }else if(is_array($serviceJson)){
-                            echo "array";
-                            foreach($serviceJson as $json){
-                                var_dump($json);
-                                $selectedService = json_decode($json);
-                                var_dump("jaosn");
-                                var_dump($selectedService);
-                                if ($selectedService) {
-                                    $service = Service::getFromName($selectedService->name);
-                                    var_dump("servicessssss");
-                                    var_dump($service);
+                    foreach ($_POST['serviceType'] as $type => $serviceIds) {
+                        if (is_int($serviceIds)) {
+                           // var_dump( $serviceIds );
+                           $service = Service::getFromId($serviceIds);
+                           if ($service) {
+                               $services[] = $service;
+                           } else {
+                               echo "Service ID '$serviceIds' not found for type '$type'.";
+                           }
+                        }elseif (is_array($serviceIds)) {
+                            foreach ($serviceIds as $id) {
+                                $service = Service::getFromId($id);
+                                if ($service) {
                                     $services[] = $service;
-
+                                } else {
+                                    echo "Service ID '$id' not found for type '$type'.";
+                                }
                             }
-
                         }
-                        
-                        //$selectedService = json_decode($serviceJson);
-                        //$service = Service::getFromName($selectedService->name);
-            
-                        //$services[] = $service;
                     }
-                }
                 }
 
                 $price = 0;

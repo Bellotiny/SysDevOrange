@@ -31,28 +31,28 @@ include_once 'Views/nav.php';
             foreach ($services as $service) {
                 if($service->visibility == 1){
                   $totalPrice += $service->price;
-                $serviceJson = htmlspecialchars(json_encode($service), ENT_QUOTES, 'UTF-8');
+                  $serviceJson = htmlspecialchars(json_encode($service), ENT_QUOTES, 'UTF-8');
 
-                echo '<div class="list-group d-flex flex-row w-100 m-2">
-                        <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
-                            <input onchange="return updateCart()" class="form-check-input flex-shrink-0" 
-                                type="' . $inputType . '" 
-                                name="serviceType[' . $type . ']' . ($inputType === 'checkbox' ? '[]' : '') . '" 
-                                value="' . $serviceJson . '" 
-                                id="service-' . $service->name . '" required>
-                            <span class="flex-grow-1">
-                                ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
-                            </span>
-                            <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
-                                ' . $service->price . ' CAD
-                            </div>
-                        </label>
-                      </div>';
-                }
-            }
+                  echo '<div class="list-group d-flex flex-row w-100 m-2">
+                          <label class="list-group-item d-flex gap-2 flex-fill booking-border-style p-4 canvaSans">
+                              <input class="form-check-input flex-shrink-0" 
+                                  type="' . $inputType . '" 
+                                  name="serviceType[' . $type . ']' . ($inputType === 'checkbox' ? '[]' : '') . '" 
+                                  value="' . $service->id . '" 
+                                  data-json="' . $serviceJson . '"
+                                  id="service-' . $service->name . '" required>
+                              <span class="flex-grow-1">
+                                  ' . $service->name . '<br><small class="text-body-secondary">' . $service->description . '</small>
+                              </span>
+                              <div class="text-success d-flex justify-content-end align-items-center" style="min-width: 80px;">
+                                  ' . $service->price . ' CAD
+                              </div>
+                          </label>
+                        </div>';
+                  }
+              }
         }
         ?>
-
 
         <!-- Section 1 Location Service -->
         <h3><?= SERVICE_LOCATION ?></h3>
@@ -440,7 +440,7 @@ function updateCart() {
   if (cart.length > 0) {
     nextButton1.classList.remove('disabled');
     nextButtonCart.classList.remove('disabled');
-  } else {
+  } else if (cart.length <= 0){
     nextButton1.classList.add('disabled');
     nextButtonCart.classList.add('disabled');
   }
@@ -465,31 +465,29 @@ function removeFromCart(index) {
 // Event Listener to Handle Change on Service Selection
 document.addEventListener('change', (event) => {
   if (event.target.name && event.target.name.startsWith('serviceType')) {
-    const service = JSON.parse(event.target.value); 
+    const jsonData = event.target.dataset.json;
     const inputType = event.target.type; // Determine if radio or checkbox
 
-    // If it's a radio button, replace the current selection for that type
+    if (!jsonData) {
+      console.error("JSON data not found on element.");
+      return;
+    }
+
+    const service = JSON.parse(jsonData);
+
     if (inputType === 'radio') {
-      // Remove all items of the same type (if the service has a type attribute)
-      const sameTypeItems = cart.filter(item => item.type === service.type);
-      sameTypeItems.forEach(item => {
-        const index = cart.findIndex(cartItem => cartItem.name === item.name);
-        if (index !== -1) removeFromCart(index);
-      });
-
-      // Add the new selection
+      // Handle radio button logic (single selection for type)
+      cart = cart.filter(item => item.type !== service.type); // Remove all items of the same type
       addToCart(service.name, service.description, parseFloat(service.price), service.type);
-    } 
-
-    // If it's a checkbox, toggle the item in the cart
-    else if (inputType === 'checkbox') {
+    } else if (inputType === 'checkbox') {
+      // Handle checkbox logic (toggle selection)
       const existingItemIndex = cart.findIndex(item => item.name === service.name);
 
       if (existingItemIndex !== -1) {
-        // If item exists, remove it
+        // Remove item if it already exists
         removeFromCart(existingItemIndex);
       } else {
-        // If not, add it
+        // Add item if it does not exist
         addToCart(service.name, service.description, parseFloat(service.price), service.type);
       }
     }
