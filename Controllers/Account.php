@@ -324,8 +324,8 @@ final class Account extends Controller {
                     $this->render(["error" => "Error While Generating Token. Try Again Later"]);
                     break;
                 }
-                self::redirect(self::CHANGE_PASSWORD);
                 session_destroy();
+                self::redirect(self::CHANGE_PASSWORD);
                 break;
             case self::CHANGE_PASSWORD:
                 if (!$this->ensureRights()) {

@@ -12,7 +12,7 @@ include_once 'Views/bookingModal.php';
             <div class="position-relative p-5 text-center text-muted border border-dashed rounded-5 h-20" id="divAccount">
                 <h1 class="text-body-emphasis mt-5" style="display: contents"><?= CHANGE_PASSWORD ?></h1>
           </div>
-        <form action="<?=BASE_PATH?>/account/resetPassword" method="POST">
+        <form action="<?=BASE_PATH?>/account/change-password" method="POST">
             <div class="form-group py-2">
                 <label for="password"><?= PASSWORD ?></label>
                 <input type="password" class="form-control" id="password" name="password" required>
