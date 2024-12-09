@@ -9,7 +9,7 @@ include_once 'Views/nav.php';
 ?>
 <body onload="initMap()">
 <div id="form-container" data-section="1" class="my-5">
-  <form action="<?=BASE_PATH?>/book/add" method="POST" novalidate="" class="needs-validation ">
+  <form action="<?=BASE_PATH?>/book" method="POST" novalidate="" class="needs-validation ">
      <!-- Section 1 -->
      <div class="form-section active container pt-5 "  id="section1">
 

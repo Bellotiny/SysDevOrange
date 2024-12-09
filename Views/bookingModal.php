@@ -23,7 +23,7 @@
                     </div>
                     <div class="container d-flex justify-content-center gap-4 my-5">
                       <a class="btn btn-primary w-50" href="<?=BASE_PATH?>/home" role="button"><?= CANCEL?></a>
-                      <a class="btn btn-primary w-50 disabled" id="confirmButton" href="<?=BASE_PATH?>/book/list" role="button" ><?= CONFIRM ?></a>
+                      <a class="btn btn-primary w-50 disabled" id="confirmButton" href="<?=BASE_PATH?>/book" role="button" ><?= CONFIRM ?></a>
                     </div>
                 </div>
             </div>
