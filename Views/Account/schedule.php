@@ -38,8 +38,8 @@ include_once 'Views/bookingModal.php';
                     $availability = $data["availabilities"][$i];
                     $ids[] = $availability->id;
                     if (!array_key_exists($i + 1, $data["availabilities"]) ||
-                        $availability?->booking?->id !== $data["availabilities"][$i + 1]?->booking?->id &&
-                        strtotime($availability->timeSlot) + 30 * 60 !== strtotime($data["availabilities"][$i + 1]->timeSlot)) {
+                        $availability?->booking?->id !== $data["availabilities"][$i + 1]?->booking?->id ||
+                        strtotime($availability->timeSlot) !== strtotime($data["availabilities"][$i + 1]->timeSlot) + 30 * 60) {
                         $start = strtotime($availability->timeSlot);
                         ?>
                         <tr>
