@@ -1,7 +1,7 @@
 <?php
 
-include_once "Model.php";
-include_once "Image.php";
+include_once "Models/Model.php";
+include_once "Models/Image.php";
 
 final class Review extends Model {
     public const TABLE = "reviews";
@@ -78,7 +78,6 @@ final class Review extends Model {
     }
 
     public static function listByDate(int $page, ?Where $where = null): array {
-        $order = new Order([self::date], true);
-        return self::list($where, null, 10, (10 * $page), $order);
+        return self::list($where, null, 25, (25 * $page), new Order([self::date], true));
     }
 }

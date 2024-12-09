@@ -1,9 +1,12 @@
 <?php
 
-include_once "Model.php";
-include_once "UserGroup.php";
-include_once "GroupAction.php";
-include_once "Action.php";
+include_once "Models/Model.php";
+include_once "Models/UserGroup.php";
+include_once "Models/GroupAction.php";
+include_once "Models/Token.php";
+include_once "Models/Review.php";
+include_once "Models/Booking.php";
+include_once "Models/Availability.php";
 
 final class User extends Model {
     public const TABLE = "users";
@@ -14,7 +17,6 @@ final class User extends Model {
     final public const email = self::TABLE . ".email";
     final public const phoneNumber = self::TABLE . ".phoneNumber";
     final public const birthDate = self::TABLE . ".birthDate";
-    final public const token = self::TABLE . ".token";
 
     private const password = self::TABLE . ".password";
 
@@ -23,7 +25,6 @@ final class User extends Model {
     public string $email;
     public ?string $phoneNumber;
     public ?string $birthDate;
-    private ?string $token;
 
     public function __construct(array $fields) {
         $this->id = $fields[self::id];
@@ -32,7 +33,6 @@ final class User extends Model {
         $this->email = $fields[self::email];
         $this->phoneNumber = $fields[self::phoneNumber];
         $this->birthDate = $fields[self::birthDate];
-        $this->token = $fields[self::token];
     }
 
     protected function toAssoc(): array {
@@ -43,7 +43,6 @@ final class User extends Model {
             self::email => $this->email,
             self::phoneNumber => $this->phoneNumber,
             self::birthDate => $this->birthDate,
-            self::token => $this->token,
         ];
     }
 
@@ -65,7 +64,6 @@ final class User extends Model {
                 self::email => $email,
                 self::phoneNumber => $phoneNumber,
                 self::birthDate => $birthDate,
-                self::token => null,
             ]);
             UserGroup::new($user, Group::getFromName("registeredUsers"));
             return $user;
@@ -73,25 +71,6 @@ final class User extends Model {
             echo($e);
             return null;
         }
-    }
-
-//    public function applyDiscount($firstName, $birthDate){
-//        $birthDateTime = new DateTime($birthDate);
-//        $birthDateTimeStart = clone $birthDateTime;
-//        $birthDateTimeStart->setTime(8, 0, 0);
-//
-//        $birthDateTimeEnd = clone $birthDateTime;
-//        $birthDateTimeEnd->setTime(16, 0, 0);
-//        Discount::new($firstName, "birthday", $birthDateTimeStart->format('Y-m-d H:i:s'), $birthDateTimeEnd->format('Y-m-d H:i:s'));
-//    }
-
-    /**
-     * Get user based on the email and password
-     */
-    public static function getFromEmailPassword(string $email, string $password): ?self {
-        $where = (new Where(new Equals(new Value(self::email, $email))))
-            ->addAnd(new Equals(new Value(self::password, $password, true)));
-        return self::get($where);
     }
 
     /**
@@ -102,32 +81,12 @@ final class User extends Model {
     }
 
     /**
-     * Retrieve a User object based on a token
+     * Get user based on the email and password
      */
-    public static function getFromToken(string $token): ?self {
-        return self::get(new Where(new Equals(new Value(self::token, $token))));
-    }
-
-    /**
-     * Retrieve a User object based on a token stored in a cookie.
-     */
-    public static function getFromCookie(): ?self {
-        if (isset($_COOKIE["token"])) {
-            return self::getFromToken($_COOKIE["token"]);
-        } else {
-            return null;
-        }
-    }
-
-    public function getToken(): ?string {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): bool {
-        return self::update(
-            (new Values())->add(new Value(self::token, $token)),
-            new Where(new Equals(new Value(self::id, $this->id)))
-        );
+    public static function getFromEmailPassword(string $email, string $password): ?self {
+        $where = (new Where(new Equals(new Value(self::email, $email))))
+            ->addAnd(new Equals(new Value(self::password, $password, true)));
+        return self::get($where);
     }
 
     public function hasPassword(): bool {
@@ -139,6 +98,21 @@ final class User extends Model {
             (new Values())->add(new Value(self::password, $password, true)),
             new Where(new Equals(new Value(self::id, $this->id)))
         );
+    }
+
+    /**
+     * @throws Random\RandomException
+     */
+    public function generateToken(): string {
+        $token = $this->id . "06BlK0dFkhC1LVf9" . bin2hex(random_bytes(16));
+        Token::new($token, $this);
+        setcookie("token", $token, time() + 34560000, "/");
+        return $token;
+    }
+
+    public function deleteAllTokens(): bool {
+        setcookie("token", "", -1, "/");  // Remove cookie "token" from the user's browser
+        return Token::delete(new Where(new Equals(new Value(Token::userID, $this->id))));
     }
 
     public function hasRights(string $controller, string $action): bool {

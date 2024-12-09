@@ -1,6 +1,6 @@
 <?php
 
-include_once "Model.php";
+include_once "Models/Model.php";
 
 final class Image extends Model {
     public const TABLE = "images";

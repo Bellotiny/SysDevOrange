@@ -72,8 +72,8 @@ abstract class Model {
     protected final static function insert(Values $values, bool $override): bool {
         return self::executeQuery(
             "INSERT INTO `" . static::TABLE . "`" .
-            " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ") " .
-            ($override ? "ON DUPLICATE KEY UPDATE" : "") .
+            " (" . implode(", ", $values->getColumns()) . ") VALUES (" . implode(", ", $values->getMarkers()) . ")" .
+            ($override ? " ON DUPLICATE KEY UPDATE" : "") .
             ";",
             $values->getArgs()
         );

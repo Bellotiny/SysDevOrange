@@ -5,32 +5,34 @@ include_once "Models/Booking.php";
 
 final class Reviews extends Controller {
     final public const ADD = "add";
+    final public const LIST = "list";
     final public const EDIT = "edit";
     final public const DELETE = "delete";
-    final public const LIST = "list";
+
+    public function __construct(?string $action = null) {
+        parent::__construct($action ?? self::LIST);
+    }
 
     public function route(): void {
-        $action = strtolower($_GET["action"] ?? self::LIST);
-
-        switch ($action) {
+        switch ($this->action) {
             case self::ADD:
-                if (!$this->verifyRights($action)) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-//                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
-//                    $this->render("Reviews", $action, ["error" => "You are only allowed 1 review per booking."]);
-//                    break;
-//                }
+                if (count($this->user->getBookings()) <= count($this->user->getReviews())) {
+                    $this->render(["error" => "You are only allowed 1 review per booking. You currently only have " . count($this->user->getBookings()) . " bookings."]);
+                    break;
+                }
                 if (!isset($_POST["title"]) || !isset($_POST["message"]) || !isset($_FILES["image"])) {
-                    $this->render("Reviews", $action);
+                    $this->render();
                     break;
                 }
-                if ($_POST["title"] === "" || $_POST["message"] === "") {
-                    $this->render("Reviews", $action, [
-                        "error" => "Title or Message cannot be empty",
-                        "title" => $_POST["title"],
-                        "message" => $_POST["message"],
-                    ]);
+                if ($_POST["title"] === "") {
+                    $this->render(["error" => "Title cannot be empty", "message" => $_POST["message"]]);
+                    break;
+                }
+                if ($_POST["message"] === "") {
+                    $this->render(["error" => "Message cannot be empty", "title" => $_POST["title"]]);
                     break;
                 }
                 $image = null;
@@ -45,24 +47,28 @@ final class Reviews extends Controller {
                 $this->redirect();
                 break;
             case self::EDIT:
-                if (!$this->verifyRights($action)) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $review = Review::getfromId((int)$_GET["id"]);
-                if (is_null($review)) {
+                if ($this->id === null) {
                     $this->redirect();
                     break;
                 }
-                if (!isset($_POST["title"]) || !isset($_POST["message"])) {
-                    $this->render("Reviews", $action, ["review" => $review]);
+                $review = Review::getfromId($this->id);
+                if ($review === null) {
+                    $this->redirect();
                     break;
                 }
-                if ($_POST["title"] === "" || $_POST["message"] === "") {
-                    $this->render("Reviews", $action, [
-                        "error" => "Title or Message cannot be empty",
-                        "title" => $_POST["title"],
-                        "message" => $_POST["message"],
-                    ]);
+                if (!isset($_POST["title"]) || !isset($_POST["message"]) || !isset($_FILES["image"])) {
+                    $this->render(["review" => $review]);
+                    break;
+                }
+                if ($_POST["title"] === "") {
+                    $this->render(["error" => "Title cannot be empty", "message" => $_POST["message"]]);
+                    break;
+                }
+                if ($_POST["message"] === "") {
+                    $this->render(["error" => "Message cannot be empty", "title" => $_POST["title"]]);
                     break;
                 }
                 $review->title = $_POST["title"];
@@ -82,21 +88,29 @@ final class Reviews extends Controller {
                         );
                     }
                     move_uploaded_file($_FILES["image"]["tmp_name"], $review->image->getPath());
+                } else if ($_POST["deleteImage"] === true) {
+                    if ($review->image) {
+                        $review->image->remove();
+                        if (file_exists($review->image->getPath())) {
+                            unlink($review->image->getPath());
+                        }
+                        $review->image = null;
+                    }
                 }
                 $review->save();
                 $this->redirect();
                 break;
             case self::DELETE:
-                if (!$this->verifyRights($action)) {
+                if (!$this->ensureRights()) {
                     break;
                 }
-                $review = Review::getfromId((int)$_GET["id"]);
-                if (is_null($review)) {
+                if ($this->id === null) {
                     $this->redirect();
                     break;
                 }
-                if (!isset($_POST["confirm"])) {
-                    $this->render("Reviews", $action, ["review" => $review]);
+                $review = Review::getfromId($this->id);
+                if ($review === null) {
+                    $this->redirect();
                     break;
                 }
                 if ($review->image) {
@@ -108,16 +122,16 @@ final class Reviews extends Controller {
                 $review->remove();
                 $this->redirect();
                 break;
-            default:
+            case self::LIST:
                 if (isset($_POST["search"])) {
-                    $reviews = Review::search((int)($_GET["id"] ?? 0), $_POST["search"]);
+                    $reviews = Review::search($this->id ?? 0, $_POST["search"]);
                 } else {
-                    $reviews = Review::listByDate((int)($_GET["id"] ?? 0));
+                    $reviews = Review::listByDate($this->id ?? 0);
                 }
-                $this->render("Reviews", "list", [
-                    "search" => $_POST["search"] ?? "",
-                    "reviews" => $reviews,
-                ]);
+                $this->render(["search" => $_POST["search"] ?? "", "reviews" => $reviews]);
+                break;
+            default:
+                self::redirect();
                 break;
         }
     }

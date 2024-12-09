@@ -46,7 +46,7 @@ include_once 'Views/bookingModal.php';
                             <td><?= date("Y-m-d H:i", $start) ?> - <?= date("Y-m-d H:i", $end) ?></td>
                             <td><?= ($availability->booking !== null) ? "<a href='" . BASE_PATH . "/account/viewbooking/" . $availability->booking->id . "'>booked</a>" : "" ?></td>
                             <td>
-                                <a href="<?= BASE_PATH ?>/account/deleteavailability/<?= $start . "-" . $end ?>">
+                                <a href="<?= BASE_PATH ?>/account/deleteavailability?start=<?= $start ?>&end=<?= $end ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                          class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                         <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.118 4l.845 10.56c.034.428.384.74.814.74h6.46c.43 0 .78-.312.814-.74L11.884 4H4.118Z"/>

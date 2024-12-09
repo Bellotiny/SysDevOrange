@@ -1,8 +1,8 @@
 <?php
 
-include_once "Model.php";
-include_once "Group.php";
-include_once "Action.php";
+include_once "Models/Model.php";
+include_once "Models/Group.php";
+include_once "Models/Action.php";
 
 final class GroupAction extends Model {
     public const TABLE = "groups_actions";

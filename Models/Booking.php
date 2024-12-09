@@ -1,14 +1,14 @@
 <?php
 
-include_once "Model.php";
-include_once "User.php";
-include_once "Discount.php";
-include_once "BookingService.php";
-include_once "Service.php";
-include_once "BookingColor.php";
-include_once "Color.php";
-include_once "BookingImage.php";
-include_once "Image.php";
+include_once "Models/Model.php";
+include_once "Models/User.php";
+include_once "Models/Discount.php";
+include_once "Models/BookingService.php";
+include_once "Models/Service.php";
+include_once "Models/BookingColor.php";
+include_once "Models/Color.php";
+include_once "Models/BookingImage.php";
+include_once "Models/Image.php";
 
 final class Booking extends Model {
     public const TABLE = "bookings";
