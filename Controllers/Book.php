@@ -7,7 +7,7 @@ include_once "Models/Discount.php";
 include_once "Models/User.php";
 include_once "Models/Availability.php";
 include_once "Models/Image.php";
-//include_once "Models/Payment.php";
+include_once "Models/Payment.php";
 include_once "Controllers/Home.php";
 
 final class Book extends Controller {
@@ -140,13 +140,13 @@ final class Book extends Controller {
                         if ($images != null) {
                             Booking::setGroups($booking, $images, 'BookingImage');
                         }
-                        // $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
+                        $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
 
-                        // if ($customerResponse->isSuccess()) {
-                        //     $this->render('Book','payment');
-                        // } else {
-                        //     error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
-                        // }
+                        if ($customerResponse->isSuccess()) {
+                            $this->render('Book',$action);
+                        } else {
+                            error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
+                        }
                         Home::redirect();
                     }
                 }
