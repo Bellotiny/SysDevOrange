@@ -16,36 +16,33 @@ final class Book extends Controller {
 
         switch ($action) {
             case "list":
-                $this->render("Book", "bookOne", ["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::listAvailableTime()]);
+                Book::render(["services" => Service::list(), "colors" => Color::list(), "availabilities" =>Availability::listAvailableTime()]);
             break;
             case "add":
-                //var_dump($_POST);
+                var_dump($_POST);
                 $services = [];
                 
                 if (isset($_POST['serviceType']) && is_array($_POST['serviceType'])) {
-                    //var_dump($_POST['serviceType']);
-                    
+                    $services = [];
                     foreach ($_POST['serviceType'] as $type => $serviceIds) {
-                        if (is_int($serviceIds)) {
-                           // var_dump( $serviceIds );
-                           $service = Service::getFromId($serviceIds);
-                           if ($service) {
-                               $services[] = $service;
-                           } else {
-                               echo "Service ID '$serviceIds' not found for type '$type'.";
-                           }
-                        }elseif (is_array($serviceIds)) {
-                            foreach ($serviceIds as $id) {
+                        $serviceIds = is_array($serviceIds) ? $serviceIds : [$serviceIds];
+                
+                        foreach ($serviceIds as $id) {
+                            if (is_numeric($id)) {
                                 $service = Service::getFromId($id);
                                 if ($service) {
                                     $services[] = $service;
                                 } else {
                                     echo "Service ID '$id' not found for type '$type'.";
                                 }
+                            } else {
+                                echo "Invalid service ID for type '$type'.";
                             }
                         }
                     }
+                    var_dump($services);
                 }
+                
 
                 $price = 0;
                 foreach ($services as $service) {
@@ -82,13 +79,13 @@ final class Book extends Controller {
                     $user = $this->user;
                     var_dump($user );
                 } else {
-                    var_dump($_POST['firstName'], $_POST['lastName'], $_POST['username']);
+                    var_dump($_POST['firstName'], $_POST['lastName'], $_POST['email']);
                     if (
-                        isset($_POST['firstName'], $_POST['lastName'], $_POST['username'])
+                        isset($_POST['firstName'], $_POST['lastName'], $_POST['email'])
                     ) {
                         $firstName = $_POST['firstName'];
                         $lastName = $_POST['lastName'];
-                        $username = $_POST['username'];
+                        $username = $_POST['email'];
                 
                         $user = User::new($firstName, $lastName, $username);
                         var_dump($user);
@@ -142,8 +139,10 @@ final class Book extends Controller {
                         }
                         $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
 
+                        var_dump($customerResponse);
                         if ($customerResponse->isSuccess()) {
-                            $this->render('Book',$action);
+                            $action = 'payment';
+                            Book::render();
                         } else {
                             error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
                         }
