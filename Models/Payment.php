@@ -23,16 +23,46 @@ class Payment {
     }
 
     public static function createPayment($cardNonce, $amount) {
+        // Amount validation
+        if (floatval($amount) <= 0) {
+            self::logTransaction("Failure", "Invalid amount provided", $amount);
+            return null;
+        }
+    
         $paymentsApi = self::getSquareClient()->getPaymentsApi();
-
+    
         $money = new \Square\Models\Money();
         $money->setAmount($amount * 100);
         $money->setCurrency('USD');
-
+    
         $request = new \Square\Models\CreatePaymentRequest($cardNonce, uniqid(), $money);
-
-        return $paymentsApi->createPayment($request);
+    
+        $response = $paymentsApi->createPayment($request);
+    
+        if ($response->isSuccess()) {
+            self::logTransaction("Success", "Payment processed successfully", $amount, $response->getResult()->getPayment()->getCustomerId());
+            return $response->getResult();
+        } else {
+            self::logTransaction("Failure", implode(', ', $response->getErrors()), $amount);
+            return null;
+        }
     }
+
+    private static function logTransaction($status, $message, $amount, $customerId = null) {
+        $logFile = 'transaction_log.txt';
+        $timestamp = date("Y-m-d H:i:s");
+        
+        // Prepare log entry
+        $logEntry = "[$timestamp] - Status: $status - Amount: $amount USD";
+        if ($customerId) {
+            $logEntry .= " - Customer ID: $customerId";
+        }
+        $logEntry .= " - Message: $message\n";
+        
+        // Write log to file
+        file_put_contents($logFile, $logEntry, FILE_APPEND);
+    }
+    
 
     public static function createCustomer($name, $email) {
         $customersApi = self::getSquareClient()->getCustomersApi();

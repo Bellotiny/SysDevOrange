@@ -122,13 +122,6 @@ final class Book extends Controller {
                 } else {
                     error_log("No images were uploaded.");
                 }
-
-                //echo '<pre>';
-                //var_dump($services);
-                //var_dump($colors);
-                //var_dump($date_time->timeSlot);
-                //var_dump($location);
-                //echo '</pre>';
                 if ($services != null && $colors != null && $date_time != null) {
                     $message = $message ?? null;
                     date_default_timezone_set('America/Toronto');
@@ -145,15 +138,15 @@ final class Book extends Controller {
                         if ($images != null) {
                             Booking::setGroups($booking, $images, 'BookingImage');
                         }
-                        // $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
+                        $customerResponse = Payment::createCustomer($user->firstName . ' ' . $user->lastName, $user->email);
 
-                        // //var_dump($customerResponse);
-                        // if ($customerResponse->isSuccess()) {
-                        //     //self::redirect(self::PAYMENT);
-                        //     break;
-                        // } else {
-                        //     error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
-                        // }
+                        //var_dump($customerResponse);
+                        if ($customerResponse->isSuccess()) {
+                            self::redirect(self::PAYMENT);
+                            break;
+                        } else {
+                            error_log('Customer creation failed: ' . json_encode($customerResponse->getErrors()));
+                        }
                         Home::redirect();
                     }
                 }
